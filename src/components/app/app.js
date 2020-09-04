@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import UserSelect from '../user-select/index';
+import Logo from '../logo/index';
 
 export default class App extends PureComponent {
   render() {
     return (
       <>
-        <UserSelect />
+        <Logo />
       </>
     );
   }
