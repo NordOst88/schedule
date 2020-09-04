@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-import Button from '../button/button';
+import UserSwitcher from '../user-switcher/user-switcher';
 
 export default class App extends PureComponent {
   render() {
-    return <Button />;
+    return <UserSwitcher />;
   }
 }

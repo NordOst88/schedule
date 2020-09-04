@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch } from 'antd';
 import 'antd/dist/antd.css';
-import './button.scss';
+import './user-switcher.scss';
 import { CrownOutlined, UserOutlined } from '@ant-design/icons';
 
-const Button = () => {
+const UserSwitcher = () => {
   return (
     <>
       <Switch
-        className="admin_button"
+        className="switch"
         checkedChildren={<CrownOutlined />}
         unCheckedChildren={<UserOutlined />}
       />
@@ -16,4 +16,4 @@ const Button = () => {
   );
 };
 
-export default Button;
+export default UserSwitcher;
