@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react';
-import UserSwitcher from '../user-switcher/user-switcher';
+import UserSelect from '../user-select/index';
 
 export default class App extends PureComponent {
   render() {
-    return <UserSwitcher />;
+    return (
+      <>
+        <UserSelect />
+      </>
+    );
   }
 }
