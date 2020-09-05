@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
+import Table from '../table';
 
 export default class App extends PureComponent {
   render() {
-    return <h1>Let&#39;s do it!</h1>;
+    return <Table />;
   }
 }
