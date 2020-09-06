@@ -1,7 +1,16 @@
 import React, { PureComponent } from 'react';
+import { Layout } from 'antd';
+
+import HeaderContainer from '../haeder-container/header-container';
 
 export default class App extends PureComponent {
   render() {
-    return <h1>Let&#39;s do it!</h1>;
+    const { Content } = Layout;
+    return (
+      <Layout>
+        <HeaderContainer />
+        <Content />
+      </Layout>
+    );
   }
 }
