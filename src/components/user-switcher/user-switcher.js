@@ -13,6 +13,8 @@ const UserSwitcher = () => {
   return (
     <Space className="switch_container">
       <div
+        role="button"
+        tabIndex="0"
         onKeyDown={() => toggleSwitch()}
         onClick={() => toggleSwitch()}
         className="switch_container-text"
