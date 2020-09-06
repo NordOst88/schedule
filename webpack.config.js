@@ -18,7 +18,6 @@ module.exports = (env = {}) => {
     const plugins = [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'SONGBIRD',
         template: 'public/index.html',
         favicon: 'src/assets/favicon/favicon.ico',
       }),
@@ -66,6 +65,9 @@ module.exports = (env = {}) => {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           loader: 'eslint-loader',
+          options: {
+            quiet: true,
+          },
         },
 
         // Loading images
