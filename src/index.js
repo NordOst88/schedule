@@ -5,7 +5,13 @@ import { Provider } from 'react-redux';
 import reducer from './reducers/reducer';
 import App from './components/app/app';
 
-const store = createStore(reducer);
+// todo: only for extension redux devtool. Delete before deploy
+
+const store = createStore(
+  reducer,
+  // eslint-disable-next-line no-underscore-dangle
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 render(
   <Provider store={store}>

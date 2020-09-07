@@ -1,11 +1,6 @@
-import { SET_TABLE_VIEW, SET_CALENDAR_VIEW, SET_LIST_VIEW } from '../reducers/reducer';
+import { SET_VIEW_MODE, SET_USER } from '../constants/constants';
 
-const setTableView = () => ({ type: SET_TABLE_VIEW });
-const setListView = () => ({ type: SET_LIST_VIEW });
-const setCalendarView = () => ({ type: SET_CALENDAR_VIEW });
+const onViewModeChange = (mode) => ({ type: SET_VIEW_MODE, mode });
+const onSetUser = (user) => ({ type: SET_USER, user });
 
-export default {
-  setTableView,
-  setListView,
-  setCalendarView,
-};
+export { onViewModeChange, onSetUser };
