@@ -12,7 +12,7 @@ const MyTable = () => {
   const dateFormat = 'DD.MM.YYYY HH:mm';
 
   const getTimeStamp = (value) => {
-    const timestamp = Math.floor((new Date(value)).getTime());
+    const timestamp = Math.floor(new Date(value).getTime());
     console.log(timestamp);
   };
 
@@ -41,11 +41,7 @@ const MyTable = () => {
       title: 'Date',
       dataIndex: 'dateTime',
       key: 'date',
-      render: (date) => (
-        <>
-          {extractDateTime(date)}
-        </>
-      ),
+      render: (date) => <>{extractDateTime(date)}</>,
       sorter: (a, b) => a.dateTime - b.dateTime,
       // defaultSortOrder: 'ascend',
     },
@@ -53,21 +49,13 @@ const MyTable = () => {
       title: 'Time',
       dataIndex: 'dateTime',
       key: 'time',
-      render: (time) => (
-        <>
-          {extractDateTime(time, 'time')}
-        </>
-      ),
+      render: (time) => <>{extractDateTime(time, 'time')}</>,
     },
     {
       title: 'Deadline',
       dataIndex: 'deadline',
       key: 'deadline',
-      render: (time) => (
-        <>
-          {extractDateTime(time, 'dateTime')}
-        </>
-      ),
+      render: (time) => <>{extractDateTime(time, 'dateTime')}</>,
     },
     {
       title: 'Type',
@@ -97,7 +85,9 @@ const MyTable = () => {
       key: 'event',
       render: ({ name, url }) => (
         <>
-          <a href={url} target="_blanc">{ name }</a>
+          <a href={url} target="_blanc">
+            {name}
+          </a>
         </>
       ),
     },
@@ -121,7 +111,7 @@ const MyTable = () => {
               }}
               key={name}
             >
-              { name }
+              {name}
             </a>
           ))}
         </>
@@ -151,7 +141,7 @@ const MyTable = () => {
                   marginRight: '8px',
                 }}
               >
-                { name }
+                {name}
               </a>
             </Space>
           ))}
@@ -167,19 +157,8 @@ const MyTable = () => {
 
   return (
     <>
-      <Table
-        dataSource={dummyData}
-        columns={columns}
-        rowKey="id"
-        size="small"
-        pagination={false}
-      />
-      <DatePicker
-        showTime
-        onChange={onChange}
-        onOk={onOk}
-        format={dateFormat}
-      />
+      <Table dataSource={dummyData} columns={columns} rowKey="id" size="small" pagination={false} />
+      <DatePicker showTime onChange={onChange} onOk={onOk} format={dateFormat} />
     </>
   );
 };

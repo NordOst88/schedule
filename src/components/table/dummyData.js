@@ -1,25 +1,24 @@
 /* eslint-disable max-len */
-// description
 export default [
-  {
-    id: '1',
-    week: '0',
-    dateTime: '1599087906000',
-    deadline: '1599188006000',
-    type: ['js task'],
-    place: 'Minsk',
-    event: {
-      name: 'Songbird',
-      url: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird.md',
-    },
-    description: 'Здесь вы научитесь терпеть боль',
-    links: [
-      { name: 'LearnJs', url: 'https://learnjs.ru' },
-      { name: 'GitHub', url: 'https://github.com' },
-    ],
-    organizer: [{ name: 'Юлия', url: 'https://github.com/yuliahope' }],
-    comment: 'Вопросы можно задать в дискорде',
-  },
+  // {
+  //   id: '1',
+  //   week: '0',
+  //   dateTime: '1599087906',
+  //   deadline: '1599188006',
+  //   type: ['js task'], => ???
+  //   place: 'Online',
+  //   estimatedTime: '8h',
+  //   timeZone: '',
+  //   name: 'Songbird',
+  //   descriptionUrl: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird.md',
+  //   description: 'Здесь вы научитесь терпеть боль',
+  //   links: [ => ???
+  //     { name: 'LearnJs', url: 'https://learnjs.ru' },
+  //     { name: 'GitHub', url: 'https://github.com' },
+  //   ],
+  //   organizer: ['id1', 'id2'], => separated data => ???
+  //   comment: 'Вопросы можно задать в дискорде',
+  // },
   {
     id: '2',
     week: '0',
@@ -63,10 +62,9 @@ export default [
   //   event: { name: 'HTML online course', url: 'https://ru.code-basics.com/languages/html' },
   //   description: 'Базовый курс, который даст понимание основ HTML',
   //   links: [{ name: 'Code basics', url: 'https://ru.code-basics.com/' }],
-  //   organizer: [
-  //     { name: 'RSSchool', url: 'https://docs.rs.school/#' },
-  //   ],
-  //   comment: 'На странице курса все темы отмечены галочками. Студент может пояснить решение некоторых заданий (на выбор ментора)/ Решения всех заданий доступны после 20-минутной паузы. Для проверки самостоятельности решения заданий нужно посмотреть и послушать как студент решает пройденные им таски',
+  //   organizer: [{ name: 'RSSchool', url: 'https://docs.rs.school/#' }],
+  //   comment:
+  //     'На странице курса все темы отмечены галочками. Студент может пояснить решение некоторых заданий (на выбор ментора)/ Решения всех заданий доступны после 20-минутной паузы. Для проверки самостоятельности решения заданий нужно посмотреть и послушать как студент решает пройденные им таски',
   // },
   // {
   //   id: '5',
