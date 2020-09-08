@@ -11,14 +11,14 @@
     "prod": "webpack -p --env.mode=production",
     "lint": "eslint src/**/*.js",
     "fix": "eslint src/**/*.js --fix",
-    "prettier": "prettier --config .prettierrc --write src/**/*.js",
+    "prettier": "prettier --config .prettierrc --write src/**/*.{js,jsx}",
     "start": "webpack-dev-server -d --open --hot",
     "analyze": "webpack -p --env.analyze"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git add .",
-      "pre-push": ""
+      "pre-commit": "npm run prettier && git add .",
+      "pre-push": "eslint src/**/*.{js,jsx}"
     }
   },
   "dependencies": {

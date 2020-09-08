@@ -65,9 +65,6 @@ module.exports = (env = {}) => {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           loader: 'eslint-loader',
-          options: {
-            quiet: true,
-          },
         },
 
         // Loading images

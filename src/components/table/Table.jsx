@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
-import {
-  DatePicker, Table, Tag, Space,
-} from 'antd';
+import { DatePicker, Table, Tag, Space } from 'antd';
 import dummyData from './dummyData';
 import extractDateTime from '../../utils/extractDateTime';
 import './Table.scss';
