@@ -5,19 +5,19 @@ import Table from '../table';
 
 import './content-container.scss';
 
-const ContentContainer = ({ currentView, role }) => {
+const ContentContainer = ({ currentView }) => {
   const { Content } = Layout;
 
   return (
     <Content>
-      <p className="text">
+      {/* <p className="text">
         Current View:
         {currentView}
       </p>
       <p className="text">
         Current Role:
         {role}
-      </p>
+      </p> */}
       {currentView === 'Table' && <Table />}
     </Content>
   );

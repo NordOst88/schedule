@@ -31,6 +31,7 @@ const MyTable = () => {
     additional: 'purple',
     deadline: 'red',
     lecture: 'blue',
+    'self-study': 'cyan',
   };
 
   const colorSelector = (type) => tagsColors[type];

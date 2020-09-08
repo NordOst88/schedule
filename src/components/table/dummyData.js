@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // description
 export default [
   {
@@ -52,6 +53,53 @@ export default [
     ],
     comment: 'Обязательно посмотреть!',
   },
+  // {
+  //   id: '4',
+  //   week: '1',
+  //   dateTime: '1599469200000',
+  //   deadline: '',
+  //   type: ['self-study'],
+  //   place: 'Online',
+  //   event: { name: 'HTML online course', url: 'https://ru.code-basics.com/languages/html' },
+  //   description: 'Базовый курс, который даст понимание основ HTML',
+  //   links: [{ name: 'Code basics', url: 'https://ru.code-basics.com/' }],
+  //   organizer: [
+  //     { name: 'RSSchool', url: 'https://docs.rs.school/#' },
+  //   ],
+  //   comment: 'На странице курса все темы отмечены галочками. Студент может пояснить решение некоторых заданий (на выбор ментора)/ Решения всех заданий доступны после 20-минутной паузы. Для проверки самостоятельности решения заданий нужно посмотреть и послушать как студент решает пройденные им таски',
+  // },
+  // {
+  //   id: '5',
+  //   week: '1',
+  //   dateTime: '1599555600000',
+  //   deadline: '',
+  //   type: ['lecture'],
+  //   place: 'Online',
+  //   event: { name: 'Как работать с браузером', url: 'https://www.youtube.com/' },
+  //   description: 'Лекция про браузеры)',
+  //   links: [{ name: 'Browsers and IDEs', url: 'https://www.youtube.com/watch?v=nd2VYxOsOwY' }],
+  //   organizer: [
+  //     { name: 'Юлия', url: 'https://github.com/yuliahope' },
+  //     { name: 'Клон Юлии', url: 'https://github.com/yuliahope' },
+  //   ],
+  //   comment: 'Обязательно посмотреть!',
+  // },
+  // {
+  //   id: '6',
+  //   week: '1',
+  //   dateTime: '1599555600000',
+  //   deadline: '',
+  //   type: ['lecture'],
+  //   place: 'Online',
+  //   event: { name: 'Как работать с браузером', url: 'https://www.youtube.com/' },
+  //   description: 'Лекция про браузеры)',
+  //   links: [{ name: 'Browsers and IDEs', url: 'https://www.youtube.com/watch?v=nd2VYxOsOwY' }],
+  //   organizer: [
+  //     { name: 'Юлия', url: 'https://github.com/yuliahope' },
+  //     { name: 'Клон Юлии', url: 'https://github.com/yuliahope' },
+  //   ],
+  //   comment: 'Обязательно посмотреть!',
+  // },
 ];
 
 // [

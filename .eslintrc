@@ -5,7 +5,7 @@
     "es6": true,
     "jest": true
   },
-  "extends": ["airbnb", "airbnb/hooks"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["import", "jsx-a11y", "react", "react-hooks"],
   "rules": {
     "strict": 0,

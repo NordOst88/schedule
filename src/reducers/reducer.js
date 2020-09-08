@@ -1,7 +1,5 @@
 /* eslint-disable no-console */
-import {
-  TABLE, STUDENT, SET_VIEW_MODE, SET_USER,
-} from '../constants/constants';
+import { TABLE, STUDENT, SET_VIEW_MODE, SET_USER } from '../constants/constants';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 
 let view;

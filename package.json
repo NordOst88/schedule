@@ -17,7 +17,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "git add .",
+      "pre-commit": "npm run prettier && git add .",
       "pre-push": "eslint src/**/*.js"
     }
   },
