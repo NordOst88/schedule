@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Badge, Calendar } from 'antd';
+
+import { VIEW_MODES } from '../../constants/constants';
 
 function getListData(value) {
   let listData;
@@ -64,8 +67,14 @@ export function monthCellRender(value) {
   ) : null;
 }
 
-const CalendarContainer = () => {
-  return <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />;
+const CalendarContainer = ({ currentView }) => {
+  return currentView === VIEW_MODES[2] ? <Calendar dateCellRender={dateCellRender} /> : null;
 };
 
-export default CalendarContainer;
+const mapStateToProps = ({ currentView }) => {
+  return {
+    currentView,
+  };
+};
+
+export default connect(mapStateToProps)(CalendarContainer);
