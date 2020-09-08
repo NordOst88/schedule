@@ -1,24 +1,23 @@
-/* eslint-disable max-len */
 export default [
-  // {
-  //   id: '1',
-  //   week: '0',
-  //   dateTime: '1599087906',
-  //   deadline: '1599188006',
-  //   type: ['js task'], => ???
-  //   place: 'Online',
-  //   estimatedTime: '8h',
-  //   timeZone: '',
-  //   name: 'Songbird',
-  //   descriptionUrl: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird.md',
-  //   description: 'Здесь вы научитесь терпеть боль',
-  //   links: [ => ???
-  //     { name: 'LearnJs', url: 'https://learnjs.ru' },
-  //     { name: 'GitHub', url: 'https://github.com' },
-  //   ],
-  //   organizer: ['id1', 'id2'], => separated data => ???
-  //   comment: 'Вопросы можно задать в дискорде',
-  // },
+  {
+    id: '1',
+    week: '0',
+    dateTime: '1599087906000',
+    deadline: '1599188006000',
+    type: ['js task'],
+    place: 'Online',
+    estimatedTime: '8h',
+    timeZone: '',
+    name: 'Songbird',
+    descriptionUrl: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird.md',
+    description: 'Здесь вы научитесь терпеть боль',
+    links: [
+      { name: 'LearnJs', url: 'https://learnjs.ru' },
+      { name: 'GitHub', url: 'https://github.com' },
+    ],
+    organizer: [{ name: 'Юлия', url: 'https://github.com/yuliahope' }],
+    comment: 'Вопросы можно задать в дискорде',
+  },
   {
     id: '2',
     week: '0',
@@ -26,11 +25,11 @@ export default [
     deadline: '1599388006000',
     type: ['additional', 'js task'],
     place: 'Minsk',
-    event: {
-      name: 'Codewars React',
-      url:
-        'https://github.com/rolling-scopes-school/tasks/blob/f504966947a9f3e85a27f6401e7a6870f870f392/tasks/codewars-react.md',
-    },
+    estimatedTime: '8h',
+    timeZone: '',
+    name: 'Codewars React',
+    descriptionUrl:
+      'https://github.com/rolling-scopes-school/tasks/blob/f504966947a9f3e85a27f6401e7a6870f870f392/tasks/codewars-react.md',
     description: 'Задачки на знание реакт-компонентов',
     links: [{ name: 'React', url: 'https://reactjs.org/' }],
     organizer: [{ name: 'Юлия', url: 'https://github.com/yuliahope' }],
@@ -43,7 +42,10 @@ export default [
     deadline: '',
     type: ['lecture'],
     place: 'Online',
-    event: { name: 'Как работать с браузером', url: 'https://www.youtube.com/' },
+    estimatedTime: '8h',
+    timeZone: '',
+    name: 'Как работать с браузером',
+    descriptionUrl: 'https://www.youtube.com/',
     description: 'Лекция про браузеры)',
     links: [{ name: 'Browsers and IDEs', url: 'https://www.youtube.com/watch?v=nd2VYxOsOwY' }],
     organizer: [
@@ -99,43 +101,3 @@ export default [
   //   comment: 'Обязательно посмотреть!',
   // },
 ];
-
-// [
-//   {
-//     id: '1',
-//     dateTime: '1599087906000',
-//     place: 'Minsk',
-//     name: 'Songbird',
-//     broadcastUrl: '',
-//     type: ['js task'],
-//     organizer: 'https://github.com/yuliahope',
-//     descriptionUrl: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird.md',
-//     detailsUrl: '',
-//     comment: '',
-//   },
-//   {
-//     id: '2',
-//     dateTime: '1599207720000',
-//     place: 'Minsk',
-//     name: 'Codewars React',
-//     broadcastUrl: '',
-//     type: ['deadline', 'additional'],
-//     organizer: 'https://github.com/yuliahope',
-//     descriptionUrl:
-//       'https://github.com/rolling-scopes-school/tasks/blob/f504966947a9f3e85a27f6401e7a6870f870f392/tasks/codewars-react.md',
-//     detailsUrl: '',
-//     comment: '',
-//   },
-//   {
-//     id: '3',
-//     dateTime: '1599253464064',
-//     place: 'Minsk',
-//     name: 'Schedule',
-//     broadcastUrl: '',
-//     type: ['js task'],
-//     organizer: 'https://github.com/yuliahope',
-//     descriptionUrl: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/schedule.md',
-//     detailsUrl: '',
-//     comment: '',
-//   },
-// ];

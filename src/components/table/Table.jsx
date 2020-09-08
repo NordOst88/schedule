@@ -81,9 +81,9 @@ const MyTable = () => {
       title: 'Name',
       dataIndex: 'event',
       key: 'event',
-      render: ({ name, url }) => (
+      render: (name, record) => (
         <>
-          <a href={url} target="_blanc">
+          <a href={record.url} target="_blanc">
             {name}
           </a>
         </>
