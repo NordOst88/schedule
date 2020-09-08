@@ -18,7 +18,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "git add .",
-      "pre-push": "eslint src/**/*.js"
+      "pre-push": ""
     }
   },
   "dependencies": {
