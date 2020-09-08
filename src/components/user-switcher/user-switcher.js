@@ -10,6 +10,7 @@ const UserSwitcher = () => {
     document.querySelector('.switch').classList.toggle('hidden');
     document.querySelector('.divider').classList.toggle('hidden');
   };
+
   return (
     <Space className="switch_container">
       <div
