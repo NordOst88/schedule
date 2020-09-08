@@ -5,40 +5,27 @@ import { Badge, Calendar } from 'antd';
 
 import { VIEW_MODES } from '../../constants/constants';
 
-function getListData(value) {
-  let listData;
-  switch (value.date()) {
-    case 8:
-      listData = [
-        { type: 'warning', content: 'This is warning event.' },
-        { type: 'success', content: 'This is usual event.' },
-      ];
-      break;
-    case 10:
-      listData = [
-        { type: 'warning', content: 'This is warning event.' },
-        { type: 'success', content: 'This is usual event.' },
-        { type: 'error', content: 'This is error event.' },
-      ];
-      break;
-    case 15:
-      listData = [
-        { type: 'warning', content: 'This is warning event' },
-        { type: 'success', content: 'This is very long usual event。。....' },
-        { type: 'error', content: 'This is error event 1.' },
-        { type: 'error', content: 'This is error event 2.' },
-        { type: 'error', content: 'This is error event 3.' },
-        { type: 'error', content: 'This is error event 4.' },
-      ];
-      break;
-    default:
-  }
+const compareDates = (moment, eventDate) => {
+  const isSameDay = moment.date() === eventDate.getDate();
+  const isSameMonth = moment.month() === eventDate.getMonth();
+  const isSameYear = moment.year() === eventDate.getFullYear();
 
-  return listData || [];
+  return isSameDay && isSameMonth && isSameYear;
+};
+
+function getListData(value, data) {
+  const currentData = data.filter((obj) => {
+    const eventDate = new Date(+obj.dateTime);
+    return compareDates(value, eventDate);
+  });
+
+  return currentData.map((obj) => {
+    return { type: 'success', content: obj.name };
+  });
 }
 
-export function dateCellRender(value) {
-  const listData = getListData(value);
+export function dateCellRender(value, data) {
+  const listData = getListData(value, data);
 
   return (
     <ul className="events">
@@ -67,13 +54,17 @@ export function monthCellRender(value) {
   ) : null;
 }
 
-const CalendarContainer = ({ currentView }) => {
-  return currentView === VIEW_MODES[2] ? <Calendar dateCellRender={dateCellRender} /> : null;
+const CalendarContainer = ({ currentView, data }) => {
+  console.log(data);
+  return currentView === VIEW_MODES[2] ? (
+    <Calendar dateCellRender={(value) => dateCellRender(value, data)} />
+  ) : null;
 };
 
-const mapStateToProps = ({ currentView }) => {
+const mapStateToProps = ({ currentView, data }) => {
   return {
     currentView,
+    data,
   };
 };
 
