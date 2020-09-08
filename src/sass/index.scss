@@ -3,7 +3,8 @@
 // Abstract
 @import "abstract/constants";
 @import "abstract/placeholders";
-@import "abstract/mixins.scss";
+@import "abstract/mixins";
 
 //  Base
 @import "base/base";
+@import "antd/dist/antd";
