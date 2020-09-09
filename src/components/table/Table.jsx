@@ -3,6 +3,7 @@ import React from 'react';
 import { DatePicker, Table, Tag, Space } from 'antd';
 import dummyData from './dummyData';
 import extractDateTime from '../../utils/extractDateTime';
+import { colorSelector, getOrganizer } from './helpers';
 import './Table.scss';
 import 'antd/dist/antd.css';
 
@@ -23,16 +24,6 @@ const MyTable = () => {
   function onOk(value) {
     console.log('Selected Time: ', value);
   }
-
-  const tagsColors = {
-    'js task': 'green',
-    additional: 'purple',
-    deadline: 'red',
-    lecture: 'blue',
-    'self-study': 'cyan',
-  };
-
-  const colorSelector = (type) => tagsColors[type];
 
   const columns = [
     {
@@ -121,28 +112,31 @@ const MyTable = () => {
       key: 'organizer',
       render: (organizers) => (
         <>
-          {organizers.map(({ name, url }) => (
-            <Space key={name}>
-              <img
-                src={`${url}.png?size=48`}
-                style={{
-                  height: '24px',
-                  width: '24px',
-                  borderRadius: '12px',
-                }}
-                alt="avatar"
-              />
-              <a
-                href={url}
-                target="_blanc"
-                style={{
-                  marginRight: '8px',
-                }}
-              >
-                {name}
-              </a>
-            </Space>
-          ))}
+          {organizers.map((id) => {
+            const { name, url } = getOrganizer(id);
+            return (
+              <Space key={name}>
+                <img
+                  src={`${url}.png?size=48`}
+                  style={{
+                    height: '24px',
+                    width: '24px',
+                    borderRadius: '12px',
+                  }}
+                  alt="avatar"
+                />
+                <a
+                  href={url}
+                  target="_blanc"
+                  style={{
+                    marginRight: '8px',
+                  }}
+                >
+                  {name}
+                </a>
+              </Space>
+            );
+          })}
         </>
       ),
     },

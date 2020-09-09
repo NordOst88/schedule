@@ -15,7 +15,7 @@ export default [
       { name: 'LearnJs', url: 'https://learnjs.ru' },
       { name: 'GitHub', url: 'https://github.com' },
     ],
-    organizer: [{ name: 'Юлия', url: 'https://github.com/yuliahope' }],
+    organizer: ['id1'],
     comment: 'Вопросы можно задать в дискорде',
   },
   {
@@ -32,7 +32,7 @@ export default [
       'https://github.com/rolling-scopes-school/tasks/blob/f504966947a9f3e85a27f6401e7a6870f870f392/tasks/codewars-react.md',
     description: 'Задачки на знание реакт-компонентов',
     links: [{ name: 'React', url: 'https://reactjs.org/' }],
-    organizer: [{ name: 'Юлия', url: 'https://github.com/yuliahope' }],
+    organizer: ['id3'],
     comment: 'Задание не обязательное',
   },
   {
@@ -48,10 +48,7 @@ export default [
     descriptionUrl: 'https://www.youtube.com/',
     description: 'Лекция про браузеры)',
     links: [{ name: 'Browsers and IDEs', url: 'https://www.youtube.com/watch?v=nd2VYxOsOwY' }],
-    organizer: [
-      { name: 'Юлия', url: 'https://github.com/yuliahope' },
-      { name: 'Клон Юлии', url: 'https://github.com/yuliahope' },
-    ],
+    organizer: ['id1', 'id2'],
     comment: 'Обязательно посмотреть!',
   },
   // {
