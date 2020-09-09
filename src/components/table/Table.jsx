@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { DatePicker, Table, Tag, Space } from 'antd';
+import { DatePicker, Table, Tag, Space, Tooltip } from 'antd';
 import dummyData from './dummyData';
 import extractDateTime from '../../utils/extractDateTime';
 import { colorSelector, getOrganizer, getAvatarSrc } from './helpers';
@@ -32,7 +32,6 @@ const MyTable = () => {
       key: 'date',
       render: (date) => <>{extractDateTime(date)}</>,
       sorter: (a, b) => a.dateTime - b.dateTime,
-      // defaultSortOrder: 'ascend',
     },
     {
       title: 'Time',
@@ -72,7 +71,6 @@ const MyTable = () => {
       title: 'Estimated Time',
       dataIndex: 'estimatedTime',
       key: 'estimatedTime',
-      width: 50,
       align: 'center',
     },
     {
@@ -91,6 +89,20 @@ const MyTable = () => {
       title: 'Description',
       dataIndex: 'description',
       key: 'description',
+      render: (description) => (
+        <Tooltip placement="topLeft" title={description}>
+          <div
+            style={{
+              width: 200,
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {description}
+          </div>
+        </Tooltip>
+      ),
     },
     {
       title: 'Links',
@@ -151,6 +163,20 @@ const MyTable = () => {
       title: 'Comment',
       dataIndex: 'comment',
       key: 'comment',
+      render: (comment) => (
+        <Tooltip placement="topLeft" title={comment}>
+          <div
+            style={{
+              width: 200,
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {comment}
+          </div>
+        </Tooltip>
+      ),
     },
   ];
 

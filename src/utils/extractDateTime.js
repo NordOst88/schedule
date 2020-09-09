@@ -3,10 +3,10 @@ export default function extractDateTime(dateTime, type = 'date') {
     return null;
   }
   if (type === 'date') {
-    return new Date(+dateTime).toLocaleDateString();
+    return new Date(+dateTime * 1000).toLocaleDateString();
   }
   if (type === 'dateTime') {
-    return new Date(+dateTime).toLocaleString().slice(0, 17);
+    return new Date(+dateTime * 1000).toLocaleString().slice(0, 17);
   }
-  return new Date(+dateTime).toLocaleTimeString().slice(0, 5);
+  return new Date(+dateTime * 1000).toLocaleTimeString().slice(0, 5);
 }
