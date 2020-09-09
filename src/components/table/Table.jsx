@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { DatePicker, Table, Tag, Space, Tooltip } from 'antd';
+import { DatePicker, Table, Tag, Space, Tooltip, Divider } from 'antd';
 import dummyData from './dummyData';
 import extractDateTime from '../../utils/extractDateTime';
 import { colorSelector, getOrganizer, getAvatarSrc } from './helpers';
@@ -110,17 +110,22 @@ const MyTable = () => {
       key: 'links',
       render: (links) => (
         <>
-          {links.map(({ name, url }) => (
-            <a
-              href={url}
-              target="_blanc"
-              style={{
-                marginRight: '8px',
-              }}
-              key={name}
-            >
-              {name}
-            </a>
+          {links.map(({ name, url }, idx) => (
+            <>
+              <a
+                href={url}
+                target="_blanc"
+                style={{
+                  marginRight: '8px',
+                }}
+                key={name}
+              >
+                {name}
+              </a>
+              {idx !== links.length - 1 ? (
+                <Divider style={{ 'background-color': '#757575' }} type="vertical" />
+              ) : null}
+            </>
           ))}
         </>
       ),
