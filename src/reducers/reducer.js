@@ -1,28 +1,18 @@
-import { TABLE, STUDENT, SET_VIEW_MODE, SET_USER } from '../constants/constants';
+import { SET_VIEW_MODE, SET_USER, SET_EVENTS } from '../actions/actions-types';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
+import getInitialState from '../utils/getInitialState';
 
-let view;
-let role;
-
-if (localStorage.settings) {
-  const storage = JSON.parse(localStorage.settings);
-  view = storage.mode;
-  role = storage.user;
-}
-const initialState = {
-  currentView: view || TABLE,
-  role: role || STUDENT,
-};
-
-const reducer = (state = initialState, action) => {
-  console.log('reducer', action);
+const reducer = (state = getInitialState(), action) => {
+  console.log('reducer', state, action);
   switch (action.type) {
     case SET_VIEW_MODE:
       setLocaLStorageSettings(Object.entries(action)[1]);
-      return { ...state, currentView: action.mode };
+      return { ...state, currentView: action.payload };
     case SET_USER:
       setLocaLStorageSettings(Object.entries(action)[1]);
-      return { ...state, role: action.user };
+      return { ...state, role: action.payload };
+    case SET_EVENTS:
+      return { ...state, events: action.payload };
     default:
       return state;
   }

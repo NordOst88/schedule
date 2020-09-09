@@ -45,6 +45,7 @@ export default class SwaggerService {
   }
 
   async addEvent(event) {
+    console.log('addEvent', event);
     await this.getResource('event', 'POST', event);
   }
 

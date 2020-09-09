@@ -1,0 +1,5 @@
+const SET_VIEW_MODE = 'SET_VIEW_MODE';
+const SET_USER = 'SET_USER';
+const SET_EVENTS = 'SET_EVENTS';
+
+export { SET_VIEW_MODE, SET_USER, SET_EVENTS };
