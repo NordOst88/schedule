@@ -20,7 +20,7 @@ function getListData(value, data) {
   });
 
   return currentData.map((obj) => {
-    return { type: 'success', content: obj.name };
+    return { type: 'success', name: obj.name, id: obj.id };
   });
 }
 
@@ -30,8 +30,8 @@ export function dateCellRender(value, data) {
   return (
     <ul className="events">
       {listData.map((item) => (
-        <li key={item.content}>
-          <Badge status={item.type} text={item.content} />
+        <li key={item.name} id={item.id} onClick={() => console.log(item.id)}>
+          <Badge color="#A56AC0" text={item.name} />
         </li>
       ))}
     </ul>
