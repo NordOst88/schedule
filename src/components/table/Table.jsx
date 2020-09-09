@@ -3,7 +3,7 @@ import React from 'react';
 import { DatePicker, Table, Tag, Space } from 'antd';
 import dummyData from './dummyData';
 import extractDateTime from '../../utils/extractDateTime';
-import { colorSelector, getOrganizer } from './helpers';
+import { colorSelector, getOrganizer, getAvatarSrc } from './helpers';
 import './Table.scss';
 import 'antd/dist/antd.css';
 
@@ -69,9 +69,16 @@ const MyTable = () => {
       key: 'place',
     },
     {
+      title: 'Estimated Time',
+      dataIndex: 'estimatedTime',
+      key: 'estimatedTime',
+      width: 50,
+      align: 'center',
+    },
+    {
       title: 'Name',
-      dataIndex: 'event',
-      key: 'event',
+      dataIndex: 'name',
+      key: 'name',
       render: (name, record) => (
         <>
           <a href={record.url} target="_blanc">
@@ -117,7 +124,7 @@ const MyTable = () => {
             return (
               <Space key={name}>
                 <img
-                  src={`${url}.png?size=48`}
+                  src={getAvatarSrc(url)}
                   style={{
                     height: '24px',
                     width: '24px',
