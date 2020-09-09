@@ -111,21 +111,19 @@ const MyTable = () => {
       render: (links) => (
         <>
           {links.map(({ name, url }, idx) => (
-            <>
-              <a
-                href={url}
-                target="_blanc"
-                style={{
-                  marginRight: '8px',
-                }}
-                key={name}
-              >
-                {name}
-              </a>
+            <a
+              href={url}
+              target="_blanc"
+              style={{
+                whiteSpace: 'nowrap',
+              }}
+              key={name}
+            >
+              {name}
               {idx !== links.length - 1 ? (
                 <Divider style={{ 'background-color': '#757575' }} type="vertical" />
               ) : null}
-            </>
+            </a>
           ))}
         </>
       ),
