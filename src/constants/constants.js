@@ -11,19 +11,20 @@ const SET_VIEW_MODE = 'SET_VIEW_MODE';
 const SET_USER = 'SET_USER';
 
 // colors
-const COLOR_PRESET = [
-  { type: 'js task', color: '#d9f7be' },
-  { type: 'HTML task', color: '#ffffb8' },
-  { type: 'self-study', color: '#b5f5ec' },
-  { type: 'markdown', color: '#fff2e8' },
-  { type: 'lecture', color: '#efdbff' },
-  { type: 'materials', color: '#ffd6e7' },
-  { type: 'test', color: '#237804' },
-  { type: 'deadline', color: '#ff7875' },
-  { type: 'cross-check', color: '#fa541c' },
-  { type: 'codewars', color: '#13c2c2' },
-  { type: 'interview', color: '#fff566' },
-];
+const COLOR_PRESET = {
+  'js task': '#bae637',
+  'HTML task': '#ffffb8',
+  'self-study': '#b5f5ec',
+  markdown: '#fff2e8',
+  lecture: '#efdbff',
+  materials: '#ffd6e7',
+  test: '#237804',
+  deadline: '#ff7875',
+  'cross-check': '#fa541c',
+  codewars: '#13c2c2',
+  interview: '#fff566',
+};
+
 export {
   TABLE,
   LIST,

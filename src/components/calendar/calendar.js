@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Badge, Calendar } from 'antd';
 
-import { VIEW_MODES } from '../../constants/constants';
+import { VIEW_MODES, COLOR_PRESET } from '../../constants/constants';
 
 const compareDates = (moment, eventDate) => {
   const isSameDay = moment.date() === eventDate.getDate();
@@ -13,32 +13,37 @@ const compareDates = (moment, eventDate) => {
   return isSameDay && isSameMonth && isSameYear;
 };
 
-function getListData(value, data) {
+function getListData(value, data, colors) {
   const currentData = data.filter((obj) => {
     const eventDate = new Date(+obj.dateTime);
     return compareDates(value, eventDate);
   });
 
+  if (!currentData.length) {
+    return [];
+  }
+
   return currentData.map((obj) => {
-    return { type: 'success', name: obj.name, id: obj.id };
+    const color = colors[obj.type];
+    return { type: obj.type, name: obj.name, id: obj.id, color };
   });
 }
 
-export function dateCellRender(value, data) {
-  const listData = getListData(value, data);
+export function dateCellRender(value, data, colors) {
+  const listData = getListData(value, data, colors);
 
   return (
     <ul className="events">
       {listData.map((item) => (
         <li key={item.name} id={item.id} onClick={() => console.log(item.id)}>
-          <Badge color="#A56AC0" text={item.name} />
+          <Badge color={item.color} text={item.name} />
         </li>
       ))}
     </ul>
   );
 }
 
-function getMonthData(value) {
+/* function getMonthData(value) {
   if (value.month() === 8) {
     return 1394;
   }
@@ -53,11 +58,10 @@ export function monthCellRender(value) {
     </div>
   ) : null;
 }
-
+ */
 const CalendarContainer = ({ currentView, data }) => {
-  console.log(data);
   return currentView === VIEW_MODES[2] ? (
-    <Calendar dateCellRender={(value) => dateCellRender(value, data)} />
+    <Calendar dateCellRender={(value) => dateCellRender(value, data, COLOR_PRESET)} />
   ) : null;
 };
 

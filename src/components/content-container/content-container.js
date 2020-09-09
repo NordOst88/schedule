@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 
-import CalendarContainer from '../../calendar/components/calendar';
+import CalendarContainer from '../calendar/calendar';
 
 import './content-container.scss';
 
