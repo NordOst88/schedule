@@ -17,7 +17,7 @@ function getAvatarSrc(url) {
 }
 
 const getTimeStamp = (value) => {
-  const timestamp = Math.floor(new Date(value).getTime());
+  const timestamp = Math.floor(new Date(value).getTime() / 1000);
   console.log(timestamp);
 };
 

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
 import { TableOutlined, DownOutlined } from '@ant-design/icons';
@@ -12,6 +10,7 @@ import 'antd/dist/antd.css';
 
 const MyTable = () => {
   const [columnsToView, setColumnsToView] = useState(columns);
+  const currentDate = Math.floor(new Date('2020-09-06T17:30').getTime() / 1000);
 
   const columnSelectHandler = (column, checked) => {
     if (!checked) {
@@ -41,13 +40,12 @@ const MyTable = () => {
 
   return (
     <>
-      {console.log(columnsToView)}
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item label="Date Picker">
           <DatePicker showTime onChange={onDateChange} onOk={onDateOk} format={dateFormat} />
         </Form.Item>
-        <Form.Item>
-          <Dropdown overlay={menu(columns)}>
+        <Form.Item style={{ cursor: 'pointer' }}>
+          <Dropdown overlay={menu(columns)} arrow>
             <span>
               <TableOutlined /> Select Column <DownOutlined />
             </span>
@@ -55,6 +53,12 @@ const MyTable = () => {
         </Form.Item>
       </Form>
       <Table
+        rowClassName={(record) => {
+          if (+record.dateTime < currentDate) {
+            return 'expired-date';
+          }
+          return null;
+        }}
         dataSource={dummyData}
         columns={columnsToView}
         rowKey="id"
