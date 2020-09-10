@@ -1,7 +1,13 @@
-.modal_date{
+.modal_flex-sb{
     display: flex;
     justify-content: space-between;
 }
+.modal_flex{
+    display: flex;
+}
 .modal_bold{
     font-weight: 700;
+}
+.modal_flex-ml{
+    margin-left: 50px;
 }
