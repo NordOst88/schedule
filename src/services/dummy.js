@@ -1,48 +1,52 @@
 const data = [
   {
-    id: 1,
-    week: 0,
+    week: '0',
+    dateTime: '1599087906',
+    deadline: '1599188006',
     name: 'Computer Science Basics',
     description:
       'Курс состоит из нескольких крупных модулей, каждый из которых содержит короткие видео и тесты. Задача тестов - проверить, насколько хорошо стала понятна тема. Тесты можно проходить неограниченное количество раз, более того, во многих из них есть пояснения к неправильным ответам. Этот курс максимально гибкий: нет deadlineов, нет возможности "завалить" тест, можно проходить обучение в удобное время в удобном месте.',
     descriptionUrl: 'https://learn.epam.com/detailsPage?id=4b131384-7829-4204-a27b-21c538b41f88',
-    type: 'js task',
-    timeZone: 'GMT+3',
-    dateTime: '1598986800000',
-    place: 'Minsk',
+    type: ['js task', 'optional'],
+    estimatedTime: '8h',
+    timeZone: '',
+    place: 'online',
+    links: [
+      { name: 'LearnJs', url: 'https://learnjs.ru/' },
+      { name: 'GitHub', url: 'https://github.com/' },
+    ],
     comment:
       'Курс проходится за полчаса кликами по кнопке Next и перебором вариантов ответа в тестах.',
-    organizer: [
-      {
-        name: 'Vitali Shulha',
-        url: 'https://github.com/vitalliuss/',
-      },
-    ],
-    deadline: '',
+    organizer: ['1', '2'],
   },
   {
-    id: 2,
-    week: 0,
-    name: 'HTML online course',
-    description: 'Базовый курс по HTML',
-    descriptionUrl: 'https://ru.code-basics.com/languages/html',
-    type: 'self-study',
-    timeZone: 'GMT+3',
-    dateTime: '1598972400000',
-    place: 'Minsk',
+    week: '0',
+    dateTime: '1599087906',
+    deadline: '',
+    name: 'Computer Science Basics',
+    description:
+      'Курс состоит из нескольких крупных модулей, каждый из которых содержит короткие видео и тесты. Задача тестов - проверить, насколько хорошо стала понятна тема. Тесты можно проходить неограниченное количество раз, более того, во многих из них есть пояснения к неправильным ответам. Этот курс максимально гибкий: нет deadlineов, нет возможности "завалить" тест, можно проходить обучение в удобное время в удобном месте.',
+    descriptionUrl: 'https://learn.epam.com/detailsPage?id=4b131384-7829-4204-a27b-21c538b41f88',
+    type: ['js task', 'optional'],
+    estimatedTime: '8h',
+    timeZone: '',
+    place: 'online',
+    links: [
+      { name: 'LearnJs', url: 'https://learnjs.ru/' },
+      { name: 'GitHub', url: 'https://github.com/' },
+    ],
     comment:
-      'На странице курса все темы отмечены галочками. Студент может пояснить решение некоторых заданий (на выбор ментора)/ Решения всех заданий доступны после 20-минутной паузы. Для проверки самостоятельности решения  заданий нужно посмотреть и послушать как студент решает пройденные им таски',
+      'Курс проходится за полчаса кликами по кнопке Next и перебором вариантов ответа в тестах.',
     organizer: [
       {
         name: 'Code basics',
         url: 'https://ru.code-basics.com/',
       },
       {
-        name: 'Vitali Shulha',
-        url: 'https://github.com/vitalliuss/',
+        name: 'Code basics',
+        url: 'https://ru.code-basics.com/',
       },
     ],
-    deadline: '1598918400000',
   },
   {
     id: 3,

@@ -5,14 +5,12 @@ import './modal.scss';
 export default class ModalInfo extends Component {
   state = {
     visible: false,
-    id: 0,
+    id: 1,
   };
 
   showModal = () => {
-    const id = this.state.id + 1;
     this.setState({
       visible: true,
-      id,
     });
   };
 
@@ -23,13 +21,31 @@ export default class ModalInfo extends Component {
   };
 
   render() {
-    const { id } = this.state;
-    const { name, description, descriptionUrl, organizer, place, type } = this.props.data[id];
+    const { id, visible } = this.state;
+    const {
+      name,
+      description,
+      descriptionUrl,
+      organizer,
+      place,
+      type,
+      dateTime,
+      deadline,
+    } = this.props.data[id];
     const names = organizer.map((el) => (
       <div key={Math.random() * 100}>
-        {el.name}, Url: <a href={el.url}>{el.url}</a>
+        {el.name}, <br />
+        <strong>Url:</strong> <a href={el.url}>{el.url}</a>
       </div>
     ));
+    const types = typeof type === 'object' ? type.join(' , ') : <span>{type}</span>;
+    const deadlineSpan =
+      deadline === '' ? null : (
+        <span>
+          <span className="modal_bold">Deadline: </span>
+          {deadline}
+        </span>
+      );
     return (
       <>
         <Button type="primary" onClick={this.showModal}>
@@ -37,17 +53,17 @@ export default class ModalInfo extends Component {
         </Button>
         <Modal
           title={`${name}`}
-          visible={this.state.visible}
+          visible={visible}
           bodyStyle={{ fontSize: 18 }}
           footer={[
             <Button key="OK" type="primary" onClick={this.handleOk}>
-              Submit
+              Ok
             </Button>,
           ]}
-          className="modal"
+          onCancel={this.handleOk}
         >
           <p>
-            <span className="modal_bold">Type:</span> {type}
+            <span className="modal_bold">Type:</span> {types}
           </p>
           <p>
             <span className="modal_bold">Place:</span> {place}
@@ -61,6 +77,14 @@ export default class ModalInfo extends Component {
           </p>
           <div>
             <span className="modal_bold">Organizer:</span> {names}
+          </div>
+          <br />
+          <div className="modal_date">
+            <span>
+              <span className="modal_bold">Date: </span>
+              {dateTime}
+            </span>
+            {deadlineSpan}
           </div>
         </Modal>
       </>
