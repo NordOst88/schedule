@@ -1,13 +1,7 @@
+/* eslint-disable no-console */
 import dummyMentors from './dummyMentors';
 import logoRSSchool from '../../assets/images/logo_rs.svg';
-
-const tagsColors = {
-  'js task': 'green',
-  additional: 'purple',
-  deadline: 'red',
-  lecture: 'blue',
-  'self-study': 'cyan',
-};
+import { tagsColors } from './constants';
 
 const colorSelector = (type) => tagsColors[type];
 
@@ -22,4 +16,19 @@ function getAvatarSrc(url) {
   return logoRSSchool;
 }
 
-export { colorSelector, getOrganizer, getAvatarSrc };
+const getTimeStamp = (value) => {
+  const timestamp = Math.floor(new Date(value).getTime());
+  console.log(timestamp);
+};
+
+function onDateChange(value, dateString) {
+  console.log('TimeStamp: ', value);
+  getTimeStamp(dateString);
+  console.log('Date and time: ', dateString);
+}
+
+function onDateOk(value) {
+  console.log('Selected Time: ', value);
+}
+
+export { colorSelector, getOrganizer, getAvatarSrc, onDateChange, onDateOk };
