@@ -7,12 +7,12 @@ const reducer = (state = getInitialState(), action) => {
   switch (action.type) {
     case SET_VIEW_MODE:
       setLocaLStorageSettings(Object.entries(action)[1]);
-      return { ...state, currentView: action.payload };
+      return { ...state, currentView: action.mode };
     case SET_USER:
       setLocaLStorageSettings(Object.entries(action)[1]);
-      return { ...state, role: action.payload };
+      return { ...state, role: action.user };
     case SET_EVENTS:
-      return { ...state, events: action.payload };
+      return { ...state, events: action.events };
     default:
       return state;
   }

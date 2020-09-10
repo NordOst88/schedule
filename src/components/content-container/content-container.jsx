@@ -4,6 +4,11 @@ import { Layout } from 'antd';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 
+import { LIST } from '../../constants/constants';
+import List from '../list/list';
+
+import sortByDateTime from '../../utils/sortByDateTime';
+
 import './content-container.scss';
 
 class ContentContainer extends PureComponent {
@@ -11,16 +16,18 @@ class ContentContainer extends PureComponent {
 
   componentDidMount() {
     const { onFetch } = this.props;
-    this.api.getAllEvents().then((events) => onFetch(events));
+    this.api.getAllEvents().then((events) => {
+      const formattedData = sortByDateTime(events);
+      onFetch(formattedData);
+    });
   }
 
   render() {
-    const { currentView, role } = this.props;
+    const { currentView } = this.props;
     const { Content } = Layout;
     return (
-      <Content>
-        <p className="text">Current View: {currentView}</p>
-        <p className="text">Current Role: {role}</p>
+      <Content style={{ padding: '15px 3%', backgroundColor: '#fff' }}>
+        {currentView === LIST ? <List /> : null}
       </Content>
     );
   }

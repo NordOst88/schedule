@@ -7,16 +7,9 @@ import ErrorBoundary from './components/error-boundary/error-boundary';
 
 import store from './store';
 
-// todo: only for extension redux devtool. Delete before deploy
+// import SwaggerService from './services/swagger-service';
 
-render(
-  <Provider store={store}>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  </Provider>,
-  document.getElementById('root'),
-);
+// const api = new SwaggerService();
 
 // const obj = {
 //   data: [
@@ -45,8 +38,7 @@ render(
 //       dateTime: '1599089906',
 //       deadline: '1599188006',
 //       name: 'Computer Science Basics',
-//       description:
-//         'Курс состоит из нескольких крупных модулей, каждый из которых содержит короткие видео и тесты. Задача тестов - проверить, насколько хорошо стала понятна тема. Тесты можно проходить неограниченное количество раз, более того, во многих из них есть пояснения к неправильным ответам. Этот курс максимально гибкий: нет deadlineов, нет возможности "завалить" тест, можно проходить обучение в удобное время в удобном месте.',
+//       description: 'Курс состоит 1',
 //       descriptionUrl: 'https://learn.epam.com/detailsPage?id=4b131384-7829-4204-a27b-21c538b41f88',
 //       type: ['js task', 'optional'],
 //       estimatedTime: '8h',
@@ -62,11 +54,10 @@ render(
 //     },
 //     {
 //       week: '0',
-//       dateTime: '1599090906',
+//       dateTime: '1597090906',
 //       deadline: '1599188006',
 //       name: 'Computer Science Basics',
-//       description:
-//         'Курс состоит из нескольких крупных модулей, каждый из которых содержит короткие видео и тесты. Задача тестов - проверить, насколько хорошо стала понятна тема. Тесты можно проходить неограниченное количество раз, более того, во многих из них есть пояснения к неправильным ответам. Этот курс максимально гибкий: нет deadlineов, нет возможности "завалить" тест, можно проходить обучение в удобное время в удобном месте.',
+//       description: 'Курс состоит 2',
 //       descriptionUrl: 'https://learn.epam.com/detailsPage?id=4b131384-7829-4204-a27b-21c538b41f88',
 //       type: ['js task', 'optional'],
 //       estimatedTime: '8h',
@@ -85,7 +76,7 @@ render(
 //   ],
 // };
 
-// todo: add events on back-end
+// // todo: add events on back-end
 // obj.data.forEach(async (el) => {
 //   console.log(el);
 //   await api.addEvent(el);
@@ -98,3 +89,14 @@ render(
 //   allEv.forEach((el) => api.deleteEventById(el.id));
 // }
 // clearStore();
+
+// todo: only for extension redux devtool. Delete before deploy
+
+render(
+  <Provider store={store}>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </Provider>,
+  document.getElementById('root'),
+);
