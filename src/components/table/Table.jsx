@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useState } from 'react';
 import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
 import { TableOutlined, DownOutlined } from '@ant-design/icons';
 import columns from './columns';
@@ -10,11 +11,29 @@ import './Table.scss';
 import 'antd/dist/antd.css';
 
 const MyTable = () => {
+  const [columnsToView, setColumnsToView] = useState(columns);
+
+  const columnSelectHandler = (column, checked) => {
+    if (!checked) {
+      setColumnsToView([...columnsToView].filter((item) => item !== column));
+    } else {
+      const idx = columns.indexOf(column);
+      setColumnsToView([...columnsToView.slice(0, idx), column, ...columnsToView.slice(idx)]);
+    }
+  };
+
+  const checkSetter = (column) => columnsToView.includes(column);
+
   const menu = (cols) => (
     <Menu>
       {cols.map((column) => (
         <Menu.Item key={column.key}>
-          <Checkbox>{column.title}</Checkbox>
+          <Checkbox
+            checked={checkSetter(column)}
+            onChange={({ target }) => columnSelectHandler(column, target.checked)}
+          >
+            {column.title}
+          </Checkbox>
         </Menu.Item>
       ))}
     </Menu>
@@ -22,6 +41,7 @@ const MyTable = () => {
 
   return (
     <>
+      {console.log(columnsToView)}
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item label="Date Picker">
           <DatePicker showTime onChange={onDateChange} onOk={onDateOk} format={dateFormat} />
@@ -34,7 +54,13 @@ const MyTable = () => {
           </Dropdown>
         </Form.Item>
       </Form>
-      <Table dataSource={dummyData} columns={columns} rowKey="id" size="small" pagination={false} />
+      <Table
+        dataSource={dummyData}
+        columns={columnsToView}
+        rowKey="id"
+        size="small"
+        pagination={false}
+      />
     </>
   );
 };
