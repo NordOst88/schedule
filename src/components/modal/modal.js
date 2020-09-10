@@ -7,7 +7,7 @@ export default class ModalInfo extends Component {
     visible: false,
     id: 1,
   };
-
+  getTime() {}
   showModal = () => {
     this.setState({
       visible: true,
@@ -34,10 +34,10 @@ export default class ModalInfo extends Component {
     } = this.props.data[id];
     const names = organizer.map((el) => (
       <div key={Math.random() * 100}>
-        {el.name}, <br />
-        <strong>Url:</strong> <a href={el.url}>{el.url}</a>
+        <a href={el.url}>{el.name}</a>
       </div>
     ));
+    console.log(new Date(+deadline));
     const types = typeof type === 'object' ? type.join(' , ') : <span>{type}</span>;
     const deadlineSpan =
       deadline === '' ? null : (
@@ -52,8 +52,10 @@ export default class ModalInfo extends Component {
           Open Modal
         </Button>
         <Modal
+          width={650}
           title={`${name}`}
           visible={visible}
+          style={{ top: 20 }}
           bodyStyle={{ fontSize: 18 }}
           footer={[
             <Button key="OK" type="primary" onClick={this.handleOk}>
@@ -82,7 +84,6 @@ export default class ModalInfo extends Component {
           <div className="modal_date">
             <span>
               <span className="modal_bold">Date: </span>
-              {dateTime}
             </span>
             {deadlineSpan}
           </div>
