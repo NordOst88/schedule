@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import { Badge, Calendar } from 'antd';
 
 import { VIEW_MODES, COLOR_PRESET } from '../../constants/constants';
+import { onEventClick } from '../../actions/actions';
 
 const compareDates = (moment, eventDate) => {
   const isSameDay = moment.date() === eventDate.getDate();
@@ -29,13 +30,13 @@ function getListData(value, data, colors) {
   });
 }
 
-export function dateCellRender(value, data, colors) {
+export function dateCellRender(value, data, colors, onClick) {
   const listData = getListData(value, data, colors);
 
   return (
     <ul className="events">
       {listData.map((item) => (
-        <li key={item.name} id={item.id} onClick={() => console.log(item.id)}>
+        <li key={item.name} id={item.id} onClick={() => onClick(item)}>
           <Badge color={item.color} text={item.name} />
         </li>
       ))}
@@ -59,9 +60,9 @@ export function monthCellRender(value) {
   ) : null;
 }
  */
-const CalendarContainer = ({ currentView, data }) => {
+const CalendarContainer = ({ currentView, data, onClick }) => {
   return currentView === VIEW_MODES[2] ? (
-    <Calendar dateCellRender={(value) => dateCellRender(value, data, COLOR_PRESET)} />
+    <Calendar dateCellRender={(value) => dateCellRender(value, data, COLOR_PRESET, onClick)} />
   ) : null;
 };
 
@@ -72,4 +73,10 @@ const mapStateToProps = ({ currentView, data }) => {
   };
 };
 
-export default connect(mapStateToProps)(CalendarContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClick: (currentData) => dispatch(onEventClick(currentData)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarContainer);

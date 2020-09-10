@@ -1,4 +1,4 @@
-import { TABLE, STUDENT, SET_VIEW_MODE, SET_USER } from '../constants/constants';
+import { TABLE, STUDENT, SET_VIEW_MODE, SET_USER, CURRENT_DATA } from '../constants/constants';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 import data from '../services/dummy-data';
 
@@ -13,6 +13,8 @@ if (localStorage.settings) {
 const initialState = {
   currentView: view || TABLE,
   role: role || STUDENT,
+  // calendar
+  currentData: {},
   data,
 };
 
@@ -25,6 +27,9 @@ const reducer = (state = initialState, action) => {
     case SET_USER:
       setLocaLStorageSettings(Object.entries(action)[1]);
       return { ...state, role: action.user };
+    // calendar
+    case CURRENT_DATA:
+      return { ...state, currentData: action.currentData };
     default:
       return state;
   }
