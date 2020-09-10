@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Modal, Button } from 'antd';
+import { Modal, Button, Tag } from 'antd';
 import './modal.scss';
+
+import { COLOR_PRESET } from '../../constants/constants';
 
 export default class ModalInfo extends Component {
   state = {
@@ -51,8 +53,11 @@ export default class ModalInfo extends Component {
       </div>
     ));
 
-    const types = typeof type === 'object' ? type.join(' , ') : <span>{type}</span>;
-
+    const types = type.map((el) => (
+      <Tag color={COLOR_PRESET[el]} key={Math.random() * 100}>
+        {el}
+      </Tag>
+    ));
     const deadlineSpan =
       deadline === '' ? null : (
         <span>
