@@ -1,7 +1,6 @@
 {
     "data": [
         {
-            "id": 1,
             "week": 0,
             "name": "Computer Science Basics",
             "description": "Курс состоит из нескольких крупных модулей, каждый из которых содержит короткие видео и тесты. Задача тестов - проверить, насколько хорошо стала понятна тема. Тесты можно проходить неограниченное количество раз, более того, во многих из них есть пояснения к неправильным ответам. Этот курс максимально гибкий: нет deadlineов, нет возможности \"завалить\" тест, можно проходить обучение в удобное время в удобном месте.",
@@ -20,7 +19,6 @@
             "deadline": ""
         },
         {
-            "id": 2,
             "week": 0,
             "name": "HTML online course",
             "description": "Базовый курс по HTML",
@@ -39,7 +37,6 @@
             "deadline": "1598918400000"
         },
         {
-            "id": 3,
             "week": 0,
             "name": "CSS online course",
             "description": "Базовый курс по CSS",
@@ -58,7 +55,6 @@
             "deadline": "1598918400000"
         },
         {
-            "id": 4,
             "week": 0,
             "name": "JS online course",
             "description": "Базовый курс JavaScript. Если проходить осмысленно, даст неплохое представление о языке и его возможностях.",
@@ -77,7 +73,6 @@
             "deadline": "1598918400000"
         },
         {
-            "id": 5,
             "week": 1,
             "name": "Git & GitHub. Регистрация на GitHub",
             "description": "Знакомство с Git & GitHub , регистрация на сервесе, и установка Git",
@@ -96,7 +91,6 @@
             "deadline": ""
         },
         {
-            "id": 6,
             "week": 1,
             "name": "Git & GitHub. Изучение команд Git",
             "description": "Создание репозитория на гитхабе, создание ветки, добавление файлов с использование команд Git",
@@ -115,7 +109,6 @@
             "deadline": ""
         },
         {
-            "id": 7,
             "week": 1,
             "name": "Git & GitHub. Требования к комитам",
             "description": "Изучение требований коммитам согласно гайдлайну и применение их на практике",
@@ -134,7 +127,6 @@
             "deadline": ""
         },
         {
-            "id": 8,
             "week": 1,
             "name": "Git & GitHub. GitHub Pages",
             "description": "Изучение и использование сервиса GitHub Pages и Netlify для деплоя  проектов",
@@ -153,7 +145,6 @@
             "deadline": ""
         },
         {
-            "id": 9,
             "week": 1,
             "name": "IDE. Установка VS Code",
             "description": "YouTube видео по установленовке Visual Studio Code и рекомендованных плагинов. ",
@@ -172,7 +163,6 @@
             "deadline": ""
         },
         {
-            "id": 10,
             "week": 1,
             "name": "IDE. Взаимодействие редактора и браузера",
             "description": "Изучение плагин LiveServer для открытия HTML файлов в браузере через VS Code",
@@ -191,7 +181,6 @@
             "deadline": ""
         },
         {
-            "id": 11,
             "week": 1,
             "name": "Markdown.",
             "description": "Изучение синтаксиса Markdown его применение на практике.",
@@ -210,7 +199,6 @@
             "deadline": ""
         },
         {
-            "id": 12,
             "week": 1,
             "name": "Markdown & Git",
             "description": "Создать Markdown документ с описанием резюме.",
@@ -245,7 +233,6 @@
             "deadline": "1599696000000"
         },
         {
-            "id": 13,
             "week": 1,
             "name": "CSS Basics",
             "description": "YouTube видео о базовых особенностях CSS",
@@ -264,7 +251,6 @@
             "deadline": ""
         },
         {
-            "id": 14,
             "week": 1,
             "name": "CSS. Selectors",
             "description": "30 CSS-селекторов, которые должны знать начинающие разработчики",
@@ -283,7 +269,7 @@
             "deadline": ""
         },
         {
-            "id": 15,
+
             "week": 1,
             "name": "HTML, CSS & Git Basics",
             "description": "Создать страницу index.html и стили для нее. Основным содержанием этой страницы является документ Markdown из последней codewars Git и Markdown. Помимо текста нужно добавить свою фотографию или картинку. Страница должна быть развернута на страницах Github и доступна по URL-адресу",
@@ -306,7 +292,6 @@
             "deadline": "1599955200000"
         },
         {
-            "id": 16,
             "week": 1,
             "name": "CSS positioning and layout (Flex)",
             "description": "Видео lecture Position. Floats. Flex. Semantic. CSS3",
@@ -325,7 +310,6 @@
             "deadline": ""
         },
         {
-            "id": 17,
             "week": 2,
             "name": "Git CheatSheet",
             "description": "Вся информация по Гит в одном месте",
@@ -344,7 +328,6 @@
             "deadline": ""
         },
         {
-            "id": 18,
             "week": 2,
             "name": "Broswers and IDEs",
             "description": "Видео lecture о браузерах и редакторах кода. Ответы на вопросы",
@@ -363,7 +346,6 @@
             "deadline": ""
         },
         {
-            "id": 19,
             "week": 2,
             "name": "SASS Basics",
             "description": "Изучение документации по Sass на официальном сайте",
@@ -382,7 +364,6 @@
             "deadline": ""
         },
         {
-            "id": 20,
             "week": 2,
             "name": "Friday Live Coding",
             "description": "Онлайн создание разметки по макету. Основы БЭМ. Figma. Работа в VS Code",
@@ -401,7 +382,6 @@
             "deadline": ""
         },
         {
-            "id": 21,
             "week": 2,
             "name": "HTML, CSS & Git Basics Test",
             "description": "Тест по основам HTML, CSS, Git",
@@ -420,7 +400,6 @@
             "deadline": "1600473600000"
         },
         {
-            "id": 22,
             "week": 3,
             "name": "Simple-singolo",
             "description": "Cверстать страницу согласно макету. Использовать JavaScript для создания адаптивного меню, слайдера, переключения табов в блоке Portfolio.",
@@ -439,7 +418,6 @@
             "deadline": "1600819200000"
         },
         {
-            "id": 23,
             "week": 4,
             "name": "Simple-singolo",
             "description": "Выполненное задание по верстке. Использован JavaScript для создания адаптивного меню, слайдера, переключения табов в блоке Portfolio.",
@@ -458,7 +436,6 @@
             "deadline": ""
         },
         {
-            "id": 24,
             "week": 4,
             "name": "JavaScript. Introduction",
             "description": "Изучение учебника по JavaScript. ",
@@ -477,7 +454,6 @@
             "deadline": ""
         },
         {
-            "id": 25,
             "week": 4,
             "name": "Singolo cross-check",
             "description": "Проверка выполнения таска Simple-singolo другими студентами. ",
@@ -496,7 +472,6 @@
             "deadline": "1601337600000"
         },
         {
-            "id": 26,
             "week": 4,
             "name": "Friday Live Coding",
             "description": "Продолжение работы с макетом. Подключение припроцессоров.",
@@ -515,7 +490,6 @@
             "deadline": ""
         },
         {
-            "id": 27,
             "week": 5,
             "name": "Codewars. Basics",
             "description": "Задания для практики решения JavaScript тасков на специальной платформе Codewars",
@@ -534,7 +508,6 @@
             "deadline": "1601769600000"
         },
         {
-            "id": 28,
             "week": 5,
             "name": "Friday Live Coding",
             "description": "Продолжение работы с макетом.  Стилизация страницы. Подключение normalize.css",
@@ -553,7 +526,6 @@
             "deadline": ""
         },
         {
-            "id": 29,
             "week": 5,
             "name": "Codewars. Basics",
             "description": "Задания для практики решения JavaScript тасков на специальной платформе Codewars",
@@ -572,7 +544,6 @@
             "deadline": ""
         },
         {
-            "id": 30,
             "week": 5,
             "name": "Calculator",
             "description": "Создание калькулятора, выполняющего математические операции. Отличное объяснение, единственное в этой подборке на русском языке. Код немного устарел: всё ещё используются объявления переменных var вместо const и let, обычные функции, вместо стрелочных. Но логика создания приложения осталась неизменной.",
@@ -591,7 +562,6 @@
             "deadline": ""
         },
         {
-            "id": 31,
             "week": 6,
             "name": "JS Basics Video",
             "description": "Для повторения и закрепления изученного материала",
@@ -610,7 +580,6 @@
             "deadline": ""
         },
         {
-            "id": 32,
             "week": 6,
             "name": "JS. DOM",
             "description": "Подключение первого скрипта\nОбъектная модель документа\nКлюч к пониманию языка\nСвойства, события, методы\ninnerHTML и style\nОбработка событий\nСлайдер фотографий в 20 строк",
@@ -629,7 +598,6 @@
             "deadline": ""
         },
         {
-            "id": 33,
             "week": 6,
             "name": "Webpack",
             "description": "Введение в Webpack, установка, плагины",
@@ -648,7 +616,6 @@
             "deadline": ""
         },
         {
-            "id": 34,
             "week": 6,
             "name": "Codewars. Basics-1",
             "description": "Задания для практики решения JavaScript тасков на специальной платформе Codewars",
@@ -667,7 +634,6 @@
             "deadline": "1602720000000"
         },
         {
-            "id": 35,
             "week": 7,
             "name": "Advanced JS",
             "description": "Изучение prototype, call, bind, this, замыкания, event loop, , асинхронность, промисы, классы и т д",
@@ -686,7 +652,6 @@
             "deadline": ""
         },
         {
-            "id": 36,
             "week": 7,
             "name": "Codewars. Basics-1",
             "description": "Задания для практики решения JavaScript тасков на специальной платформе Codewars",
@@ -705,7 +670,6 @@
             "deadline": ""
         },
         {
-            "id": 37,
             "week": 8,
             "name": "Advanced JS Test",
             "description": "Тест по продвинутым функциям JavaScript. Ссылка на тест будет в Дискорде. ",
@@ -724,7 +688,6 @@
             "deadline": "1602892800000"
         },
         {
-            "id": 38,
             "week": 9,
             "name": "Rain-drops",
             "description": "Необходимо создать приложение - тренажёр по математике, позволяющий закрепить навыки арифметических действий: сложения, вычитания, умножения и деления.",
@@ -743,7 +706,6 @@
             "deadline": "1603584000000"
         },
         {
-            "id": 39,
             "week": 10,
             "name": "Codewars. Basics-2",
             "description": "Задания для практики решения JavaScript тасков на специальной платформе Codewars",
@@ -762,7 +724,6 @@
             "deadline": ""
         },
         {
-            "id": 40,
             "week": 10,
             "name": "Rain-drops",
             "description": "Необходимо создать приложение - тренажёр по математике, позволяющий закрепить навыки арифметических действий: сложения, вычитания, умножения и деления.",
@@ -781,7 +742,6 @@
             "deadline": ""
         },
         {
-            "id": 41,
             "week": 10,
             "name": "fancy-weather",
             "description": "Вам необходимо создать приложение - прогноз погоды",
@@ -800,7 +760,6 @@
             "deadline": "1604966400000"
         },
         {
-            "id": 42,
             "week": 13,
             "name": "Interview questions",
             "description": "Список вопросов для подготовки к финальному собеседованию. ",
@@ -819,7 +778,6 @@
             "deadline": ""
         },
         {
-            "id": 43,
             "week": 13,
             "name": "Interview",
             "description": "Финльное собеседование по завершению курса. Основы JavaScript, HTML, CSS",
