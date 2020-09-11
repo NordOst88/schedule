@@ -12,6 +12,7 @@ const LIST_TEXT = {
   left: 'Left',
   right: 'Right',
   alternate: 'Alternate',
+  deadline: 'Deadline:',
 };
 
 const COLOR_PRESET = {

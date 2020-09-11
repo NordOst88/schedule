@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Timeline, Radio, Typography, Space } from 'antd';
+import { FlagOutlined } from '@ant-design/icons';
 
 import { LIST_TEXT } from '../../constants/constants';
+import { onSetListView } from '../../actions/actions';
 import getFormattedDate from '../../utils/getFormattedDate';
 import getEventColor from '../../utils/getEventColor';
 
-const List = ({ events, eventColors }) => {
-  const [mode, setMode] = useState('left');
+const List = ({ events, eventColors, listView, onChange }) => {
   const { Text, Link } = Typography;
-  const { moreDetails, left, right, alternate } = LIST_TEXT;
-
-  const onChange = ({ target: { value } }) => {
-    setMode(value);
-  };
+  const { moreDetails, left, right, alternate, deadline } = LIST_TEXT;
 
   const onMoreDetailsClick = (event) => {
+    // todo: show modal
     console.log('onMoreDetailsClick', event);
   };
 
+  // todo: think about left view mode
   return (
     <>
       <Radio.Group
         onChange={onChange}
-        value={mode}
+        value={listView}
         style={{
           display: 'flex',
           marginBottom: 10,
@@ -34,23 +33,24 @@ const List = ({ events, eventColors }) => {
         <Radio value="right">{right}</Radio>
         <Radio value="alternate">{alternate}</Radio>
       </Radio.Group>
-      <Timeline mode={mode}>
+      <Timeline mode={listView}>
         {events.map((event) => {
           const activeEvent = Date.now() > new Date(event.deadline * 1000);
           const colorEvent = getEventColor(activeEvent, eventColors, ...event.type);
           const textType = activeEvent ? 'secondary' : null;
           const startDate = getFormattedDate(event.dateTime);
           const deadlineDate = getFormattedDate(event.deadline);
+          const dateValue = listView === 'left' || listView === 'right' ? null : `${startDate}`;
+          console.log('colorEvent', colorEvent);
 
           return (
             <Timeline.Item
-              color={colorEvent}
               key={event.id}
-              // label={mode === 'left' ? null : `${startDate}`}
-              label={`${startDate}`}
+              label={dateValue}
+              dot={<FlagOutlined style={{ fontSize: '2rem', color: colorEvent }} />}
             >
               <Space direction="vertical">
-                {/* {mode === 'left' ? <p>{startDate}</p> : null} */}
+                {dateValue ? null : <p>{startDate}</p>}
                 <Link href={event.descriptionUrl} target="_blank" type={textType}>
                   {event.name}
                 </Link>
@@ -59,11 +59,13 @@ const List = ({ events, eventColors }) => {
                   mark
                   type={textType}
                   style={{ cursor: 'pointer' }}
-                  onClick={() => onMoreDetailsClick(event)}
+                  onClick={() => {
+                    onMoreDetailsClick(event);
+                  }}
                 >
                   {moreDetails}
                 </Text>
-                <Text type={textType || 'danger'}>Deadline: {deadlineDate}</Text>
+                <Text type={textType || 'danger'}>{`${deadline} ${deadlineDate}`}</Text>
               </Space>
             </Timeline.Item>
           );
@@ -73,9 +75,10 @@ const List = ({ events, eventColors }) => {
   );
 };
 
-const mapStateToProps = ({ events, eventColors }) => ({
+const mapStateToProps = ({ events, eventColors, listView }) => ({
   events,
   eventColors,
+  listView,
 });
 
-export default connect(mapStateToProps)(List);
+export default connect(mapStateToProps, { onChange: onSetListView })(List);
