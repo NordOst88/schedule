@@ -1,5 +1,7 @@
 import { TABLE, STUDENT, SET_VIEW_MODE, SET_USER } from '../constants/constants';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
+// modal
+import data from '../services/dummy';
 
 let view;
 let role;
@@ -12,6 +14,7 @@ if (localStorage.settings) {
 const initialState = {
   currentView: view || TABLE,
   role: role || STUDENT,
+  data,
 };
 
 const reducer = (state = initialState, action) => {
