@@ -69,7 +69,9 @@ const List = ({ events, eventColors, listView, onChange }) => {
                 >
                   {moreDetails}
                 </Text>
-                <Text type={textType || 'danger'}>{`${deadline} ${deadlineDate}`}</Text>
+                {deadlineDate ? (
+                  <Text type={textType || 'danger'}>{`${deadline} ${deadlineDate}`}</Text>
+                ) : null}
               </Space>
             </Timeline.Item>
           );
