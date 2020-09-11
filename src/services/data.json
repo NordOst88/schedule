@@ -10,14 +10,14 @@
             ],
             "timeZone": "",
             "estimatedTime": "16h",
-            "dateTime": "1598986800",
+            "dateTime": "1598972400",
             "place": "online",
             "comment": "Курс проходится за полчаса кликами по кнопке Next и перебором вариантов ответа в тестах. ",
             "organizer": [
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
-            "deadline": "",
-            "links": []
+            "deadline": "1599004800",
+            "links": {}
         },
         {
             "week": 0,
@@ -36,8 +36,8 @@
             "organizer": [
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
-            "deadline": "1598918400",
-            "links": []
+            "deadline": "1599004800",
+            "links": {}
         },
         {
             "week": 0,
@@ -57,8 +57,8 @@
                 "DVgluQnLGTg9ggTi6A4N ",
                 "zom0bgoUBztJLlMhDEvh"
             ],
-            "deadline": "1598918400",
-            "links": []
+            "deadline": "1599004800",
+            "links": {}
         },
         {
             "week": 0,
@@ -77,8 +77,8 @@
             "organizer": [
                 "zom0bgoUBztJLlMhDEvh"
             ],
-            "deadline": "1598918400",
-            "links": []
+            "deadline": "1599004800",
+            "links": {}
         },
         {
             "week": 1,
@@ -97,7 +97,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -117,7 +117,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -136,7 +136,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -155,7 +155,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -174,11 +174,9 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": [
-                {
-                    "VS Code Downloader": "https://code.visualstudio.com/"
-                }
-            ]
+            "links": {
+                "VS Code Downloader": "https://code.visualstudio.com/"
+            }
         },
         {
             "week": 1,
@@ -197,7 +195,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -216,14 +214,10 @@
                 "DVgluQnLGTg9ggTi6A4N "
             ],
             "deadline": "",
-            "links": [
-                {
-                    "Mastering Markdown": "https://guides.github.com/features/mastering-markdown/"
-                },
-                {
-                    "Commit requirments": "https://docs.rs.school/#/en/git-convention"
-                }
-            ]
+            "links": {
+                "Mastering Markdown": "https://guides.github.com/features/mastering-markdown/",
+                "Commit requirments": "https://docs.rs.school/#/en/git-convention"
+            }
         },
         {
             "week": 1,
@@ -242,7 +236,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "1599696000",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -261,7 +255,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -280,7 +274,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -299,7 +293,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "1599955200",
-            "links": []
+            "links": {}
         },
         {
             "week": 1,
@@ -318,7 +312,7 @@
                 "DVgluQnLGTg9ggTi6A4N "
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 2,
@@ -337,7 +331,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 2,
@@ -356,7 +350,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 2,
@@ -375,14 +369,10 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": [
-                {
-                    "Preprocessors. Sass": "https://www.youtube.com/watch?v=JO8DvVZbxDw&feature=youtu.be"
-                },
-                {
-                    "SASS. Documentation": "https://sass-scss.ru/documentation/"
-                }
-            ]
+            "links": {
+                "Preprocessors. Sass": "https://www.youtube.com/watch?v=JO8DvVZbxDw&feature=youtu.be",
+                "SASS. Documentation": "https://sass-scss.ru/documentation/"
+            }
         },
         {
             "week": 2,
@@ -401,14 +391,10 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": [
-                {
-                    "GitHub": "https://github.com/ViktoriyaVorozhun/friday-live-coding/tree/develop"
-                },
-                {
-                    "Figma layout": "https://www.figma.com/file/Z7b86A3OdV6kAgoeZBPOZ7/Template-1?node-id=0%3A1"
-                }
-            ]
+            "links": {
+                "GitHub": "https://github.com/ViktoriyaVorozhun/friday-live-coding/tree/develop",
+                "Figma layout": "https://www.figma.com/file/Z7b86A3OdV6kAgoeZBPOZ7/Template-1?node-id=0%3A1"
+            }
         },
         {
             "week": 2,
@@ -427,14 +413,15 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "1600473600",
-            "links": []
+            "links": {}
         },
         {
             "week": 3,
             "name": "Simple-singolo",
             "description": "Cверстать страницу согласно макету. Использовать JavaScript для создания адаптивного меню, слайдера, переключения табов в блоке Portfolio.",
             "descriptionUrl": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-0/simple-singolo.md",
-            "type": ["HTML\xa0task"
+            "type": [
+                "HTML task"
             ],
             "timeZone": "",
             "estimatedTime": "40h",
@@ -445,11 +432,9 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "1600819200",
-            "links": [
-                {
-                    "Figma layout": "https://www.figma.com/file/DhRPIgi3JKRXqAkxaujDLl/Simple-Singolo?node-id=0%3A1"
-                }
-            ]
+            "links": {
+                "Figma layout": "https://www.figma.com/file/DhRPIgi3JKRXqAkxaujDLl/Simple-Singolo?node-id=0%3A1"
+            }
         },
         {
             "week": 4,
@@ -460,7 +445,7 @@
                 "deadline"
             ],
             "timeZone": "",
-            "estimatedTime": nan,
+            "estimatedTime": "",
             "dateTime": "1600819200",
             "place": "online",
             "comment": "Необходимо прикрепить работу на проверку на странице Submit в RS App",
@@ -468,7 +453,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 4,
@@ -487,7 +472,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 4,
@@ -506,7 +491,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "1601337600",
-            "links": []
+            "links": {}
         },
         {
             "week": 4,
@@ -525,7 +510,7 @@
                 "DVgluQnLGTg9ggTi6A4N "
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 5,
@@ -544,7 +529,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "1601769600",
-            "links": []
+            "links": {}
         },
         {
             "week": 5,
@@ -556,14 +541,14 @@
             ],
             "timeZone": "",
             "estimatedTime": "2h",
-            "dateTime": "1599073200",
+            "dateTime": "1601492400",
             "place": "online",
             "comment": "",
             "organizer": [
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 5,
@@ -574,7 +559,7 @@
                 "deadline"
             ],
             "timeZone": "",
-            "estimatedTime": nan,
+            "estimatedTime": "",
             "dateTime": "1601769600",
             "place": "online",
             "comment": "После завершения таски ее нужно засабмитить в RS App",
@@ -582,14 +567,15 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 5,
             "name": "Calculator",
             "description": "Создание калькулятора, выполняющего математические операции. Отличное объяснение, единственное в этой подборке на русском языке. Код немного устарел: всё ещё используются объявления переменных var вместо const и let, обычные функции, вместо стрелочных. Но логика создания приложения осталась неизменной.",
             "descriptionUrl": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-0/projects.md#task-1-calculator",
-            "type": ["js\xa0task",
+            "type": [
+                "js task",
                 "optional"
             ],
             "timeZone": "",
@@ -601,7 +587,7 @@
                 "DVgluQnLGTg9ggTi6A4N "
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 6,
@@ -620,7 +606,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 6,
@@ -639,7 +625,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 6,
@@ -658,7 +644,7 @@
                 "DVgluQnLGTg9ggTi6A4N "
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 6,
@@ -677,7 +663,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "1602720000",
-            "links": []
+            "links": {}
         },
         {
             "week": 7,
@@ -696,7 +682,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 7,
@@ -707,7 +693,7 @@
                 "deadline"
             ],
             "timeZone": "",
-            "estimatedTime": nan,
+            "estimatedTime": "",
             "dateTime": "1602720000",
             "place": "online",
             "comment": "Задание нужно засабмитить в RS App",
@@ -715,13 +701,13 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 8,
             "name": "Advanced JS Test",
             "description": "Тест по продвинутым функциям JavaScript. Ссылка на тест будет в Дискорде. ",
-            "descriptionUrl": nan,
+            "descriptionUrl": "",
             "type": [
                 "test"
             ],
@@ -734,7 +720,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "1602892800",
-            "links": []
+            "links": {}
         },
         {
             "week": 9,
@@ -754,7 +740,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "1603584000",
-            "links": []
+            "links": {}
         },
         {
             "week": 10,
@@ -773,7 +759,7 @@
                 "2hrQVm7BAzWdmMQpzJAw"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 10,
@@ -784,7 +770,7 @@
                 "deadline"
             ],
             "timeZone": "",
-            "estimatedTime": nan,
+            "estimatedTime": "",
             "dateTime": "1603584000",
             "place": "online",
             "comment": "",
@@ -792,7 +778,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 10,
@@ -810,15 +796,11 @@
             "organizer": [
                 "zom0bgoUBztJLlMhDEvh"
             ],
-            "deadline": "1604966400",
-            "links": [
-                {
-                    "Figma layout": "https://www.figma.com/file/3aQwTNcZWg5CTuvlQ1t5MQ/fancy-weather?node-id=0%3A1"
-                },
-                {
-                    "Demo": "https://deadline2020-fancy-weather.netlify.app/"
-                }
-            ]
+            "deadline": "1604016000",
+            "links": {
+                "Figma layout": "https://www.figma.com/file/3aQwTNcZWg5CTuvlQ1t5MQ/fancy-weather?node-id=0%3A1",
+                "Demo": "https://deadline2020-fancy-weather.netlify.app/"
+            }
         },
         {
             "week": 12,
@@ -838,7 +820,7 @@
                 "DVgluQnLGTg9ggTi6A4N"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 12,
@@ -858,7 +840,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 13,
@@ -877,7 +859,7 @@
                 "zom0bgoUBztJLlMhDEvh"
             ],
             "deadline": "",
-            "links": []
+            "links": {}
         },
         {
             "week": 13,
@@ -896,11 +878,9 @@
                 "DVgluQnLGTg9ggTi6A4N "
             ],
             "deadline": "1608681600",
-            "links": [
-                {
-                    "Interview Questions": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/interview-corejs.md"
-                }
-            ]
+            "links": {
+                "Interview Questions": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/interview-corejs.md"
+            }
         }
     ]
 }
