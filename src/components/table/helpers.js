@@ -31,4 +31,34 @@ function onDateOk(value) {
   console.log('Selected Time: ', value);
 }
 
-export { colorSelector, getOrganizer, getAvatarSrc, onDateChange, onDateOk };
+function filterColumns(columns, selectedColumns) {
+  return columns.filter((item) => selectedColumns.includes(item.key));
+}
+
+function addColumnKeyToList(selectedColumns, column, columnIdx) {
+  if (!selectedColumns.includes(column.key)) {
+    selectedColumns.splice(columnIdx, 0, column.key);
+    localStorage.setItem('test1', JSON.stringify(selectedColumns));
+  }
+  return selectedColumns;
+}
+
+function removeColumnKeyToList(selectedColumns, column) {
+  const idx = selectedColumns.indexOf(column.key);
+  if (idx > -1) {
+    selectedColumns.splice(idx, 1);
+    localStorage.setItem('test1', JSON.stringify(selectedColumns));
+  }
+  return selectedColumns;
+}
+
+export {
+  colorSelector,
+  getOrganizer,
+  getAvatarSrc,
+  onDateChange,
+  onDateOk,
+  filterColumns,
+  addColumnKeyToList,
+  removeColumnKeyToList,
+};

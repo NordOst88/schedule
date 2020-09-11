@@ -2,21 +2,31 @@ import React, { useState } from 'react';
 import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
 import { TableOutlined, DownOutlined } from '@ant-design/icons';
 import columns from './columns';
-import { dateFormat } from './constants';
+import { dateFormat, columnsList } from './constants';
 import dummyData from './dummyData';
-import { onDateChange, onDateOk } from './helpers';
+import {
+  onDateChange,
+  onDateOk,
+  filterColumns,
+  addColumnKeyToList,
+  removeColumnKeyToList,
+} from './helpers';
 import './Table.scss';
 import 'antd/dist/antd.css';
 
 const MyTable = () => {
-  const [columnsToView, setColumnsToView] = useState(columns);
+  const selectedColumns = JSON.parse(localStorage.getItem('test1')) || columnsList;
+  const filteredColumns = filterColumns(columns, selectedColumns);
+  const [columnsToView, setColumnsToView] = useState(filteredColumns);
   const currentDate = Math.floor(new Date('2020-09-06T17:30').getTime() / 1000);
 
   const columnSelectHandler = (column, checked) => {
+    const idx = columns.indexOf(column);
     if (!checked) {
+      removeColumnKeyToList(selectedColumns, column, idx);
       setColumnsToView([...columnsToView].filter((item) => item !== column));
     } else {
-      const idx = columns.indexOf(column);
+      addColumnKeyToList(selectedColumns, column);
       setColumnsToView([...columnsToView.slice(0, idx), column, ...columnsToView.slice(idx)]);
     }
   };

@@ -9,4 +9,17 @@ const tagsColors = {
 
 const dateFormat = 'DD.MM.YYYY HH:mm';
 
-export { dateFormat, tagsColors };
+const columnsList = [
+  'date',
+  'time',
+  'deadline',
+  'place',
+  'estimatedTime',
+  'name',
+  'description',
+  'links',
+  'organizer',
+  'comment',
+];
+
+export { dateFormat, tagsColors, columnsList };
