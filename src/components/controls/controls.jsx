@@ -41,16 +41,8 @@ const Controls = ({ currentView, onSelect }) => {
   );
 };
 
-const mapStateToProps = ({ currentView }) => {
-  return {
-    currentView,
-  };
-};
+const mapStateToProps = ({ currentView }) => ({
+  currentView,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onSelect: (mode) => dispatch(onViewModeChange(mode)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Controls);
+export default connect(mapStateToProps, { onSelect: onViewModeChange })(Controls);

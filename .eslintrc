@@ -6,6 +6,7 @@
     "jest": true
   },
   "extends": ["airbnb", "prettier", "prettier/react"],
+  // "extends": ["airbnb"],
   "plugins": ["import", "jsx-a11y", "react", "react-hooks"],
   "rules": {
     "strict": 0,
@@ -14,6 +15,7 @@
     "react/prop-types": [0, { "ignore": "ignore", "customValidators": "customValidator" }],
     "react/state-in-constructor": "off",
     "react/destructuring-assignment": [1, "always", { "ignoreClassFields": true }],
-    "no-underscore-dangle": [2, { "allowAfterThis": true }]
+    "no-underscore-dangle": [2, { "allowAfterThis": true }],
+    "arrow-body-style": ["error", "as-needed"]
   }
 }

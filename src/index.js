@@ -1,21 +1,40 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducers/reducer';
+
 import App from './components/app/app';
+import ErrorBoundary from './components/error-boundary/error-boundary';
+
+import store from './store';
+
+// import SwaggerService from './services/swagger-service';
+
+// const api = new SwaggerService();
+
+// const obj = {};
+
+// todo: add events on back-end
+// obj.data.forEach(async (el) => {
+//   console.log(el);
+//   await api.addEvent(el);
+// });
+
+// todo: clear all events on back-end
+// console.log(obj);
+// async function clearStore() {
+//   const allEv = await api.getAllEvents();
+//   console.log(allEv);
+//   allEv.forEach((el) => api.deleteEventById(el.id));
+// }
+// clearStore();
 
 // todo: only for extension redux devtool. Delete before deploy
 
-const store = createStore(
-  reducer,
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
-
 render(
   <Provider store={store}>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </Provider>,
   document.getElementById('root'),
 );
