@@ -59,17 +59,12 @@ export function monthCellRender(value) {
   ) : null;
 }
  */
-const CalendarContainer = ({ currentView, events }) => {
-  return currentView === VIEW_MODES[2] ? (
-    <Calendar dateCellRender={(value) => dateCellRender(value, events, COLOR_PRESET)} />
-  ) : null;
-};
+const CalendarContainer = ({ events }) => (
+  <Calendar dateCellRender={(value) => dateCellRender(value, events, COLOR_PRESET)} />
+);
 
-const mapStateToProps = ({ currentView, events }) => {
-  return {
-    currentView,
-    events,
-  };
-};
+const mapStateToProps = ({ events }) => ({
+  events,
+});
 
 export default connect(mapStateToProps)(CalendarContainer);
