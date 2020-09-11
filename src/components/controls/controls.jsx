@@ -45,8 +45,4 @@ const mapStateToProps = ({ currentView }) => ({
   currentView,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onSelect: (mode) => dispatch(onViewModeChange(mode)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Controls);
+export default connect(mapStateToProps, { onSelect: onViewModeChange })(Controls);

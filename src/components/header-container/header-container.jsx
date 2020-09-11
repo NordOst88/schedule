@@ -54,8 +54,4 @@ const mapStateToProps = ({ role }) => ({
   role,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onSelect: (user) => dispatch(onSetUser(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export default connect(mapStateToProps, { onSelect: onSetUser })(HeaderContainer);

@@ -9,9 +9,9 @@
     "clean": "rm -f -r dist",
     "dev": "webpack -d --env.mode=development",
     "prod": "webpack -p --env.mode=production",
-    "lint": "eslint src/**/*.js",
-    "fix": "eslint src/**/*.js --fix",
-    "prettier": "prettier --config .prettierrc --write src/**/*.{js,jsx}",
+    "lint": "eslint src/**/*.js src/**/*.jsx",
+    "fix": "eslint src/**/*.js src/**/*.jsx --fix",
+    "prettier": "prettier --config .prettierrc --write src/**/*.js src/**/*.jsx",
     "start": "webpack-dev-server -d --open --hot",
     "analyze": "webpack -p --env.analyze"
   },

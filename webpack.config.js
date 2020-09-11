@@ -10,9 +10,10 @@ module.exports = (env = {}) => {
   const isProd = mode === 'production';
   const isDev = mode === 'development';
 
-  const getStyleLoaders = () => {
-    return [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'];
-  };
+  const getStyleLoaders = () => [
+    isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+    'css-loader',
+  ];
 
   const getPlugins = () => {
     const plugins = [
