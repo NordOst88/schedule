@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Badge, Calendar } from 'antd';
 
-import { VIEW_MODES, COLOR_PRESET } from '../../constants/constants';
+const onEventClick = (eventName) => {
+  // todo: show modal
+  console.log('onEventClick', eventName);
+};
 
 const compareDates = (moment, eventDate) => {
+  /* console.log(eventDate);
+  console.log(moment); */
   const isSameDay = moment.date() === eventDate.getDate();
   const isSameMonth = moment.month() === eventDate.getMonth();
   const isSameYear = moment.year() === eventDate.getFullYear();
@@ -13,9 +18,9 @@ const compareDates = (moment, eventDate) => {
   return isSameDay && isSameMonth && isSameYear;
 };
 
-function getListData(value, data, colors) {
-  const currentData = data.filter((obj) => {
-    const eventDate = new Date(+obj.dateTime);
+function getListData(value, events, eventColors) {
+  const currentData = events.filter((obj) => {
+    const eventDate = new Date(+(obj.dateTime * 1000));
     return compareDates(value, eventDate);
   });
 
@@ -23,48 +28,47 @@ function getListData(value, data, colors) {
     return [];
   }
 
+  // console.log('data', currentData);
+
   return currentData.map((obj) => {
-    const color = colors[obj.type];
-    return { type: obj.type, name: obj.name, id: obj.id, color };
+    const copyObj = obj;
+    const color = eventColors[copyObj.type];
+    copyObj.color = color;
+    return copyObj;
   });
 }
 
-export function dateCellRender(value, data, colors) {
-  const listData = getListData(value, data, colors);
-
+export function dateCellRender(value, events, eventColors) {
+  const listData = getListData(value, events, eventColors);
+  // todo 1000 to constants
+  // todo colors to constants
   return (
     <ul className="events">
-      {listData.map((item) => (
-        <li key={item.name} id={item.id} onClick={() => console.log(item)}>
-          <Badge color={item.color} text={item.name} />
-        </li>
-      ))}
+      {listData.map((item) => {
+        const activeEvent = Date.now() > new Date(+(item.dateTime * 1000));
+        const textType = activeEvent ? 'secondary' : null;
+
+        return (
+          <li key={item.name} id={item.id} onClick={() => onEventClick(item)}>
+            <Badge
+              color={item.color}
+              text={item.name}
+              style={{ color: textType ? '#00000073' : '#faad14' }}
+            />
+          </li>
+        );
+      })}
     </ul>
   );
 }
 
-/* function getMonthData(value) {
-  if (value.month() === 8) {
-    return 1394;
-  }
-}
-
-export function monthCellRender(value) {
-  const num = getMonthData(value);
-  return num ? (
-    <div className="notes-month">
-      <section>{num}</section>
-      <span>Backlog number</span>
-    </div>
-  ) : null;
-}
- */
-const CalendarContainer = ({ events }) => (
-  <Calendar dateCellRender={(value) => dateCellRender(value, events, COLOR_PRESET)} />
+const CalendarContainer = ({ events, eventColors }) => (
+  <Calendar dateCellRender={(value) => dateCellRender(value, events, eventColors)} />
 );
 
-const mapStateToProps = ({ events }) => ({
+const mapStateToProps = ({ events, eventColors }) => ({
   events,
+  eventColors,
 });
 
 export default connect(mapStateToProps)(CalendarContainer);
