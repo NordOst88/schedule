@@ -14,15 +14,20 @@ const compareDates = (moment, eventDate) => {
   const isSameDay = moment.date() === eventDate.getDate();
   const isSameMonth = moment.month() === eventDate.getMonth();
   const isSameYear = moment.year() === eventDate.getFullYear();
-
+  // console.log(isSameDay && isSameMonth && isSameYear);
   return isSameDay && isSameMonth && isSameYear;
 };
 
-function getListData(value, events, eventColors) {
-  const currentData = events.filter((obj) => {
-    const eventDate = new Date(+(obj.dateTime * 1000));
+const filterDataByDay = (value, events) => {
+  return events.filter((obj) => {
+    const eventDate = new Date(+obj.dateTime * 1000);
     return compareDates(value, eventDate);
   });
+};
+
+function getListData(value, events, eventColors) {
+  // console.log(events);
+  const currentData = filterDataByDay(value, events);
 
   if (!currentData.length) {
     return [];
@@ -32,7 +37,8 @@ function getListData(value, events, eventColors) {
 
   return currentData.map((obj) => {
     const copyObj = obj;
-    const color = eventColors[copyObj.type];
+    // todo to lowerCase
+    const color = eventColors[copyObj.type[0]];
     copyObj.color = color;
     return copyObj;
   });
@@ -45,7 +51,7 @@ export function dateCellRender(value, events, eventColors) {
   return (
     <ul className="events">
       {listData.map((item) => {
-        const activeEvent = Date.now() > new Date(+(item.dateTime * 1000));
+        const activeEvent = Date.now() > new Date(+item.dateTime * 1000);
         const textType = activeEvent ? 'secondary' : null;
 
         return (
@@ -63,7 +69,12 @@ export function dateCellRender(value, events, eventColors) {
 }
 
 const CalendarContainer = ({ events, eventColors }) => (
-  <Calendar dateCellRender={(value) => dateCellRender(value, events, eventColors)} />
+  <Calendar
+    dateCellRender={(value) => dateCellRender(value, events, eventColors)}
+    onSelect={(value) => {
+      console.log(filterDataByDay(value, events));
+    }}
+  />
 );
 
 const mapStateToProps = ({ events, eventColors }) => ({
