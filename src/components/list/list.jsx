@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Timeline, Radio, Typography, Space } from 'antd';
 
+import { LIST_TEXT } from '../../constants/constants';
 import getFormattedDate from '../../utils/getFormattedDate';
+import getEventColor from '../../utils/getEventColor';
 
-const List = ({ events }) => {
+const List = ({ events, eventColors }) => {
   const [mode, setMode] = useState('left');
   const { Text, Link } = Typography;
+  const { moreDetails, left, right, alternate } = LIST_TEXT;
 
   const onChange = ({ target: { value } }) => {
     setMode(value);
@@ -27,19 +30,21 @@ const List = ({ events }) => {
           justifyContent: 'flex-end',
         }}
       >
-        <Radio value="left">Left</Radio>
-        <Radio value="right">Right</Radio>
-        <Radio value="alternate">Alternate</Radio>
+        <Radio value="left">{left}</Radio>
+        <Radio value="right">{right}</Radio>
+        <Radio value="alternate">{alternate}</Radio>
       </Radio.Group>
       <Timeline mode={mode}>
         {events.map((event) => {
           const activeEvent = Date.now() > new Date(event.deadline * 1000);
+          const colorEvent = getEventColor(activeEvent, eventColors, ...event.type);
           const textType = activeEvent ? 'secondary' : null;
           const startDate = getFormattedDate(event.dateTime);
           const deadlineDate = getFormattedDate(event.deadline);
+
           return (
             <Timeline.Item
-              color={activeEvent ? 'gray' : 'green'}
+              color={colorEvent}
               key={event.id}
               // label={mode === 'left' ? null : `${startDate}`}
               label={`${startDate}`}
@@ -56,7 +61,7 @@ const List = ({ events }) => {
                   style={{ cursor: 'pointer' }}
                   onClick={() => onMoreDetailsClick(event)}
                 >
-                  Подробнее
+                  {moreDetails}
                 </Text>
                 <Text type={textType || 'danger'}>Deadline: {deadlineDate}</Text>
               </Space>
@@ -68,8 +73,9 @@ const List = ({ events }) => {
   );
 };
 
-const mapStateToProps = ({ events }) => ({
+const mapStateToProps = ({ events, eventColors }) => ({
   events,
+  eventColors,
 });
 
 export default connect(mapStateToProps)(List);

@@ -7,6 +7,13 @@ const MENTOR = 'Mentor';
 const VIEW_MODES = [TABLE, LIST, CALENDAR];
 const USER_ROLES = [STUDENT, MENTOR];
 
+const LIST_TEXT = {
+  moreDetails: 'Подробнее',
+  left: 'Left',
+  right: 'Right',
+  alternate: 'Alternate',
+};
+
 const COLOR_PRESET = {
   'js task': '#42d205',
   'HTML task': '#fadb14',
@@ -23,6 +30,8 @@ const COLOR_PRESET = {
   conference: '#b32cb2',
   'meet-up': '#2dc0c4',
   optional: '#b10162',
+  inactive: '#808080',
+  default: '#000000',
 };
 
-export { TABLE, LIST, CALENDAR, STUDENT, MENTOR, VIEW_MODES, USER_ROLES, COLOR_PRESET };
+export { TABLE, LIST, CALENDAR, STUDENT, MENTOR, VIEW_MODES, USER_ROLES, COLOR_PRESET, LIST_TEXT };
