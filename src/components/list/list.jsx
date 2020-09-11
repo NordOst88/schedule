@@ -17,7 +17,7 @@ const List = ({ events, eventColors, listView, onChange }) => {
     console.log('onMoreDetailsClick', event);
   };
 
-  // todo: think about left view mode
+  // todo: add style
   return (
     <>
       <Radio.Group
@@ -41,22 +41,26 @@ const List = ({ events, eventColors, listView, onChange }) => {
           const startDate = getFormattedDate(event.dateTime);
           const deadlineDate = getFormattedDate(event.deadline);
           const dateValue = listView === 'left' || listView === 'right' ? null : `${startDate}`;
-          console.log('colorEvent', colorEvent);
 
           return (
             <Timeline.Item
               key={event.id}
               label={dateValue}
               dot={<FlagOutlined style={{ fontSize: '2rem', color: colorEvent }} />}
+              style={{ color: textType ? '#00000073' : '#faad14' }}
             >
               <Space direction="vertical">
-                {dateValue ? null : <p>{startDate}</p>}
+                {dateValue ? null : (
+                  <Text type={textType || 'warning'} strong>
+                    {startDate}
+                  </Text>
+                )}
                 <Link href={event.descriptionUrl} target="_blank" type={textType}>
                   {event.name}
                 </Link>
                 <Text type={textType}>{event.description}</Text>
                 <Text
-                  mark
+                  mark="false"
                   type={textType}
                   style={{ cursor: 'pointer' }}
                   onClick={() => {
