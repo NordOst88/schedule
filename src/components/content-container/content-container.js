@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 
-import CalendarContainer from '../calendar/calendar';
-
 import './content-container.scss';
 
 const ContentContainer = ({ currentView, role }) => {
@@ -11,7 +9,6 @@ const ContentContainer = ({ currentView, role }) => {
 
   return (
     <Content>
-      <CalendarContainer />
       <p className="text">Current View: {currentView}</p>
       <p className="text">Current Role: {role}</p>
     </Content>
