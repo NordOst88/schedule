@@ -16,7 +16,7 @@ const LIST_TEXT = {
 };
 
 const COLOR_PRESET = {
-  'js task': '#42d205',
+  'JS task': '#42d205',
   'HTML task': '#fadb14',
   'CSS task': '#0084ff',
   'self-study': '#08979c',
