@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
 import { TableOutlined, DownOutlined } from '@ant-design/icons';
 import columns from './columns';
 import { dateFormat, columnsList } from './constants';
-import dummyData from './dummyData';
+// import dummyData from './dummyData';
 import {
   onDateChange,
   onDateOk,
@@ -14,7 +16,7 @@ import {
 import './Table.scss';
 import 'antd/dist/antd.css';
 
-const MyTable = () => {
+const MyTable = ({ events }) => {
   const selectedColumns = JSON.parse(localStorage.getItem('test1')) || columnsList;
   const filteredColumns = filterColumns(columns, selectedColumns);
   const [columnsToView, setColumnsToView] = useState(filteredColumns);
@@ -69,7 +71,7 @@ const MyTable = () => {
           }
           return null;
         }}
-        dataSource={dummyData}
+        dataSource={events}
         columns={columnsToView}
         rowKey="id"
         size="small"
@@ -79,4 +81,8 @@ const MyTable = () => {
   );
 };
 
-export default MyTable;
+const mapStateToProps = ({ events }) => ({
+  events,
+});
+
+export default connect(mapStateToProps)(MyTable);

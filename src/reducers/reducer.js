@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { SET_VIEW_MODE, SET_USER, SET_EVENTS, SET_LIST_VIEW } from '../actions/actions-types';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 import getInitialState from '../utils/getInitialState';

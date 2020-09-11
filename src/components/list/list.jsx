@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Timeline, Radio, Typography, Space } from 'antd';

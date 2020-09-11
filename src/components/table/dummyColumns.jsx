@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Tag, Space, Tooltip, Divider } from 'antd';
 import extractDateTime from '../../utils/extractDateTime';
@@ -89,16 +88,16 @@ const columns = [
     key: 'links',
     render: (links) => (
       <>
-        {links.map((object, idx) => (
+        {links.map(({ name, url }, idx) => (
           <a
-            href={Object.entries(object)[0][1]}
+            href={url}
             target="_blanc"
             style={{
               whiteSpace: 'nowrap',
             }}
-            key={Object.entries(object)[0][0]}
+            key={name}
           >
-            {Object.entries(object)[0][0]}
+            {name}
             {idx !== links.length - 1 ? (
               <Divider style={{ backgroundColor: '#757575' }} type="vertical" />
             ) : null}
@@ -111,13 +110,33 @@ const columns = [
     title: 'Organizer',
     dataIndex: 'organizer',
     key: 'organizer',
-    render: (orgs, record) => (
+    render: (organizers) => (
       <>
-        {orgs.map((org) => (
-          <Tag color="purple" key={org}>
-            {org}
-          </Tag>
-        ))}
+        {organizers.map((id) => {
+          const { name, url } = getOrganizer(id);
+          return (
+            <Space key={name}>
+              <img
+                src={getAvatarSrc(url)}
+                style={{
+                  height: '24px',
+                  width: '24px',
+                  borderRadius: '12px',
+                }}
+                alt="avatar"
+              />
+              <a
+                href={url}
+                target="_blanc"
+                style={{
+                  marginRight: '8px',
+                }}
+              >
+                {name}
+              </a>
+            </Space>
+          );
+        })}
       </>
     ),
   },
