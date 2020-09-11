@@ -1,12 +1,15 @@
-import { TABLE, STUDENT } from '../constants/constants';
+import { TABLE, STUDENT, COLOR_PRESET } from '../constants/constants';
 
 const getInitialState = () => {
-  const { mode, user } = localStorage.settings ? JSON.parse(localStorage.settings) : {};
+  const { mode, user, colorPreset } = localStorage.settings
+    ? JSON.parse(localStorage.settings)
+    : {};
 
   return {
     currentView: mode || TABLE,
     role: user || STUDENT,
-    events: null,
+    events: [],
+    eventColors: colorPreset || COLOR_PRESET,
   };
 };
 
