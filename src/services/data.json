@@ -575,7 +575,7 @@
             "description": "Создание калькулятора, выполняющего математические операции. Отличное объяснение, единственное в этой подборке на русском языке. Код немного устарел: всё ещё используются объявления переменных var вместо const и let, обычные функции, вместо стрелочных. Но логика создания приложения осталась неизменной.",
             "descriptionUrl": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-0/projects.md#task-1-calculator",
             "type": [
-                "js task",
+                "JS task",
                 "optional"
             ],
             "timeZone": "",
