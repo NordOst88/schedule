@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Tag, Space, Tooltip, Divider } from 'antd';
-import { getAvatarSrc } from './helpers';
+import { getAvatarSrc } from '../../utils/tableHelpers';
 import getEventColor from '../../utils/getEventColor';
 import getFormattedDate from '../../utils/getFormattedDate';
 import store from '../../store';

@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
 import { TableOutlined, DownOutlined } from '@ant-design/icons';
 import columns from './columns';
-import { dateFormat, columnsList } from './constants';
+import { dateFormat, columnsList } from '../../constants/tableConstants';
 import {
   onDateChange,
   onDateOk,
   filterColumns,
   addColumnKeyToList,
   removeColumnKeyToList,
-} from './helpers';
+} from '../../utils/tableHelpers';
 import './Table.scss';
 
 const MyTable = ({ events }) => {

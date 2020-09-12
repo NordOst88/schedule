@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import logoRSSchool from '../../assets/images/logo_rs.svg';
-import setLocaLStorageSettings from '../../utils/setLocalStorageSettings';
+import logoRSSchool from '../assets/images/logo_rs.svg';
+import setLocaLStorageSettings from './setLocalStorageSettings';
 
 function getAvatarSrc(url) {
   if (url.indexOf('github') > -1) {
