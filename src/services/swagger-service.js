@@ -1,3 +1,5 @@
+import DATA from '../constants/data';
+
 export default class SwaggerService {
   _apiKey = '8xZBYLh04KItILB5uYVO';
 
@@ -35,7 +37,7 @@ export default class SwaggerService {
   async getAllEvents() {
     const response = await this.getResource('events', 'GET');
 
-    return response.data;
+    return this._getFormattedEvents(response.data);
   }
 
   async getAllOrganizers() {
@@ -77,4 +79,28 @@ export default class SwaggerService {
   async deleteOrganizerById(organizerId) {
     this.getResource(`organizer/${organizerId}`, 'DELETE');
   }
+
+  _getFormattedEvents = async (events) => {
+    const organizers = await this.getAllOrganizers();
+    const formattedEvents = events.map((event) => {
+      const { organizer } = event;
+      event.organizer = organizer.map((id) => organizers.find((el) => el.id === id));
+      return event;
+    });
+
+    return formattedEvents;
+  };
+
+  // todo: !!!don't use these methods!!!
+
+  clearBackend = async () => {
+    const allEv = await this.getAllEvents();
+    allEv.forEach((el) => this.deleteEventById(el.id));
+  };
+
+  writeBackend = async () => {
+    DATA.forEach(async (el) => {
+      await this.addEvent(el);
+    });
+  };
 }

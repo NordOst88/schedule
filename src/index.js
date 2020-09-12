@@ -7,28 +7,17 @@ import ErrorBoundary from './components/error-boundary/error-boundary';
 
 import store from './store';
 
+// todo: delete before deploy
+
 // import SwaggerService from './services/swagger-service';
 
 // const api = new SwaggerService();
 
-// const obj = {};
-
 // todo: add events on back-end
-// obj.data.forEach(async (el) => {
-//   console.log(el);
-//   await api.addEvent(el);
-// });
+// api.writeBackend();
 
 // todo: clear all events on back-end
-// console.log(obj);
-// async function clearStore() {
-//   const allEv = await api.getAllEvents();
-//   console.log(allEv);
-//   allEv.forEach((el) => api.deleteEventById(el.id));
-// }
-// clearStore();
-
-// todo: only for extension redux devtool. Delete before deploy
+// api.clearBackend();
 
 render(
   <Provider store={store}>
