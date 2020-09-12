@@ -5,7 +5,6 @@ import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
 import { TableOutlined, DownOutlined } from '@ant-design/icons';
 import columns from './columns';
 import { dateFormat, columnsList } from './constants';
-// import dummyData from './dummyData';
 import {
   onDateChange,
   onDateOk,

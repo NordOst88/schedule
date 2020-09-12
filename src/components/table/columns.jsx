@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Tag, Space, Tooltip, Divider } from 'antd';
-import extractDateTime from '../../utils/extractDateTime';
-import { colorSelector, getAvatarSrc } from './helpers';
+import { getAvatarSrc } from './helpers';
 import getEventColor from '../../utils/getEventColor';
-// import getFormattedDate from '../../utils/getFormattedDate';
+import getFormattedDate from '../../utils/getFormattedDate';
 import store from '../../store';
 
 const { eventColors } = store.getState();
@@ -14,20 +13,20 @@ const columns = [
     title: 'Date',
     dataIndex: 'dateTime',
     key: 'date',
-    render: (date) => <>{extractDateTime(date)}</>,
+    render: (date) => <>{getFormattedDate(date, 'date')}</>,
     sorter: (a, b) => a.dateTime - b.dateTime,
   },
   {
     title: 'Time',
     dataIndex: 'dateTime',
     key: 'time',
-    render: (time) => <>{extractDateTime(time, 'time')}</>,
+    render: (time) => <>{getFormattedDate(time, 'time')}</>,
   },
   {
     title: 'Deadline',
     dataIndex: 'deadline',
     key: 'deadline',
-    render: (time) => <>{extractDateTime(time, 'dateTime')}</>,
+    render: (deadline) => <>{getFormattedDate(deadline)}</>,
   },
   {
     title: 'Type',
