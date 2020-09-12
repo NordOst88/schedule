@@ -2,10 +2,12 @@
 import React from 'react';
 import { Tag, Space, Tooltip, Divider } from 'antd';
 import extractDateTime from '../../utils/extractDateTime';
-import { colorSelector, getOrganizer, getAvatarSrc } from './helpers';
+import { colorSelector, getAvatarSrc } from './helpers';
 import getEventColor from '../../utils/getEventColor';
 // import getFormattedDate from '../../utils/getFormattedDate';
-import { COLOR_PRESET } from '../../constants/constants';
+import store from '../../store';
+
+const { eventColors } = store.getState();
 
 const columns = [
   {
@@ -34,7 +36,7 @@ const columns = [
     render: (tags) => (
       <>
         {tags.map((tag) => {
-          const color = getEventColor(false, COLOR_PRESET, tag);
+          const color = getEventColor(false, eventColors, tag);
           return (
             <Tag color={color} key={tag}>
               {tag}
@@ -110,20 +112,42 @@ const columns = [
   //     </>
   //   ),
   // },
-  // {
-  //   title: 'Organizer',
-  //   dataIndex: 'organizer',
-  //   key: 'organizer',
-  //   render: (orgs, record) => (
-  //     <>
-  //       {orgs.map((org) => (
-  //         <Tag color="purple" key={org}>
-  //           {org}
-  //         </Tag>
-  //       ))}
-  //     </>
-  //   ),
-  // },
+  {
+    title: 'Organizer',
+    dataIndex: 'organizer',
+    key: 'organizer',
+    render: (organizers) => (
+      <>
+        {organizers.map((obj) => {
+          if (obj instanceof Object) {
+            return (
+              <Space key={obj.name}>
+                <img
+                  src={getAvatarSrc(obj.url)}
+                  style={{
+                    height: '24px',
+                    width: '24px',
+                    borderRadius: '12px',
+                  }}
+                  alt="avatar"
+                />
+                <a
+                  href={obj.url}
+                  target="_blanc"
+                  style={{
+                    marginRight: '8px',
+                  }}
+                >
+                  {obj.name}
+                </a>
+              </Space>
+            );
+          }
+          return null;
+        })}
+      </>
+    ),
+  },
   {
     title: 'Comment',
     dataIndex: 'comment',

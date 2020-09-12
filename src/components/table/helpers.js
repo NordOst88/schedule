@@ -1,13 +1,8 @@
 /* eslint-disable no-console */
-import dummyMentors from './dummyMentors';
 import logoRSSchool from '../../assets/images/logo_rs.svg';
 import { tagsColors } from './constants';
 
 const colorSelector = (type) => tagsColors[type];
-
-function getOrganizer(id) {
-  return dummyMentors.find((mentor) => mentor.id === id);
-}
 
 function getAvatarSrc(url) {
   if (url.indexOf('github') > -1) {
@@ -54,7 +49,6 @@ function removeColumnKeyToList(selectedColumns, column) {
 
 export {
   colorSelector,
-  getOrganizer,
   getAvatarSrc,
   onDateChange,
   onDateOk,
