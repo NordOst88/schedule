@@ -3,6 +3,9 @@ import React from 'react';
 import { Tag, Space, Tooltip, Divider } from 'antd';
 import extractDateTime from '../../utils/extractDateTime';
 import { colorSelector, getOrganizer, getAvatarSrc } from './helpers';
+import getEventColor from '../../utils/getEventColor';
+// import getFormattedDate from '../../utils/getFormattedDate';
+import { COLOR_PRESET } from '../../constants/constants';
 
 const columns = [
   {
@@ -31,7 +34,7 @@ const columns = [
     render: (tags) => (
       <>
         {tags.map((tag) => {
-          const color = colorSelector(tag);
+          const color = getEventColor(false, COLOR_PRESET, tag);
           return (
             <Tag color={color} key={tag}>
               {tag}
@@ -83,44 +86,44 @@ const columns = [
       </Tooltip>
     ),
   },
-  {
-    title: 'Links',
-    dataIndex: 'links',
-    key: 'links',
-    render: (links) => (
-      <>
-        {links.map((object, idx) => (
-          <a
-            href={Object.entries(object)[0][1]}
-            target="_blanc"
-            style={{
-              whiteSpace: 'nowrap',
-            }}
-            key={Object.entries(object)[0][0]}
-          >
-            {Object.entries(object)[0][0]}
-            {idx !== links.length - 1 ? (
-              <Divider style={{ backgroundColor: '#757575' }} type="vertical" />
-            ) : null}
-          </a>
-        ))}
-      </>
-    ),
-  },
-  {
-    title: 'Organizer',
-    dataIndex: 'organizer',
-    key: 'organizer',
-    render: (orgs, record) => (
-      <>
-        {orgs.map((org) => (
-          <Tag color="purple" key={org}>
-            {org}
-          </Tag>
-        ))}
-      </>
-    ),
-  },
+  // {
+  //   title: 'Links',
+  //   dataIndex: 'links',
+  //   key: 'links',
+  //   render: (links) => (
+  //     <>
+  //       {links.map((object, idx) => (
+  //         <a
+  //           href={Object.entries(object)[0][1]}
+  //           target="_blanc"
+  //           style={{
+  //             whiteSpace: 'nowrap',
+  //           }}
+  //           key={Object.entries(object)[0][0]}
+  //         >
+  //           {Object.entries(object)[0][0]}
+  //           {idx !== links.length - 1 ? (
+  //             <Divider style={{ backgroundColor: '#757575' }} type="vertical" />
+  //           ) : null}
+  //         </a>
+  //       ))}
+  //     </>
+  //   ),
+  // },
+  // {
+  //   title: 'Organizer',
+  //   dataIndex: 'organizer',
+  //   key: 'organizer',
+  //   render: (orgs, record) => (
+  //     <>
+  //       {orgs.map((org) => (
+  //         <Tag color="purple" key={org}>
+  //           {org}
+  //         </Tag>
+  //       ))}
+  //     </>
+  //   ),
+  // },
   {
     title: 'Comment',
     dataIndex: 'comment',

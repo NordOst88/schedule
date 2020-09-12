@@ -14,7 +14,6 @@ import {
   removeColumnKeyToList,
 } from './helpers';
 import './Table.scss';
-import 'antd/dist/antd.css';
 
 const MyTable = ({ events }) => {
   const selectedColumns = JSON.parse(localStorage.getItem('test1')) || columnsList;
