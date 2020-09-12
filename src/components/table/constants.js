@@ -1,18 +1,10 @@
-const tagsColors = {
-  'js task': 'green',
-  additional: 'purple',
-  deadline: 'red',
-  lecture: 'blue',
-  'self-study': 'cyan',
-  meetup: 'magenta',
-};
-
 const dateFormat = 'DD.MM.YYYY HH:mm';
 
 const columnsList = [
   'date',
   'time',
   'deadline',
+  'type',
   'place',
   'estimatedTime',
   'name',
@@ -22,4 +14,4 @@ const columnsList = [
   'comment',
 ];
 
-export { dateFormat, tagsColors, columnsList };
+export { dateFormat, columnsList };

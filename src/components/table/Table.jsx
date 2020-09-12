@@ -15,7 +15,10 @@ import {
 import './Table.scss';
 
 const MyTable = ({ events }) => {
-  const selectedColumns = JSON.parse(localStorage.getItem('test1')) || columnsList;
+  const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
+  const selectedColumns = storage.tableColumnsSelected
+    ? JSON.parse(storage.tableColumnsSelected)
+    : columnsList;
   const filteredColumns = filterColumns(columns, selectedColumns);
   const [columnsToView, setColumnsToView] = useState(filteredColumns);
   const currentDate = Math.floor(new Date('2020-09-06T17:30').getTime() / 1000);

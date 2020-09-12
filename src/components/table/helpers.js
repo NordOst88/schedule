@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 import logoRSSchool from '../../assets/images/logo_rs.svg';
-import { tagsColors } from './constants';
-
-const colorSelector = (type) => tagsColors[type];
+import setLocaLStorageSettings from '../../utils/setLocalStorageSettings';
 
 function getAvatarSrc(url) {
   if (url.indexOf('github') > -1) {
@@ -33,7 +31,7 @@ function filterColumns(columns, selectedColumns) {
 function addColumnKeyToList(selectedColumns, column, columnIdx) {
   if (!selectedColumns.includes(column.key)) {
     selectedColumns.splice(columnIdx, 0, column.key);
-    localStorage.setItem('test1', JSON.stringify(selectedColumns));
+    setLocaLStorageSettings(['tableColumnsSelected', JSON.stringify(selectedColumns)], 'table');
   }
   return selectedColumns;
 }
@@ -42,13 +40,12 @@ function removeColumnKeyToList(selectedColumns, column) {
   const idx = selectedColumns.indexOf(column.key);
   if (idx > -1) {
     selectedColumns.splice(idx, 1);
-    localStorage.setItem('test1', JSON.stringify(selectedColumns));
+    setLocaLStorageSettings(['tableColumnsSelected', JSON.stringify(selectedColumns)], 'table');
   }
   return selectedColumns;
 }
 
 export {
-  colorSelector,
   getAvatarSrc,
   onDateChange,
   onDateOk,
