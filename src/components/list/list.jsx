@@ -24,19 +24,7 @@ const List = ({ events, eventColors, listView, onChange }) => {
   // todo: add style
   return (
     <>
-      <Radio.Group
-        onChange={onChange}
-        value={listView}
-        style={{
-          display: 'flex',
-          marginBottom: 10,
-          justifyContent: 'flex-end',
-        }}
-      >
-        <Radio value="left">{left}</Radio>
-        <Radio value="right">{right}</Radio>
-        <Radio value="alternate">{alternate}</Radio>
-      </Radio.Group>
+      <ListTypeSelect {...{ onChange, listView, left, right, alternate }} />
       <Timeline mode={listView}>
         {events.map((event) => {
           const activeEvent = Date.now() > new Date(event.dateTime * 1000);
@@ -54,7 +42,7 @@ const List = ({ events, eventColors, listView, onChange }) => {
               style={{ color: textType ? eventColors.inactive : eventColors.markdown }}
             >
               <Space direction="vertical">
-                {dateValue ? null : (
+                {!dateValue && (
                   <Text type={textType || 'warning'} strong>
                     {startDate}
                   </Text>
@@ -73,18 +61,36 @@ const List = ({ events, eventColors, listView, onChange }) => {
                 >
                   {moreDetails}
                 </Text>
-                {deadlineDate ? (
+                {deadlineDate && (
                   <Text type={textType || 'danger'}>{`${deadline} ${deadlineDate}`}</Text>
-                ) : null}
+                )}
               </Space>
             </Timeline.Item>
           );
         })}
       </Timeline>
-      <ModalInfo {...{ ...eventDescription, displayModal, setDisplayModal, eventColors }} />
+      {displayModal && (
+        <ModalInfo {...{ ...eventDescription, displayModal, setDisplayModal, eventColors }} />
+      )}
     </>
   );
 };
+
+const ListTypeSelect = ({ onChange, listView, left, right, alternate }) => (
+  <Radio.Group
+    onChange={onChange}
+    value={listView}
+    style={{
+      display: 'flex',
+      marginBottom: 10,
+      justifyContent: 'flex-end',
+    }}
+  >
+    <Radio value="left">{left}</Radio>
+    <Radio value="right">{right}</Radio>
+    <Radio value="alternate">{alternate}</Radio>
+  </Radio.Group>
+);
 
 const mapStateToProps = ({ events, eventColors, listView }) => ({
   events,
