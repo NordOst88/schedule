@@ -10,8 +10,8 @@ const OptionPicker = ({ options = [], defaultValue, onChange }) => {
       showSearch="true"
       defaultValue={defaultValue}
       style={{
-        width: 120,
-        fontSize: '2rem',
+        width: 200,
+        fontSize: '1.7rem',
       }}
     >
       {options.length

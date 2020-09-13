@@ -56,6 +56,8 @@ const COLOR_PRESET = {
   default: '#000000',
 };
 
+const LOCALES = 'ru-RU';
+
 export {
   TABLE,
   LIST,
@@ -68,4 +70,5 @@ export {
   LIST_TEXT,
   MODAL_INFO_TEXT,
   HEADER_TEXT,
+  LOCALES,
 };
