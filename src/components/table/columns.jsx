@@ -67,11 +67,9 @@ const columns = [
     dataIndex: 'name',
     key: 'name',
     render: (name, record) => (
-      <>
-        <Link href={record.descriptionUrl} target="_blank">
-          {name}
-        </Link>
-      </>
+      <Link href={record.descriptionUrl} target="_blank">
+        {name}
+      </Link>
     ),
   },
   {
