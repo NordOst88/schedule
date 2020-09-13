@@ -15,6 +15,12 @@ const LIST_TEXT = {
   deadline: 'Deadline:',
 };
 
+const HEADER_TEXT = {
+  title: 'Schedule',
+  linkUrl: 'https://rs.school/',
+  imageAlt: 'Rolling Scopes School Logo',
+};
+
 const MODAL_INFO_TEXT = {
   estimatedWeek: 'Неделя обучения : ',
   taskName: 'Тема : ',
@@ -50,6 +56,8 @@ const COLOR_PRESET = {
   default: '#000000',
 };
 
+const LOCALES = 'ru-RU';
+
 export {
   TABLE,
   LIST,
@@ -61,4 +69,6 @@ export {
   COLOR_PRESET,
   LIST_TEXT,
   MODAL_INFO_TEXT,
+  HEADER_TEXT,
+  LOCALES,
 };

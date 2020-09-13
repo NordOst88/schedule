@@ -1,4 +1,10 @@
-import { SET_VIEW_MODE, SET_USER, SET_EVENTS, SET_LIST_VIEW } from '../actions/actions-types';
+import {
+  SET_VIEW_MODE,
+  SET_USER,
+  SET_EVENTS,
+  SET_LIST_VIEW,
+  SET_TIMEZONE,
+} from '../actions/actions-types';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 import getInitialState from '../utils/getInitialState';
 
@@ -8,6 +14,9 @@ const reducer = (state = getInitialState(), action) => {
     case SET_VIEW_MODE:
       setLocaLStorageSettings(Object.entries(action));
       return { ...state, currentView: action.mode };
+    case SET_TIMEZONE:
+      setLocaLStorageSettings(Object.entries(action));
+      return { ...state, currentTimezone: action.timezone };
     case SET_USER:
       setLocaLStorageSettings(Object.entries(action));
       return { ...state, role: action.user };

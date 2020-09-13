@@ -10,7 +10,7 @@ import { onSetListView } from '../../actions/actions';
 import getFormattedDate from '../../utils/getFormattedDate';
 import getEventColor from '../../utils/getEventColor';
 
-const List = ({ events, eventColors, listView, onChange }) => {
+const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
   const { Text, Link } = Typography;
   const { moreDetails, left, right, alternate, deadline } = LIST_TEXT;
   const [displayModal, setDisplayModal] = useState(false);
@@ -30,8 +30,8 @@ const List = ({ events, eventColors, listView, onChange }) => {
           const activeEvent = Date.now() > new Date(event.dateTime * 1000);
           const colorEvent = getEventColor(eventColors, ...event.type, activeEvent);
           const textType = activeEvent ? 'secondary' : null;
-          const startDate = getFormattedDate(event.dateTime);
-          const deadlineDate = getFormattedDate(event.deadline);
+          const startDate = getFormattedDate(event.dateTime, currentTimezone);
+          const deadlineDate = getFormattedDate(event.deadline, currentTimezone);
           const dateValue = listView === 'left' || listView === 'right' ? null : `${startDate}`;
 
           return (
@@ -92,10 +92,11 @@ const ListTypeSelect = ({ onChange, listView, left, right, alternate }) => (
   </Radio.Group>
 );
 
-const mapStateToProps = ({ events, eventColors, listView }) => ({
+const mapStateToProps = ({ events, eventColors, listView, currentTimezone }) => ({
   events,
   eventColors,
   listView,
+  currentTimezone,
 });
 
 export default connect(mapStateToProps, { onChange: onSetListView })(List);

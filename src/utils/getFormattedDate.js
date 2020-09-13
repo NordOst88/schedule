@@ -1,6 +1,11 @@
-const getFormattedDate = (timestamp) => {
+import { LOCALES } from '../constants/constants';
+
+const getFormattedDate = (timestamp, timezone) => {
   if (timestamp) {
-    const date = new Date(timestamp * 1000);
+    const localDate = new Date(timestamp * 1000).toLocaleString(LOCALES, {
+      timeZone: timezone,
+    });
+    const date = new Date(localDate);
     const year = date.getFullYear();
     let month = date.getMonth() + 1;
     month = month > 9 ? month : `0${month}`;
