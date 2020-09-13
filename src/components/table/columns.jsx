@@ -9,6 +9,21 @@ import { tagsName } from '../../constants/tableConstants';
 
 const { eventColors } = store.getState();
 
+const EllipsedText = (text) => (
+  <Tooltip placement="topLeft" title={text}>
+    <div
+      style={{
+        width: 200,
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {text}
+    </div>
+  </Tooltip>
+);
+
 const columns = [
   {
     title: 'Date',
@@ -52,7 +67,7 @@ const columns = [
     key: 'name',
     render: (name, record) => (
       <>
-        <a href={record.url} target="_blanc">
+        <a href={record.descriptionUrl} target="_blanc">
           {name}
         </a>
       </>
@@ -62,20 +77,7 @@ const columns = [
     title: 'Description',
     dataIndex: 'description',
     key: 'description',
-    render: (description) => (
-      <Tooltip placement="topLeft" title={description}>
-        <div
-          style={{
-            width: 200,
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {description}
-        </div>
-      </Tooltip>
-    ),
+    render: (description) => EllipsedText(description),
   },
   {
     title: 'Links',
@@ -94,20 +96,7 @@ const columns = [
     title: 'Comment',
     dataIndex: 'comment',
     key: 'comment',
-    render: (comment) => (
-      <Tooltip placement="topLeft" title={comment}>
-        <div
-          style={{
-            width: 200,
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {comment}
-        </div>
-      </Tooltip>
-    ),
+    render: (comment) => EllipsedText(comment),
   },
 ];
 

@@ -1,11 +1,14 @@
 import setLocaLStorageSettings from './setLocalStorageSettings';
+import { TABLE } from '../constants/constants';
 
+// todo: remove after tests
 const getTimeStamp = (value) => {
   const timestamp = Math.floor(new Date(value).getTime() / 1000);
   // console.log(timestamp);
   return timestamp;
 };
 
+// todo: remove after tests
 function onDateChange(value, dateString) {
   // console.log('TimeStamp: ', value);
   getTimeStamp(dateString);
@@ -13,6 +16,7 @@ function onDateChange(value, dateString) {
   return value;
 }
 
+// todo: remove after tests
 function onDateOk(value) {
   // console.log('Selected Time: ', value);
   return value;
@@ -25,7 +29,7 @@ function filterColumns(columns, selectedColumns) {
 function addColumnKey(selectedColumns, column, columnIdx) {
   if (!selectedColumns.includes(column.key)) {
     selectedColumns.splice(columnIdx, 0, column.key);
-    setLocaLStorageSettings(['tableColumnsSelected', JSON.stringify(selectedColumns)], 'table');
+    setLocaLStorageSettings(['tableColumnsSelected', JSON.stringify(selectedColumns)], TABLE);
   }
   return selectedColumns;
 }
@@ -34,7 +38,7 @@ function removeColumnKey(selectedColumns, column) {
   const idx = selectedColumns.indexOf(column.key);
   if (idx > -1) {
     selectedColumns.splice(idx, 1);
-    setLocaLStorageSettings(['tableColumnsSelected', JSON.stringify(selectedColumns)], 'table');
+    setLocaLStorageSettings(['tableColumnsSelected', JSON.stringify(selectedColumns)], TABLE);
   }
   return selectedColumns;
 }
