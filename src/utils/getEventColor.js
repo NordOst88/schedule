@@ -1,4 +1,4 @@
-const getEventColor = (mode, palette, type) => {
+const getEventColor = (palette, type, mode) => {
   if (mode) {
     return palette.inactive;
   }
