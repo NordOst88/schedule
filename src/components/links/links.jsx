@@ -21,9 +21,9 @@ const Links = ({ links }) => {
             key={link[0]}
           >
             {link[0] || noInfo}
-            {idx !== link.length - 1 && linksArray.length > 1 ? (
+            {idx !== link.length - 1 && linksArray.length > 1 && (
               <Divider style={{ backgroundColor: '#757575' }} type="vertical" />
-            ) : null}
+            )}
           </Link>
         ))
       ) : (

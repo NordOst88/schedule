@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer';
@@ -8,6 +8,7 @@ import store from '../../store';
 import { tagsName } from '../../constants/tableConstants';
 
 const { eventColors } = store.getState();
+const { Link } = Typography;
 
 const EllipsedText = (text) => (
   <Tooltip placement="topLeft" title={text}>
@@ -67,9 +68,9 @@ const columns = [
     key: 'name',
     render: (name, record) => (
       <>
-        <a href={record.descriptionUrl} target="_blanc">
+        <Link href={record.descriptionUrl} target="_blank">
           {name}
-        </a>
+        </Link>
       </>
     ),
   },
