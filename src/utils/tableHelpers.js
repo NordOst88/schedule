@@ -1,13 +1,5 @@
 /* eslint-disable no-console */
-import logoRSSchool from '../assets/images/logo_rs.svg';
 import setLocaLStorageSettings from './setLocalStorageSettings';
-
-function getAvatarSrc(url) {
-  if (url.indexOf('github') > -1) {
-    return `${url}.png?size=48`;
-  }
-  return logoRSSchool;
-}
 
 const getTimeStamp = (value) => {
   const timestamp = Math.floor(new Date(value).getTime() / 1000);
@@ -45,11 +37,4 @@ function removeColumnKeyToList(selectedColumns, column) {
   return selectedColumns;
 }
 
-export {
-  getAvatarSrc,
-  onDateChange,
-  onDateOk,
-  filterColumns,
-  addColumnKeyToList,
-  removeColumnKeyToList,
-};
+export { onDateChange, onDateOk, filterColumns, addColumnKeyToList, removeColumnKeyToList };

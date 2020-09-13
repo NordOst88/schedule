@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Tag, Space, Tooltip, Divider } from 'antd';
+import { Space, Tooltip } from 'antd';
 import Type from '../task-type';
 import Links from '../links';
-import { getAvatarSrc } from '../../utils/tableHelpers';
+import Organizer from '../organizer';
 import getFormattedDate from '../../utils/getFormattedDate';
 import store from '../../store';
 
@@ -87,37 +87,7 @@ const columns = [
     title: 'Organizer',
     dataIndex: 'organizer',
     key: 'organizer',
-    render: (organizers) => (
-      <>
-        {organizers.map((obj) => {
-          if (obj instanceof Object) {
-            return (
-              <Space key={obj.name}>
-                <img
-                  src={getAvatarSrc(obj.url)}
-                  style={{
-                    height: '24px',
-                    width: '24px',
-                    borderRadius: '12px',
-                  }}
-                  alt="avatar"
-                />
-                <a
-                  href={obj.url}
-                  target="_blanc"
-                  style={{
-                    marginRight: '8px',
-                  }}
-                >
-                  {obj.name}
-                </a>
-              </Space>
-            );
-          }
-          return null;
-        })}
-      </>
-    ),
+    render: (organizer) => <Organizer {...{ organizer }} />,
   },
   {
     title: 'Comment',

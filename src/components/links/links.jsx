@@ -15,10 +15,10 @@ const Links = ({ links }) => {
           <Link
             href={link[1]}
             target="_blank"
-            key={link[0]}
             style={{
               whiteSpace: 'nowrap',
             }}
+            key={link[0]}
           >
             {link[0] || noInfo}
             {idx !== link.length - 1 && linksArray.length > 1 ? (
