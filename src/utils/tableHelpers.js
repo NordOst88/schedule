@@ -26,9 +26,9 @@ function filterColumns(columns, selectedColumns) {
   return columns.filter((item) => selectedColumns.includes(item.key));
 }
 
-function addColumnKey(selectedColumns, column, columnIdx) {
+function addColumnKey(selectedColumns, column) {
   if (!selectedColumns.includes(column.key)) {
-    selectedColumns.splice(columnIdx, 0, column.key);
+    selectedColumns.push(column.key);
     setLocaLStorageSettings(['tableColumnsSelected', JSON.stringify(selectedColumns)], TABLE);
   }
   return selectedColumns;

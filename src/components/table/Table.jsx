@@ -20,16 +20,20 @@ const TableContainer = ({ events }) => {
     ? JSON.parse(storage.tableColumnsSelected)
     : columnsList;
   const filteredColumns = filterColumns(columns, selectedColumns);
-  const [visibleColumns, setColumnsToView] = useState(filteredColumns);
+  const [visibleColumns, setVisibleColumns] = useState(filteredColumns);
 
   const columnSelectHandler = (column, checked) => {
     const idx = columns.indexOf(column);
     if (!checked) {
       removeColumnKey(selectedColumns, column, idx);
-      setColumnsToView([...visibleColumns].filter((item) => item !== column));
+      setVisibleColumns([...visibleColumns.slice(0, idx), {}, ...visibleColumns.slice(idx + 1)]);
     } else {
       addColumnKey(selectedColumns, column);
-      setColumnsToView([...visibleColumns.slice(0, idx), column, ...visibleColumns.slice(idx)]);
+      setVisibleColumns([
+        ...visibleColumns.slice(0, idx),
+        column,
+        ...visibleColumns.slice(idx + 1),
+      ]);
     }
   };
 
