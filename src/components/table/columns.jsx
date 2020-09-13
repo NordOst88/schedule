@@ -2,8 +2,8 @@
 import React from 'react';
 import { Tag, Space, Tooltip, Divider } from 'antd';
 import Type from '../task-type';
+import Links from '../links';
 import { getAvatarSrc } from '../../utils/tableHelpers';
-import getEventColor from '../../utils/getEventColor';
 import getFormattedDate from '../../utils/getFormattedDate';
 import store from '../../store';
 
@@ -77,30 +77,12 @@ const columns = [
       </Tooltip>
     ),
   },
-  // {
-  //   title: 'Links',
-  //   dataIndex: 'links',
-  //   key: 'links',
-  //   render: (links) => (
-  //     <>
-  //       {links.map((object, idx) => (
-  //         <a
-  //           href={Object.entries(object)[0][1]}
-  //           target="_blanc"
-  //           style={{
-  //             whiteSpace: 'nowrap',
-  //           }}
-  //           key={Object.entries(object)[0][0]}
-  //         >
-  //           {Object.entries(object)[0][0]}
-  //           {idx !== links.length - 1 ? (
-  //             <Divider style={{ backgroundColor: '#757575' }} type="vertical" />
-  //           ) : null}
-  //         </a>
-  //       ))}
-  //     </>
-  //   ),
-  // },
+  {
+    title: 'Links',
+    dataIndex: 'links',
+    key: 'links',
+    render: (links) => <Links {...{ links }} />,
+  },
   {
     title: 'Organizer',
     dataIndex: 'organizer',
