@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import { Space, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer';
 import getFormattedDate from '../../utils/getFormattedDate';
 import store from '../../store';
+import { tagsName } from '../../constants/tableConstants';
 
 const { eventColors } = store.getState();
 
@@ -33,7 +33,7 @@ const columns = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    render: (type) => <Type {...{ type, eventColors }} />,
+    render: (type) => <Type {...{ type, eventColors, tagsName }} />,
   },
   {
     title: 'Place',
@@ -82,6 +82,7 @@ const columns = [
     dataIndex: 'links',
     key: 'links',
     render: (links) => <Links {...{ links }} />,
+    align: 'center',
   },
   {
     title: 'Organizer',

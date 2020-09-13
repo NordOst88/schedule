@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
@@ -9,32 +8,32 @@ import {
   onDateChange,
   onDateOk,
   filterColumns,
-  addColumnKeyToList,
-  removeColumnKeyToList,
+  addColumnKey,
+  removeColumnKey,
 } from '../../utils/tableHelpers';
 import './Table.scss';
 
-const MyTable = ({ events }) => {
+const TableContainer = ({ events }) => {
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
   const selectedColumns = storage.tableColumnsSelected
     ? JSON.parse(storage.tableColumnsSelected)
     : columnsList;
   const filteredColumns = filterColumns(columns, selectedColumns);
-  const [columnsToView, setColumnsToView] = useState(filteredColumns);
-  const currentDate = Math.floor(new Date('2020-09-06T17:30').getTime() / 1000);
+  const [visibleColumns, setColumnsToView] = useState(filteredColumns);
+  const currentDate = Date.now() / 1000;
 
   const columnSelectHandler = (column, checked) => {
     const idx = columns.indexOf(column);
     if (!checked) {
-      removeColumnKeyToList(selectedColumns, column, idx);
-      setColumnsToView([...columnsToView].filter((item) => item !== column));
+      removeColumnKey(selectedColumns, column, idx);
+      setColumnsToView([...visibleColumns].filter((item) => item !== column));
     } else {
-      addColumnKeyToList(selectedColumns, column);
-      setColumnsToView([...columnsToView.slice(0, idx), column, ...columnsToView.slice(idx)]);
+      addColumnKey(selectedColumns, column);
+      setColumnsToView([...visibleColumns.slice(0, idx), column, ...visibleColumns.slice(idx)]);
     }
   };
 
-  const checkSetter = (column) => columnsToView.includes(column);
+  const checkSetter = (column) => visibleColumns.includes(column);
 
   const menu = (cols) => (
     <Menu>
@@ -73,7 +72,7 @@ const MyTable = ({ events }) => {
           return null;
         }}
         dataSource={events}
-        columns={columnsToView}
+        columns={visibleColumns}
         rowKey="id"
         size="small"
         pagination={false}
@@ -86,4 +85,4 @@ const mapStateToProps = ({ events }) => ({
   events,
 });
 
-export default connect(mapStateToProps)(MyTable);
+export default connect(mapStateToProps)(TableContainer);

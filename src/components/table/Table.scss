@@ -1,12 +1,6 @@
-// td.ant-table-column-sort {
-//   background: #ffffff;
-// }
-td span.ant-tag:not(:last-child) {
+.table-tags:not(:last-child) {
   margin-bottom: 5px;
 }
-// .table-materials-link {
-//   border-right: 1px solid black;
-// }
 .expired-date {
   opacity: 0.5;
 }

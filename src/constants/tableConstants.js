@@ -1,5 +1,7 @@
 const dateFormat = 'DD.MM.YYYY HH:mm';
 
+const tagsName = 'table-tags';
+
 const columnsList = [
   'date',
   'time',
@@ -14,4 +16,4 @@ const columnsList = [
   'comment',
 ];
 
-export { dateFormat, columnsList };
+export { dateFormat, columnsList, tagsName };
