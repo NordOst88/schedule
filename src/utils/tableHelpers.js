@@ -39,4 +39,18 @@ function removeColumnKey(selectedColumns, column) {
   return selectedColumns;
 }
 
-export { onDateChange, onDateOk, filterColumns, addColumnKey, removeColumnKey };
+const addClassByCurrentDate = (record) => {
+  if (+record.dateTime < Date.now() / 1000) {
+    return 'expired-date';
+  }
+  return null;
+};
+
+export {
+  onDateChange,
+  onDateOk,
+  filterColumns,
+  addColumnKey,
+  removeColumnKey,
+  addClassByCurrentDate,
+};

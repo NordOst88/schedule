@@ -10,6 +10,7 @@ import {
   filterColumns,
   addColumnKey,
   removeColumnKey,
+  addClassByCurrentDate,
 } from '../../utils/tableHelpers';
 import './Table.scss';
 
@@ -20,7 +21,6 @@ const TableContainer = ({ events }) => {
     : columnsList;
   const filteredColumns = filterColumns(columns, selectedColumns);
   const [visibleColumns, setColumnsToView] = useState(filteredColumns);
-  const currentDate = Date.now() / 1000;
 
   const columnSelectHandler = (column, checked) => {
     const idx = columns.indexOf(column);
@@ -65,12 +65,7 @@ const TableContainer = ({ events }) => {
         </Form.Item>
       </Form>
       <Table
-        rowClassName={(record) => {
-          if (+record.dateTime < currentDate) {
-            return 'expired-date';
-          }
-          return null;
-        }}
+        rowClassName={addClassByCurrentDate}
         dataSource={events}
         columns={visibleColumns}
         rowKey="id"
