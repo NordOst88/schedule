@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { DatePicker, Table, Form, Menu, Dropdown, Checkbox } from 'antd';
-import { TableOutlined, DownOutlined } from '@ant-design/icons';
+import { DatePicker, Table, Form } from 'antd';
 import columns from './columns';
 import { dateFormat, columnsList } from '../../constants/tableConstants';
 import {
@@ -13,6 +12,7 @@ import {
   addClassByCurrentDate,
 } from '../../utils/tableHelpers';
 import './Table.scss';
+import ColumnSelector from './ColumnSelector';
 
 const TableContainer = ({ events }) => {
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
@@ -33,23 +33,6 @@ const TableContainer = ({ events }) => {
     }
   };
 
-  const checkSetter = (column) => visibleColumns.includes(column);
-
-  const menu = (cols) => (
-    <Menu>
-      {cols.map((column) => (
-        <Menu.Item key={column.key}>
-          <Checkbox
-            checked={checkSetter(column)}
-            onChange={({ target }) => columnSelectHandler(column, target.checked)}
-          >
-            {column.title}
-          </Checkbox>
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-
   return (
     <>
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
@@ -57,11 +40,7 @@ const TableContainer = ({ events }) => {
           <DatePicker showTime onChange={onDateChange} onOk={onDateOk} format={dateFormat} />
         </Form.Item>
         <Form.Item style={{ cursor: 'pointer' }}>
-          <Dropdown overlay={menu(columns)} arrow>
-            <span>
-              <TableOutlined /> Select Column <DownOutlined />
-            </span>
-          </Dropdown>
+          <ColumnSelector {...{ visibleColumns, columnSelectHandler }} />
         </Form.Item>
       </Form>
       <Table
