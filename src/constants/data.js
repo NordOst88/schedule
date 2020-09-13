@@ -44,7 +44,7 @@ const DATA = [
     place: 'online',
     comment:
       'На странице курса все темы отмечены галочками. Студент может пояснить решение некоторых заданий (на выбор ментора)/ Решения всех заданий доступны после 20-минутной паузы. Для проверки самостоятельности решения  заданий нужно посмотреть и послушать как студент решает пройденные им таски',
-    organizer: ['DVgluQnLGTg9ggTi6A4N ', 'zom0bgoUBztJLlMhDEvh'],
+    organizer: ['DVgluQnLGTg9ggTi6A4N', 'zom0bgoUBztJLlMhDEvh'],
     deadline: '1599004800',
     links: {},
   },
@@ -170,7 +170,7 @@ const DATA = [
     dateTime: '1599728400',
     place: 'online',
     comment: 'Изучение займет примерно 1 час. ',
-    organizer: ['DVgluQnLGTg9ggTi6A4N '],
+    organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {
       'Mastering Markdown': 'https://guides.github.com/features/mastering-markdown/',
@@ -253,7 +253,7 @@ const DATA = [
     dateTime: '1599955200',
     place: 'online',
     comment: '',
-    organizer: ['DVgluQnLGTg9ggTi6A4N '],
+    organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
   },
@@ -419,7 +419,7 @@ const DATA = [
     dateTime: '1601060400',
     place: 'online',
     comment: '',
-    organizer: ['DVgluQnLGTg9ggTi6A4N '],
+    organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
   },
@@ -484,7 +484,7 @@ const DATA = [
     place: 'online',
     comment:
       'Постарайтесь разобраться, почему код пишется так, а не иначе, понять логику автора приложения, не просто повторить готовую работу, но улучшить её, исправить замеченные ошибки и неточности, внести в неё что-то своё.',
-    organizer: ['DVgluQnLGTg9ggTi6A4N '],
+    organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
   },
@@ -530,7 +530,7 @@ const DATA = [
     dateTime: '1602158400',
     place: 'online',
     comment: 'Курс от Владилена Минина по webpack считается одним из лучших',
-    organizer: ['DVgluQnLGTg9ggTi6A4N '],
+    organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
   },
@@ -729,7 +729,7 @@ const DATA = [
     dateTime: '1606935600',
     place: 'online',
     comment: 'Собеседование нужно пройти в течении 2 недель',
-    organizer: ['DVgluQnLGTg9ggTi6A4N '],
+    organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '1608681600',
     links: {
       'Interview Questions':
