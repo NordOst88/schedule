@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Tag, Space, Tooltip, Divider } from 'antd';
+import Type from '../task-type';
 import { getAvatarSrc } from '../../utils/tableHelpers';
 import getEventColor from '../../utils/getEventColor';
 import getFormattedDate from '../../utils/getFormattedDate';
@@ -13,14 +14,14 @@ const columns = [
     title: 'Date',
     dataIndex: 'dateTime',
     key: 'date',
-    render: (date) => <>{getFormattedDate(date, 'date')}</>,
+    render: (date) => <>{getFormattedDate(date).slice(0, 10)}</>,
     sorter: (a, b) => a.dateTime - b.dateTime,
   },
   {
     title: 'Time',
     dataIndex: 'dateTime',
     key: 'time',
-    render: (time) => <>{getFormattedDate(time, 'time')}</>,
+    render: (time) => <>{getFormattedDate(time).slice(12)}</>,
   },
   {
     title: 'Deadline',
@@ -32,18 +33,7 @@ const columns = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    render: (tags) => (
-      <>
-        {tags.map((tag) => {
-          const color = getEventColor(false, eventColors, tag);
-          return (
-            <Tag color={color} key={tag}>
-              {tag}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    render: (type) => <Type {...{ type, eventColors }} />,
   },
   {
     title: 'Place',

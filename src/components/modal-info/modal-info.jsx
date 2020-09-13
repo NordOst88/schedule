@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Modal, Space, Typography } from 'antd';
 
-import Type from '../task-type/task-type';
+import Type from '../task-type';
 import Links from '../links/links';
 import Organizer from '../organizer/organizer';
 
