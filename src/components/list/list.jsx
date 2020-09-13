@@ -70,7 +70,9 @@ const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
         })}
       </Timeline>
       {displayModal && (
-        <ModalInfo {...{ ...eventDescription, displayModal, setDisplayModal, eventColors }} />
+        <ModalInfo
+          {...{ ...eventDescription, displayModal, setDisplayModal, eventColors, currentTimezone }}
+        />
       )}
     </>
   );

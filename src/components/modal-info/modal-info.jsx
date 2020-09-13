@@ -42,6 +42,7 @@ const ModalInfo = ({
   displayModal,
   setDisplayModal,
   eventColors,
+  currentTimezone,
 }) => {
   const { Link } = Typography;
   const getTypeTaskTags = () => <Type {...{ type, eventColors }} />;
@@ -52,8 +53,8 @@ const ModalInfo = ({
       {name}
     </Link>
   );
-  const startDate = getFormattedDate(dateTime) || noInfo;
-  const deadlineDate = getFormattedDate(deadline) || noInfo;
+  const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
+  const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
 
   return (
     <Modal

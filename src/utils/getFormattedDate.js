@@ -1,8 +1,6 @@
-import { LOCALES } from '../constants/constants';
-
 const getFormattedDate = (timestamp, timezone) => {
   if (timestamp) {
-    const localDate = new Date(timestamp * 1000).toLocaleString(LOCALES, {
+    const localDate = new Date(timestamp * 1000).toLocaleString('en-US', {
       timeZone: timezone,
     });
     const date = new Date(localDate);
