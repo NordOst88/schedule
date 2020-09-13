@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Modal, Space, Typography } from 'antd';
 
-import Type from '../task-type/task-type';
-import Links from '../links/links';
+import Type from '../task-type';
+import Links from '../links';
 import Organizer from '../organizer/organizer';
 
 import getFormattedDate from '../../utils/getFormattedDate';
