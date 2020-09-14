@@ -10,7 +10,7 @@ const EventPopUp = ({
   setDisplayPopUp,
   displayModal,
 }) => {
-  const isDisplay = !displayModal && displayPopUp;
+  const isDisplay = !displayModal && displayPopUp && currentDateEvents.length;
 
   return (
     <Modal

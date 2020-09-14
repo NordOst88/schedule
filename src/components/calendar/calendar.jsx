@@ -6,11 +6,11 @@ import { Badge, Calendar } from 'antd';
 
 import ModalInfo from '../modal-info/modal-info';
 import { filterDataByDay, getListData } from '../../utils/calendarHelpers';
+import getFormattedDate from '../../utils/getFormattedDate';
 import EventPopUp from './eventPopUp';
 import {
   INACTIVE_EVENT_TYPE,
   INACTIVE_EVENT_COLOR,
-  MILLISECONDS,
   LARGE_MOBILE_WIDTH,
 } from '../../constants/calendarConstants';
 
@@ -28,12 +28,13 @@ const dateCellRender = (value, events, eventColors, onEventClick, currentTimezon
     >
       {listData.map((item) => {
         const { dateTime, name, color, id } = item;
-        const activeEvent = Date.now() > new Date(+dateTime * MILLISECONDS);
+        const activeEvent = Date.now() > new Date(getFormattedDate(dateTime, currentTimezone));
         const textType = activeEvent ? INACTIVE_EVENT_TYPE : null;
 
         return (
-          <li key={name} id={id} onClick={() => onEventClick(item)}>
+          <li key={name} id={id}>
             <Badge
+              onClick={() => onEventClick(item)}
               color={color}
               text={name}
               style={{ color: textType ? INACTIVE_EVENT_COLOR : color }}
