@@ -14,8 +14,8 @@ import {
   LARGE_MOBILE_WIDTH,
 } from '../../constants/calendarConstants';
 
-const dateCellRender = (value, events, eventColors, onEventClick) => {
-  const listData = getListData(value, events, eventColors);
+const dateCellRender = (value, events, eventColors, onEventClick, currentTimezone) => {
+  const listData = getListData(value, events, eventColors, currentTimezone);
 
   return (
     <ul
@@ -59,7 +59,9 @@ const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
   return (
     <>
       <Calendar
-        dateCellRender={(value) => dateCellRender(value, events, eventColors, onEventClick)}
+        dateCellRender={(value) =>
+          dateCellRender(value, events, eventColors, onEventClick, currentTimezone)
+        }
         onSelect={(value) => {
           if (window.innerWidth <= LARGE_MOBILE_WIDTH) {
             const dayEvents = filterDataByDay(value, events);

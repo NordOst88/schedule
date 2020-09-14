@@ -1,4 +1,4 @@
-import { MILLISECONDS } from '../constants/calendarConstants';
+import getFormattedDate from './getFormattedDate';
 
 const compareDates = (moment, eventDate) => {
   const isSameDay = moment.date() === eventDate.getDate();
@@ -8,15 +8,15 @@ const compareDates = (moment, eventDate) => {
   return isSameDay && isSameMonth && isSameYear;
 };
 
-const filterDataByDay = (value, events) =>
+const filterDataByDay = (value, events, currentTimezone) =>
   events.filter((obj) => {
-    const eventDate = new Date(+obj.dateTime * MILLISECONDS);
+    const localTime = new Date(getFormattedDate(obj.dateTime, currentTimezone));
 
-    return compareDates(value, eventDate);
+    return compareDates(value, localTime);
   });
 
-const getListData = (value, events, eventColors) => {
-  const currentData = filterDataByDay(value, events);
+const getListData = (value, events, eventColors, currentTimezone) => {
+  const currentData = filterDataByDay(value, events, currentTimezone);
 
   if (!currentData.length) {
     return [];
