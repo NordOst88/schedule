@@ -56,7 +56,7 @@ export function dateCellRender(value, events, eventColors, onEventClick) {
             <Badge
               color={item.color}
               text={item.name}
-              style={{ color: textType ? '#00000073' : '#faad14' }}
+              style={{ color: textType ? '#00000073' : item.color }}
             />
           </li>
         );
