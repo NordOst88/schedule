@@ -19,7 +19,6 @@ module.exports = (env = {}) => {
     const plugins = [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'SONGBIRD',
         template: 'public/index.html',
         favicon: 'src/assets/favicon/favicon.ico',
       }),

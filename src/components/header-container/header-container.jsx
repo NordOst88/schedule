@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Layout, Select } from 'antd';
+import { Layout, Typography, Image } from 'antd';
 import Heading from '../heading/heading';
-import { USER_ROLES } from '../../constants/constants';
+import OptionPicker from '../option-picker/option-picker';
+import { USER_ROLES, HEADER_TEXT } from '../../constants/constants';
 import { onSetUser } from '../../actions/actions';
 import logo from '../../assets/images/logo-rsschool3.png';
 import './header-container.scss';
 
 const HeaderContainer = ({ role, onSelect }) => {
   const { Header } = Layout;
-  const { Option } = Select;
+  const { Link } = Typography;
+  const { title, linkUrl, imageAlt } = HEADER_TEXT;
 
   return (
     <Header
@@ -21,31 +23,11 @@ const HeaderContainer = ({ role, onSelect }) => {
         alignItems: 'center',
       }}
     >
-      <a className="logo" href="https://rs.school/" target="_blank" rel="noreferrer">
-        <img src={logo} alt="Rolling Scopes School Logo" />
-      </a>
-      <Heading>Schedule</Heading>
-      <Select
-        onChange={onSelect}
-        showSearch="true"
-        defaultValue={role}
-        style={{
-          width: 120,
-          fontSize: '2rem',
-        }}
-      >
-        {USER_ROLES.map((user) => (
-          <Option
-            style={{
-              fontSize: '2rem',
-            }}
-            value={user}
-            key={user}
-          >
-            {user}
-          </Option>
-        ))}
-      </Select>
+      <Link className="logo" href={linkUrl} target="_blank" rel="noreferrer">
+        <Image src={logo} alt={imageAlt} width={85} />
+      </Link>
+      <Heading>{title}</Heading>
+      <OptionPicker onChange={onSelect} defaultValue={role} options={USER_ROLES} />
     </Header>
   );
 };

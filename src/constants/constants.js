@@ -15,7 +15,26 @@ const LIST_TEXT = {
   deadline: 'Deadline:',
 };
 
-// todo all in lowerCase and data as well
+const HEADER_TEXT = {
+  title: 'Schedule',
+  linkUrl: 'https://rs.school/',
+  imageAlt: 'Rolling Scopes School Logo',
+};
+
+const MODAL_INFO_TEXT = {
+  estimatedWeek: 'Неделя обучения : ',
+  taskName: 'Тема : ',
+  taskType: 'Тип задания : ',
+  taskStart: 'Дата выдачи : ',
+  taskDeadline: 'Дата сдачи : ',
+  estimatedStudyTime: 'Время на прохождение : ',
+  taskPlace: 'Место проведения : ',
+  taskDescription: 'Описание : ',
+  taskLinks: 'Материалы : ',
+  taskOrganizer: 'Организатор : ',
+  taskComment: 'Комментарий : ',
+  noInfo: 'N/A',
+};
 
 const COLOR_PRESET = {
   'JS task': '#42d205',
@@ -37,4 +56,16 @@ const COLOR_PRESET = {
   default: '#000000',
 };
 
-export { TABLE, LIST, CALENDAR, STUDENT, MENTOR, VIEW_MODES, USER_ROLES, COLOR_PRESET, LIST_TEXT };
+export {
+  TABLE,
+  LIST,
+  CALENDAR,
+  STUDENT,
+  MENTOR,
+  VIEW_MODES,
+  USER_ROLES,
+  COLOR_PRESET,
+  LIST_TEXT,
+  MODAL_INFO_TEXT,
+  HEADER_TEXT,
+};

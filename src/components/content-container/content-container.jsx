@@ -8,6 +8,7 @@ import { onSetEvents } from '../../actions/actions';
 
 import { LIST, TABLE, CALENDAR } from '../../constants/constants';
 import List from '../list/list';
+import Table from '../table';
 
 import sortByDateTime from '../../utils/sortByDateTime';
 
