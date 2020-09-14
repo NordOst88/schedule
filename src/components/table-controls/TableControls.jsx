@@ -6,11 +6,13 @@ import { PlusOutlined } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
+import ModalAddEvent from './ModalAddEvent';
 
 const api = new SwaggerService();
 
 const TableControls = ({ onFetch }) => {
   const [loading, setLoading] = useState(false);
+  const [displayModal, setDisplayModal] = useState(false);
 
   const testEvent = {
     week: '13',
@@ -46,6 +48,10 @@ const TableControls = ({ onFetch }) => {
       <Button type="dashed" icon={<PlusOutlined spin={loading} />} onClick={addEventHandler}>
         Add test event
       </Button>
+      <Button type="dashed" onClick={() => setDisplayModal(true)}>
+        Open modal
+      </Button>
+      <ModalAddEvent {...{ setDisplayModal, displayModal }} />
     </Space>
   );
 };
