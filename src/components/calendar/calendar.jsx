@@ -11,6 +11,7 @@ import {
   INACTIVE_EVENT_TYPE,
   INACTIVE_EVENT_COLOR,
   MILLISECONDS,
+  LARGE_MOBILE_WIDTH,
 } from '../../constants/calendarConstants';
 
 const dateCellRender = (value, events, eventColors, onEventClick) => {
@@ -60,9 +61,11 @@ const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
       <Calendar
         dateCellRender={(value) => dateCellRender(value, events, eventColors, onEventClick)}
         onSelect={(value) => {
-          const dayEvents = filterDataByDay(value, events);
-          setCurrentDateEvents(dayEvents);
-          setDisplayPopUp(true);
+          if (window.innerWidth <= LARGE_MOBILE_WIDTH) {
+            const dayEvents = filterDataByDay(value, events);
+            setCurrentDateEvents(dayEvents);
+            setDisplayPopUp(true);
+          }
         }}
       />
       {displayModal && (
@@ -72,7 +75,7 @@ const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
       )}
       {displayPopUp && (
         <EventPopUp
-          currentEvents={currentDateEvents}
+          currentDateEvents={currentDateEvents}
           displayPopUp={displayPopUp}
           onEventClick={onEventClick}
           setDisplayPopUp={setDisplayPopUp}

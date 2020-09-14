@@ -1,19 +1,17 @@
 import React from 'react';
-//import { connect } from 'react-redux';
 
-import { Modal, Space, Typography } from 'antd';
-
+import { Modal, Space, Badge } from 'antd';
 import 'antd/dist/antd.css';
-//import { Badge, Calendar } from 'antd';
 
 const EventPopUp = ({
-  currentEvents,
+  currentDateEvents,
   displayPopUp,
   onEventClick,
   setDisplayPopUp,
   displayModal,
 }) => {
   const isDisplay = !displayModal && displayPopUp;
+
   return (
     <Modal
       width={300}
@@ -25,25 +23,29 @@ const EventPopUp = ({
       }}
     >
       <Space direction="vertical">
-        {currentEvents.map((item) => {
+        {currentDateEvents.map((item) => {
           const { name, color } = item;
 
-          return <Line text={name} color={color} item={item} onEventClick={onEventClick} />;
+          return (
+            <Line text={name} color={color} item={item} onEventClick={onEventClick} key={name} />
+          );
         })}
       </Space>
     </Modal>
   );
 };
 
-const Line = ({ text, color, item, onEventClick }) => {
-  const { Text } = Typography;
-  return (
-    <>
-      <Text onClick={() => onEventClick(item)} style={{ color, cursor: 'pointer' }}>
-        {text}
-      </Text>
-    </>
-  );
-};
+const Line = ({ text, color, item, onEventClick }) => (
+  <>
+    <Badge
+      onClick={() => {
+        onEventClick(item);
+      }}
+      style={{ cursor: 'pointer' }}
+      color={color}
+      text={text}
+    />
+  </>
+);
 
 export default EventPopUp;
