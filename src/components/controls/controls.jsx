@@ -6,6 +6,7 @@ import OptionPicker from '../option-picker/option-picker';
 import { VIEW_MODES } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
 import { onViewModeChange, onTimezoneChange } from '../../actions/actions';
+import SelectContainer from '../filter/filter';
 
 import './controls.scss';
 
@@ -18,7 +19,8 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
       <OptionPicker onChange={onTimezoneSelect} defaultValue={currentTimezone} options={TIMEZONE} />
     </Menu.Item>
     <Menu.Item>
-      <Button type="primary">Something else</Button>
+      {/* <Button type="primary">Something else</Button> */}
+      <SelectContainer />
     </Menu.Item>
     <Menu.Item>
       <Button>Something else</Button>
