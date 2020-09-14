@@ -46,7 +46,7 @@ class ContentContainer extends PureComponent {
         ) : (
           <>
             {currentView === LIST ? <List /> : null}
-            {currentView === TABLE ? <List /> : null}
+            {currentView === TABLE ? <Table /> : null}
             {currentView === CALENDAR ? <CalendarContainer /> : null}
           </>
         )}

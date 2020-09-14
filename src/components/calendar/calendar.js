@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Badge, Calendar } from 'antd';
 
-const onEventClick = (eventName) => {
-  // todo: show modal
-  console.log('onEventClick', eventName);
-};
+import ModalInfo from '../modal-info/modal-info';
 
 const compareDates = (moment, eventDate) => {
   /* console.log(eventDate);
@@ -44,7 +41,7 @@ function getListData(value, events, eventColors) {
   });
 }
 
-export function dateCellRender(value, events, eventColors) {
+export function dateCellRender(value, events, eventColors, onEventClick) {
   const listData = getListData(value, events, eventColors);
   // todo 1000 to constants
   // todo colors to constants
@@ -68,18 +65,36 @@ export function dateCellRender(value, events, eventColors) {
   );
 }
 
-const CalendarContainer = ({ events, eventColors }) => (
-  <Calendar
-    dateCellRender={(value) => dateCellRender(value, events, eventColors)}
-    onSelect={(value) => {
-      console.log(filterDataByDay(value, events));
-    }}
-  />
-);
+const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
+  const [displayModal, setDisplayModal] = useState(false);
+  const [eventDescription, setEventDescription] = useState(null);
 
-const mapStateToProps = ({ events, eventColors }) => ({
+  const onEventClick = (eventName) => {
+    setEventDescription(eventName);
+    setDisplayModal(true);
+  };
+
+  return (
+    <>
+      <Calendar
+        dateCellRender={(value) => dateCellRender(value, events, eventColors, onEventClick)}
+        onSelect={(value) => {
+          console.log(filterDataByDay(value, events));
+        }}
+      />
+      {displayModal && (
+        <ModalInfo
+          {...{ ...eventDescription, displayModal, setDisplayModal, eventColors, currentTimezone }}
+        />
+      )}
+    </>
+  );
+};
+
+const mapStateToProps = ({ events, eventColors, currentTimezone }) => ({
   events,
   eventColors,
+  currentTimezone,
 });
 
 export default connect(mapStateToProps)(CalendarContainer);
