@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Menu, Button } from 'antd';
 // import { AppstoreTwoTone } from '@ant-design/icons';
 import OptionPicker from '../option-picker/option-picker';
+import TableControls from '../table-controls';
 import { VIEW_MODES } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
 import { onViewModeChange, onTimezoneChange } from '../../actions/actions';
@@ -22,6 +23,9 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
     </Menu.Item>
     <Menu.Item>
       <Button>Something else</Button>
+    </Menu.Item>
+    <Menu.Item>
+      <TableControls />
     </Menu.Item>
   </Menu>
 );
