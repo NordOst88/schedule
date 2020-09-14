@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Modal, Space, Badge } from 'antd';
-import 'antd/dist/antd.css';
 
 const EventPopUp = ({
   currentDateEvents,

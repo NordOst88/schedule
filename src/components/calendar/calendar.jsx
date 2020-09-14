@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import 'antd/dist/antd.css';
 import { Badge, Calendar } from 'antd';
 
 import ModalInfo from '../modal-info/modal-info';
