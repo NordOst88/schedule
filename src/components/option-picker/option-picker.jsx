@@ -1,6 +1,8 @@
 import React from 'react';
 import { Select } from 'antd';
 
+import './option-picker.scss';
+
 const OptionPicker = ({ options = [], defaultValue, onChange }) => {
   const { Option } = Select;
 
@@ -9,10 +11,7 @@ const OptionPicker = ({ options = [], defaultValue, onChange }) => {
       onChange={onChange}
       showSearch="true"
       defaultValue={defaultValue}
-      style={{
-        width: 200,
-        fontSize: '1.7rem',
-      }}
+      className="option-picker"
     >
       {options.length
         ? options.map((option) => (
