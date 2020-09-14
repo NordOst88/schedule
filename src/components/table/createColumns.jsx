@@ -29,7 +29,9 @@ const createColumns = (currentTimezone, eventColors) => [
     dataIndex: 'dateTime',
     key: 'date',
     render: (date) => (
-      <div style={{ minWidth: 75 }}>{getFormattedDate(date, currentTimezone).slice(0, 10)}</div>
+      <div style={{ whiteSpace: 'nowrap' }}>
+        {getFormattedDate(date, currentTimezone).slice(0, 10)}
+      </div>
     ),
     sorter: (a, b) => a.dateTime - b.dateTime,
   },
@@ -44,7 +46,7 @@ const createColumns = (currentTimezone, eventColors) => [
     dataIndex: 'deadline',
     key: 'deadline',
     render: (deadline) => (
-      <div style={{ minWidth: 110 }}>{getFormattedDate(deadline, currentTimezone)}</div>
+      <div style={{ whiteSpace: 'nowrap' }}>{getFormattedDate(deadline, currentTimezone)}</div>
     ),
   },
   {
