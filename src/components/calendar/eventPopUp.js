@@ -3,7 +3,7 @@ import React from 'react';
 import { Modal, Space, Badge } from 'antd';
 
 const EventPopUp = ({
-  currentDateEvents,
+  currentDateEvents = [],
   displayPopUp,
   onEventClick,
   setDisplayPopUp,

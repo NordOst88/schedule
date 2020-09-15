@@ -18,10 +18,10 @@ const dateCellRender = (value, events, eventColors, onEventClick, currentTimezon
 
   return (
     <ul
-      className="events"
+      className="calendar__events"
       style={{
-        margin: '0',
-        padding: '0',
+        margin: 0,
+        padding: 0,
         listStyle: 'none',
       }}
     >
@@ -29,13 +29,14 @@ const dateCellRender = (value, events, eventColors, onEventClick, currentTimezon
         const { dateTime, name, color, id } = item;
         const activeEvent = Date.now() > new Date(getFormattedDate(dateTime, currentTimezone));
         const textType = activeEvent ? INACTIVE_EVENT_TYPE : null;
+        const badgeText = window.innerWidth <= LARGE_MOBILE_WIDTH ? '' : name;
 
         return (
           <li key={name} id={id}>
             <Badge
               onClick={() => onEventClick(item)}
               color={color}
-              text={name}
+              text={badgeText}
               style={{ color: textType ? INACTIVE_EVENT_COLOR : color }}
             />
           </li>
@@ -53,7 +54,13 @@ const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
 
   const onEventClick = (eventName) => {
     setEventDescription(eventName);
-    setDisplayModal(true);
+    if (window.innerWidth <= LARGE_MOBILE_WIDTH) {
+      if (displayPopUp) {
+        setDisplayModal(true);
+      }
+    } else {
+      setDisplayModal(true);
+    }
   };
 
   return (
