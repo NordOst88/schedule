@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { DatePicker, Table, Form } from 'antd';
-import columns from './columns';
+import createColumns from './createColumns';
 import { dateFormat, columnsList } from '../../constants/tableConstants';
 import {
   onDateChange,
@@ -14,13 +14,20 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 
-const TableContainer = ({ events }) => {
+const TableContainer = ({ events, currentTimezone, eventColors }) => {
+  const columns = createColumns(currentTimezone, eventColors);
+
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
   const selectedColumns = storage.tableColumnsSelected
     ? JSON.parse(storage.tableColumnsSelected)
     : columnsList;
-  const filteredColumns = filterColumns(columns, selectedColumns);
+
+  let filteredColumns = filterColumns(columns, selectedColumns);
   const [visibleColumns, setVisibleColumns] = useState(filteredColumns);
+  useEffect(() => {
+    filteredColumns = filterColumns(columns, selectedColumns);
+    setVisibleColumns(filteredColumns);
+  }, [currentTimezone, eventColors]);
 
   const columnSelectHandler = (column, checked) => {
     const idx = columns.indexOf(column);
@@ -44,7 +51,7 @@ const TableContainer = ({ events }) => {
           <DatePicker showTime onChange={onDateChange} onOk={onDateOk} format={dateFormat} />
         </Form.Item>
         <Form.Item style={{ cursor: 'pointer' }}>
-          <ColumnSelector {...{ visibleColumns, columnSelectHandler }} />
+          <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
       </Form>
       <Table
@@ -59,8 +66,10 @@ const TableContainer = ({ events }) => {
   );
 };
 
-const mapStateToProps = ({ events }) => ({
+const mapStateToProps = ({ events, currentTimezone, eventColors }) => ({
+  eventColors,
   events,
+  currentTimezone,
 });
 
 export default connect(mapStateToProps)(TableContainer);
