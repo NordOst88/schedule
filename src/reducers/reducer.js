@@ -9,7 +9,6 @@ import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 import getInitialState from '../utils/getInitialState';
 
 const reducer = (state = getInitialState(), action) => {
-  console.log('reducer', state, 'action', action);
   switch (action.type) {
     case SET_VIEW_MODE:
       setLocaLStorageSettings(Object.entries(action));

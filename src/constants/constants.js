@@ -21,6 +21,10 @@ const HEADER_TEXT = {
   imageAlt: 'Rolling Scopes School Logo',
 };
 
+const CONTROLS_TEXT = {
+  printBtn: 'Print',
+};
+
 const MODAL_INFO_TEXT = {
   estimatedWeek: 'Неделя обучения : ',
   taskName: 'Тема : ',
@@ -68,4 +72,5 @@ export {
   LIST_TEXT,
   MODAL_INFO_TEXT,
   HEADER_TEXT,
+  CONTROLS_TEXT,
 };
