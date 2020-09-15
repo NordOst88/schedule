@@ -71,7 +71,7 @@ const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
         }
         onSelect={(value) => {
           if (window.innerWidth <= LARGE_MOBILE_WIDTH) {
-            const dayEvents = filterDataByDay(value, events);
+            const dayEvents = filterDataByDay(value, events, currentTimezone);
             setCurrentDateEvents(dayEvents);
             setDisplayPopUp(true);
           }
