@@ -4,10 +4,8 @@ import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer';
 import getFormattedDate from '../../utils/getFormattedDate';
-import store from '../../store';
 import { tagsName } from '../../constants/tableConstants';
 
-const { eventColors } = store.getState();
 const { Link } = Typography;
 
 const EllipsedText = (text) => (
@@ -25,25 +23,31 @@ const EllipsedText = (text) => (
   </Tooltip>
 );
 
-const columns = [
+const createColumns = (currentTimezone, eventColors) => [
   {
-    title: 'Date',
+    title: `Date`,
     dataIndex: 'dateTime',
     key: 'date',
-    render: (date) => <>{getFormattedDate(date).slice(0, 10)}</>,
+    render: (date) => (
+      <div style={{ whiteSpace: 'nowrap' }}>
+        {getFormattedDate(date, currentTimezone).slice(0, 10)}
+      </div>
+    ),
     sorter: (a, b) => a.dateTime - b.dateTime,
   },
   {
     title: 'Time',
     dataIndex: 'dateTime',
     key: 'time',
-    render: (time) => <>{getFormattedDate(time).slice(12)}</>,
+    render: (time) => <>{getFormattedDate(time, currentTimezone).slice(12)}</>,
   },
   {
     title: 'Deadline',
     dataIndex: 'deadline',
     key: 'deadline',
-    render: (deadline) => <>{getFormattedDate(deadline)}</>,
+    render: (deadline) => (
+      <div style={{ whiteSpace: 'nowrap' }}>{getFormattedDate(deadline, currentTimezone)}</div>
+    ),
   },
   {
     title: 'Type',
@@ -99,4 +103,4 @@ const columns = [
   },
 ];
 
-export default columns;
+export default createColumns;
