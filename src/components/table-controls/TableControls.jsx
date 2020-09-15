@@ -1,15 +1,13 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Space } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import moment from 'moment';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import ModalAddEvent from './ModalAddEvent';
+import getTimeStamp from '../../utils/getTimeStamp';
 
 const api = new SwaggerService();
 
@@ -45,8 +43,6 @@ const TableControls = ({ onFetch }) => {
       });
     });
   };
-
-  const getTimeStamp = (momentObj) => Math.floor(moment(momentObj).format('x') / 1000);
 
   const createNewEvent = (event) => {
     const newEvent = {
