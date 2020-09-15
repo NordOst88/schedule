@@ -23,7 +23,12 @@ function onDateOk(value) {
 }
 
 function filterColumns(columns, selectedColumns) {
-  return columns.filter((item) => selectedColumns.includes(item.key));
+  return columns.map((item) => {
+    if (!selectedColumns.includes(item.key)) {
+      return {};
+    }
+    return item;
+  });
 }
 
 function addColumnKey(selectedColumns, column) {
