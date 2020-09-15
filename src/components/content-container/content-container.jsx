@@ -14,6 +14,8 @@ import sortByDateTime from '../../utils/sortByDateTime';
 
 import './content-container.scss';
 
+import CalendarContainer from '../calendar/calendar';
+
 class ContentContainer extends PureComponent {
   api = new SwaggerService();
 
@@ -45,7 +47,7 @@ class ContentContainer extends PureComponent {
           <>
             {currentView === LIST ? <List /> : null}
             {currentView === TABLE ? <Table /> : null}
-            {currentView === CALENDAR ? <List /> : null}
+            {currentView === CALENDAR ? <CalendarContainer /> : null}
           </>
         )}
       </Content>
