@@ -12,7 +12,7 @@
 }
 @media (max-width: 425px) {
     .header-container{
-        padding: 16px;
+        padding: 16px 9px 16px 22px;
         height: 60px;
     }
     .option-picker{
@@ -24,6 +24,6 @@
     }
     .title{
         font-size: 1.75rem !important;
-        margin-right: 40px;
+        margin-right: 60px;
     }
 }
