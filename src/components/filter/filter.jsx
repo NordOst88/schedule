@@ -20,24 +20,52 @@ const options = [
 ];
 
 const customStyles = {
-  control: (provided, state) => ({
+  option: (provided) => ({
     ...provided,
-    background: '#fff',
-    borderColor: '#9e9e9e',
-    minHeight: '30px',
-    height: '30px',
-    width: '300px',
-    boxShadow: state.isFocused ? null : null,
+    lineHeight: '10px',
   }),
+  container: (provided) => ({
+    ...provided,
+    lineHeight: '15px',
+  }),
+
+  /*   control: (provided) => ({
+    ...provided,
+    width: 300,
+    height: 35,
+    minHeight: 35,
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    width: '100%',
+    height: '100%',
+  }),
+
+  placeholder: (provided) => ({
+    ...provided,
+    lineHeight: 10,
+    display: 'flex',
+    alignItems: 'center',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    lineHeight: 26,
+  }), */
 };
 
 const SelectContainer = () => (
-  <Select
-    closeMenuOnSelect={false}
-    // defaultValue={[colourOptions[0], colourOptions[1]]}
-    isMulti
-    options={options}
-    styles={customStyles}
-  />
+  <div style={{ width: 300, maxHeight: 40, height: 35 }}>
+    <Select
+      closeMenuOnSelect={false}
+      // defaultValue={[colourOptions[0], colourOptions[1]]}
+      isMulti
+      options={options}
+      styles={customStyles}
+      className="multi-select"
+      classNamePrefix="react-select"
+      menuPlacement="auto"
+      maxMenuHeight={100}
+    />
+  </div>
 );
 export default SelectContainer;
