@@ -49,9 +49,9 @@ const TableControls = ({ onFetch }) => {
       week: `${event.week}`,
       dateTime: `${getTimeStamp(event.dateTime)}`,
       deadline: `${getTimeStamp(event.deadline)}`,
-      type: event.type.tags,
-      place: '',
-      estimatedTime: '',
+      type: event.type ? event.type.tags : [''],
+      place: event.place,
+      estimatedTime: event.estimatedTime,
       timeZone: '',
       name: event.name,
       descriptionUrl: event.descriptionUrl,
@@ -59,15 +59,14 @@ const TableControls = ({ onFetch }) => {
       links: {
         TEST: '',
       },
-      organizer: [''],
+      organizer: event.organizers ? event.organizers.organizers : [''],
       comment: event.comment,
     };
-    console.log(newEvent);
+    console.log('Event ====>', newEvent);
   };
 
   const addEventFromModal = (event) => {
     console.log('TestEvent ====>', testEvent);
-    // console.log('Event ====>', event);
     createNewEvent(event);
     setDisplayModal(false);
   };
@@ -80,7 +79,7 @@ const TableControls = ({ onFetch }) => {
       <Button type="dashed" onClick={() => setDisplayModal(true)}>
         Open modal
       </Button>
-      <ModalAddEvent {...{ setDisplayModal, displayModal, addEventFromModal }} />
+      <ModalAddEvent {...{ setDisplayModal, displayModal, addEventFromModal, api }} />
     </Space>
   );
 };

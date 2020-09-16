@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
@@ -51,7 +50,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
   };
 
   const handleOnChange = (selectedTags) => {
-    const newTags = selectedTags.map((item) => item.value);
+    const newTags = selectedTags ? selectedTags.map((item) => item.value) : [];
     setTags(newTags);
     triggerChange({
       tags: newTags,

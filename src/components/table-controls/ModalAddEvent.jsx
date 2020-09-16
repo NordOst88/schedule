@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Input, InputNumber, DatePicker, Typography } from 'antd';
 import TagPicker from './TagsPicker';
+import OrganizersPicker from './OrganizersPicker';
 
 const { Text } = Typography;
 
@@ -18,7 +19,7 @@ const useResetFormOnCloseModal = ({ form, displayModal }) => {
   }, [displayModal]);
 };
 
-const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, eventColors }) => {
+const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, api }) => {
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
     form,
@@ -26,7 +27,7 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, event
   });
 
   const config = {
-    rules: [{ required: true, message: 'Please input your Task Name!' }],
+    rules: [{ required: true, message: `Please input your Task Name!` }],
   };
 
   const onOk = () => {
@@ -54,10 +55,24 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, event
         <Form.Item name="deadline" label="DeadLine">
           <DatePicker showTime format="YYYY-MM-DD HH:mm" />
         </Form.Item>
-        <Form.Item label="Task Type" name="type">
+        <Form.Item
+          label="Task Type"
+          name="type"
+          rules={[{ required: true, message: `Please input Task Type` }]}
+        >
           <TagPicker />
         </Form.Item>
-        <Form.Item label="Task Name" name="name" {...config}>
+        <Form.Item label="Place" name="place">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Estimated Time" name="estimatedTime">
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Task Name"
+          name="name"
+          rules={[{ required: true, message: `Please input your Task Name` }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item label="Task URL" name="descriptionUrl">
@@ -65,6 +80,13 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, event
         </Form.Item>
         <Form.Item label="Description" name="description">
           <Input />
+        </Form.Item>
+        <Form.Item
+          label="Organizers"
+          name="organizers"
+          rules={[{ required: true, message: `Please input Organizer` }]}
+        >
+          <OrganizersPicker {...{ api }} />
         </Form.Item>
         <Form.Item label="Comment" name="comment">
           <Input />
