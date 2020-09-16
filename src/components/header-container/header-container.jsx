@@ -24,7 +24,7 @@ const HeaderContainer = ({ role, onSelect }) => {
       }}
     >
       <Link className="logo" href={linkUrl} target="_blank" rel="noreferrer">
-        <Image src={logo} alt={imageAlt} width={85} />
+        <Image src={logo} alt={imageAlt} width={85} preview={false} />
       </Link>
       <Heading>{title}</Heading>
       <OptionPicker onChange={onSelect} defaultValue={role} options={USER_ROLES} />

@@ -21,6 +21,10 @@ const HEADER_TEXT = {
   imageAlt: 'Rolling Scopes School Logo',
 };
 
+const CONTROLS_TEXT = {
+  printBtn: 'Print',
+};
+
 const MODAL_INFO_TEXT = {
   estimatedWeek: 'Неделя обучения : ',
   taskName: 'Тема : ',
@@ -56,6 +60,11 @@ const COLOR_PRESET = {
   default: '#000000',
 };
 
+const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
+
+const SAVE_OPTIONS = ['PDF', 'JPG'];
+const BTN_SAVE_TEXT = 'Save as';
+
 export {
   TABLE,
   LIST,
@@ -68,4 +77,8 @@ export {
   LIST_TEXT,
   MODAL_INFO_TEXT,
   HEADER_TEXT,
+  CONTROLS_TEXT,
+  MODAL_SPINNER_TIP,
+  SAVE_OPTIONS,
+  BTN_SAVE_TEXT,
 };

@@ -20,7 +20,6 @@ const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
     setEventDescription(event);
     setDisplayModal(true);
   };
-
   // todo: add style
   return (
     <>
