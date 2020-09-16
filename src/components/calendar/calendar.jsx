@@ -15,6 +15,7 @@ import {
   CALENDAR_FONT_SIZE,
   BADGE_HEIGHT,
 } from '../../constants/calendarConstants';
+import './calendar.scss';
 
 const EllipsisText = (text) => (
   <Tooltip placement="topLeft" title={text}>
