@@ -11,17 +11,20 @@ import {
   INACTIVE_EVENT_TYPE,
   INACTIVE_EVENT_COLOR,
   LARGE_MOBILE_WIDTH,
+  DESKTOP_WIDTH,
+  CALENDAR_FONT_SIZE,
+  BADGE_HEIGHT,
 } from '../../constants/calendarConstants';
 
 const EllipsisText = (text) => (
   <Tooltip placement="topLeft" title={text}>
     <div
       style={{
-        width: 85,
+        width: `${window.innerWidth <= DESKTOP_WIDTH ? '30px' : '80px'}`,
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
-        fontSize: 16,
+        fontSize: CALENDAR_FONT_SIZE,
       }}
     >
       {text}
@@ -58,7 +61,7 @@ const dateCellRender = (value, events, eventColors, onEventClick, currentTimezon
                 display: 'flex',
                 justifyContent: 'flex-start',
                 alignItems: 'center',
-                height: 25,
+                height: BADGE_HEIGHT,
               }}
             />
           </li>
