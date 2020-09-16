@@ -12,19 +12,18 @@
 }
 @media (max-width: 425px) {
     .header-container{
-        height: 200px;
-        justify-content: end;
-        flex-direction: column;
+        padding: 16px;
+        height: 60px;
     }
     .option-picker{
         width: 200px;
         font-size: 1.5rem !important;
     }
     .logo_img{
-        width: 83px !important;
+        display: none;
     }
     .title{
-        font-size: 3rem !important;
-        margin-bottom: 20px;
+        font-size: 1.75rem !important;
+        margin-right: 40px;
     }
 }
