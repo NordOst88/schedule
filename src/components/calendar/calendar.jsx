@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Badge, Calendar } from 'antd';
+import { Badge, Calendar, Tooltip } from 'antd';
 
 import ModalInfo from '../modal-info/modal-info';
 import { filterDataByDay, getListData } from '../../utils/calendarHelpers';
@@ -12,6 +12,22 @@ import {
   INACTIVE_EVENT_COLOR,
   LARGE_MOBILE_WIDTH,
 } from '../../constants/calendarConstants';
+
+const EllipsisText = (text) => (
+  <Tooltip placement="topLeft" title={text}>
+    <div
+      style={{
+        width: 85,
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        fontSize: 16,
+      }}
+    >
+      {text}
+    </div>
+  </Tooltip>
+);
 
 const dateCellRender = (value, events, eventColors, onEventClick, currentTimezone) => {
   const listData = getListData(value, events, eventColors, currentTimezone);
@@ -29,7 +45,7 @@ const dateCellRender = (value, events, eventColors, onEventClick, currentTimezon
         const { dateTime, name, color, id } = item;
         const activeEvent = Date.now() > new Date(getFormattedDate(dateTime, currentTimezone));
         const textType = activeEvent ? INACTIVE_EVENT_TYPE : null;
-        const badgeText = window.innerWidth <= LARGE_MOBILE_WIDTH ? '' : name;
+        const badgeText = window.innerWidth <= LARGE_MOBILE_WIDTH ? '' : EllipsisText(name);
 
         return (
           <li key={name} id={id}>
@@ -37,7 +53,13 @@ const dateCellRender = (value, events, eventColors, onEventClick, currentTimezon
               onClick={() => onEventClick(item)}
               color={color}
               text={badgeText}
-              style={{ color: textType ? INACTIVE_EVENT_COLOR : color }}
+              style={{
+                color: textType ? INACTIVE_EVENT_COLOR : color,
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                height: 25,
+              }}
             />
           </li>
         );
