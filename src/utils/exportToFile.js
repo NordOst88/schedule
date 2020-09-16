@@ -4,7 +4,6 @@ import { SAVE_OPTIONS, TABLE, CALENDAR } from '../constants/constants';
 const [pdf, jpg] = SAVE_OPTIONS;
 
 const exportToFile = async (view, extension = pdf) => {
-  console.log('SAVE_OPTIONS', pdf, jpg);
   let [className, orientation, margin] = ['.ant-timeline', 'p', [7, 10, 9, 10]];
 
   switch (view) {

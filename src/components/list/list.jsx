@@ -77,24 +77,21 @@ const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
   );
 };
 
-const ListTypeSelect = ({ onChange, listView, left, right, alternate }) => {
-  console.log('listView', listView);
-  return (
-    <Radio.Group
-      onChange={onChange}
-      value={listView}
-      style={{
-        display: 'flex',
-        marginBottom: 10,
-        justifyContent: 'flex-end',
-      }}
-    >
-      <Radio value="left">{left}</Radio>
-      <Radio value="right">{right}</Radio>
-      <Radio value="alternate">{alternate}</Radio>
-    </Radio.Group>
-  );
-};
+const ListTypeSelect = ({ onChange, listView, left, right, alternate }) => (
+  <Radio.Group
+    onChange={onChange}
+    value={listView}
+    style={{
+      display: 'flex',
+      marginBottom: 10,
+      justifyContent: 'flex-end',
+    }}
+  >
+    <Radio value="left">{left}</Radio>
+    <Radio value="right">{right}</Radio>
+    <Radio value="alternate">{alternate}</Radio>
+  </Radio.Group>
+);
 
 const mapStateToProps = ({ events, eventColors, listView, currentTimezone }) => ({
   events,
