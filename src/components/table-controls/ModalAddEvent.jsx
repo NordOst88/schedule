@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
-import { Modal, Form, Input, InputNumber, DatePicker, Typography, Select, Tag } from 'antd';
+import { Modal, Form, Input, InputNumber, DatePicker, Typography } from 'antd';
+import TagPicker from './TagsPicker';
 
 const { Text } = Typography;
-const { Option } = Select;
 
 const useResetFormOnCloseModal = ({ form, displayModal }) => {
   const prevVisibleRef = useRef();
@@ -25,9 +25,6 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, event
     displayModal,
   });
 
-  const taskTypes = Object.entries(eventColors);
-  console.log(taskTypes);
-
   const config = {
     rules: [{ required: true, message: 'Please input your Task Name!' }],
   };
@@ -35,10 +32,6 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, event
   const onOk = () => {
     form.submit();
   };
-
-  function handleChange(value) {
-    console.log(value);
-  }
 
   return (
     <Modal
@@ -59,17 +52,10 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, event
           <DatePicker showTime format="YYYY-MM-DD HH:mm" />
         </Form.Item>
         <Form.Item name="deadline" label="DeadLine">
-          <DatePicker />
+          <DatePicker showTime format="YYYY-MM-DD HH:mm" />
         </Form.Item>
-        <Form.Item label="Task Type">
-          <Select name="type" onChange={handleChange}>
-            {taskTypes.map((type) => (
-              <Option key={type[0]}>
-                <Tag color={type[1]}>{type[0]}</Tag>
-              </Option>
-            ))}
-          </Select>
-          <Input />
+        <Form.Item label="Task Type" name="type">
+          <TagPicker />
         </Form.Item>
         <Form.Item label="Task Name" name="name" {...config}>
           <Input />
@@ -88,8 +74,4 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, event
   );
 };
 
-const mapStateToProps = ({ eventColors }) => ({
-  eventColors,
-});
-
-export default connect(mapStateToProps)(ModalAddEvent);
+export default ModalAddEvent;

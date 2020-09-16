@@ -49,7 +49,7 @@ const TableControls = ({ onFetch }) => {
       week: `${event.week}`,
       dateTime: `${getTimeStamp(event.dateTime)}`,
       deadline: `${getTimeStamp(event.deadline)}`,
-      type: [event.type],
+      type: event.type.tags,
       place: '',
       estimatedTime: '',
       timeZone: '',
@@ -67,7 +67,7 @@ const TableControls = ({ onFetch }) => {
 
   const addEventFromModal = (event) => {
     console.log('TestEvent ====>', testEvent);
-    console.log('Event ====>', event);
+    // console.log('Event ====>', event);
     createNewEvent(event);
     setDisplayModal(false);
   };
