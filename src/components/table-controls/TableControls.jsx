@@ -45,6 +45,17 @@ const TableControls = ({ onFetch }) => {
     });
   };
 
+  const addEventToBackend = (event) => {
+    setLoading(true);
+    api.addEvent(event).then(() => {
+      api.getAllEvents().then((events) => {
+        const formattedData = sortByDateTime(events);
+        onFetch(formattedData);
+        setLoading(false);
+      });
+    });
+  };
+
   const createNewEvent = (event) => {
     const newEvent = {
       week: `${event.week}`,
@@ -62,6 +73,7 @@ const TableControls = ({ onFetch }) => {
       comment: event.comment || '',
     };
     console.log('Event ====>', newEvent);
+    addEventToBackend(newEvent);
   };
 
   const addEventFromModal = (event) => {
