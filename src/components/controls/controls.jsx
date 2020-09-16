@@ -5,9 +5,16 @@ import { Menu, Button } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
 
 import ModalSpinner from '../modal-spinner/modal-spinner';
-
 import OptionPicker from '../option-picker/option-picker';
-import { VIEW_MODES, CONTROLS_TEXT, MODAL_SPINNER_TIP } from '../../constants/constants';
+import Dropdown from '../dropdown/dropdown';
+
+import {
+  VIEW_MODES,
+  CONTROLS_TEXT,
+  MODAL_SPINNER_TIP,
+  BTN_SAVE_TEXT,
+  SAVE_OPTIONS,
+} from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
 import { onViewModeChange, onTimezoneChange } from '../../actions/actions';
 import print from '../../utils/print';
@@ -19,9 +26,9 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
   const { printBtn } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
 
-  const onBtnExportClick = async () => {
+  const onBtnExportClick = async (extension) => {
     setDisplaySpinner(true);
-    await exportToFile(currentView);
+    await exportToFile(currentView, extension);
     setDisplaySpinner(false);
   };
 
@@ -39,7 +46,7 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
           />
         </Menu.Item>
         <Menu.Item>
-          <Button onClick={onBtnExportClick}>Save</Button>
+          <Dropdown text={BTN_SAVE_TEXT} onBtnClick={onBtnExportClick} items={SAVE_OPTIONS} />
         </Menu.Item>
         <Menu.Item>
           <Button icon={<PrintLogo />} onClick={print}>

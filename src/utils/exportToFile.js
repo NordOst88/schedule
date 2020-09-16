@@ -1,8 +1,10 @@
 import html2pdf from 'html2pdf.js';
+import { SAVE_OPTIONS, TABLE, CALENDAR } from '../constants/constants';
 
-import { TABLE, CALENDAR } from '../constants/constants';
+const [pdf, jpg] = SAVE_OPTIONS;
 
-const exportToFile = async (view) => {
+const exportToFile = async (view, extension = pdf) => {
+  console.log('SAVE_OPTIONS', pdf, jpg);
   let [className, orientation, margin] = ['.ant-timeline', 'p', [7, 10, 9, 10]];
 
   switch (view) {
@@ -29,19 +31,23 @@ const exportToFile = async (view) => {
 
   const input = document.querySelector(className);
 
-  await html2pdf(input, config);
+  if (extension === pdf) {
+    await html2pdf(input, config);
+  }
 
-  await html2pdf()
-    .set(config)
-    .from(input)
-    .toImg()
-    .outputImg()
-    .then((img) => {
-      const link = document.createElement('a');
-      link.download = `${view}.jpeg`;
-      link.href = img.src;
-      link.click();
-    });
+  if (extension === jpg) {
+    await html2pdf()
+      .set(config)
+      .from(input)
+      .toImg()
+      .outputImg()
+      .then((img) => {
+        const link = document.createElement('a');
+        link.download = `${view}.jpeg`;
+        link.href = img.src;
+        link.click();
+      });
+  }
 };
 
 export default exportToFile;

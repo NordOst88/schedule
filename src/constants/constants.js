@@ -62,6 +62,9 @@ const COLOR_PRESET = {
 
 const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
 
+const SAVE_OPTIONS = ['PDF', 'JPG'];
+const BTN_SAVE_TEXT = 'Save as';
+
 export {
   TABLE,
   LIST,
@@ -76,4 +79,6 @@ export {
   HEADER_TEXT,
   CONTROLS_TEXT,
   MODAL_SPINNER_TIP,
+  SAVE_OPTIONS,
+  BTN_SAVE_TEXT,
 };
