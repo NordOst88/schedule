@@ -1,6 +1,9 @@
 @media (max-width: 767px){
+    .header-container{
+        padding: 0 12px 0 30px;
+    }
     .option-picker{
-        width: 110px;
+        width: 150px;
         font-size: 1.5rem !important;
     }
     .logo_img{
@@ -12,7 +15,7 @@
 }
 @media (max-width: 425px) {
     .header-container{
-        padding: 16px 9px 16px 22px;
+        padding: 0 9px 0 26px;
         height: 60px;
     }
     .option-picker{
@@ -24,6 +27,6 @@
     }
     .title{
         font-size: 1.75rem !important;
-        margin-right: 60px;
+        margin-right: 70px;
     }
 }
