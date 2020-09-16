@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
 import { Menu, Button } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
 
+import ModalSpinner from '../modal-spinner/modal-spinner';
+
 import OptionPicker from '../option-picker/option-picker';
-import { VIEW_MODES, CONTROLS_TEXT } from '../../constants/constants';
+import { VIEW_MODES, CONTROLS_TEXT, MODAL_SPINNER_TIP } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
 import { onViewModeChange, onTimezoneChange } from '../../actions/actions';
 import print from '../../utils/print';
@@ -15,33 +17,38 @@ import './controls.scss';
 
 const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect }) => {
   const { printBtn } = CONTROLS_TEXT;
+  const [displaySpinner, setDisplaySpinner] = useState(false);
+
+  const onBtnExportClick = async () => {
+    setDisplaySpinner(true);
+    await exportToFile(currentView);
+    setDisplaySpinner(false);
+  };
+
   return (
-    <Menu mode="horizontal">
-      <Menu.Item>
-        <OptionPicker onChange={onViewSelect} defaultValue={currentView} options={VIEW_MODES} />
-      </Menu.Item>
-      <Menu.Item>
-        <OptionPicker
-          onChange={onTimezoneSelect}
-          defaultValue={currentTimezone}
-          options={TIMEZONE}
-        />
-      </Menu.Item>
-      <Menu.Item>
-        <Button
-          onClick={async () => {
-            await exportToFile(currentView);
-          }}
-        >
-          Save
-        </Button>
-      </Menu.Item>
-      <Menu.Item>
-        <Button icon={<PrintLogo />} onClick={print}>
-          {printBtn}
-        </Button>
-      </Menu.Item>
-    </Menu>
+    <>
+      <Menu mode="horizontal">
+        <Menu.Item>
+          <OptionPicker onChange={onViewSelect} defaultValue={currentView} options={VIEW_MODES} />
+        </Menu.Item>
+        <Menu.Item>
+          <OptionPicker
+            onChange={onTimezoneSelect}
+            defaultValue={currentTimezone}
+            options={TIMEZONE}
+          />
+        </Menu.Item>
+        <Menu.Item>
+          <Button onClick={onBtnExportClick}>Save</Button>
+        </Menu.Item>
+        <Menu.Item>
+          <Button icon={<PrintLogo />} onClick={print}>
+            {printBtn}
+          </Button>
+        </Menu.Item>
+      </Menu>
+      {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: MODAL_SPINNER_TIP }} />}
+    </>
   );
 };
 

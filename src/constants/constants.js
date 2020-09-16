@@ -60,6 +60,8 @@ const COLOR_PRESET = {
   default: '#000000',
 };
 
+const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
+
 export {
   TABLE,
   LIST,
@@ -73,4 +75,5 @@ export {
   MODAL_INFO_TEXT,
   HEADER_TEXT,
   CONTROLS_TEXT,
+  MODAL_SPINNER_TIP,
 };
