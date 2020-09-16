@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
-import { Modal, Form, Input, InputNumber, DatePicker, Typography } from 'antd';
+import { Modal, Form, Input, InputNumber, DatePicker, Typography, Space, Button } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
+import LinksList from './LinksList';
 
 const { Text } = Typography;
 
@@ -90,6 +92,9 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, api }
         </Form.Item>
         <Form.Item label="Comment" name="comment">
           <Input />
+        </Form.Item>
+        <Form.Item label="Links">
+          <LinksList />
         </Form.Item>
       </Form>
     </Modal>

@@ -8,6 +8,7 @@ import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import ModalAddEvent from './ModalAddEvent';
 import getTimeStamp from '../../utils/getTimeStamp';
+import convertArrayToObject from '../../utils/convertArrayToObject';
 
 const api = new SwaggerService();
 
@@ -50,17 +51,15 @@ const TableControls = ({ onFetch }) => {
       dateTime: `${getTimeStamp(event.dateTime)}`,
       deadline: `${getTimeStamp(event.deadline)}`,
       type: event.type ? event.type.tags : [''],
-      place: event.place,
-      estimatedTime: event.estimatedTime,
+      place: event.place || '',
+      estimatedTime: event.estimatedTime || '',
       timeZone: '',
-      name: event.name,
-      descriptionUrl: event.descriptionUrl,
-      description: event.description,
-      links: {
-        TEST: '',
-      },
+      name: event.name || '',
+      descriptionUrl: event.descriptionUrl || '',
+      description: event.description || '',
+      links: convertArrayToObject(event.links),
       organizer: event.organizers ? event.organizers.organizers : [''],
-      comment: event.comment,
+      comment: event.comment || '',
     };
     console.log('Event ====>', newEvent);
   };
