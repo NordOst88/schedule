@@ -23,6 +23,8 @@ const HEADER_TEXT = {
 
 const CONTROLS_TEXT = {
   printBtn: 'Print',
+  // color-picker
+  settingsBtn: 'Settings',
 };
 
 const MODAL_INFO_TEXT = {

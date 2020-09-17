@@ -22,9 +22,13 @@ import exportToFile from '../../utils/exportToFile';
 
 import './controls.scss';
 
+import SettingsLogo from '../color-picker/settings-logo';
+import SettingsModal from '../color-picker/color-picker';
+
 const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect }) => {
-  const { printBtn } = CONTROLS_TEXT;
+  const { printBtn, settingsBtn } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
+  const [displaySettingsModal, setDisplaySettingsModal] = useState(false);
 
   const onBtnExportClick = async (extension) => {
     setDisplaySpinner(true);
@@ -53,8 +57,16 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
             {printBtn}
           </Button>
         </Menu.Item>
+        <Menu.Item>
+          <Button icon={<SettingsLogo />} onClick={() => setDisplaySettingsModal(true)}>
+            {settingsBtn}
+          </Button>
+        </Menu.Item>
       </Menu>
       {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: MODAL_SPINNER_TIP }} />}
+      {displaySettingsModal && (
+        <SettingsModal {...{ setDisplaySettingsModal, displaySettingsModal }} />
+      )}
     </>
   );
 };
