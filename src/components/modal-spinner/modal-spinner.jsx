@@ -6,6 +6,7 @@ import './modal-spinner.scss';
 
 const ModalSpinner = ({ displaySpinner, tip }) => (
   <Modal
+    className="modal-spinner"
     width={0}
     visible={displaySpinner}
     footer={null}

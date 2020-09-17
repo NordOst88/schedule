@@ -36,6 +36,9 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
     <>
       <Menu mode="horizontal">
         <Menu.Item>
+          <Dropdown text={BTN_SAVE_TEXT} onBtnClick={onBtnExportClick} items={SAVE_OPTIONS} />
+        </Menu.Item>
+        <Menu.Item>
           <OptionPicker onChange={onViewSelect} defaultValue={currentView} options={VIEW_MODES} />
         </Menu.Item>
         <Menu.Item>
@@ -44,9 +47,6 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
             defaultValue={currentTimezone}
             options={TIMEZONE}
           />
-        </Menu.Item>
-        <Menu.Item>
-          <Dropdown text={BTN_SAVE_TEXT} onBtnClick={onBtnExportClick} items={SAVE_OPTIONS} />
         </Menu.Item>
         <Menu.Item>
           <Button icon={<PrintLogo />} onClick={print}>
