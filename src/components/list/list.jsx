@@ -27,7 +27,7 @@ const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
       <Timeline mode={listView}>
         {events.map((event) => {
           const activeEvent = Date.now() > new Date(event.dateTime * 1000);
-          const colorEvent = getEventColor(eventColors, ...event.type, activeEvent);
+          const colorEvent = getEventColor(eventColors, event.type, activeEvent);
           const textType = activeEvent ? 'secondary' : null;
           const startDate = getFormattedDate(event.dateTime, currentTimezone);
           const deadlineDate = getFormattedDate(event.deadline, currentTimezone);
