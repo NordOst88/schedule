@@ -5,7 +5,7 @@ import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
-import TextLine from '../line';
+import Line from '../line';
 
 const {
   week,
@@ -46,6 +46,11 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
     form.submit();
   };
 
+  const layout = {
+    labelCol: { span: 6 },
+    wrapperCol: { span: 16 },
+  };
+
   return (
     <Modal
       title="Add Event"
@@ -53,9 +58,15 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
       onCancel={() => setDisplayModal(false)}
       onOk={onOk}
     >
-      <Form onFinish={createNewEvent} form={form} initialValues={{ week: 0 }} size="small">
+      <Form
+        {...layout}
+        onFinish={createNewEvent}
+        form={form}
+        initialValues={{ week: 0 }}
+        size="small"
+      >
         <Form.Item
-          label={<TextLine title={week} />}
+          label={<Line title={week} />}
           name="week"
           rules={[{ type: 'number', min: 0, max: 99 }]}
         >
@@ -63,47 +74,47 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
         </Form.Item>
         <Form.Item
           name="dateTime"
-          label={<TextLine title={date} />}
+          label={<Line title={date} />}
           rules={[{ required: true, message: `Please select Date` }]}
         >
           <DatePicker showTime format="YYYY-MM-DD HH:mm" />
         </Form.Item>
-        <Form.Item name="deadline" label={<TextLine title={deadline} />}>
+        <Form.Item name="deadline" label={<Line title={deadline} />}>
           <DatePicker showTime format="YYYY-MM-DD HH:mm" />
         </Form.Item>
-        <Form.Item label={<TextLine title={taskType} />} name="type">
+        <Form.Item label={<Line title={taskType} />} name="type">
           <TagPicker />
         </Form.Item>
-        <Form.Item name="place" label={<TextLine title={place} />}>
+        <Form.Item name="place" label={<Line title={place} />}>
           <Input />
         </Form.Item>
-        <Form.Item name="estimatedTime" label={<TextLine title={estimatedTime} />}>
+        <Form.Item name="estimatedTime" label={<Line title={estimatedTime} />}>
           <Input />
         </Form.Item>
         <Form.Item
           name="name"
-          label={<TextLine title={taskName} />}
+          label={<Line title={taskName} />}
           rules={[{ required: true, message: `Please input your Task Name` }]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name="descriptionUrl" label={<TextLine title={taskURL} />}>
+        <Form.Item name="descriptionUrl" label={<Line title={taskURL} />}>
           <Input />
         </Form.Item>
-        <Form.Item name="description" label={<TextLine title={description} />}>
+        <Form.Item name="description" label={<Line title={description} />}>
           <Input />
         </Form.Item>
         <Form.Item
           name="organizers"
-          label={<TextLine title={organizers} />}
+          label={<Line title={organizers} />}
           rules={[{ required: true, message: `Please input Organizer` }]}
         >
           <OrganizersPicker {...{ api }} />
         </Form.Item>
-        <Form.Item name="comment" label={<TextLine title={comment} />}>
+        <Form.Item name="comment" label={<Line title={comment} />}>
           <Input />
         </Form.Item>
-        <Form.Item label={<TextLine title={links} />}>
+        <Form.Item label={<Line title={links} />}>
           <LinksList />
         </Form.Item>
       </Form>
