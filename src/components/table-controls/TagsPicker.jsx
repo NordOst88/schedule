@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
 import { selectStyles } from '../../constants/tableConstants';
+import { COLOR_PRESET } from '../../constants/constants';
+
+const { inactive } = COLOR_PRESET;
 
 const TagsPicker = ({ eventColors, value = {}, onChange }) => {
   const [tags, setTags] = useState([]);
@@ -17,7 +20,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
       const { color } = data;
       return {
         ...styles,
-        backgroundColor: data.color ? color : '#00b8d9',
+        backgroundColor: data.color ? color : inactive,
       };
     },
     multiValueLabel: (styles) => ({

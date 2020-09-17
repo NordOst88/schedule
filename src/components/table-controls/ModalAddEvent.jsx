@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Input, InputNumber, DatePicker } from 'antd';
 import TagPicker from './TagsPicker';

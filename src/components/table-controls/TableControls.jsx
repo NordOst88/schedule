@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Space } from 'antd';
@@ -43,7 +42,6 @@ const TableControls = ({ onFetch }) => {
       organizer: event.organizers ? event.organizers.organizers : [''],
       comment: event.comment || '',
     };
-    console.log('Event ====>', newEvent);
     addEventToBackend(newEvent);
     setDisplayModal(false);
   };
