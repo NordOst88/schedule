@@ -23,7 +23,7 @@ const HeaderContainer = ({ role, onSelect }) => {
         alignItems: 'center',
       }}
     >
-      <Link className="logo" href={linkUrl} target="_blank">
+      <Link className="logo" href={linkUrl} target="_blank" rel="noreferrer">
         <Image src={logo} alt={imageAlt} width={85} preview={false} />
       </Link>
       <Heading>{title}</Heading>
