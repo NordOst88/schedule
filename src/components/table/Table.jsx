@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { DatePicker, Table, Form } from 'antd';
+import { DatePicker, Table, Form, Button } from 'antd';
 import createColumns from './createColumns';
 import { dateFormat, columnsList } from '../../constants/tableConstants';
 import {
@@ -14,7 +14,21 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 
+import { selection, unselected } from '../../utils/itemSelection';
+
 const TableContainer = ({ events, currentTimezone, eventColors }) => {
+  //  selection
+  const [i, setI] = useState([]);
+
+  const onSelectChange = (selectedRowKeys) => {
+    setI({ selectedRowKeys });
+  };
+
+  const rowSelection = {
+    i,
+    onChange: onSelectChange,
+  };
+
   const columns = createColumns(currentTimezone, eventColors);
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
@@ -53,8 +67,21 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
+        <Button type="primary" onClick={() => selection(i)}>
+          Hide items
+        </Button>
+        <Button
+          type="primary"
+          className="button-margin"
+          onClick={() => {
+            unselected(i);
+          }}
+        >
+          Show Items
+        </Button>
       </Form>
       <Table
+        rowSelection={rowSelection}
         rowClassName={addClassByCurrentDate}
         dataSource={events}
         columns={visibleColumns}
