@@ -14,19 +14,23 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 
-import { selection, unselected } from '../../utils/itemSelection';
+import { hideItems, viewItems } from '../../utils/hideItem';
 
 const TableContainer = ({ events, currentTimezone, eventColors }) => {
-  //  selection
-  const [i, setI] = useState([]);
+  // hideItem
+  const [selectedItems, setItem] = useState([]);
+  /*  useEffect(()=>{
+    setItem(JSON.parse(localStorage.getItem('sec')))
+  }, []) */
 
   const onSelectChange = (selectedRowKeys) => {
-    setI({ selectedRowKeys });
+    setItem({ selectedRowKeys });
+    /* localStorage.setItem('sec', JSON.stringify({selectedRowKeys})) */
   };
 
   const rowSelection = {
-    i,
     onChange: onSelectChange,
+    selectedRowKeys: selectedItems.selectedRowKeys,
   };
 
   const columns = createColumns(currentTimezone, eventColors);
@@ -67,20 +71,21 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
-        <Button type="primary" onClick={() => selection(i)}>
+        <Button type="primary" onClick={() => hideItems(selectedItems)}>
           Hide items
         </Button>
         <Button
           type="primary"
           className="button-margin"
           onClick={() => {
-            unselected(i);
+            viewItems(selectedItems);
           }}
         >
           Show Items
         </Button>
       </Form>
       <Table
+        // hideItem
         rowSelection={rowSelection}
         rowClassName={addClassByCurrentDate}
         dataSource={events}
