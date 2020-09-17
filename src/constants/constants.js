@@ -40,6 +40,21 @@ const MODAL_INFO_TEXT = {
   noInfo: 'N/A',
 };
 
+const MODAL_ADD_EVENT_TEXT = {
+  week: 'Week',
+  date: 'Date',
+  deadline: 'Deadline',
+  taskType: 'Task type',
+  place: 'Place',
+  estimatedTime: 'Estimated Time',
+  taskName: 'Task Name',
+  taskURL: 'Task URL',
+  description: 'Description',
+  organizers: 'Organizers',
+  comment: 'Comment',
+  links: 'Links',
+};
+
 const COLOR_PRESET = {
   'JS task': '#42d205',
   'HTML task': '#fadb14',
@@ -81,4 +96,5 @@ export {
   MODAL_SPINNER_TIP,
   SAVE_OPTIONS,
   BTN_SAVE_TEXT,
+  MODAL_ADD_EVENT_TEXT,
 };

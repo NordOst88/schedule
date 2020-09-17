@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import { selectStyles } from '../../constants/tableConstants';
 
 const TagsPicker = ({ eventColors, value = {}, onChange }) => {
@@ -11,13 +11,13 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
     option: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      fontWeight: 400,
+      fontWeight: 500,
     }),
     multiValue: (styles, { data }) => {
       const { color } = data;
       return {
         ...styles,
-        backgroundColor: color,
+        backgroundColor: data.color ? color : '#00b8d9',
       };
     },
     multiValueLabel: (styles) => ({
@@ -55,7 +55,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
   };
 
   return (
-    <Select
+    <CreatableSelect
       closeMenuOnSelect={false}
       isMulti
       options={taskOptions}
@@ -65,6 +65,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
       menuPlacement="auto"
       maxMenuHeight={100}
       onChange={handleOnChange}
+      placeholder="Select and/or create new task type"
     />
   );
 };

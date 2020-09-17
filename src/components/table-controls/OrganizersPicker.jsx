@@ -44,6 +44,7 @@ const OrganizersPicker = ({ value = {}, onChange, api }) => {
       menuPlacement="auto"
       maxMenuHeight={100}
       onChange={handleOnChange}
+      placeholder="Select organizer"
     />
   );
 };

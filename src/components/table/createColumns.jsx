@@ -30,7 +30,7 @@ const createColumns = (currentTimezone, eventColors) => [
     key: 'date',
     render: (date) => (
       <div style={{ whiteSpace: 'nowrap' }}>
-        {getFormattedDate(date, currentTimezone).slice(0, 10)}
+        {date ? getFormattedDate(date, currentTimezone).slice(0, 10) : null}
       </div>
     ),
     sorter: (a, b) => a.dateTime - b.dateTime,
@@ -39,7 +39,7 @@ const createColumns = (currentTimezone, eventColors) => [
     title: 'Time',
     dataIndex: 'dateTime',
     key: 'time',
-    render: (time) => <>{getFormattedDate(time, currentTimezone).slice(12)}</>,
+    render: (time) => <>{time ? getFormattedDate(time, currentTimezone).slice(12) : null}</>,
   },
   {
     title: 'Deadline',
