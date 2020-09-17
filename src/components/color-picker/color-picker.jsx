@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
+import { ChromePicker } from 'react-color';
 
 import { Modal, Space, Typography } from 'antd';
 
@@ -14,9 +15,10 @@ const getTasksTypes = (events) => {
 
 const SettingsModal = ({ setDisplaySettingsModal, displaySettingsModal, events, eventColors }) => {
   const settingsContainerRef = useRef(null);
+  const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const type = getTasksTypes(events);
-  const getTypeTaskTags = () => <Type {...{ type, eventColors }} />;
-  console.log('types', getTypeTaskTags());
+  const tagsName = 'color__picker';
+  const getTypeTaskTags = () => <Type {...{ type, eventColors, tagsName }} />;
 
   return (
     <div ref={settingsContainerRef}>
@@ -29,19 +31,22 @@ const SettingsModal = ({ setDisplaySettingsModal, displaySettingsModal, events, 
           setDisplaySettingsModal(false);
         }}
       >
-        <Space direction="vertical">
-          <Line text={getTypeTaskTags()} />
+        <Space direction="vertical" style={{ marginBottom: 20 }}>
+          <Line text={getTypeTaskTags()} setDisplayColorPicker={setDisplayColorPicker} />
         </Space>
+        {displayColorPicker && <ChromePicker style={{ margin: '0 auto' }} />}
       </Modal>
     </div>
   );
 };
 
-const Line = ({ text }) => {
+const Line = ({ text, setDisplayColorPicker }) => {
   const { Text } = Typography;
   return (
     <>
-      <Text style={{ lineHeight: '30px' }}>{text}</Text>
+      <Text style={{ lineHeight: '30px' }} onClick={() => setDisplayColorPicker(true)}>
+        {text}
+      </Text>
     </>
   );
 };
