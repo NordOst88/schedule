@@ -16,35 +16,6 @@ const TableControls = ({ onFetch }) => {
   const [loading, setLoading] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
 
-  const testEvent = {
-    week: '13',
-    dateTime: '1607035600',
-    deadline: '1608681600',
-    type: ['test'],
-    place: 'Test',
-    estimatedTime: '8h',
-    timeZone: '',
-    name: 'TEST',
-    descriptionUrl: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird.md',
-    description: 'TEST',
-    links: {
-      TEST: 'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/interview-corejs.md',
-    },
-    organizer: ['DVgluQnLGTg9ggTi6A4N'],
-    comment: 'TEST',
-  };
-
-  const addEventHandler = () => {
-    setLoading(true);
-    api.addEvent(testEvent).then(() => {
-      api.getAllEvents().then((events) => {
-        const formattedData = sortByDateTime(events);
-        onFetch(formattedData);
-        setLoading(false);
-      });
-    });
-  };
-
   const addEventToBackend = (event) => {
     setLoading(true);
     api.addEvent(event).then(() => {
@@ -74,23 +45,20 @@ const TableControls = ({ onFetch }) => {
     };
     console.log('Event ====>', newEvent);
     addEventToBackend(newEvent);
-  };
-
-  const addEventFromModal = (event) => {
-    console.log('TestEvent ====>', testEvent);
-    createNewEvent(event);
     setDisplayModal(false);
   };
 
   return (
     <Space>
-      <Button type="dashed" icon={<PlusOutlined spin={loading} />} onClick={addEventHandler}>
-        Add test event
+      <Button
+        type="dashed"
+        disabled={loading}
+        icon={<PlusOutlined spin={loading} />}
+        onClick={() => setDisplayModal(true)}
+      >
+        Add Event
       </Button>
-      <Button type="dashed" onClick={() => setDisplayModal(true)}>
-        Open modal
-      </Button>
-      <ModalAddEvent {...{ setDisplayModal, displayModal, addEventFromModal, api }} />
+      <ModalAddEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} />
     </Space>
   );
 };

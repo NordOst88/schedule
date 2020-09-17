@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { DatePicker, Table, Form } from 'antd';
+import { Table, Form } from 'antd';
 import createColumns from './createColumns';
-import { dateFormat, columnsList } from '../../constants/tableConstants';
+import { columnsList } from '../../constants/tableConstants';
 import {
-  onDateChange,
-  onDateOk,
   filterColumns,
   addColumnKey,
   removeColumnKey,
@@ -47,9 +45,6 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
   return (
     <>
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
-        <Form.Item label="Date Picker">
-          <DatePicker showTime onChange={onDateChange} onOk={onDateOk} format={dateFormat} />
-        </Form.Item>
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>

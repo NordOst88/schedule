@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
+import { selectStyles } from '../../constants/tableConstants';
 
 const TagsPicker = ({ eventColors, value = {}, onChange }) => {
   const [tags, setTags] = useState([]);
   const taskTypes = Object.entries(eventColors);
   const taskOptions = taskTypes.map((item) => ({ value: item[0], label: item[0], color: item[1] }));
-  const colorStyles = {
+  const customStyles = {
     option: (styles, { data }) => ({
       ...styles,
       color: data.color,
-      fontWeight: 500,
-    }),
-    control: (styles) => ({
-      ...styles,
-      borderRadius: '2px',
+      fontWeight: 400,
     }),
     multiValue: (styles, { data }) => {
       const { color } = data;
@@ -62,7 +59,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
       closeMenuOnSelect={false}
       isMulti
       options={taskOptions}
-      styles={colorStyles}
+      styles={{ ...selectStyles, ...customStyles }}
       className="multi-select"
       classNamePrefix="react-select"
       menuPlacement="auto"

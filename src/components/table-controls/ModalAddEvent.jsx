@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
-import { Modal, Form, Input, InputNumber, DatePicker, Typography, Space, Button } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Modal, Form, Input, InputNumber, DatePicker, Typography } from 'antd';
 import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
@@ -21,7 +20,7 @@ const useResetFormOnCloseModal = ({ form, displayModal }) => {
   }, [displayModal]);
 };
 
-const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, api }) => {
+const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) => {
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
     form,
@@ -43,7 +42,7 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, addEventFromModal, api }
       onCancel={() => setDisplayModal(false)}
       onOk={onOk}
     >
-      <Form onFinish={addEventFromModal} form={form} initialValues={{ week: 0 }} size="small">
+      <Form onFinish={createNewEvent} form={form} initialValues={{ week: 0 }} size="small">
         <Form.Item
           label={<Text strong>Week</Text>}
           name="week"
