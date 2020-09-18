@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Timeline, Radio, Typography, Space } from 'antd';
+import { Timeline, Radio, Typography, Space, Divider } from 'antd';
 import { FlagOutlined } from '@ant-design/icons';
 
 import ModalInfo from '../modal-info/modal-info';
@@ -42,14 +42,16 @@ const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
             >
               <Space direction="vertical">
                 {!dateValue && (
-                  <Text type={textType || 'warning'} strong>
+                  <Text type={textType || 'success'} strong>
                     {startDate}
                   </Text>
                 )}
                 <Link href={event.descriptionUrl} target="_blank" type={textType}>
                   {event.name}
                 </Link>
-                <Text type={textType}>{event.description}</Text>
+                <Text type={textType} style={{ textAlign: 'justify' }}>
+                  {event.description}
+                </Text>
                 <Text
                   mark
                   type={textType}
@@ -63,6 +65,7 @@ const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
                 {deadlineDate && (
                   <Text type={textType || 'danger'}>{`${deadline} ${deadlineDate}`}</Text>
                 )}
+                <Divider />
               </Space>
             </Timeline.Item>
           );
