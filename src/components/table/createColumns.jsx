@@ -4,7 +4,7 @@ import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer';
 import getFormattedDate from '../../utils/getFormattedDate';
-import { tagsName } from '../../constants/tableConstants';
+import { TAGS_NAME } from '../../constants/tableConstants';
 
 const { Link } = Typography;
 
@@ -30,7 +30,7 @@ const createColumns = (currentTimezone, eventColors) => [
     key: 'date',
     render: (date) => (
       <div style={{ whiteSpace: 'nowrap' }}>
-        {date ? getFormattedDate(date, currentTimezone).slice(0, 10) : null}
+        {date && getFormattedDate(date, currentTimezone).slice(0, 10)}
       </div>
     ),
     sorter: (a, b) => a.dateTime - b.dateTime,
@@ -39,7 +39,7 @@ const createColumns = (currentTimezone, eventColors) => [
     title: 'Time',
     dataIndex: 'dateTime',
     key: 'time',
-    render: (time) => <>{time ? getFormattedDate(time, currentTimezone).slice(12) : null}</>,
+    render: (time) => <>{time && getFormattedDate(time, currentTimezone).slice(12)}</>,
   },
   {
     title: 'Deadline',
@@ -53,7 +53,7 @@ const createColumns = (currentTimezone, eventColors) => [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    render: (type) => <Type {...{ type, eventColors, tagsName }} />,
+    render: (type) => <Type {...{ type, eventColors }} tagsName={TAGS_NAME} />,
   },
   {
     title: 'Place',

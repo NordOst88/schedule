@@ -1,6 +1,6 @@
-const tagsName = 'table-tags';
+const TAGS_NAME = 'table-tags';
 
-const columnsList = [
+const COLUMNS_LIST = [
   'date',
   'time',
   'deadline',
@@ -14,12 +14,12 @@ const columnsList = [
   'comment',
 ];
 
-const selectStyles = {
-  control: (styles, state) => ({
+const SELECT_STYLES = {
+  control: (styles, { isFocused }) => ({
     ...styles,
     borderRadius: '2px',
-    borderColor: state.isFocused ? '#40a9ff' : '#d9d9d9',
-    boxShadow: state.isFocused ? '0 0 0 2px rgba(24, 144, 255, 0.2)' : 0,
+    borderColor: isFocused ? '#40a9ff' : '#d9d9d9',
+    boxShadow: isFocused ? '0 0 0 2px rgba(24, 144, 255, 0.2)' : 0,
     minHeight: 30,
     '&:hover': {
       borderColor: '#40a9ff',
@@ -44,4 +44,4 @@ const selectStyles = {
   }),
 };
 
-export { columnsList, tagsName, selectStyles };
+export { COLUMNS_LIST, TAGS_NAME, SELECT_STYLES };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table, Form } from 'antd';
 import createColumns from './createColumns';
-import { columnsList } from '../../constants/tableConstants';
+import { COLUMNS_LIST } from '../../constants/tableConstants';
 import {
   filterColumns,
   addColumnKey,
@@ -18,7 +18,7 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
   const selectedColumns = storage.tableColumnsSelected
     ? JSON.parse(storage.tableColumnsSelected)
-    : columnsList;
+    : COLUMNS_LIST;
 
   let filteredColumns = filterColumns(columns, selectedColumns);
   const [visibleColumns, setVisibleColumns] = useState(filteredColumns);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { selectStyles } from '../../constants/tableConstants';
+import { SELECT_STYLES } from '../../constants/tableConstants';
 
 const OrganizersPicker = ({ value = {}, onChange, api }) => {
   const [organizers, setOrganizers] = useState([]);
@@ -38,7 +38,7 @@ const OrganizersPicker = ({ value = {}, onChange, api }) => {
       closeMenuOnSelect={false}
       isMulti
       options={organizers}
-      styles={selectStyles}
+      styles={SELECT_STYLES}
       className="multi-select"
       classNamePrefix="react-select"
       menuPlacement="auto"

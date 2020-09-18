@@ -1,5 +1,5 @@
 const convertArrayToObject = (array) =>
-  array
+  Array.isArray(array)
     ? array.reduce(
         (obj, item) => ({
           ...obj,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
-import { selectStyles } from '../../constants/tableConstants';
+import { SELECT_STYLES } from '../../constants/tableConstants';
 import { COLOR_PRESET } from '../../constants/constants';
 
 const { inactive } = COLOR_PRESET;
@@ -62,7 +62,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
       closeMenuOnSelect={false}
       isMulti
       options={taskOptions}
-      styles={{ ...selectStyles, ...customStyles }}
+      styles={{ ...SELECT_STYLES, ...customStyles }}
       className="multi-select"
       classNamePrefix="react-select"
       menuPlacement="auto"

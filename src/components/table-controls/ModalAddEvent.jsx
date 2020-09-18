@@ -104,7 +104,7 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
           <Input />
         </Form.Item>
         <Form.Item
-          name="organizers"
+          name="selectedOrganizers"
           label={<Line title={organizers} />}
           rules={[{ required: true, message: `Please input Organizer` }]}
         >

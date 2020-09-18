@@ -26,21 +26,34 @@ const TableControls = ({ onFetch }) => {
     });
   };
 
-  const createNewEvent = (event) => {
+  const createNewEvent = ({
+    week,
+    dateTime,
+    deadline,
+    type,
+    place = '',
+    estimatedTime = '',
+    name = '',
+    descriptionUrl = '',
+    description = '',
+    links,
+    selectedOrganizers,
+    comment = '',
+  }) => {
     const newEvent = {
-      week: `${event.week}`,
-      dateTime: `${getTimeStamp(event.dateTime)}`,
-      deadline: `${getTimeStamp(event.deadline)}`,
-      type: event.type ? event.type.tags : [''],
-      place: event.place || '',
-      estimatedTime: event.estimatedTime || '',
+      week: `${week}`,
+      dateTime: `${getTimeStamp(dateTime)}`,
+      deadline: `${getTimeStamp(deadline)}`,
+      type: type ? type.tags : [''],
+      place,
+      estimatedTime,
       timeZone: '',
-      name: event.name || '',
-      descriptionUrl: event.descriptionUrl || '',
-      description: event.description || '',
-      links: convertArrayToObject(event.links),
-      organizer: event.organizers ? event.organizers.organizers : [''],
-      comment: event.comment || '',
+      name,
+      descriptionUrl,
+      description,
+      links: convertArrayToObject(links),
+      organizer: selectedOrganizers ? selectedOrganizers.organizers : [''],
+      comment: comment || '',
     };
     addEventToBackend(newEvent);
     setDisplayModal(false);
