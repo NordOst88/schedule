@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Button, Space } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import SwaggerService from '../../services/swagger-service';
+import { onSetEvents } from '../../actions/actions';
+import sortByDateTime from '../../utils/sortByDateTime';
+import ModalAddEvent from './ModalAddEvent';
+import getTimeStamp from '../../utils/getTimeStamp';
+import convertArrayToObject from '../../utils/convertArrayToObject';
+
+const api = new SwaggerService();
+
+const TableControls = ({ onFetch }) => {
+  const [loading, setLoading] = useState(false);
+  const [displayModal, setDisplayModal] = useState(false);
+
+  const addEventToBackend = (event) => {
+    setLoading(true);
+    api.addEvent(event).then(() => {
+      api.getAllEvents().then((events) => {
+        const formattedData = sortByDateTime(events);
+        onFetch(formattedData);
+        setLoading(false);
+      });
+    });
+  };
+
+  const createNewEvent = ({
+    week,
+    dateTime,
+    deadline,
+    type,
+    place = '',
+    estimatedTime = '',
+    name = '',
+    descriptionUrl = '',
+    description = '',
+    links,
+    selectedOrganizers,
+    comment = '',
+  }) => {
+    const newEvent = {
+      week: `${week}`,
+      dateTime: `${getTimeStamp(dateTime)}`,
+      deadline: `${getTimeStamp(deadline)}`,
+      type: type ? type.tags : [''],
+      place,
+      estimatedTime,
+      timeZone: '',
+      name,
+      descriptionUrl,
+      description,
+      links: convertArrayToObject(links),
+      organizer: selectedOrganizers ? selectedOrganizers.organizers : [''],
+      comment: comment || '',
+    };
+    addEventToBackend(newEvent);
+    setDisplayModal(false);
+  };
+
+  return (
+    <Space>
+      <Button
+        type="dashed"
+        disabled={loading}
+        icon={<PlusOutlined spin={loading} />}
+        onClick={() => setDisplayModal(true)}
+      >
+        Add Event
+      </Button>
+      <ModalAddEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} />
+    </Space>
+  );
+};
+
+const mapStateToProps = ({ onFetch }) => ({
+  onFetch,
+});
+
+export default connect(mapStateToProps, { onFetch: onSetEvents })(TableControls);

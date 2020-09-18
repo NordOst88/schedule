@@ -1,27 +1,6 @@
 import setLocaLStorageSettings from './setLocalStorageSettings';
 import { TABLE } from '../constants/constants';
 
-// todo: remove after tests
-const getTimeStamp = (value) => {
-  const timestamp = Math.floor(new Date(value).getTime() / 1000);
-  // console.log(timestamp);
-  return timestamp;
-};
-
-// todo: remove after tests
-function onDateChange(value, dateString) {
-  // console.log('TimeStamp: ', value);
-  getTimeStamp(dateString);
-  // console.log('Date and time: ', dateString);
-  return value;
-}
-
-// todo: remove after tests
-function onDateOk(value) {
-  // console.log('Selected Time: ', value);
-  return value;
-}
-
 function filterColumns(columns, selectedColumns) {
   return columns.map((item) => {
     if (!selectedColumns.includes(item.key)) {
@@ -55,11 +34,4 @@ const addClassByCurrentDate = (record) => {
   return null;
 };
 
-export {
-  onDateChange,
-  onDateOk,
-  filterColumns,
-  addColumnKey,
-  removeColumnKey,
-  addClassByCurrentDate,
-};
+export { filterColumns, addColumnKey, removeColumnKey, addClassByCurrentDate };
