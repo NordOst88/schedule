@@ -93,7 +93,7 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
         <Form.Item
           name="name"
           label={<Line title={taskName} />}
-          rules={[{ required: true, message: `Please input your Task Name` }]}
+          rules={[{ required: true, message: `Please input your task name` }]}
         >
           <Input />
         </Form.Item>
@@ -106,7 +106,7 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
         <Form.Item
           name="selectedOrganizers"
           label={<Line title={organizers} />}
-          rules={[{ required: true, message: `Please input Organizer` }]}
+          rules={[{ required: true, message: `Please select orginizer` }]}
         >
           <OrganizersPicker {...{ api }} />
         </Form.Item>
