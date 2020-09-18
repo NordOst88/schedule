@@ -1,27 +1,22 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { ChromePicker } from 'react-color';
 
 import { Modal, Space, Typography } from 'antd';
 
 import Type from '../task-type';
 
 import './color-picker.scss';
-
-const getTasksTypes = (events) => {
-  const allTypes = events.map((obj) => obj.type).flat();
-  return [...new Set(allTypes)];
-};
+import getTasksTypes from '../../utils/getTasksTypes';
+import ColorPicker from './color-picker';
 
 const SettingsModal = ({ setDisplaySettingsModal, displaySettingsModal, events, eventColors }) => {
-  const settingsContainerRef = useRef(null);
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const type = getTasksTypes(events);
   const tagsName = 'color__picker';
   const getTypeTaskTags = () => <Type {...{ type, eventColors, tagsName }} />;
 
   return (
-    <div ref={settingsContainerRef}>
+    <div>
       <Modal
         width={650}
         visible={displaySettingsModal}
@@ -34,7 +29,7 @@ const SettingsModal = ({ setDisplaySettingsModal, displaySettingsModal, events, 
         <Space direction="vertical" style={{ marginBottom: 20 }}>
           <Line text={getTypeTaskTags()} setDisplayColorPicker={setDisplayColorPicker} />
         </Space>
-        {displayColorPicker && <ChromePicker style={{ margin: '0 auto' }} />}
+        {displayColorPicker && <ColorPicker />}
       </Modal>
     </div>
   );

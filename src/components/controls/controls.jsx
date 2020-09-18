@@ -23,7 +23,7 @@ import exportToFile from '../../utils/exportToFile';
 import './controls.scss';
 
 import SettingsLogo from '../color-picker/settings-logo';
-import SettingsModal from '../color-picker/color-picker';
+import SettingsModal from '../color-picker/settings-modal';
 
 const Controls = ({
   currentView,
