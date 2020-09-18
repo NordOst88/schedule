@@ -9,11 +9,20 @@ import './color-picker.scss';
 import getTasksTypes from '../../utils/getTasksTypes';
 import ColorPicker from './color-picker';
 
+import rgbToHex from '../../utils/colorPickerHelpers';
+
 const SettingsModal = ({ setDisplaySettingsModal, displaySettingsModal, events, eventColors }) => {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
+  const [isDisplayColorPicker, setDisplayColorPicker] = useState(false);
+  const [targetColor, setTargetColor] = useState(null);
   const type = getTasksTypes(events);
   const tagsName = 'color__picker';
-  const getTypeTaskTags = () => <Type {...{ type, eventColors, tagsName }} />;
+
+  const displayColorPicker = ({ target }) => {
+    setTargetColor(rgbToHex(target.style.backgroundColor));
+    setDisplayColorPicker(true);
+  };
+
+  const getTypeTaskTags = () => <Type {...{ type, eventColors, tagsName, displayColorPicker }} />;
 
   return (
     <div>
@@ -27,21 +36,23 @@ const SettingsModal = ({ setDisplaySettingsModal, displaySettingsModal, events, 
         }}
       >
         <Space direction="vertical" style={{ marginBottom: 20 }}>
-          <Line text={getTypeTaskTags()} setDisplayColorPicker={setDisplayColorPicker} />
+          <Line
+            text={getTypeTaskTags()}
+            setDisplayColorPicker={setDisplayColorPicker}
+            setTargetColor={setTargetColor}
+          />
         </Space>
-        {displayColorPicker && <ColorPicker />}
+        {isDisplayColorPicker && <ColorPicker defaultColor={targetColor} />}
       </Modal>
     </div>
   );
 };
 
-const Line = ({ text, setDisplayColorPicker }) => {
+const Line = ({ text }) => {
   const { Text } = Typography;
   return (
     <>
-      <Text style={{ lineHeight: '30px' }} onClick={() => setDisplayColorPicker(true)}>
-        {text}
-      </Text>
+      <Text style={{ lineHeight: '30px' }}>{text}</Text>
     </>
   );
 };

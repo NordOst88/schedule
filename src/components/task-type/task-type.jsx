@@ -3,12 +3,16 @@ import { Tag } from 'antd';
 
 import getEventColor from '../../utils/getEventColor';
 
-const Type = ({ type, eventColors, tagsName }) => {
-  console.log(type);
+const Type = ({ type, eventColors, tagsName, displayColorPicker }) => {
   return (
     <>
       {type.map((task) => (
-        <Tag color={getEventColor(eventColors, task)} className={tagsName} key={task}>
+        <Tag
+          color={getEventColor(eventColors, task)}
+          className={tagsName}
+          key={task}
+          onClick={displayColorPicker}
+        >
           {task}
         </Tag>
       ))}
