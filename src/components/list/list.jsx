@@ -10,7 +10,7 @@ import { onSetListView } from '../../actions/actions';
 import getFormattedDate from '../../utils/getFormattedDate';
 import getEventColor from '../../utils/getEventColor';
 
-const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
+const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone }) => {
   const { Text, Link } = Typography;
   const { moreDetails, left, right, alternate, deadline } = LIST_TEXT;
   const [displayModal, setDisplayModal] = useState(false);
@@ -25,7 +25,7 @@ const List = ({ events, eventColors, listView, onChange, currentTimezone }) => {
     <>
       <ListTypeSelect {...{ onChange, listView, left, right, alternate }} />
       <Timeline mode={listView}>
-        {events.map((event) => {
+        {selectedEvents.map((event) => {
           const activeEvent = Date.now() > new Date(event.dateTime * 1000);
           const colorEvent = getEventColor(eventColors, event.type, activeEvent);
           const textType = activeEvent ? 'secondary' : null;
@@ -96,8 +96,9 @@ const ListTypeSelect = ({ onChange, listView, left, right, alternate }) => (
   </Radio.Group>
 );
 
-const mapStateToProps = ({ events, eventColors, listView, currentTimezone }) => ({
+const mapStateToProps = ({ events, selectedEvents, eventColors, listView, currentTimezone }) => ({
   events,
+  selectedEvents,
   eventColors,
   listView,
   currentTimezone,

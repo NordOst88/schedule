@@ -65,6 +65,8 @@ const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
 const SAVE_OPTIONS = ['PDF', 'JPG'];
 const BTN_SAVE_TEXT = 'Save as';
 
+const ALL_TASKS = 'All task types';
+
 export {
   TABLE,
   LIST,
@@ -81,4 +83,5 @@ export {
   MODAL_SPINNER_TIP,
   SAVE_OPTIONS,
   BTN_SAVE_TEXT,
+  ALL_TASKS,
 };
