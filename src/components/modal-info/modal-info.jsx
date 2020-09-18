@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { Modal, Space, Typography } from 'antd';
 
@@ -58,19 +58,17 @@ const ModalInfo = ({
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
 
-  const modalContainerRef = useRef(null);
-
   // todo: think about refactor
 
   useEffect(() => {
     const css = `.ant-modal-header { background-color: ${getEventColor(eventColors, type)}5e; }`;
     const style = document.createElement('style');
     style.innerHTML = css;
-    modalContainerRef.current.appendChild(style);
+    document.querySelector('.modal-info').appendChild(style);
   }, []);
 
   return (
-    <div ref={modalContainerRef}>
+    <div className="modal-info">
       <Modal
         width={650}
         visible={displayModal}
