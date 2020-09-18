@@ -16,7 +16,7 @@ import {
   SAVE_OPTIONS,
 } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
-import { onViewModeChange, onTimezoneChange } from '../../actions/actions';
+import { onViewModeChange, onTimezoneChange, onTaskChange } from '../../actions/actions';
 import print from '../../utils/print';
 import exportToFile from '../../utils/exportToFile';
 
@@ -25,7 +25,15 @@ import './controls.scss';
 import SettingsLogo from '../color-picker/settings-logo';
 import SettingsModal from '../color-picker/color-picker';
 
-const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect }) => {
+const Controls = ({
+  currentView,
+  currentTimezone,
+  onViewSelect,
+  onTaskSelect,
+  onTimezoneSelect,
+  selectedTask,
+  tasksTypes,
+}) => {
   const { printBtn, settingsBtn } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
   const [displaySettingsModal, setDisplaySettingsModal] = useState(false);
@@ -53,6 +61,9 @@ const Controls = ({ currentView, currentTimezone, onViewSelect, onTimezoneSelect
           />
         </Menu.Item>
         <Menu.Item>
+          <OptionPicker onChange={onTaskSelect} defaultValue={selectedTask} options={tasksTypes} />
+        </Menu.Item>
+        <Menu.Item>
           <Button icon={<PrintLogo />} onClick={print}>
             {printBtn}
           </Button>
@@ -75,12 +86,15 @@ const PrintLogo = () => (
   <PrinterOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
 );
 
-const mapStateToProps = ({ currentView, currentTimezone }) => ({
+const mapStateToProps = ({ currentView, tasksTypes, currentTimezone, selectedTask }) => ({
   currentView,
   currentTimezone,
+  selectedTask,
+  tasksTypes,
 });
 
 export default connect(mapStateToProps, {
   onViewSelect: onViewModeChange,
   onTimezoneSelect: onTimezoneChange,
+  onTaskSelect: onTaskChange,
 })(Controls);
