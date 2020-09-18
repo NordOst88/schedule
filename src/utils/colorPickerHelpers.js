@@ -1,5 +1,5 @@
-const rgbToHex = (rgbText) => {
-  return rgbText.replace(
+const rgbToHex = (rgbText) =>
+  rgbText.replace(
     /rgb\((.+?)\)/gi,
     (_, rgb) =>
       `#${rgb
@@ -11,6 +11,5 @@ const rgbToHex = (rgbText) => {
         )
         .join('')}`,
   );
-};
 
 export default rgbToHex;

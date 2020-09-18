@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { ChromePicker } from 'react-color';
 
-// import defaultColor from '../../constants/colorPickerConstants';
-
-const ColorPicker = ({ defaultColor }) => {
+const ColorPicker = ({ defaultColor, setFormattedColor, eventTarget }) => {
   const [color, setColor] = useState(defaultColor);
   useEffect(() => {
     setColor(defaultColor);
-  });
+  }, [defaultColor]);
 
   return (
     <div className="color__container" style={{ position: 'absolute' }}>
-      <ChromePicker color={color} onChange={(updatedColor) => setColor(updatedColor.hex)} />
+      <ChromePicker
+        color={color}
+        disableAlpha
+        onChange={(updatedColor) => {
+          setColor(updatedColor.hex);
+          eventTarget.style.backgroundColor = updatedColor.hex;
+        }}
+        onChangeComplete={(updatedColor) => {
+          setFormattedColor(updatedColor.hex);
+        }}
+      />
     </div>
   );
 };

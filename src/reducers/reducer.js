@@ -43,6 +43,11 @@ const reducer = (state = getInitialState(), action) => {
         selectedEvents: getSelectedEvents(state.events, selectedTask),
       };
     }
+    case 'SET_COLOR': {
+      const { colorPreset } = action;
+      setLocaLStorageSettings(Object.entries(action));
+      return { ...state, eventColors: colorPreset };
+    }
 
     default:
       return state;
