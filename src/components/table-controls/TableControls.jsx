@@ -9,6 +9,7 @@ import ModalAddEvent from './ModalAddEvent';
 import getTimeStamp from '../../utils/getTimeStamp';
 import convertArrayToObject from '../../utils/convertArrayToObject';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
+import TableEdit from '../table-edit';
 
 const api = new SwaggerService();
 const { noInfo } = MODAL_INFO_TEXT;
@@ -71,6 +72,7 @@ const TableControls = ({ onFetch }) => {
       >
         Add Event
       </Button>
+      <TableEdit />
       <ModalAddEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} />
     </Space>
   );
