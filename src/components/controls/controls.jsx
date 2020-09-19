@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
 import { Menu, Button } from 'antd';
-import { PrinterOutlined } from '@ant-design/icons';
+import { PrinterOutlined, SettingOutlined } from '@ant-design/icons';
 
 import ModalSpinner from '../modal-spinner/modal-spinner';
 import OptionPicker from '../option-picker/option-picker';
@@ -22,6 +22,8 @@ import exportToFile from '../../utils/exportToFile';
 
 import './controls.scss';
 
+import SettingsModal from '../color-picker/settings-modal';
+
 const Controls = ({
   currentView,
   currentTimezone,
@@ -33,11 +35,16 @@ const Controls = ({
 }) => {
   const { printBtn } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
+  const [displaySettingsModal, setDisplaySettingsModal] = useState(false);
 
   const onBtnExportClick = async (extension) => {
     setDisplaySpinner(true);
     await exportToFile(currentView, extension);
     setDisplaySpinner(false);
+  };
+
+  const onSettingsClick = () => {
+    setDisplaySettingsModal(true);
   };
 
   return (
@@ -67,14 +74,24 @@ const Controls = ({
         <Menu.Item>
           <TableControls />
         </Menu.Item>
+        <Menu.Item>
+          <Button icon={<SettingsLogo />} onClick={onSettingsClick} />
+        </Menu.Item>
       </Menu>
       {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: MODAL_SPINNER_TIP }} />}
+      {displaySettingsModal && (
+        <SettingsModal {...{ setDisplaySettingsModal, displaySettingsModal }} />
+      )}
     </>
   );
 };
 
 const PrintLogo = () => (
   <PrinterOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
+);
+
+const SettingsLogo = () => (
+  <SettingOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
 );
 
 const mapStateToProps = ({ currentView, tasksTypes, currentTimezone, selectedTask }) => ({

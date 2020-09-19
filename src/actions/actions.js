@@ -5,6 +5,7 @@ import {
   SET_LIST_VIEW,
   SET_TIMEZONE,
   SET_TASK,
+  SET_COLOR,
 } from './actions-types';
 
 const onTimezoneChange = (timezone) => ({ type: SET_TIMEZONE, timezone });
@@ -14,4 +15,15 @@ const onSetEvents = (events) => ({ type: SET_EVENTS, events });
 const onSetListView = ({ target: { value } }) => ({ type: SET_LIST_VIEW, listView: value });
 const onTaskChange = (task) => ({ type: SET_TASK, selectedTask: task });
 
-export { onViewModeChange, onSetUser, onSetEvents, onSetListView, onTimezoneChange, onTaskChange };
+// colo-picker
+const onEventColorChange = (colorPreset) => ({ type: SET_COLOR, colorPreset });
+
+export {
+  onViewModeChange,
+  onSetUser,
+  onSetEvents,
+  onSetListView,
+  onTimezoneChange,
+  onTaskChange,
+  onEventColorChange,
+};

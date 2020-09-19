@@ -5,6 +5,7 @@ import {
   SET_LIST_VIEW,
   SET_TIMEZONE,
   SET_TASK,
+  SET_COLOR,
 } from '../actions/actions-types';
 
 import { ALL_TASKS } from '../constants/constants';
@@ -44,6 +45,10 @@ const reducer = (state = getInitialState(), action) => {
         selectedTask,
         selectedEvents: getSelectedEvents(state.events, selectedTask),
       };
+    }
+    case SET_COLOR: {
+      setLocaLStorageSettings(Object.entries(action));
+      return { ...state, eventColors: action.colorPreset };
     }
 
     default:
