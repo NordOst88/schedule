@@ -7,7 +7,7 @@ import { PrinterOutlined } from '@ant-design/icons';
 import ModalSpinner from '../modal-spinner/modal-spinner';
 import OptionPicker from '../option-picker/option-picker';
 import Dropdown from '../dropdown/dropdown';
-
+import TableControls from '../table-controls';
 import {
   VIEW_MODES,
   CONTROLS_TEXT,
@@ -69,9 +69,7 @@ const Controls = ({
           </Button>
         </Menu.Item>
         <Menu.Item>
-          <Button icon={<SettingsLogo />} onClick={() => setDisplaySettingsModal(true)}>
-            {settingsBtn}
-          </Button>
+          <TableControls />
         </Menu.Item>
       </Menu>
       {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: MODAL_SPINNER_TIP }} />}
