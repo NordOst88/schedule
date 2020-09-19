@@ -25,7 +25,7 @@ const editColumn = {
   align: 'center',
 };
 
-const TableContainer = ({ events, currentTimezone, eventColors }) => {
+const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode }) => {
   const columns = createColumns(currentTimezone, eventColors);
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
@@ -39,8 +39,6 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
     filteredColumns = filterColumns(columns, selectedColumns);
     setVisibleColumns(filteredColumns);
   }, [currentTimezone, eventColors]);
-
-  const [editable, setEditable] = useState(true);
 
   const columnSelectHandler = (column, checked) => {
     const idx = columns.indexOf(column);
@@ -67,7 +65,7 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
       <Table
         rowClassName={addClassByCurrentDate}
         dataSource={events}
-        columns={editable ? [editColumn, ...visibleColumns] : visibleColumns}
+        columns={tableEditMode ? [editColumn, ...visibleColumns] : visibleColumns}
         rowKey="id"
         size="small"
         pagination={false}
@@ -76,10 +74,11 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
   );
 };
 
-const mapStateToProps = ({ events, currentTimezone, eventColors }) => ({
+const mapStateToProps = ({ events, currentTimezone, eventColors, tableEditMode }) => ({
   eventColors,
   events,
   currentTimezone,
+  tableEditMode,
 });
 
 export default connect(mapStateToProps)(TableContainer);

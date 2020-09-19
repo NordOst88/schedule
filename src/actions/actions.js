@@ -5,6 +5,7 @@ import {
   SET_LIST_VIEW,
   SET_TIMEZONE,
   SET_TASK,
+  SET_TABLE_EDIT_MODE,
 } from './actions-types';
 
 const onTimezoneChange = (timezone) => ({ type: SET_TIMEZONE, timezone });
@@ -13,5 +14,14 @@ const onSetUser = (user) => ({ type: SET_USER, user });
 const onSetEvents = (events) => ({ type: SET_EVENTS, events });
 const onSetListView = ({ target: { value } }) => ({ type: SET_LIST_VIEW, listView: value });
 const onTaskChange = (task) => ({ type: SET_TASK, selectedTask: task });
+const onSetTableEditMode = (tableEditMode) => ({ type: SET_TABLE_EDIT_MODE, tableEditMode });
 
-export { onViewModeChange, onSetUser, onSetEvents, onSetListView, onTimezoneChange, onTaskChange };
+export {
+  onViewModeChange,
+  onSetUser,
+  onSetEvents,
+  onSetListView,
+  onTimezoneChange,
+  onTaskChange,
+  onSetTableEditMode,
+};

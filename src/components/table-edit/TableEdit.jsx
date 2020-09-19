@@ -1,10 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Button } from 'antd';
+import { EditTwoTone } from '@ant-design/icons';
+import { onSetTableEditMode } from '../../actions/actions';
 
-const TableEdit = () => (
-  <Button type="dashed" onClick={() => {}}>
+const TableEdit = ({ tableEditMode, onChange }) => (
+  <Button
+    type="dashed"
+    onClick={() => onChange(!tableEditMode)}
+    icon={tableEditMode && <EditTwoTone />}
+  >
     Edit Event
   </Button>
 );
 
-export default TableEdit;
+const mapStateToProps = ({ tableEditMode }) => ({
+  tableEditMode,
+});
+
+export default connect(mapStateToProps, { onChange: onSetTableEditMode })(TableEdit);

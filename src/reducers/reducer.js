@@ -5,6 +5,7 @@ import {
   SET_LIST_VIEW,
   SET_TIMEZONE,
   SET_TASK,
+  SET_TABLE_EDIT_MODE,
 } from '../actions/actions-types';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 import getInitialState from '../utils/getInitialState';
@@ -43,6 +44,8 @@ const reducer = (state = getInitialState(), action) => {
         selectedEvents: getSelectedEvents(state.events, selectedTask),
       };
     }
+    case SET_TABLE_EDIT_MODE:
+      return { ...state, tableEditMode: action.tableEditMode };
 
     default:
       return state;

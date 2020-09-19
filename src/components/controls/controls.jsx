@@ -15,6 +15,7 @@ import {
   BTN_SAVE_TEXT,
   SAVE_OPTIONS,
   MENTOR,
+  TABLE,
 } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
 import { onViewModeChange, onTimezoneChange, onTaskChange } from '../../actions/actions';
@@ -66,7 +67,7 @@ const Controls = ({
             {printBtn}
           </Button>
         </Menu.Item>
-        {role === MENTOR && (
+        {role === MENTOR && currentView === TABLE && (
           <Menu.Item>
             <TableControls />
           </Menu.Item>

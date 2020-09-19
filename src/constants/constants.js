@@ -82,6 +82,8 @@ const BTN_SAVE_TEXT = 'Save as';
 
 const ALL_TASKS = 'All task types';
 
+const TABLE_EDITABLE = true;
+
 export {
   TABLE,
   LIST,
@@ -100,4 +102,5 @@ export {
   BTN_SAVE_TEXT,
   ALL_TASKS,
   MODAL_ADD_EVENT_TEXT,
+  TABLE_EDITABLE,
 };
