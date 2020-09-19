@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table, Form, Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
+import SwaggerService from '../../services/swagger-service';
 import createColumns from './createColumns';
 import { COLUMNS_LIST } from '../../constants/tableConstants';
 import {
@@ -14,18 +15,13 @@ import {
 } from '../../utils/tableHelpers';
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
+import ModalAddEvent from '../table-controls/ModalAddEvent';
 
-const editColumn = {
-  title: () => <EditTwoTone />,
-  dataIndex: 'id',
-  key: 'id',
-  render: (id) => (
-    <Button type="dashed" size="small" icon={<EditTwoTone />} onClick={() => console.log(id)} />
-  ),
-  align: 'center',
-};
+const api = new SwaggerService();
 
 const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode }) => {
+  const [displayModal, setDisplayModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState({});
   const columns = createColumns(currentTimezone, eventColors);
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
@@ -55,6 +51,30 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode })
     }
   };
 
+  const updateEvent = (event) => {
+    console.log(event);
+  };
+
+  const openModal = (id, record) => {
+    setDisplayModal(true);
+    setSelectedEvent(record);
+  };
+
+  const editColumn = {
+    title: () => <EditTwoTone />,
+    dataIndex: 'id',
+    key: 'id',
+    render: (id, record) => (
+      <Button
+        type="dashed"
+        size="small"
+        icon={<EditTwoTone />}
+        onClick={() => openModal(id, record)}
+      />
+    ),
+    align: 'center',
+  };
+
   return (
     <>
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
@@ -70,6 +90,7 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode })
         size="small"
         pagination={false}
       />
+      <ModalAddEvent {...{ setDisplayModal, displayModal, selectedEvent, updateEvent, api }} />
     </>
   );
 };

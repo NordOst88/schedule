@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { SELECT_STYLES } from '../../constants/tableConstants';
 
-const OrganizersPicker = ({ value = {}, onChange, api }) => {
+const OrganizersPicker = ({ value = null, onChange, api }) => {
+  const formattedValue = value && value.map((item) => ({ value: item.id, label: item.name }));
   const [organizers, setOrganizers] = useState([]);
   useEffect(() => {
     const getOrganizers = async () => {
@@ -18,19 +19,15 @@ const OrganizersPicker = ({ value = {}, onChange, api }) => {
 
   const triggerChange = (changedValue) => {
     if (onChange) {
-      onChange({
-        organizers,
-        ...value,
-        ...changedValue,
-      });
+      onChange(changedValue);
     }
   };
 
   const handleOnChange = (selectedOrgs) => {
-    const newOrgs = selectedOrgs ? selectedOrgs.map((item) => item.value) : [];
-    triggerChange({
-      organizers: newOrgs,
-    });
+    const newOrgs = selectedOrgs
+      ? selectedOrgs.map((item) => ({ name: item.label, id: item.value }))
+      : [];
+    triggerChange(newOrgs);
   };
 
   return (
@@ -45,6 +42,7 @@ const OrganizersPicker = ({ value = {}, onChange, api }) => {
       maxMenuHeight={100}
       onChange={handleOnChange}
       placeholder="Select organizer"
+      value={formattedValue}
     />
   );
 };

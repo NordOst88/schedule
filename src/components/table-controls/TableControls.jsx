@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Space } from 'antd';
@@ -33,21 +34,21 @@ const TableControls = ({ onFetch }) => {
     week,
     dateTime,
     deadline,
-    type,
+    type = [noInfo],
     place = noInfo,
     estimatedTime = noInfo,
     name = noInfo,
     descriptionUrl = noInfo,
     description = noInfo,
     links,
-    selectedOrganizers,
+    selectedOrganizers = [noInfo],
     comment = noInfo,
   }) => {
     const newEvent = {
       week: `${week}`,
       dateTime: `${getTimeStamp(dateTime)}`,
       deadline: `${getTimeStamp(deadline)}`,
-      type: type ? type.tags : [noInfo],
+      type,
       place,
       estimatedTime,
       timeZone: '',
@@ -55,7 +56,7 @@ const TableControls = ({ onFetch }) => {
       descriptionUrl,
       description,
       links: convertArrayToObject(links),
-      organizer: selectedOrganizers ? selectedOrganizers.organizers : [noInfo],
+      organizer: selectedOrganizers.map((item) => item.id),
       comment,
     };
     addEventToBackend(newEvent);

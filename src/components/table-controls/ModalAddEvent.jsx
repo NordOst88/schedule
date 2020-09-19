@@ -1,5 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Input, InputNumber, DatePicker } from 'antd';
+import moment from 'moment';
 import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
@@ -21,24 +25,48 @@ const {
   links,
 } = MODAL_ADD_EVENT_TEXT;
 
-const useResetFormOnCloseModal = ({ form, displayModal }) => {
+const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
   const prevVisibleRef = useRef();
   useEffect(() => {
     prevVisibleRef.current = displayModal;
   }, [displayModal]);
   const prevVisible = prevVisibleRef.current;
   useEffect(() => {
+    if (displayModal && !prevVisible && selectedEvent) {
+      form.setFieldsValue({
+        id: selectedEvent.id,
+        week: selectedEvent.week,
+        dateTime: selectedEvent.dateTime && moment(selectedEvent.dateTime * 1000),
+        deadline: selectedEvent.deadline && moment(selectedEvent.deadline * 1000),
+        type: selectedEvent.type,
+        place: selectedEvent.place,
+        estimatedTime: selectedEvent.estimatedTime,
+        name: selectedEvent.name,
+        description: selectedEvent.description,
+        // links: selectedEvent.links,
+        selectedOrganizers: selectedEvent.organizer,
+        comment: selectedEvent.comment,
+      });
+    }
     if (!displayModal && prevVisible) {
       form.resetFields();
     }
   }, [displayModal]);
 };
 
-const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) => {
+const ModalAddEvent = ({
+  setDisplayModal,
+  displayModal,
+  createNewEvent,
+  selectedEvent,
+  updateEvent,
+  api,
+}) => {
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
     form,
     displayModal,
+    selectedEvent,
   });
 
   const onOk = () => {
@@ -50,6 +78,8 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
     wrapperCol: { span: 16 },
   };
 
+  console.log(selectedEvent);
+
   return (
     <Modal
       title="Add Event"
@@ -59,7 +89,7 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
     >
       <Form
         {...layout}
-        onFinish={createNewEvent}
+        onFinish={createNewEvent || updateEvent}
         form={form}
         initialValues={{ week: 0 }}
         size="small"
