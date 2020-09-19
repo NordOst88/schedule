@@ -7,6 +7,8 @@ import {
   SET_TASK,
   SET_COLOR,
 } from '../actions/actions-types';
+
+import { ALL_TASKS } from '../constants/constants';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 import getInitialState from '../utils/getInitialState';
 import getSelectedEvents from '../utils/getSelectedEvents';
@@ -29,7 +31,7 @@ const reducer = (state = getInitialState(), action) => {
         ...state,
         events,
         selectedEvents: getSelectedEvents(events, state.selectedTask),
-        tasksTypes: getTasksTypes(events),
+        tasksTypes: [ALL_TASKS, ...getTasksTypes(events)],
       };
     }
     case SET_LIST_VIEW:
