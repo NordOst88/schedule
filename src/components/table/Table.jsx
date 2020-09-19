@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Table, Form } from 'antd';
+import { Table, Form, Button } from 'antd';
+import { EditTwoTone } from '@ant-design/icons';
 import createColumns from './createColumns';
 import { COLUMNS_LIST } from '../../constants/tableConstants';
 import {
@@ -11,6 +14,16 @@ import {
 } from '../../utils/tableHelpers';
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
+
+const editColumn = {
+  title: () => <EditTwoTone />,
+  dataIndex: 'id',
+  key: 'id',
+  render: (id) => (
+    <Button type="dashed" size="small" icon={<EditTwoTone />} onClick={() => console.log(id)} />
+  ),
+  align: 'center',
+};
 
 const TableContainer = ({ events, currentTimezone, eventColors }) => {
   const columns = createColumns(currentTimezone, eventColors);
@@ -26,6 +39,8 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
     filteredColumns = filterColumns(columns, selectedColumns);
     setVisibleColumns(filteredColumns);
   }, [currentTimezone, eventColors]);
+
+  const [editable, setEditable] = useState(true);
 
   const columnSelectHandler = (column, checked) => {
     const idx = columns.indexOf(column);
@@ -52,7 +67,7 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
       <Table
         rowClassName={addClassByCurrentDate}
         dataSource={events}
-        columns={visibleColumns}
+        columns={editable ? [editColumn, ...visibleColumns] : visibleColumns}
         rowKey="id"
         size="small"
         pagination={false}
