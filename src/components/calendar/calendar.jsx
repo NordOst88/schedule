@@ -33,8 +33,8 @@ const EllipsisText = (text) => (
   </Tooltip>
 );
 
-const dateCellRender = (value, events, eventColors, onEventClick, currentTimezone) => {
-  const listData = getListData(value, events, eventColors, currentTimezone);
+const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selectedEvents) => {
+  const listData = getListData(value, selectedEvents, eventColors, currentTimezone);
 
   return (
     <ul
@@ -72,7 +72,7 @@ const dateCellRender = (value, events, eventColors, onEventClick, currentTimezon
   );
 };
 
-const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
+const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [eventDescription, setEventDescription] = useState(null);
   const [displayPopUp, setDisplayPopUp] = useState(false);
@@ -92,12 +92,13 @@ const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
   return (
     <>
       <Calendar
+        className="schedule__calendar"
         dateCellRender={(value) =>
-          dateCellRender(value, events, eventColors, onEventClick, currentTimezone)
+          dateCellRender(value, eventColors, onEventClick, currentTimezone, selectedEvents)
         }
         onSelect={(value) => {
           if (window.innerWidth <= LARGE_MOBILE_WIDTH) {
-            const dayEvents = filterDataByDay(value, events, currentTimezone);
+            const dayEvents = filterDataByDay(value, currentTimezone);
             setCurrentDateEvents(dayEvents);
             setDisplayPopUp(true);
           }
@@ -121,10 +122,10 @@ const CalendarContainer = ({ events, eventColors, currentTimezone }) => {
   );
 };
 
-const mapStateToProps = ({ events, eventColors, currentTimezone }) => ({
-  events,
+const mapStateToProps = ({ eventColors, currentTimezone, selectedEvents }) => ({
   eventColors,
   currentTimezone,
+  selectedEvents,
 });
 
 export default connect(mapStateToProps)(CalendarContainer);
