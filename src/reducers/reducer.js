@@ -5,8 +5,11 @@ import {
   SET_LIST_VIEW,
   SET_TIMEZONE,
   SET_TASK,
+  SET_COLOR,
   SET_TABLE_EDIT_MODE,
 } from '../actions/actions-types';
+
+import { ALL_TASKS } from '../constants/constants';
 import setLocaLStorageSettings from '../utils/setLocalStorageSettings';
 import getInitialState from '../utils/getInitialState';
 import getSelectedEvents from '../utils/getSelectedEvents';
@@ -29,7 +32,7 @@ const reducer = (state = getInitialState(), action) => {
         ...state,
         events,
         selectedEvents: getSelectedEvents(events, state.selectedTask),
-        tasksTypes: getTasksTypes(events),
+        tasksTypes: [ALL_TASKS, ...getTasksTypes(events)],
       };
     }
     case SET_LIST_VIEW:
@@ -43,6 +46,10 @@ const reducer = (state = getInitialState(), action) => {
         selectedTask,
         selectedEvents: getSelectedEvents(state.events, selectedTask),
       };
+    }
+    case SET_COLOR: {
+      setLocaLStorageSettings(Object.entries(action));
+      return { ...state, eventColors: action.colorPreset };
     }
     case SET_TABLE_EDIT_MODE:
       return { ...state, tableEditMode: action.tableEditMode };
