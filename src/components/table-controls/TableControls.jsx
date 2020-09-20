@@ -6,20 +6,18 @@ import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import ModalAddEvent from './ModalAddEvent';
-import getTimeStamp from '../../utils/getTimeStamp';
-import convertArrayToObject from '../../utils/convertArrayToObject';
-import { MODAL_INFO_TEXT, MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
+import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import TableEdit from '../table-edit';
+import { formatEventForFetch } from '../../utils/tableHelpers';
 
 const api = new SwaggerService();
-const { noInfo } = MODAL_INFO_TEXT;
 const { addEvent } = MODAL_ADD_EVENT_TEXT;
 
 const TableControls = ({ onFetch }) => {
   const [loading, setLoading] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
 
-  const addEventToBackend = (event) => {
+  const fetchAddEvent = (event) => {
     setLoading(true);
     api.addEvent(event).then(() => {
       api.getAllEvents().then((events) => {
@@ -30,36 +28,9 @@ const TableControls = ({ onFetch }) => {
     });
   };
 
-  const createNewEvent = ({
-    week,
-    dateTime,
-    deadline,
-    type = [noInfo],
-    place = noInfo,
-    estimatedTime = noInfo,
-    name = noInfo,
-    descriptionUrl = noInfo,
-    description = noInfo,
-    links,
-    selectedOrganizers = [noInfo],
-    comment = noInfo,
-  }) => {
-    const newEvent = {
-      week: `${week}`,
-      dateTime: `${getTimeStamp(dateTime)}`,
-      deadline: `${getTimeStamp(deadline)}`,
-      type,
-      place,
-      estimatedTime,
-      timeZone: '',
-      name,
-      descriptionUrl,
-      description,
-      links: convertArrayToObject(links),
-      organizer: selectedOrganizers.map((item) => item.id),
-      comment,
-    };
-    addEventToBackend(newEvent);
+  const createNewEvent = (event) => {
+    const newEvent = formatEventForFetch(event);
+    fetchAddEvent(newEvent);
     setDisplayModal(false);
   };
 

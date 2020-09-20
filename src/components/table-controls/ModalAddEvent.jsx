@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Input, InputNumber, DatePicker } from 'antd';
-import moment from 'moment';
 import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import Line from '../line';
+import { formatEventForModal } from '../../utils/tableHelpers';
 
 const {
   week,
@@ -30,24 +30,8 @@ const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
   const prevVisible = prevVisibleRef.current;
   useEffect(() => {
     if (displayModal && !prevVisible && selectedEvent) {
-      form.setFieldsValue({
-        id: selectedEvent.id,
-        week: +selectedEvent.week,
-        dateTime: selectedEvent.dateTime && moment(selectedEvent.dateTime * 1000),
-        deadline: selectedEvent.deadline && moment(selectedEvent.deadline * 1000),
-        type: selectedEvent.type,
-        place: selectedEvent.place,
-        estimatedTime: selectedEvent.estimatedTime,
-        name: selectedEvent.name,
-        description: selectedEvent.description,
-        descriptionUrl: selectedEvent.descriptionUrl,
-        links: Object.entries(selectedEvent.links).map((item) => ({
-          title: item[0],
-          url: item[1],
-        })),
-        selectedOrganizers: selectedEvent.organizer,
-        comment: selectedEvent.comment,
-      });
+      const formattedEvent = formatEventForModal(selectedEvent);
+      form.setFieldsValue(formattedEvent);
     }
     if (!displayModal && prevVisible) {
       form.resetFields();

@@ -12,17 +12,15 @@ import {
   addColumnKey,
   removeColumnKey,
   addClassByCurrentDate,
+  formatEventForFetch,
 } from '../../utils/tableHelpers';
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 import ModalAddEvent from '../table-controls/ModalAddEvent';
-import getTimeStamp from '../../utils/getTimeStamp';
-import convertArrayToObject from '../../utils/convertArrayToObject';
-import { MODAL_INFO_TEXT, MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
+import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import ModalSpinner from '../modal-spinner';
 
 const api = new SwaggerService();
-const { noInfo } = MODAL_INFO_TEXT;
 const { editEvent } = MODAL_ADD_EVENT_TEXT;
 
 const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, onFetch }) => {
@@ -58,7 +56,7 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
     }
   };
 
-  const fetchToBackend = (event) => {
+  const fetchUpdateEvent = (event) => {
     setLoading(true);
     api.updateEventById(event.id, event).then(() => {
       api.getAllEvents().then((evnts) => {
@@ -69,36 +67,9 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
     });
   };
 
-  const updateEvent = ({
-    week,
-    dateTime,
-    deadline,
-    type = [noInfo],
-    place = noInfo,
-    estimatedTime = noInfo,
-    name = noInfo,
-    descriptionUrl = noInfo,
-    description = noInfo,
-    links,
-    selectedOrganizers = [noInfo],
-    comment = noInfo,
-  }) => {
-    const newEvent = {
-      week: `${week}`,
-      dateTime: `${getTimeStamp(dateTime)}`,
-      deadline: `${getTimeStamp(deadline)}`,
-      type,
-      place,
-      estimatedTime,
-      timeZone: '',
-      name,
-      descriptionUrl,
-      description,
-      links: convertArrayToObject(links),
-      organizer: selectedOrganizers.map((item) => item.id),
-      comment,
-    };
-    fetchToBackend(newEvent);
+  const updateEvent = (event) => {
+    const updatableEvent = formatEventForFetch(event);
+    fetchUpdateEvent(updatableEvent);
     setDisplayModal(false);
   };
 
