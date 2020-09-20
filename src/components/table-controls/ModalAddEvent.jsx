@@ -130,6 +130,9 @@ const ModalAddEvent = ({
         <Form.Item name="links" label={<Line title={links} />}>
           <LinksList />
         </Form.Item>
+        <Form.Item name="id" noStyle>
+          <Input type="hidden" />
+        </Form.Item>
       </Form>
     </Modal>
   );

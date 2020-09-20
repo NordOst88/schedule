@@ -73,6 +73,7 @@ const formatEventForModal = ({
 });
 
 const formatEventForFetch = ({
+  id,
   week,
   dateTime,
   deadline,
@@ -86,6 +87,7 @@ const formatEventForFetch = ({
   selectedOrganizers = [noInfo],
   comment = noInfo,
 }) => ({
+  id,
   week: `${week}`,
   dateTime: `${getTimeStamp(dateTime)}`,
   deadline: `${getTimeStamp(deadline)}`,
