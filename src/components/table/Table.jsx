@@ -17,13 +17,19 @@ import { hideItems, viewItems } from '../../utils/hideItem';
 const TableContainer = ({ events, currentTimezone, eventColors }) => {
   // hideItem
   const [selectedItems, setItem] = useState([]);
-  /*  useEffect(()=>{
-    setItem(JSON.parse(localStorage.getItem('sec')))
-  }, []) */
+
+  useEffect(() => {
+    setItem(localStorage.selected ? JSON.parse(localStorage.getItem('selectedItems')) : []);
+    if (localStorage.getItem('isHidden') === 'true') {
+      setTimeout(() => hideItems(JSON.parse(localStorage.getItem('selectedItems'))), 0);
+    } else if (JSON.parse(localStorage.getItem('isHidden') === 'false')) {
+      viewItems(JSON.parse(localStorage.getItem('selectedItems')));
+    }
+  }, []);
 
   const onSelectChange = (selectedRowKeys) => {
     setItem({ selectedRowKeys });
-    /* localStorage.setItem('sec', JSON.stringify({selectedRowKeys})) */
+    localStorage.setItem('selectedItems', JSON.stringify({ selectedRowKeys }));
   };
 
   const rowSelection = {
