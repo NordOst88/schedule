@@ -11,7 +11,10 @@ const OptionPicker = ({ options = [], defaultValue, onChange }) => {
       onChange={onChange}
       showSearch="true"
       defaultValue={defaultValue}
-      className="option-picker"
+      style={{
+        width: 200,
+        fontSize: '1.7rem',
+      }}
     >
       {options.length
         ? options.map((option) => (

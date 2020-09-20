@@ -1,32 +1,24 @@
 @media (max-width: 767px){
-    .header-container{
+    .ant-layout .header-container{
         padding: 0 12px 0 30px;
     }
-    .option-picker{
-        width: 150px;
-        font-size: 1.5rem !important;
+    
+    .header-container .ant-select {
+        padding-left: 50px;
     }
-    .logo_img{
-        width: 67px !important;
-    }
-    .title{
-        font-size: 1.75rem !important;
+    .logo__img{
+        padding: 10px;
     }
 }
 @media (max-width: 425px) {
-    .header-container{
+    .ant-layout .header-container {
         padding: 0 9px 0 26px;
         height: 60px;
     }
-    .option-picker{
-        width: 200px;
-        font-size: 1.5rem !important;
+    .title {
+        margin-left: 0;
     }
-    .logo_img{
+    .logo {
         display: none;
-    }
-    .title{
-        font-size: 1.75rem !important;
-        margin-right: 70px;
     }
 }
