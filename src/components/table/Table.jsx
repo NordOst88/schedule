@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { Table, Form, Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
+import { onSetEvents } from '../../actions/actions';
+import sortByDateTime from '../../utils/sortByDateTime';
 import createColumns from './createColumns';
 import { COLUMNS_LIST } from '../../constants/tableConstants';
 import {
@@ -16,12 +18,18 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 import ModalAddEvent from '../table-controls/ModalAddEvent';
+import getTimeStamp from '../../utils/getTimeStamp';
+import convertArrayToObject from '../../utils/convertArrayToObject';
+import { MODAL_INFO_TEXT } from '../../constants/constants';
+import ModalSpinner from '../modal-spinner';
 
 const api = new SwaggerService();
+const { noInfo } = MODAL_INFO_TEXT;
 
-const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode }) => {
+const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, onFetch }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
+  const [loading, setLoading] = useState(false);
   const columns = createColumns(currentTimezone, eventColors);
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
@@ -51,8 +59,48 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode })
     }
   };
 
-  const updateEvent = (event) => {
-    console.log(event);
+  const fetchToBackend = (event) => {
+    setLoading(true);
+    api.updateEventById(event.id, event).then(() => {
+      api.getAllEvents().then((evnts) => {
+        const formattedData = sortByDateTime(evnts);
+        onFetch(formattedData);
+        setLoading(false);
+      });
+    });
+  };
+
+  const updateEvent = ({
+    week,
+    dateTime,
+    deadline,
+    type = [noInfo],
+    place = noInfo,
+    estimatedTime = noInfo,
+    name = noInfo,
+    descriptionUrl = noInfo,
+    description = noInfo,
+    links,
+    selectedOrganizers = [noInfo],
+    comment = noInfo,
+  }) => {
+    const newEvent = {
+      week: `${week}`,
+      dateTime: `${getTimeStamp(dateTime)}`,
+      deadline: `${getTimeStamp(deadline)}`,
+      type,
+      place,
+      estimatedTime,
+      timeZone: '',
+      name,
+      descriptionUrl,
+      description,
+      links: convertArrayToObject(links),
+      organizer: selectedOrganizers.map((item) => item.id),
+      comment,
+    };
+    fetchToBackend(newEvent);
+    setDisplayModal(false);
   };
 
   const openModal = (id, record) => {
@@ -77,6 +125,7 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode })
 
   return (
     <>
+      <ModalSpinner displaySpinner={loading} tip="Updating Event" />
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
@@ -95,11 +144,12 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode })
   );
 };
 
-const mapStateToProps = ({ events, currentTimezone, eventColors, tableEditMode }) => ({
+const mapStateToProps = ({ events, currentTimezone, eventColors, tableEditMode, onFetch }) => ({
   eventColors,
   events,
   currentTimezone,
   tableEditMode,
+  onFetch,
 });
 
-export default connect(mapStateToProps)(TableContainer);
+export default connect(mapStateToProps, { onFetch: onSetEvents })(TableContainer);

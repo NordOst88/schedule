@@ -35,7 +35,7 @@ const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
     if (displayModal && !prevVisible && selectedEvent) {
       form.setFieldsValue({
         id: selectedEvent.id,
-        week: selectedEvent.week,
+        week: +selectedEvent.week,
         dateTime: selectedEvent.dateTime && moment(selectedEvent.dateTime * 1000),
         deadline: selectedEvent.deadline && moment(selectedEvent.deadline * 1000),
         type: selectedEvent.type,
@@ -43,6 +43,7 @@ const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
         estimatedTime: selectedEvent.estimatedTime,
         name: selectedEvent.name,
         description: selectedEvent.description,
+        descriptionUrl: selectedEvent.descriptionUrl,
         links: Object.entries(selectedEvent.links).map((item) => ({
           title: item[0],
           url: item[1],
