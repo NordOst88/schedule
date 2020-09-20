@@ -43,7 +43,10 @@ const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
         estimatedTime: selectedEvent.estimatedTime,
         name: selectedEvent.name,
         description: selectedEvent.description,
-        // links: selectedEvent.links,
+        links: Object.entries(selectedEvent.links).map((item) => ({
+          title: item[0],
+          url: item[1],
+        })),
         selectedOrganizers: selectedEvent.organizer,
         comment: selectedEvent.comment,
       });
@@ -143,7 +146,7 @@ const ModalAddEvent = ({
         <Form.Item name="comment" label={<Line title={comment} />}>
           <Input />
         </Form.Item>
-        <Form.Item label={<Line title={links} />}>
+        <Form.Item name="links" label={<Line title={links} />}>
           <LinksList />
         </Form.Item>
       </Form>
