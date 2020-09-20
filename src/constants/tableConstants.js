@@ -1,8 +1,6 @@
-const dateFormat = 'DD.MM.YYYY HH:mm';
+const TAGS_NAME = 'table-tags';
 
-const tagsName = 'table-tags';
-
-const columnsList = [
+const COLUMNS_LIST = [
   'date',
   'time',
   'deadline',
@@ -16,4 +14,34 @@ const columnsList = [
   'comment',
 ];
 
-export { dateFormat, columnsList, tagsName };
+const SELECT_STYLES = {
+  control: (styles, { isFocused }) => ({
+    ...styles,
+    borderRadius: '2px',
+    borderColor: isFocused ? '#40a9ff' : '#d9d9d9',
+    boxShadow: isFocused ? '0 0 0 2px rgba(24, 144, 255, 0.2)' : 0,
+    minHeight: 30,
+    '&:hover': {
+      borderColor: '#40a9ff',
+    },
+  }),
+  dropdownIndicator: (styles) => ({
+    ...styles,
+    padding: 4,
+  }),
+  clearIndicator: (styles) => ({
+    ...styles,
+    padding: 4,
+  }),
+  valueContainer: (styles) => ({
+    ...styles,
+    padding: '0px 6px',
+  }),
+  input: (styles) => ({
+    ...styles,
+    margin: 0,
+    padding: 0,
+  }),
+};
+
+export { COLUMNS_LIST, TAGS_NAME, SELECT_STYLES };
