@@ -23,7 +23,13 @@ import ModalSpinner from '../modal-spinner';
 const api = new SwaggerService();
 const { editEvent } = MODAL_ADD_EVENT_TEXT;
 
-const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, onFetch }) => {
+const TableContainer = ({
+  selectedEvents,
+  currentTimezone,
+  eventColors,
+  tableEditMode,
+  onFetch,
+}) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
   const [loading, setLoading] = useState(false);
@@ -104,7 +110,7 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
       </Form>
       <Table
         rowClassName={addClassByCurrentDate}
-        dataSource={events}
+        dataSource={selectedEvents}
         columns={tableEditMode ? [editColumn, ...visibleColumns] : visibleColumns}
         rowKey="id"
         size="small"
@@ -118,9 +124,15 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
   );
 };
 
-const mapStateToProps = ({ events, currentTimezone, eventColors, tableEditMode, onFetch }) => ({
+const mapStateToProps = ({
+  selectedEvents,
+  currentTimezone,
   eventColors,
-  events,
+  tableEditMode,
+  onFetch,
+}) => ({
+  eventColors,
+  selectedEvents,
   currentTimezone,
   tableEditMode,
   onFetch,
