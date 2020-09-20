@@ -16,7 +16,7 @@ import {
 } from '../../utils/tableHelpers';
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
-import ModalAddEvent from '../table-controls/ModalAddEvent';
+import ModalEvent from '../modal-event';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import ModalSpinner from '../modal-spinner';
 
@@ -110,7 +110,7 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
         size="small"
         pagination={false}
       />
-      <ModalAddEvent
+      <ModalEvent
         {...{ setDisplayModal, displayModal, selectedEvent, updateEvent, api }}
         title={editEvent}
       />

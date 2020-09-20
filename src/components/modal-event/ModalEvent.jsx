@@ -39,7 +39,7 @@ const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
   }, [displayModal]);
 };
 
-const ModalAddEvent = ({
+const ModalEvent = ({
   setDisplayModal,
   displayModal,
   createNewEvent,
@@ -138,4 +138,4 @@ const ModalAddEvent = ({
   );
 };
 
-export default ModalAddEvent;
+export default ModalEvent;

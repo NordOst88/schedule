@@ -5,7 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
-import ModalAddEvent from './ModalAddEvent';
+import ModalEvent from '../modal-event';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import TableEdit from '../table-edit';
 import { formatEventForFetch } from '../../utils/tableHelpers';
@@ -42,10 +42,10 @@ const TableControls = ({ onFetch }) => {
         icon={<PlusOutlined spin={loading} />}
         onClick={() => setDisplayModal(true)}
       >
-        Add Event
+        Add event
       </Button>
       <TableEdit />
-      <ModalAddEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} title={addEvent} />
+      <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} title={addEvent} />
     </Space>
   );
 };

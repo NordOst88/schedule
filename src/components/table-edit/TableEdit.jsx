@@ -10,7 +10,7 @@ const TableEdit = ({ tableEditMode, onChange }) => (
     onClick={() => onChange(!tableEditMode)}
     icon={tableEditMode && <EditTwoTone />}
   >
-    Edit Event
+    Edit table
   </Button>
 );
 
