@@ -16,13 +16,18 @@ import { hideItems, viewItems } from '../../utils/hideItem';
 
 const TableContainer = ({ events, currentTimezone, eventColors }) => {
   // hideItem
-  const [selectedItems, setItem] = useState([]);
+  const [selectedItems, setItem] = useState({ selectedRowKeys: [] });
 
   useEffect(() => {
-    setItem(localStorage.selected ? JSON.parse(localStorage.getItem('selectedItems')) : []);
+    setItem(
+      localStorage.selectedItems
+        ? JSON.parse(localStorage.getItem('selectedItems'))
+        : { selectedRowKeys: [] },
+    );
+    console.log(selectedItems);
     if (localStorage.getItem('isHidden') === 'true') {
       setTimeout(() => hideItems(JSON.parse(localStorage.getItem('selectedItems'))), 0);
-    } else if (JSON.parse(localStorage.getItem('isHidden') === 'false')) {
+    } else if (localStorage.getItem('isHidden') === 'false') {
       viewItems(JSON.parse(localStorage.getItem('selectedItems')));
     }
   }, []);
@@ -73,7 +78,7 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
         <Button type="primary" onClick={() => hideItems(selectedItems)}>
-          Hide items
+          Hide Selected items
         </Button>
         <Button
           type="primary"
@@ -82,7 +87,7 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
             viewItems(selectedItems);
           }}
         >
-          Show Items
+          Show Hidden Items
         </Button>
       </Form>
       <Table
