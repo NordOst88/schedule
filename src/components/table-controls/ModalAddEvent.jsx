@@ -1,6 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import { Modal, Form, Input, InputNumber, DatePicker } from 'antd';
 import moment from 'moment';
@@ -65,6 +62,7 @@ const ModalAddEvent = ({
   selectedEvent,
   updateEvent,
   api,
+  title,
 }) => {
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
@@ -82,11 +80,9 @@ const ModalAddEvent = ({
     wrapperCol: { span: 16 },
   };
 
-  console.log(selectedEvent);
-
   return (
     <Modal
-      title="Add Event"
+      {...{ title }}
       visible={displayModal}
       onCancel={() => setDisplayModal(false)}
       onOk={onOk}

@@ -53,6 +53,8 @@ const MODAL_ADD_EVENT_TEXT = {
   organizers: 'Organizers',
   comment: 'Comment',
   links: 'Links',
+  addEvent: 'Add event',
+  editEvent: 'Edit event',
 };
 
 const COLOR_PRESET = {

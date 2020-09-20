@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Space } from 'antd';
@@ -9,11 +8,12 @@ import sortByDateTime from '../../utils/sortByDateTime';
 import ModalAddEvent from './ModalAddEvent';
 import getTimeStamp from '../../utils/getTimeStamp';
 import convertArrayToObject from '../../utils/convertArrayToObject';
-import { MODAL_INFO_TEXT } from '../../constants/constants';
+import { MODAL_INFO_TEXT, MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import TableEdit from '../table-edit';
 
 const api = new SwaggerService();
 const { noInfo } = MODAL_INFO_TEXT;
+const { addEvent } = MODAL_ADD_EVENT_TEXT;
 
 const TableControls = ({ onFetch }) => {
   const [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ const TableControls = ({ onFetch }) => {
         Add Event
       </Button>
       <TableEdit />
-      <ModalAddEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} />
+      <ModalAddEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} title={addEvent} />
     </Space>
   );
 };

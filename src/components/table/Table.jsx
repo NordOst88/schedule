@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table, Form, Button } from 'antd';
@@ -20,11 +18,12 @@ import ColumnSelector from './ColumnSelector';
 import ModalAddEvent from '../table-controls/ModalAddEvent';
 import getTimeStamp from '../../utils/getTimeStamp';
 import convertArrayToObject from '../../utils/convertArrayToObject';
-import { MODAL_INFO_TEXT } from '../../constants/constants';
+import { MODAL_INFO_TEXT, MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import ModalSpinner from '../modal-spinner';
 
 const api = new SwaggerService();
 const { noInfo } = MODAL_INFO_TEXT;
+const { editEvent } = MODAL_ADD_EVENT_TEXT;
 
 const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, onFetch }) => {
   const [displayModal, setDisplayModal] = useState(false);
@@ -103,7 +102,7 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
     setDisplayModal(false);
   };
 
-  const openModal = (id, record) => {
+  const openModal = (record) => {
     setDisplayModal(true);
     setSelectedEvent(record);
   };
@@ -117,7 +116,8 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
         type="dashed"
         size="small"
         icon={<EditTwoTone />}
-        onClick={() => openModal(id, record)}
+        key={id}
+        onClick={() => openModal(record)}
       />
     ),
     align: 'center',
@@ -139,7 +139,10 @@ const TableContainer = ({ events, currentTimezone, eventColors, tableEditMode, o
         size="small"
         pagination={false}
       />
-      <ModalAddEvent {...{ setDisplayModal, displayModal, selectedEvent, updateEvent, api }} />
+      <ModalAddEvent
+        {...{ setDisplayModal, displayModal, selectedEvent, updateEvent, api }}
+        title={editEvent}
+      />
     </>
   );
 };
