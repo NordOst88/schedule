@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
 import { SELECT_STYLES } from '../../constants/tableConstants';
@@ -6,10 +6,12 @@ import { COLOR_PRESET } from '../../constants/constants';
 
 const { inactive } = COLOR_PRESET;
 
-const TagsPicker = ({ eventColors, value = {}, onChange }) => {
-  const [tags, setTags] = useState([]);
+const TagsPicker = ({ eventColors, value, onChange }) => {
   const taskTypes = Object.entries(eventColors);
   const taskOptions = taskTypes.map((item) => ({ value: item[0], label: item[0], color: item[1] }));
+  const formattedValue =
+    value && value.map((item) => ({ value: item, label: item, color: eventColors[item] }));
+
   const customStyles = {
     option: (styles, { data }) => ({
       ...styles,
@@ -20,7 +22,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
       const { color } = data;
       return {
         ...styles,
-        backgroundColor: data.color ? color : inactive,
+        backgroundColor: color || inactive,
       };
     },
     multiValueLabel: (styles) => ({
@@ -41,20 +43,13 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
 
   const triggerChange = (changedValue) => {
     if (onChange) {
-      onChange({
-        tags,
-        ...value,
-        ...changedValue,
-      });
+      onChange(changedValue);
     }
   };
 
   const handleOnChange = (selectedTags) => {
     const newTags = selectedTags ? selectedTags.map((item) => item.value) : [];
-    setTags(newTags);
-    triggerChange({
-      tags: newTags,
-    });
+    triggerChange(newTags);
   };
 
   return (
@@ -69,6 +64,7 @@ const TagsPicker = ({ eventColors, value = {}, onChange }) => {
       maxMenuHeight={100}
       onChange={handleOnChange}
       placeholder="Select and/or create new task type"
+      value={formattedValue}
     />
   );
 };

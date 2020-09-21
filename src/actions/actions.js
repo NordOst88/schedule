@@ -6,6 +6,7 @@ import {
   SET_TIMEZONE,
   SET_TASK,
   SET_COLOR,
+  SET_TABLE_EDIT_MODE,
 } from './actions-types';
 
 const onTimezoneChange = (timezone) => ({ type: SET_TIMEZONE, timezone });
@@ -14,6 +15,7 @@ const onSetUser = (user) => ({ type: SET_USER, user });
 const onSetEvents = (events) => ({ type: SET_EVENTS, events });
 const onSetListView = ({ target: { value } }) => ({ type: SET_LIST_VIEW, listView: value });
 const onTaskChange = (task) => ({ type: SET_TASK, selectedTask: task });
+const onSetTableEditMode = (tableEditMode) => ({ type: SET_TABLE_EDIT_MODE, tableEditMode });
 
 // colo-picker
 const onEventColorChange = (colorPreset) => ({ type: SET_COLOR, colorPreset });
@@ -26,4 +28,5 @@ export {
   onTimezoneChange,
   onTaskChange,
   onEventColorChange,
+  onSetTableEditMode,
 };
