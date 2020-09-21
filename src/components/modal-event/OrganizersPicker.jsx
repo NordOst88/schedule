@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { SELECT_STYLES } from '../../constants/tableConstants';
 
-const OrganizersPicker = ({ value = null, onChange, api }) => {
+const OrganizersPicker = ({ value, onChange, api }) => {
   const formattedValue = value && value.map((item) => ({ value: item.id, label: item.name }));
   const [organizers, setOrganizers] = useState([]);
   useEffect(() => {

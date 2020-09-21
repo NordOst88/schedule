@@ -6,7 +6,7 @@ import { COLOR_PRESET } from '../../constants/constants';
 
 const { inactive } = COLOR_PRESET;
 
-const TagsPicker = ({ eventColors, value = null, onChange }) => {
+const TagsPicker = ({ eventColors, value, onChange }) => {
   const taskTypes = Object.entries(eventColors);
   const taskOptions = taskTypes.map((item) => ({ value: item[0], label: item[0], color: item[1] }));
   const formattedValue =
@@ -22,7 +22,7 @@ const TagsPicker = ({ eventColors, value = null, onChange }) => {
       const { color } = data;
       return {
         ...styles,
-        backgroundColor: data.color ? color : inactive,
+        backgroundColor: color || inactive,
       };
     },
     multiValueLabel: (styles) => ({

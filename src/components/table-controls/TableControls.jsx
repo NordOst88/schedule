@@ -45,7 +45,7 @@ const TableControls = ({ onFetch }) => {
         Add event
       </Button>
       <TableEdit />
-      <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} title={addEvent} />
+      <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api, title: addEvent }} />
     </Space>
   );
 };

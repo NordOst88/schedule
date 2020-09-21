@@ -65,12 +65,7 @@ const ModalEvent = ({
   };
 
   return (
-    <Modal
-      {...{ title }}
-      visible={displayModal}
-      onCancel={() => setDisplayModal(false)}
-      onOk={onOk}
-    >
+    <Modal title={title} visible={displayModal} onCancel={() => setDisplayModal(false)} onOk={onOk}>
       <Form
         {...layout}
         onFinish={createNewEvent || updateEvent}

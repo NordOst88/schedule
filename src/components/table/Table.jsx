@@ -102,7 +102,7 @@ const TableContainer = ({
 
   return (
     <>
-      <ModalSpinner displaySpinner={loading} tip="Updating Event" />
+      {loading && <ModalSpinner displaySpinner={loading} tip="Updating Event" />}
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
@@ -116,10 +116,11 @@ const TableContainer = ({
         size="small"
         pagination={false}
       />
-      <ModalEvent
-        {...{ setDisplayModal, displayModal, selectedEvent, updateEvent, api }}
-        title={editEvent}
-      />
+      {displayModal && (
+        <ModalEvent
+          {...{ setDisplayModal, displayModal, selectedEvent, updateEvent, api, title: editEvent }}
+        />
+      )}
     </>
   );
 };
