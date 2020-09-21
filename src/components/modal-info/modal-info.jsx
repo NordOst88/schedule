@@ -11,6 +11,8 @@ import Organizer from '../organizer/organizer';
 import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
 
+import fetchGeopositionBySearch from '../map/getCoordinatesFromAddress';
+
 import './modal-info.scss';
 
 const {
@@ -57,6 +59,8 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
+
+  fetchGeopositionBySearch('Minsk');
 
   // todo: think about refactor
 
