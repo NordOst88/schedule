@@ -24,7 +24,6 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
         ? JSON.parse(localStorage.getItem('selectedItems'))
         : { selectedRowKeys: [] },
     );
-    console.log(selectedItems);
     if (localStorage.getItem('isHidden') === 'true') {
       setTimeout(() => hideItems(JSON.parse(localStorage.getItem('selectedItems'))), 0);
     } else if (localStorage.getItem('isHidden') === 'false') {
