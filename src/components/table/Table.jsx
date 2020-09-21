@@ -127,11 +127,9 @@ const TableContainer = ({
       </Form>
       <Table
         // hideItem
-        onRow={() => {
-          return {
-            onClick: (e) => handleRowClick(e),
-          };
-        }}
+        onRow={() => ({
+          onClick: (e) => handleRowClick(e),
+        })}
         rowSelection={rowSelection}
         rowClassName={addClassByCurrentDate}
         dataSource={events}
