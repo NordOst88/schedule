@@ -6,6 +6,7 @@ import {
   SET_TIMEZONE,
   SET_TASK,
   SET_COLOR,
+  SET_TABLE_EDIT_MODE,
 } from '../actions/actions-types';
 
 import { ALL_TASKS } from '../constants/constants';
@@ -50,6 +51,8 @@ const reducer = (state = getInitialState(), action) => {
       setLocaLStorageSettings(Object.entries(action));
       return { ...state, eventColors: action.colorPreset };
     }
+    case SET_TABLE_EDIT_MODE:
+      return { ...state, tableEditMode: action.tableEditMode };
 
     default:
       return state;

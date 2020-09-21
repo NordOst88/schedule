@@ -14,6 +14,8 @@ import {
   MODAL_SPINNER_TIP,
   BTN_SAVE_TEXT,
   SAVE_OPTIONS,
+  MENTOR,
+  TABLE,
 } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
 import { onViewModeChange, onTimezoneChange, onTaskChange } from '../../actions/actions';
@@ -32,6 +34,7 @@ const Controls = ({
   onTimezoneSelect,
   selectedTask,
   tasksTypes,
+  role,
 }) => {
   const { printBtn } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
@@ -71,9 +74,11 @@ const Controls = ({
             {printBtn}
           </Button>
         </Menu.Item>
-        <Menu.Item>
-          <TableControls />
-        </Menu.Item>
+        {role === MENTOR && currentView === TABLE && (
+          <Menu.Item>
+            <TableControls />
+          </Menu.Item>
+        )}
         <Menu.Item>
           <Button icon={<SettingsLogo />} onClick={onSettingsClick} />
         </Menu.Item>
@@ -94,11 +99,12 @@ const SettingsLogo = () => (
   <SettingOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
 );
 
-const mapStateToProps = ({ currentView, tasksTypes, currentTimezone, selectedTask }) => ({
+const mapStateToProps = ({ currentView, tasksTypes, currentTimezone, selectedTask, role }) => ({
   currentView,
   currentTimezone,
   selectedTask,
   tasksTypes,
+  role,
 });
 
 export default connect(mapStateToProps, {
