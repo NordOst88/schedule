@@ -15,16 +15,13 @@ const HeaderContainer = ({ role, onSelect }) => {
 
   return (
     <Header
+      className="header-container"
       style={{
-        height: 55,
         background: 'transparent',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
       }}
     >
       <Link className="logo" href={linkUrl} target="_blank" rel="noreferrer">
-        <Image src={logo} alt={imageAlt} width={85} preview={false} />
+        <Image src={logo} alt={imageAlt} width={85} preview={false} className="logo__img" />
       </Link>
       <Heading>{title}</Heading>
       <OptionPicker onChange={onSelect} defaultValue={role} options={USER_ROLES} />
