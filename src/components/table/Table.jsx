@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Table, Form, Button } from 'antd';
+import { Table, Form, Button, Typography } from 'antd';
 import createColumns from './createColumns';
 import { COLUMNS_LIST } from '../../constants/tableConstants';
 import {
@@ -14,7 +14,9 @@ import ColumnSelector from './ColumnSelector';
 
 import { onSetSelectedItems, onSetVisibility } from '../../actions/actions';
 
-import { hideItems, viewItems } from '../../utils/hideItem';
+import { hideItems, viewItems } from '../../utils/hideSelectedItems';
+
+const { Text } = Typography;
 
 const TableContainer = ({
   events,
@@ -27,6 +29,25 @@ const TableContainer = ({
 }) => {
   // hideItem
   const [selectedItems, setItem] = useState(selectedRowKeys);
+
+  const handleRowClick = (e) => {
+    if (e.shiftKey === true) {
+      const target = e.target.closest('tr[data-row-key]');
+      if (e.target.closest('tr[data-row-key]')) {
+        const rowKey = target.getAttribute('data-row-key');
+        const id = selectedItems.indexOf(`${rowKey}`);
+        if (!selectedItems.includes(`${rowKey}`)) {
+          setItem([...selectedItems, `${rowKey}`]);
+          onSelectItem([...selectedItems, `${rowKey}`]);
+        } else {
+          const before = selectedItems.slice(0, id);
+          const after = selectedItems.slice(id + 1);
+          setItem([...before, ...after]);
+          onSelectItem([...selectedItems, `${rowKey}`]);
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     if (isHiddenRowKeys === true) {
@@ -92,7 +113,7 @@ const TableContainer = ({
         </Button>
         <Button
           type="primary"
-          className="button-margin"
+          className="marginLeft"
           onClick={() => {
             setVisibility(false);
             viewItems(selectedItems);
@@ -100,9 +121,17 @@ const TableContainer = ({
         >
           Show Hidden Items
         </Button>
+        <Text strong underline className="marginLeft typography">
+          {isHiddenRowKeys === true ? 'Hidden items: ' : 'Selected Items: '} {selectedItems.length}
+        </Text>
       </Form>
       <Table
         // hideItem
+        onRow={() => {
+          return {
+            onClick: (e) => handleRowClick(e),
+          };
+        }}
         rowSelection={rowSelection}
         rowClassName={addClassByCurrentDate}
         dataSource={events}
