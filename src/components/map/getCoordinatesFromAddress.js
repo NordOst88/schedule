@@ -9,8 +9,26 @@ export default async function fetchGeopositionBySearch(inputText) {
     const searchValue = inputText;
     const response = await fetch(`${yandexGeocoding}${searchValue}`);
     const data = await response.json();
-    console.log(data);
-    return data;
+
+    const {
+      response: {
+        GeoObjectCollection: { featureMember },
+      },
+    } = data;
+
+    if (featureMember.length !== 0) {
+      const [
+        {
+          GeoObject: {
+            Point: { pos },
+          },
+        },
+      ] = featureMember;
+      console.log(pos);
+      return pos;
+    }
+
+    return noResult;
   } catch (err) {
     error.push(err);
   }

@@ -11,7 +11,7 @@ import Organizer from '../organizer/organizer';
 import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
 
-import fetchGeopositionBySearch from '../map/getCoordinatesFromAddress';
+import MapContainer from '../map/map';
 
 import './modal-info.scss';
 
@@ -60,8 +60,6 @@ const ModalInfo = ({
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
 
-  fetchGeopositionBySearch('Minsk');
-
   // todo: think about refactor
 
   useEffect(() => {
@@ -95,6 +93,7 @@ const ModalInfo = ({
           <Line title={taskOrganizer} text={getOrganizer()} />
           <Line title={taskComment} text={comment} />
         </Space>
+        <MapContainer place={place} />
       </Modal>
     </div>
   );
