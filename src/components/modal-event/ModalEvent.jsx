@@ -67,7 +67,7 @@ const ModalEvent = ({
   return (
     <Modal title={title} visible={displayModal} onCancel={() => setDisplayModal(false)} onOk={onOk}>
       <Form
-        {...layout}
+        layout={layout}
         onFinish={createNewEvent || updateEvent}
         form={form}
         initialValues={{ week: 0 }}
