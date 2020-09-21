@@ -12,33 +12,36 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 
+import { onSetSelectedItems, onSetVisibility } from '../../actions/actions';
+
 import { hideItems, viewItems } from '../../utils/hideItem';
 
-const TableContainer = ({ events, currentTimezone, eventColors }) => {
+const TableContainer = ({
+  events,
+  currentTimezone,
+  eventColors,
+  onSelectItem,
+  selectedRowKeys,
+  isHiddenRowKeys,
+  setVisibility,
+}) => {
   // hideItem
-  const [selectedItems, setItem] = useState({ selectedRowKeys: [] });
+  const [selectedItems, setItem] = useState(selectedRowKeys);
 
   useEffect(() => {
-    setItem(
-      localStorage.selectedItems
-        ? JSON.parse(localStorage.getItem('selectedItems'))
-        : { selectedRowKeys: [] },
-    );
-    if (localStorage.getItem('isHidden') === 'true') {
-      setTimeout(() => hideItems(JSON.parse(localStorage.getItem('selectedItems'))), 0);
-    } else if (localStorage.getItem('isHidden') === 'false') {
-      viewItems(JSON.parse(localStorage.getItem('selectedItems')));
+    if (isHiddenRowKeys === true) {
+      hideItems(selectedItems);
     }
   }, []);
 
-  const onSelectChange = (selectedRowKeys) => {
-    setItem({ selectedRowKeys });
-    localStorage.setItem('selectedItems', JSON.stringify({ selectedRowKeys }));
+  const onSelectChange = (selectedRow) => {
+    setItem(selectedRow);
+    onSelectItem(selectedRow);
   };
 
   const rowSelection = {
     onChange: onSelectChange,
-    selectedRowKeys: selectedItems.selectedRowKeys,
+    selectedRowKeys: selectedItems,
   };
 
   const columns = createColumns(currentTimezone, eventColors);
@@ -76,13 +79,22 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
-        <Button type="primary" onClick={() => hideItems(selectedItems)}>
+        <Button
+          type="primary"
+          onClick={() => {
+            if (selectedItems !== 0) {
+              setVisibility(true);
+            }
+            hideItems(selectedItems);
+          }}
+        >
           Hide Selected items
         </Button>
         <Button
           type="primary"
           className="button-margin"
           onClick={() => {
+            setVisibility(false);
             viewItems(selectedItems);
           }}
         >
@@ -103,10 +115,21 @@ const TableContainer = ({ events, currentTimezone, eventColors }) => {
   );
 };
 
-const mapStateToProps = ({ events, currentTimezone, eventColors }) => ({
+const mapStateToProps = ({
+  events,
+  currentTimezone,
+  eventColors,
+  selectedRowKeys,
+  isHiddenRowKeys,
+}) => ({
   eventColors,
   events,
   currentTimezone,
+  selectedRowKeys,
+  isHiddenRowKeys,
 });
 
-export default connect(mapStateToProps)(TableContainer);
+export default connect(mapStateToProps, {
+  onSelectItem: onSetSelectedItems,
+  setVisibility: onSetVisibility,
+})(TableContainer);

@@ -6,6 +6,8 @@ import {
   SET_TIMEZONE,
   SET_TASK,
   SET_COLOR,
+  SET_SELECTED_ITEMS,
+  SET_VISIBILITY,
 } from '../actions/actions-types';
 
 import { ALL_TASKS } from '../constants/constants';
@@ -49,6 +51,14 @@ const reducer = (state = getInitialState(), action) => {
     case SET_COLOR: {
       setLocaLStorageSettings(Object.entries(action));
       return { ...state, eventColors: action.colorPreset };
+    }
+    case SET_SELECTED_ITEMS: {
+      setLocaLStorageSettings(Object.entries(action));
+      return { ...state, selectedRowKeys: action.selectedRowKeys };
+    }
+    case SET_VISIBILITY: {
+      setLocaLStorageSettings(Object.entries(action));
+      return { ...state, isHiddenRowKeys: action.isHiddenRowKeys };
     }
 
     default:

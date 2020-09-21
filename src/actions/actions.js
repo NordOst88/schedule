@@ -6,6 +6,8 @@ import {
   SET_TIMEZONE,
   SET_TASK,
   SET_COLOR,
+  SET_SELECTED_ITEMS,
+  SET_VISIBILITY,
 } from './actions-types';
 
 const onTimezoneChange = (timezone) => ({ type: SET_TIMEZONE, timezone });
@@ -18,6 +20,10 @@ const onTaskChange = (task) => ({ type: SET_TASK, selectedTask: task });
 // colo-picker
 const onEventColorChange = (colorPreset) => ({ type: SET_COLOR, colorPreset });
 
+// item-selection
+const onSetSelectedItems = (selectedRowKeys) => ({ type: SET_SELECTED_ITEMS, selectedRowKeys });
+const onSetVisibility = (isHiddenRowKeys) => ({ type: SET_VISIBILITY, isHiddenRowKeys });
+
 export {
   onViewModeChange,
   onSetUser,
@@ -26,4 +32,6 @@ export {
   onTimezoneChange,
   onTaskChange,
   onEventColorChange,
+  onSetSelectedItems,
+  onSetVisibility,
 };
