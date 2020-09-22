@@ -23,6 +23,7 @@ const HEADER_TEXT = {
 
 const CONTROLS_TEXT = {
   printBtn: 'Print',
+  textAdjust: 'Change text size',
 };
 
 const MODAL_INFO_TEXT = {
@@ -83,6 +84,8 @@ const SAVE_OPTIONS = ['PDF', 'JPG'];
 const BTN_SAVE_TEXT = 'Save as';
 
 const ALL_TASKS = 'All task types';
+const DEFAULT_FONT_SIZE = 10;
+const ADJUST_FONT_SIZE = 13;
 
 const TABLE_EDITABLE = true;
 
@@ -105,4 +108,6 @@ export {
   ALL_TASKS,
   MODAL_ADD_EVENT_TEXT,
   TABLE_EDITABLE,
+  DEFAULT_FONT_SIZE,
+  ADJUST_FONT_SIZE,
 };

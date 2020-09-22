@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
 import { Menu, Button } from 'antd';
-import { PrinterOutlined, SettingOutlined } from '@ant-design/icons';
+import { PrinterOutlined, SettingOutlined, LineHeightOutlined } from '@ant-design/icons';
 
 import ModalSpinner from '../modal-spinner/modal-spinner';
 import OptionPicker from '../option-picker/option-picker';
@@ -18,7 +18,12 @@ import {
   TABLE,
 } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
-import { onViewModeChange, onTimezoneChange, onTaskChange } from '../../actions/actions';
+import {
+  onViewModeChange,
+  onTimezoneChange,
+  onTaskChange,
+  onFontSizeChange,
+} from '../../actions/actions';
 import print from '../../utils/print';
 import exportToFile from '../../utils/exportToFile';
 
@@ -34,9 +39,11 @@ const Controls = ({
   onTimezoneSelect,
   selectedTask,
   tasksTypes,
+  onTextSizeChange,
+  fontSize,
   role,
 }) => {
-  const { printBtn } = CONTROLS_TEXT;
+  const { printBtn, textAdjust } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
   const [displaySettingsModal, setDisplaySettingsModal] = useState(false);
 
@@ -74,6 +81,16 @@ const Controls = ({
             {printBtn}
           </Button>
         </Menu.Item>
+        <Menu.Item>
+          <Button
+            icon={<TextSizeLogo />}
+            onClick={() => {
+              onTextSizeChange(fontSize);
+            }}
+          >
+            {textAdjust}
+          </Button>
+        </Menu.Item>
         {role === MENTOR && currentView === TABLE && (
           <Menu.Item>
             <TableControls />
@@ -95,20 +112,33 @@ const PrintLogo = () => (
   <PrinterOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
 );
 
+const TextSizeLogo = () => (
+  <LineHeightOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
+);
+
 const SettingsLogo = () => (
   <SettingOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
 );
 
-const mapStateToProps = ({ currentView, tasksTypes, currentTimezone, selectedTask, role }) => ({
+const mapStateToProps = ({
+  currentView,
+  tasksTypes,
+  currentTimezone,
+  selectedTask,
+  role,
+  fontSize,
+}) => ({
   currentView,
   currentTimezone,
   selectedTask,
   tasksTypes,
   role,
+  fontSize,
 });
 
 export default connect(mapStateToProps, {
   onViewSelect: onViewModeChange,
   onTimezoneSelect: onTimezoneChange,
   onTaskSelect: onTaskChange,
+  onTextSizeChange: onFontSizeChange,
 })(Controls);
