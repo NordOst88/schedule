@@ -7,7 +7,13 @@ import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import createColumns from './createColumns';
 import TableEdit from '../table-edit';
-import { COLUMNS_LIST } from '../../constants/tableConstants';
+import popupMessage from '../popup-message';
+import {
+  COLUMNS_LIST,
+  SUCCESS_FETCH_MSG,
+  SUCCESS_UPDATE_EVENT,
+  ERROR_FETCH_MSG,
+} from '../../constants/tableConstants';
 import {
   filterColumns,
   addColumnKey,
@@ -67,13 +73,26 @@ const TableContainer = ({
 
   const fetchUpdateEvent = (event) => {
     setLoading(true);
-    api.updateEventById(event.id, event).then(() => {
-      api.getAllEvents().then((evnts) => {
-        const formattedData = sortByDateTime(evnts);
-        onFetch(formattedData);
+    api
+      .updateEventById(event.id, event)
+      .then(() => {
+        api.getAllEvents().then((evnts) => {
+          const formattedData = sortByDateTime(evnts);
+          onFetch(formattedData);
+          setLoading(false);
+          popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_UPDATE_EVENT });
+        });
+      })
+      .catch((error) => {
         setLoading(false);
+        popupMessage({
+          ...ERROR_FETCH_MSG,
+          message: error.name,
+          description: error.message,
+          object: event,
+          callback: fetchUpdateEvent,
+        });
       });
-    });
   };
 
   const updateEvent = (event) => {

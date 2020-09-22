@@ -56,6 +56,7 @@ const ERROR_FETCH_MSG = {
 };
 
 const SUCCESS_ADD_EVENT = { description: 'Event added successfully' };
+const SUCCESS_UPDATE_EVENT = { description: 'Event updated successfully' };
 
 export {
   COLUMNS_LIST,
@@ -64,4 +65,5 @@ export {
   SUCCESS_FETCH_MSG,
   SUCCESS_ADD_EVENT,
   ERROR_FETCH_MSG,
+  SUCCESS_UPDATE_EVENT,
 };
