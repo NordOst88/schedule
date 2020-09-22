@@ -15,6 +15,7 @@ const getInitialState = () => {
     currentTimezone: timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
     selectedTask: selectedTask || ALL_TASKS,
     tasksTypes: [],
+    tableEditMode: false,
   };
 };
 

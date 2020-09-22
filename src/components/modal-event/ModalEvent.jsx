@@ -5,6 +5,7 @@ import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import Line from '../line';
+import { formatEventForModal } from '../../utils/tableHelpers';
 
 const {
   week,
@@ -21,24 +22,37 @@ const {
   links,
 } = MODAL_ADD_EVENT_TEXT;
 
-const useResetFormOnCloseModal = ({ form, displayModal }) => {
+const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
   const prevVisibleRef = useRef();
   useEffect(() => {
     prevVisibleRef.current = displayModal;
   }, [displayModal]);
   const prevVisible = prevVisibleRef.current;
   useEffect(() => {
+    if (displayModal && !prevVisible && selectedEvent) {
+      const formattedEvent = formatEventForModal(selectedEvent);
+      form.setFieldsValue(formattedEvent);
+    }
     if (!displayModal && prevVisible) {
       form.resetFields();
     }
   }, [displayModal]);
 };
 
-const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) => {
+const ModalEvent = ({
+  setDisplayModal,
+  displayModal,
+  createNewEvent,
+  selectedEvent,
+  updateEvent,
+  api,
+  title,
+}) => {
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
     form,
     displayModal,
+    selectedEvent,
   });
 
   const onOk = () => {
@@ -51,15 +65,10 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
   };
 
   return (
-    <Modal
-      title="Add Event"
-      visible={displayModal}
-      onCancel={() => setDisplayModal(false)}
-      onOk={onOk}
-    >
+    <Modal title={title} visible={displayModal} onCancel={() => setDisplayModal(false)} onOk={onOk}>
       <Form
-        {...layout}
-        onFinish={createNewEvent}
+        layout={layout}
+        onFinish={createNewEvent || updateEvent}
         form={form}
         initialValues={{ week: 0 }}
         size="small"
@@ -113,12 +122,15 @@ const ModalAddEvent = ({ setDisplayModal, displayModal, createNewEvent, api }) =
         <Form.Item name="comment" label={<Line title={comment} />}>
           <Input />
         </Form.Item>
-        <Form.Item label={<Line title={links} />}>
+        <Form.Item name="links" label={<Line title={links} />}>
           <LinksList />
+        </Form.Item>
+        <Form.Item name="id" noStyle>
+          <Input type="hidden" />
         </Form.Item>
       </Form>
     </Modal>
   );
 };
 
-export default ModalAddEvent;
+export default ModalEvent;

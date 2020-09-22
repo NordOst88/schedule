@@ -34,7 +34,9 @@ const SettingsModal = ({
   const [newColorPreset, setColorPreset] = useState(eventColors);
 
   useEffect(() => {
-    setColorPreset((prevState) => ({ ...prevState, [selectedTag]: formattedColor }));
+    if (formattedColor) {
+      setColorPreset((prevState) => ({ ...prevState, [selectedTag]: formattedColor }));
+    }
   }, [formattedColor]);
 
   const tasksTypes = getTasksTypes(events);

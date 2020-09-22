@@ -53,6 +53,8 @@ const MODAL_ADD_EVENT_TEXT = {
   organizers: 'Organizers',
   comment: 'Comment',
   links: 'Links',
+  addEvent: 'Add event',
+  editEvent: 'Edit event',
 };
 
 const COLOR_PRESET = {
@@ -82,6 +84,8 @@ const BTN_SAVE_TEXT = 'Save as';
 
 const ALL_TASKS = 'All task types';
 
+const TABLE_EDITABLE = true;
+
 export {
   TABLE,
   LIST,
@@ -100,4 +104,5 @@ export {
   BTN_SAVE_TEXT,
   ALL_TASKS,
   MODAL_ADD_EVENT_TEXT,
+  TABLE_EDITABLE,
 };
