@@ -51,7 +51,7 @@ const SUCCESS_FETCH_MSG = {
 };
 
 const ERROR_FETCH_MSG = {
-  type: 'error',
+  type: 'warning',
   duration: null,
 };
 

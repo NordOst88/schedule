@@ -24,6 +24,7 @@ const popupMessage = ({ message, description, type, duration, object, callback }
     duration,
     btn,
     key,
+    style: { maxWidth: 300 },
   });
 };
 
