@@ -10,7 +10,6 @@ mapboxgl.accessToken =
   'pk.eyJ1Ijoic3RhY2V5c3ljaCIsImEiOiJja2FpaGw0N2YwMHUzMzRtaXNtazBtYXpkIn0.DPP70YMFkqRuAScBuq5_Gw';
 
 const MapContainer = ({ place }) => {
-  console.log(place);
   const mapContainerRef = useRef(null);
   const [Latitude, setLatitude] = useState(0);
   const [Longitude, setLongitude] = useState(0);
@@ -22,21 +21,6 @@ const MapContainer = ({ place }) => {
       setLongitude(longitude);
     }
   });
-
-  /* useEffect(() => {
-    const map = new mapboxgl.Map({
-        container: mapContainerRef.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [0, 0],
-        zoom: 12,
-      });
-  
-      
-
-    return () => map.remove();
-  }, []);
- */
-  // return <div className="map__container" ref={mapContainerRef} />;
 
   useEffect(() => {
     const map = new mapboxgl.Map({

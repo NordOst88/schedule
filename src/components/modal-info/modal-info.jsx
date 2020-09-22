@@ -59,6 +59,7 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
+  const hasPlace = place !== 'online' && place !== '';
 
   // todo: think about refactor
 
@@ -93,7 +94,7 @@ const ModalInfo = ({
           <Line title={taskOrganizer} text={getOrganizer()} />
           <Line title={taskComment} text={comment} />
         </Space>
-        <MapContainer place={place} />
+        {hasPlace && <MapContainer place={place} />}
       </Modal>
     </div>
   );

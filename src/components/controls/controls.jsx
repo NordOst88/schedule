@@ -95,9 +95,7 @@ const PrintLogo = () => (
   <PrinterOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
 );
 
-const SettingsLogo = () => (
-  <SettingOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
-);
+const SettingsLogo = () => <SettingOutlined style={{ fontSize: '1.8rem', marginRight: 0 }} />;
 
 const mapStateToProps = ({ currentView, tasksTypes, currentTimezone, selectedTask, role }) => ({
   currentView,
