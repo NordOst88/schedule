@@ -7,11 +7,10 @@ import getEventColor from '../../utils/getEventColor';
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer/organizer';
+import MapContainer from '../map/map';
 
 import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
-
-import MapContainer from '../map/map';
 
 import './modal-info.scss';
 

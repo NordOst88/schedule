@@ -2,19 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import { GLOBAL_COORDS, MAP_ZOOM, MAP_BOX_TOKEN } from '../../constants/mapConstants';
+
+import getCoordinatesFromAddress from '../../utils/getCoordinatesFromAddress';
+
 import './map.scss';
 
-import fetchGeopositionBySearch from './getCoordinatesFromAddress';
-
-mapboxgl.accessToken =
-  'pk.eyJ1Ijoic3RhY2V5c3ljaCIsImEiOiJja2FpaGw0N2YwMHUzMzRtaXNtazBtYXpkIn0.DPP70YMFkqRuAScBuq5_Gw';
+mapboxgl.accessToken = MAP_BOX_TOKEN;
 
 const MapContainer = ({ place }) => {
   const mapContainerRef = useRef(null);
-  const [Latitude, setLatitude] = useState(0);
-  const [Longitude, setLongitude] = useState(0);
+  const [Latitude, setLatitude] = useState(GLOBAL_COORDS);
+  const [Longitude, setLongitude] = useState(GLOBAL_COORDS);
 
-  fetchGeopositionBySearch(place).then((data) => {
+  getCoordinatesFromAddress(place).then((data) => {
     if (data) {
       const [longitude, latitude] = data.split(' ');
       setLatitude(latitude);
@@ -27,7 +28,7 @@ const MapContainer = ({ place }) => {
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [Longitude, Latitude],
-      zoom: 12.5,
+      zoom: MAP_ZOOM,
     });
 
     new mapboxgl.Marker().setLngLat([Longitude, Latitude]).addTo(map);
