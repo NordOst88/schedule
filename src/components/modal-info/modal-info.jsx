@@ -11,6 +11,7 @@ import MapContainer from '../map/map';
 
 import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
+import { ONLINE_TEXT } from '../../constants/mapConstants';
 
 import './modal-info.scss';
 
@@ -58,7 +59,7 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
-  const hasPlace = place !== 'online' && place !== '';
+  const hasPlace = place !== ONLINE_TEXT && place !== '';
 
   // todo: think about refactor
 
