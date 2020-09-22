@@ -44,4 +44,24 @@ const SELECT_STYLES = {
   }),
 };
 
-export { COLUMNS_LIST, TAGS_NAME, SELECT_STYLES };
+const SUCCESS_FETCH_MSG = {
+  type: 'success',
+  message: 'Success',
+  duration: 3,
+};
+
+const ERROR_FETCH_MSG = {
+  type: 'error',
+  duration: null,
+};
+
+const SUCCESS_ADD_EVENT = { description: 'Event added successfully' };
+
+export {
+  COLUMNS_LIST,
+  TAGS_NAME,
+  SELECT_STYLES,
+  SUCCESS_FETCH_MSG,
+  SUCCESS_ADD_EVENT,
+  ERROR_FETCH_MSG,
+};
