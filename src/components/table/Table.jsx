@@ -6,6 +6,7 @@ import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import createColumns from './createColumns';
+import TableEdit from '../table-edit';
 import { COLUMNS_LIST } from '../../constants/tableConstants';
 import {
   filterColumns,
@@ -17,7 +18,7 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 import ModalEvent from '../modal-event';
-import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
+import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE } from '../../constants/constants';
 import ModalSpinner from '../modal-spinner';
 
 const api = new SwaggerService();
@@ -29,6 +30,8 @@ const TableContainer = ({
   eventColors,
   tableEditMode,
   onFetch,
+  currentView,
+  role,
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
@@ -107,6 +110,11 @@ const TableContainer = ({
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
+        {role === MENTOR && currentView === TABLE && (
+          <Form.Item style={{ cursor: 'pointer' }}>
+            <TableEdit />
+          </Form.Item>
+        )}
       </Form>
       <Table
         rowClassName={addClassByCurrentDate}
@@ -131,12 +139,16 @@ const mapStateToProps = ({
   eventColors,
   tableEditMode,
   onFetch,
+  role,
+  currentView,
 }) => ({
   eventColors,
   selectedEvents,
   currentTimezone,
   tableEditMode,
   onFetch,
+  role,
+  currentView,
 });
 
 export default connect(mapStateToProps, { onFetch: onSetEvents })(TableContainer);

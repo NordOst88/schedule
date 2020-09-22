@@ -7,7 +7,6 @@ import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import ModalEvent from '../modal-event';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
-import TableEdit from '../table-edit';
 import { formatEventForFetch } from '../../utils/tableHelpers';
 
 const api = new SwaggerService();
@@ -44,7 +43,6 @@ const TableControls = ({ onFetch }) => {
       >
         Add event
       </Button>
-      <TableEdit />
       <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api, title: addEvent }} />
     </Space>
   );
