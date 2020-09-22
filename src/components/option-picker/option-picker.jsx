@@ -10,7 +10,7 @@ const OptionPicker = ({ options = [], defaultValue, onChange, styles }) => {
     <Select onChange={onChange} showSearch="true" defaultValue={defaultValue} style={styles}>
       {options.length
         ? options.map((option) => (
-            <Option value={option} key={option}>
+            <Option value={option} key={option} style={styles}>
               {option}
             </Option>
           ))

@@ -25,6 +25,7 @@ import {
   onFontSizeChange,
 } from '../../actions/actions';
 import print from '../../utils/print';
+import getFontSize from '../../utils/getFontSize';
 import exportToFile from '../../utils/exportToFile';
 
 import './controls.scss';
@@ -43,7 +44,7 @@ const Controls = ({
   fontSize,
   role,
 }) => {
-  const { printBtn, textAdjust } = CONTROLS_TEXT;
+  const { printBtn, textAdjust, colorSettings } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
   const [displaySettingsModal, setDisplaySettingsModal] = useState(false);
 
@@ -57,36 +58,71 @@ const Controls = ({
     setDisplaySettingsModal(true);
   };
 
+  const textSize = `${getFontSize(fontSize, 1.7)}`;
+  const iconsStyles = { fontSize: '1.9rem', margin: '3px 0 0' };
+  const btnsStyles = {
+    fontSize: textSize,
+    padding: '4px 10px',
+    display: 'flex',
+    alignItems: 'center',
+  };
+  const getStyles = (width) => ({ width, fontSize: textSize });
+
   return (
     <>
-      <Menu mode="horizontal">
+      <Menu
+        mode="horizontal"
+        style={{
+          height: 50,
+          lineHeight: 1,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
         <Menu.Item>
-          <Dropdown text={BTN_SAVE_TEXT} onBtnClick={onBtnExportClick} items={SAVE_OPTIONS} />
+          <Dropdown
+            text={BTN_SAVE_TEXT}
+            onBtnClick={onBtnExportClick}
+            items={SAVE_OPTIONS}
+            styles={getStyles(115)}
+          />
         </Menu.Item>
         <Menu.Item>
-          <OptionPicker onChange={onViewSelect} defaultValue={currentView} options={VIEW_MODES} />
+          <OptionPicker
+            onChange={onViewSelect}
+            defaultValue={currentView}
+            options={VIEW_MODES}
+            styles={getStyles(130)}
+          />
         </Menu.Item>
         <Menu.Item>
           <OptionPicker
             onChange={onTimezoneSelect}
             defaultValue={currentTimezone}
             options={TIMEZONE}
+            styles={getStyles(225)}
           />
         </Menu.Item>
         <Menu.Item>
-          <OptionPicker onChange={onTaskSelect} defaultValue={selectedTask} options={tasksTypes} />
+          <OptionPicker
+            onChange={onTaskSelect}
+            defaultValue={selectedTask}
+            options={tasksTypes}
+            styles={getStyles(175)}
+          />
         </Menu.Item>
         <Menu.Item>
-          <Button icon={<PrintLogo />} onClick={print}>
+          <Button icon={<PrinterOutlined style={iconsStyles} />} onClick={print} style={btnsStyles}>
             {printBtn}
           </Button>
         </Menu.Item>
         <Menu.Item>
           <Button
-            icon={<TextSizeLogo />}
+            icon={<LineHeightOutlined style={iconsStyles} />}
             onClick={() => {
               onTextSizeChange(fontSize);
             }}
+            style={btnsStyles}
           >
             {textAdjust}
           </Button>
@@ -97,7 +133,13 @@ const Controls = ({
           </Menu.Item>
         )}
         <Menu.Item>
-          <Button icon={<SettingsLogo />} onClick={onSettingsClick} />
+          <Button
+            icon={<SettingOutlined style={iconsStyles} />}
+            onClick={onSettingsClick}
+            style={btnsStyles}
+          >
+            {colorSettings}
+          </Button>
         </Menu.Item>
       </Menu>
       {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: MODAL_SPINNER_TIP }} />}
@@ -107,18 +149,6 @@ const Controls = ({
     </>
   );
 };
-
-const PrintLogo = () => (
-  <PrinterOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
-);
-
-const TextSizeLogo = () => (
-  <LineHeightOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
-);
-
-const SettingsLogo = () => (
-  <SettingOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
-);
 
 const mapStateToProps = ({
   currentView,
