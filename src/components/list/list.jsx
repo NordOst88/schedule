@@ -63,7 +63,7 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
                 <Text
                   type={textType}
                   style={{
-                    display: 'flex',
+                    display: 'block',
                     textAlign: listView !== alternate ? listView : 'center',
                   }}
                 >
@@ -90,7 +90,15 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
       </Timeline>
       {displayModal && (
         <ModalInfo
-          {...{ ...eventDescription, displayModal, setDisplayModal, eventColors, currentTimezone }}
+          {...{
+            ...eventDescription,
+            displayModal,
+            setDisplayModal,
+            eventColors,
+            currentTimezone,
+            fontSize,
+            titleTextSize,
+          }}
         />
       )}
     </>
