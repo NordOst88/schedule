@@ -12,8 +12,8 @@ mapboxgl.accessToken = MAP_BOX_TOKEN;
 
 const MapContainer = ({ place }) => {
   const mapContainerRef = useRef(null);
-  const [Latitude, setLatitude] = useState(GLOBAL_COORDS);
-  const [Longitude, setLongitude] = useState(GLOBAL_COORDS);
+  const [lat, setLatitude] = useState(GLOBAL_COORDS);
+  const [long, setLongitude] = useState(GLOBAL_COORDS);
 
   getCoordinatesFromAddress(place).then((data) => {
     if (data) {
@@ -27,14 +27,14 @@ const MapContainer = ({ place }) => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [Longitude, Latitude],
+      center: [long, lat],
       zoom: MAP_ZOOM,
     });
 
-    new mapboxgl.Marker().setLngLat([Longitude, Latitude]).addTo(map);
+    new mapboxgl.Marker().setLngLat([long, lat]).addTo(map);
 
     return () => map.remove();
-  }, [Latitude, Longitude]);
+  }, [lat, long]);
 
   return <div className="map-container" ref={mapContainerRef} />;
 };

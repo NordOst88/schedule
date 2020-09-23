@@ -1,27 +1,13 @@
 import { YANDEX_TOKEN } from '../constants/mapConstants';
 
-export default async function getCoordinatesFromAddress(inputText) {
-  const noResult = false;
-  const searchValue = inputText;
-  const response = await fetch(`${YANDEX_TOKEN}${searchValue}`);
+export default async function getCoordinatesFromAddress(address) {
+  const response = await fetch(`${YANDEX_TOKEN}${address}`);
   const data = await response.json();
-  const {
-    response: {
-      GeoObjectCollection: { featureMember },
-    },
-  } = data;
+  const { featureMember } = data.response.GeoObjectCollection;
 
-  if (featureMember.length !== 0) {
-    const [
-      {
-        GeoObject: {
-          Point: { pos },
-        },
-      },
-    ] = featureMember;
-
-    return pos;
+  if (featureMember.length) {
+    return featureMember[0].GeoObject.Point.pos;
   }
 
-  return noResult;
+  return false;
 }
