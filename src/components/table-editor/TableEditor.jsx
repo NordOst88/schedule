@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 import { onSetTableEditMode } from '../../actions/actions';
 
-const TableEdit = ({ tableEditMode, onChange }) => (
+const TableEditor = ({ tableEditMode, onChange }) => (
   <Button
     type="dashed"
     onClick={() => onChange(!tableEditMode)}
@@ -18,4 +18,4 @@ const mapStateToProps = ({ tableEditMode }) => ({
   tableEditMode,
 });
 
-export default connect(mapStateToProps, { onChange: onSetTableEditMode })(TableEdit);
+export default connect(mapStateToProps, { onChange: onSetTableEditMode })(TableEditor);

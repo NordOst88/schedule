@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button, notification } from 'antd';
 
-const popupMessage = ({ message, description, type, duration, object, callback }) => {
+const popupMessage = ({ message, description, type, duration, callbacksArg, callback }) => {
   let key = null;
   let btn = null;
 
-  if (object && callback) {
+  if (callbacksArg && callback) {
     key = `open${Date.now()}`;
     const onClick = () => {
       notification.close(key);
-      callback(object);
+      callback(callbacksArg);
     };
     btn = (
       <Button onClick={onClick} type="primary" size="small">

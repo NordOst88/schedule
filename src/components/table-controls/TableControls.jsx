@@ -40,7 +40,7 @@ const TableControls = ({ onFetch, style }) => {
           ...ERROR_FETCH_MSG,
           message: error.name,
           description: error.message,
-          object: event,
+          callbacksArg: event,
           callback: fetchAddEvent,
         });
       });
@@ -63,7 +63,9 @@ const TableControls = ({ onFetch, style }) => {
       >
         Add event
       </Button>
-      <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api, title: addEvent }} />
+      {displayModal && (
+        <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api, title: addEvent }} />
+      )}
     </>
   );
 };

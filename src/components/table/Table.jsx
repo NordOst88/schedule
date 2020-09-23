@@ -6,7 +6,7 @@ import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import createColumns from './createColumns';
-import TableEdit from '../table-edit';
+import TableEditor from '../table-editor';
 import popupMessage from '../popup-message';
 import {
   COLUMNS_LIST,
@@ -89,7 +89,7 @@ const TableContainer = ({
           ...ERROR_FETCH_MSG,
           message: error.name,
           description: error.message,
-          object: event,
+          callbacksArg: event,
           callback: fetchUpdateEvent,
         });
       });
@@ -131,7 +131,7 @@ const TableContainer = ({
         </Form.Item>
         {role === MENTOR && currentView === TABLE && (
           <Form.Item style={{ cursor: 'pointer' }}>
-            <TableEdit />
+            <TableEditor />
           </Form.Item>
         )}
       </Form>
