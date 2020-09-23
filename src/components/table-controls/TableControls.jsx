@@ -18,7 +18,7 @@ import { formatEventForFetch } from '../../utils/tableHelpers';
 const api = new SwaggerService();
 const { addEvent } = MODAL_ADD_EVENT_TEXT;
 
-const TableControls = ({ onFetch }) => {
+const TableControls = ({ onFetch, style }) => {
   const [loading, setLoading] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
 
@@ -59,6 +59,7 @@ const TableControls = ({ onFetch }) => {
         disabled={loading}
         icon={<PlusOutlined spin={loading} />}
         onClick={() => setDisplayModal(true)}
+        style={style}
       >
         Add event
       </Button>
