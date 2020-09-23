@@ -16,6 +16,7 @@ import {
   SAVE_OPTIONS,
   MENTOR,
   TABLE,
+  VIEW_SPINNER_TIP,
 } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
 import {
@@ -46,9 +47,13 @@ const Controls = ({
 }) => {
   const { printBtn, textAdjust, colorSettings } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
+  const [spinnerTip, setSpinnerTip] = useState(MODAL_SPINNER_TIP);
   const [displaySettingsModal, setDisplaySettingsModal] = useState(false);
 
   const onBtnExportClick = async (extension) => {
+    if (displaySpinner !== MODAL_SPINNER_TIP) {
+      setSpinnerTip(MODAL_SPINNER_TIP);
+    }
     setDisplaySpinner(true);
     await exportToFile(currentView, extension);
     setDisplaySpinner(false);
@@ -56,6 +61,17 @@ const Controls = ({
 
   const onSettingsClick = () => {
     setDisplaySettingsModal(true);
+  };
+
+  const onViewAdjustment = () => {
+    if (displaySpinner !== VIEW_SPINNER_TIP) {
+      setSpinnerTip(VIEW_SPINNER_TIP);
+    }
+    setDisplaySpinner(true);
+    onTextSizeChange(fontSize);
+    setTimeout(() => {
+      setDisplaySpinner(false);
+    }, 700);
   };
 
   const textSize = `${getFontSize(fontSize, 1.7)}`;
@@ -119,9 +135,7 @@ const Controls = ({
         <Menu.Item>
           <Button
             icon={<LineHeightOutlined style={iconsStyles} />}
-            onClick={() => {
-              onTextSizeChange(fontSize);
-            }}
+            onClick={onViewAdjustment}
             style={btnsStyles}
           >
             {textAdjust}
@@ -142,7 +156,7 @@ const Controls = ({
           </Button>
         </Menu.Item>
       </Menu>
-      {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: MODAL_SPINNER_TIP }} />}
+      {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: spinnerTip }} />}
       {displaySettingsModal && (
         <SettingsModal {...{ setDisplaySettingsModal, displaySettingsModal }} />
       )}

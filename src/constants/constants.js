@@ -83,6 +83,7 @@ const COLOR_PRESET = {
 };
 
 const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
+const VIEW_SPINNER_TIP = 'Please, wait. We are preparing view for you ...';
 
 const SAVE_OPTIONS = ['PDF', 'JPG'];
 const BTN_SAVE_TEXT = 'Save as';
@@ -115,4 +116,5 @@ export {
   DEFAULT_FONT_SIZE,
   ADJUST_FONT_SIZE,
   RADIO_ITEMS,
+  VIEW_SPINNER_TIP,
 };
