@@ -3,22 +3,14 @@ import { Select } from 'antd';
 
 import './option-picker.scss';
 
-const OptionPicker = ({ options = [], defaultValue, onChange }) => {
+const OptionPicker = ({ options = [], defaultValue, onChange, styles }) => {
   const { Option } = Select;
 
   return (
-    <Select
-      onChange={onChange}
-      showSearch="true"
-      defaultValue={defaultValue}
-      style={{
-        width: 200,
-        fontSize: '1.7rem',
-      }}
-    >
+    <Select onChange={onChange} showSearch="true" defaultValue={defaultValue} style={styles}>
       {options.length
         ? options.map((option) => (
-            <Option value={option} key={option}>
+            <Option value={option} key={option} style={styles}>
               {option}
             </Option>
           ))

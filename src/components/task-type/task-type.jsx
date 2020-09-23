@@ -3,7 +3,7 @@ import { Tag } from 'antd';
 
 import getEventColor from '../../utils/getEventColor';
 
-const Type = ({ type, eventColors, tagsName, displayColorPicker }) => (
+const Type = ({ type, eventColors, tagsName, displayColorPicker, fontSize }) => (
   <>
     {type.map((task) => (
       <Tag
@@ -11,6 +11,7 @@ const Type = ({ type, eventColors, tagsName, displayColorPicker }) => (
         className={tagsName}
         key={task}
         onClick={displayColorPicker}
+        style={{ fontSize, display: 'inline-block', borderRadius: 4, paddingBottom: 2 }}
       >
         {task}
       </Tag>

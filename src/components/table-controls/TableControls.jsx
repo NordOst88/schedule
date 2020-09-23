@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
@@ -53,7 +53,7 @@ const TableControls = ({ onFetch }) => {
   };
 
   return (
-    <Space>
+    <>
       <Button
         type="dashed"
         disabled={loading}
@@ -63,7 +63,7 @@ const TableControls = ({ onFetch }) => {
         Add event
       </Button>
       <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api, title: addEvent }} />
-    </Space>
+    </>
   );
 };
 

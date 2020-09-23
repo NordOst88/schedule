@@ -7,6 +7,7 @@ import {
   SET_TASK,
   SET_COLOR,
   SET_TABLE_EDIT_MODE,
+  SET_FONT_SIZE,
 } from '../actions/actions-types';
 
 import { ALL_TASKS } from '../constants/constants';
@@ -53,7 +54,9 @@ const reducer = (state = getInitialState(), action) => {
     }
     case SET_TABLE_EDIT_MODE:
       return { ...state, tableEditMode: action.tableEditMode };
-
+    case SET_FONT_SIZE:
+      setLocaLStorageSettings(Object.entries(action));
+      return { ...state, fontSize: action.fontSize };
     default:
       return state;
   }
