@@ -7,11 +7,14 @@ const MENTOR = 'Mentor';
 const VIEW_MODES = [TABLE, LIST, CALENDAR];
 const USER_ROLES = [STUDENT, MENTOR];
 
-const LIST_TEXT = {
-  moreDetails: 'Подробнее',
+const RADIO_ITEMS = {
   left: 'Left',
   right: 'Right',
   alternate: 'Alternate',
+};
+
+const LIST_TEXT = {
+  moreDetails: 'Подробнее',
   deadline: 'Deadline:',
 };
 
@@ -23,6 +26,8 @@ const HEADER_TEXT = {
 
 const CONTROLS_TEXT = {
   printBtn: 'Print',
+  textAdjust: 'Change text size',
+  colorSettings: 'Color settings',
 };
 
 const MODAL_INFO_TEXT = {
@@ -78,11 +83,14 @@ const COLOR_PRESET = {
 };
 
 const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
+const VIEW_SPINNER_TIP = 'Please, wait. We are preparing view for you ...';
 
 const SAVE_OPTIONS = ['PDF', 'JPG'];
 const BTN_SAVE_TEXT = 'Save as';
 
 const ALL_TASKS = 'All task types';
+const DEFAULT_FONT_SIZE = 10;
+const ADJUST_FONT_SIZE = 13;
 
 const TABLE_EDITABLE = true;
 
@@ -105,4 +113,8 @@ export {
   ALL_TASKS,
   MODAL_ADD_EVENT_TEXT,
   TABLE_EDITABLE,
+  DEFAULT_FONT_SIZE,
+  ADJUST_FONT_SIZE,
+  RADIO_ITEMS,
+  VIEW_SPINNER_TIP,
 };

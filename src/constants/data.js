@@ -15,6 +15,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1599004800',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 0,
@@ -31,6 +33,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1599004800',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 0,
@@ -47,6 +51,8 @@ const DATA = [
     organizer: ['DVgluQnLGTg9ggTi6A4N', 'zom0bgoUBztJLlMhDEvh'],
     deadline: '1599004800',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 0,
@@ -64,6 +70,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '1599004800',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -79,6 +87,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -95,6 +105,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh', '2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -110,6 +122,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -126,6 +140,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -143,6 +159,8 @@ const DATA = [
     links: {
       'VS Code Downloader': 'https://code.visualstudio.com/',
     },
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -158,6 +176,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -176,6 +196,8 @@ const DATA = [
       'Mastering Markdown': 'https://guides.github.com/features/mastering-markdown/',
       'Commit requirments': 'https://docs.rs.school/#/en/git-convention',
     },
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -192,6 +214,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '1599696000',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -208,6 +232,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -223,6 +249,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -240,6 +268,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1599955200',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 1,
@@ -256,6 +286,8 @@ const DATA = [
     organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 2,
@@ -272,6 +304,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 2,
@@ -287,6 +321,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 2,
@@ -305,6 +341,8 @@ const DATA = [
       'Preprocessors. Sass': 'https://www.youtube.com/watch?v=JO8DvVZbxDw&feature=youtu.be',
       'SASS. Documentation': 'https://sass-scss.ru/documentation/',
     },
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 2,
@@ -323,6 +361,8 @@ const DATA = [
       GitHub: 'https://github.com/ViktoriyaVorozhun/friday-live-coding/tree/develop',
       'Figma layout': 'https://www.figma.com/file/Z7b86A3OdV6kAgoeZBPOZ7/Template-1?node-id=0%3A1',
     },
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 2,
@@ -339,6 +379,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '1600473600',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 3,
@@ -359,6 +401,8 @@ const DATA = [
       'Figma layout':
         'https://www.figma.com/file/DhRPIgi3JKRXqAkxaujDLl/Simple-Singolo?node-id=0%3A1',
     },
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 4,
@@ -376,6 +420,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 4,
@@ -391,6 +437,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 4,
@@ -407,6 +455,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1601337600',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 4,
@@ -422,6 +472,8 @@ const DATA = [
     organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 5,
@@ -438,6 +490,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1601769600',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 5,
@@ -453,6 +507,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 5,
@@ -469,6 +525,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 5,
@@ -487,6 +545,8 @@ const DATA = [
     organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 6,
@@ -502,6 +562,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 6,
@@ -518,6 +580,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 6,
@@ -533,6 +597,8 @@ const DATA = [
     organizer: ['DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 6,
@@ -549,6 +615,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1602720000',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 7,
@@ -566,6 +634,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 7,
@@ -582,6 +652,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 8,
@@ -597,6 +669,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1602892800',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 9,
@@ -614,6 +688,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '1603584000',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 10,
@@ -630,6 +706,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 10,
@@ -647,6 +725,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 10,
@@ -668,6 +748,8 @@ const DATA = [
         'https://www.figma.com/file/3aQwTNcZWg5CTuvlQ1t5MQ/fancy-weather?node-id=0%3A1',
       Demo: 'https://deadline2020-fancy-weather.netlify.app/',
     },
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 12,
@@ -684,6 +766,8 @@ const DATA = [
     organizer: ['2hrQVm7BAzWdmMQpzJAw', 'DVgluQnLGTg9ggTi6A4N'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 12,
@@ -700,6 +784,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh', '2hrQVm7BAzWdmMQpzJAw'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 13,
@@ -716,6 +802,8 @@ const DATA = [
     organizer: ['zom0bgoUBztJLlMhDEvh'],
     deadline: '',
     links: {},
+    allowFeedback: true,
+    feedbacks: {},
   },
   {
     week: 13,
@@ -735,6 +823,8 @@ const DATA = [
       'Interview Questions':
         'https://github.com/rolling-scopes-school/tasks/blob/master/tasks/interview-corejs.md',
     },
+    allowFeedback: true,
+    feedbacks: {},
   },
 ];
 
