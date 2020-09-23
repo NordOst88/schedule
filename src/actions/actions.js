@@ -17,8 +17,11 @@ const onSetListView = ({ target: { value } }) => ({ type: SET_LIST_VIEW, listVie
 const onTaskChange = (task) => ({ type: SET_TASK, selectedTask: task });
 const onSetTableEditMode = (tableEditMode) => ({ type: SET_TABLE_EDIT_MODE, tableEditMode });
 
-// colo-picker
+// color-picker
 const onEventColorChange = (colorPreset) => ({ type: SET_COLOR, colorPreset });
+
+// feedback
+const onFeedbackChange = (feedbacks) => ({ type: 'SET_FEEDBACK', feedbacks });
 
 export {
   onViewModeChange,
@@ -29,4 +32,5 @@ export {
   onTaskChange,
   onEventColorChange,
   onSetTableEditMode,
+  onFeedbackChange,
 };

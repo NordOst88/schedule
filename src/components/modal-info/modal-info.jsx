@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Modal, Space, Typography } from 'antd';
+import { Modal, Space, Typography, Button } from 'antd';
+import { FormOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
 
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer/organizer';
+import FeedbackContainer from '../feedback/feedback';
 
 import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
@@ -58,6 +60,12 @@ const ModalInfo = ({
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
 
+  const [displayFeedbackModal, setDisplayFeedback] = useState(false);
+
+  const onFeedbackBtnClick = () => {
+    setDisplayFeedback(true);
+  };
+
   // todo: think about refactor
 
   useEffect(() => {
@@ -79,6 +87,17 @@ const ModalInfo = ({
           setDisplayModal(false);
         }}
       >
+        <Button
+          icon={<FeedbackIcon />}
+          style={{ position: 'absolute', top: 67, right: 20 }}
+          onClick={onFeedbackBtnClick}
+        />
+        <FeedbackContainer
+          displayFeedbackModal={displayFeedbackModal}
+          setDisplayFeedback={setDisplayFeedback}
+          taskName={name}
+          timeZone={currentTimezone}
+        />
         <Space direction="vertical">
           <Line title={estimatedWeek} text={week} />
           <Line title={taskType} text={getTypeTaskTags()} />
@@ -110,3 +129,5 @@ const Line = ({ title, text, styles }) => {
     </>
   );
 };
+
+const FeedbackIcon = () => <FormOutlined style={{ fontSize: '1.8rem', marginRight: 0 }} />;

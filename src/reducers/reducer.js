@@ -54,6 +54,9 @@ const reducer = (state = getInitialState(), action) => {
     case SET_TABLE_EDIT_MODE:
       return { ...state, tableEditMode: action.tableEditMode };
 
+    case 'SET_FEEDBACK':
+      return { ...state, feedbacks: action.feedbacks };
+
     default:
       return state;
   }

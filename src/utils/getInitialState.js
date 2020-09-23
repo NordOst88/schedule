@@ -16,6 +16,7 @@ const getInitialState = () => {
     selectedTask: selectedTask || ALL_TASKS,
     tasksTypes: [],
     tableEditMode: false,
+    feedbacks: [],
   };
 };
 
