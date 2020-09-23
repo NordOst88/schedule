@@ -8,47 +8,17 @@ import { onFeedbackChange } from '../../actions/actions';
 // import getFormattedDate from '../../utils/getFormattedDate';
 // import getTimeStamp from '../../utils/getTimeStamp';
 
-const FeedbackContainer = ({
-  displayFeedbackModal,
-  setDisplayFeedback,
-  role,
-  /* taskName,
-  timeZone,
-  feedbacks, */
-  // onFeedbackAdd,
-}) => {
+const FeedbackContainer = ({ displayFeedbackModal, setDisplayFeedback }) => {
   const { TextArea } = Input;
   const [inputText, setInputText] = useState('');
-  // const [newFeedback, setNewFeedback] = useState({});
-  // const [feedbacksArray, setFeedbackArray] = useState(feedbacks);
-
-  /*   useEffect(() => {
-      setFeedbackArray((prevState) => ([...prevState, newFeedback ]));
-  }, [newFeedback]); */
-
-  /*   const generateFeedback = () => {
-    const timeStamp = getTimeStamp(new Date());
-    const formattedDate = getFormattedDate(timeStamp, timeZone);
-    const name = taskName;
-
-    setNewFeedback({
-      currentDate: formattedDate,
-      name,
-      inputText,
-    });
-  }; */
 
   const handleOnChange = (e) => {
     setInputText(e.target.value);
   };
 
   const handleOk = () => {
-    // generateFeedback();
-
     setDisplayFeedback(false);
     setInputText('');
-    // console.log(feedbacksArray)
-    // console.log(feedbacks)
   };
 
   const handleCancel = () => {
@@ -75,9 +45,8 @@ const FeedbackContainer = ({
   );
 };
 
-const mapStateToProps = ({ feedbacks, role }) => ({
+const mapStateToProps = ({ feedbacks }) => ({
   feedbacks,
-  role,
 });
 
 export default connect(mapStateToProps, { onFeedbackAdd: onFeedbackChange })(FeedbackContainer);

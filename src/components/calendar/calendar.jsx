@@ -72,7 +72,7 @@ const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selec
   );
 };
 
-const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents, role }) => {
+const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [eventDescription, setEventDescription] = useState(null);
   const [displayPopUp, setDisplayPopUp] = useState(false);
@@ -107,12 +107,9 @@ const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents, role 
       {displayModal && (
         <ModalInfo
           {...{
-            ...eventDescription,
+            eventDescription,
             displayModal,
             setDisplayModal,
-            eventColors,
-            currentTimezone,
-            role,
           }}
         />
       )}

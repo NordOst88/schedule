@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
 import { Modal, Space, Typography, Button, Switch } from 'antd';
 import { FormOutlined, ReadOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
+
+import { onSetEvents } from '../../actions/actions';
 
 import Type from '../task-type';
 import Links from '../links';
@@ -15,7 +18,11 @@ import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
 import { ONLINE_TEXT } from '../../constants/mapConstants';
 
+import SwaggerService from '../../services/swagger-service';
+
 import './modal-info.scss';
+
+const api = new SwaggerService();
 
 const {
   noInfo,
@@ -33,19 +40,7 @@ const {
 } = MODAL_INFO_TEXT;
 
 const ModalInfo = ({
-  name = noInfo,
-  week = noInfo,
-  type = [],
-  dateTime,
-  deadline,
-  estimatedTime = noInfo,
-  place = noInfo,
-  description = noInfo,
-  descriptionUrl = null,
-  links = {},
-  organizer = [],
-  comment = noInfo,
-  allowFeedback,
+  eventDescription,
   displayModal,
   setDisplayModal,
   eventColors,
@@ -53,7 +48,24 @@ const ModalInfo = ({
   fontSize,
   titleTextSize,
   role,
+  onFetch,
 }) => {
+  const {
+    name = noInfo,
+    week = noInfo,
+    type = [],
+    dateTime,
+    deadline,
+    estimatedTime = noInfo,
+    place = noInfo,
+    description = noInfo,
+    descriptionUrl = null,
+    links = {},
+    organizer = [],
+    comment = noInfo,
+    allowFeedback,
+    // feedbacks = {},
+  } = eventDescription;
   const { Link } = Typography;
   const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
   const getLinks = () => <Links {...{ links }} />;
@@ -70,9 +82,23 @@ const ModalInfo = ({
   const isMentor = role === MENTOR;
 
   const [displayFeedbackModal, setDisplayFeedback] = useState(false);
+  const [updatedEvent, setUpdateEvents] = useState(eventDescription);
 
   const onFeedbackBtnClick = () => {
     setDisplayFeedback(true);
+  };
+
+  const toggleAllowFeedback = () => {
+    setUpdateEvents((prevState) => ({ ...prevState, allowFeedback: false }));
+  };
+
+  const fetchUpdateEvent = (event) => {
+    api.updateEventById(event.id, event).then(() => {
+      api.getAllEvents().then((formattedEvents) => {
+        console.log('formatted', formattedEvents);
+        onFetch(formattedEvents);
+      });
+    });
   };
 
   // todo: think about refactor
@@ -82,7 +108,6 @@ const ModalInfo = ({
     const style = document.createElement('style');
     style.innerHTML = css;
     document.querySelector('.modal-info').appendChild(style);
-    console.log(role);
   }, []);
 
   return (
@@ -94,6 +119,8 @@ const ModalInfo = ({
         centered
         footer={null}
         onCancel={() => {
+          console.log('updated event', updatedEvent);
+          fetchUpdateEvent(updatedEvent);
           setDisplayModal(false);
         }}
       >
@@ -101,7 +128,7 @@ const ModalInfo = ({
           <Button
             icon={<FeedbackIcon />}
             style={{ position: 'absolute', top: 67, right: 20 }}
-            onClick={onFeedbackBtnClick}
+            onChange={onFeedbackBtnClick}
           />
         )}
         {isMentor && (
@@ -116,6 +143,7 @@ const ModalInfo = ({
               unCheckedChildren="Feedback OFF"
               defaultChecked
               style={{ position: 'absolute', top: 18, right: 50 }}
+              onClick={toggleAllowFeedback}
             />
           </>
         )}
@@ -151,8 +179,6 @@ const ModalInfo = ({
   );
 };
 
-export default ModalInfo;
-
 const Line = ({ title, text, type, styles }) => {
   const { Text } = Typography;
   const mode = type && text !== noInfo;
@@ -169,3 +195,21 @@ const Line = ({ title, text, type, styles }) => {
 };
 
 const FeedbackIcon = () => <FormOutlined style={{ fontSize: '1.8rem', marginRight: 0 }} />;
+
+const mapStateToProps = ({
+  eventColors,
+  currentTimezone,
+  fontSize,
+  titleTextSize,
+  role,
+  onFetch,
+}) => ({
+  eventColors,
+  currentTimezone,
+  fontSize,
+  titleTextSize,
+  role,
+  onFetch,
+});
+
+export default connect(mapStateToProps, { onFetch: onSetEvents })(ModalInfo);

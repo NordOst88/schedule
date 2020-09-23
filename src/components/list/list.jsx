@@ -13,15 +13,7 @@ import getFontSize from '../../utils/getFontSize';
 
 import './list.scss';
 
-const List = ({
-  selectedEvents,
-  eventColors,
-  listView,
-  onChange,
-  currentTimezone,
-  textSize,
-  role,
-}) => {
+const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone, textSize }) => {
   const { Text, Link } = Typography;
   const { moreDetails, deadline } = LIST_TEXT;
   const [displayModal, setDisplayModal] = useState(false);
@@ -99,14 +91,9 @@ const List = ({
       {displayModal && (
         <ModalInfo
           {...{
-            ...eventDescription,
+            eventDescription,
             displayModal,
             setDisplayModal,
-            eventColors,
-            currentTimezone,
-            fontSize,
-            titleTextSize,
-            role,
           }}
         />
       )}
