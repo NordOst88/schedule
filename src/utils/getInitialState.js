@@ -1,9 +1,15 @@
 import { TABLE, STUDENT, COLOR_PRESET, ALL_TASKS } from '../constants/constants';
 
 const getInitialState = () => {
-  const { mode, user, colorPreset, listView, timezone, selectedTask } = localStorage.settings
-    ? JSON.parse(localStorage.settings)
-    : {};
+  const {
+    mode,
+    user,
+    colorPreset,
+    listView,
+    timezone,
+    selectedTask,
+    fontSize,
+  } = localStorage.settings ? JSON.parse(localStorage.settings) : {};
 
   return {
     currentView: mode || TABLE,
@@ -16,7 +22,7 @@ const getInitialState = () => {
     selectedTask: selectedTask || ALL_TASKS,
     tasksTypes: [],
     tableEditMode: false,
-    feedbacks: [],
+    fontSize: fontSize || 10,
   };
 };
 

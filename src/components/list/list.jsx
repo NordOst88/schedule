@@ -5,16 +5,21 @@ import { FlagOutlined } from '@ant-design/icons';
 
 import ModalInfo from '../modal-info/modal-info';
 
-import { LIST_TEXT } from '../../constants/constants';
+import { LIST_TEXT, RADIO_ITEMS } from '../../constants/constants';
 import { onSetListView } from '../../actions/actions';
 import getFormattedDate from '../../utils/getFormattedDate';
 import getEventColor from '../../utils/getEventColor';
+import getFontSize from '../../utils/getFontSize';
 
-const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone }) => {
+import './list.scss';
+
+const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone, textSize }) => {
   const { Text, Link } = Typography;
-  const { moreDetails, left, right, alternate, deadline } = LIST_TEXT;
+  const { moreDetails, deadline } = LIST_TEXT;
   const [displayModal, setDisplayModal] = useState(false);
   const [eventDescription, setEventDescription] = useState(null);
+  const fontSize = getFontSize(textSize, 1.6);
+  const titleTextSize = getFontSize(textSize, 1.9);
 
   const onMoreDetailsClick = (event) => {
     setEventDescription(event);
@@ -23,7 +28,7 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
   // todo: add style
   return (
     <>
-      <ListTypeSelect {...{ onChange, listView, left, right, alternate }} />
+      <ListTypeSelect {...{ onChange, listView, radioItems: RADIO_ITEMS, fontSize }} />
       <Timeline mode={listView}>
         {selectedEvents.map((event) => {
           const activeEvent = Date.now() > new Date(event.dateTime * 1000);
@@ -31,14 +36,15 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
           const textType = activeEvent ? 'secondary' : null;
           const startDate = getFormattedDate(event.dateTime, currentTimezone);
           const deadlineDate = getFormattedDate(event.deadline, currentTimezone);
-          const dateValue = listView === 'left' || listView === 'right' ? null : `${startDate}`;
+          const [left, right, alternate] = Object.keys(RADIO_ITEMS);
+          const dateValue = listView === left || listView === right ? null : `${startDate}`;
 
           return (
             <Timeline.Item
               key={event.id}
               label={dateValue}
-              dot={<FlagOutlined style={{ fontSize: '2rem', color: colorEvent }} />}
-              style={{ color: textType ? eventColors.inactive : eventColors.markdown }}
+              dot={<FlagOutlined style={{ fontSize: '2.4rem', color: colorEvent }} />}
+              style={{ color: textType ? eventColors.inactive : eventColors.markdown, fontSize }}
             >
               <Space direction="vertical">
                 {!dateValue && (
@@ -46,10 +52,21 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
                     {startDate}
                   </Text>
                 )}
-                <Link href={event.descriptionUrl} target="_blank" type={textType}>
+                <Link
+                  href={event.descriptionUrl}
+                  target="_blank"
+                  type={textType}
+                  style={{ fontSize: titleTextSize, lineHeight: 1 }}
+                >
                   {event.name}
                 </Link>
-                <Text type={textType} style={{ textAlign: 'justify' }}>
+                <Text
+                  type={textType}
+                  style={{
+                    display: 'block',
+                    textAlign: listView !== alternate ? listView : 'center',
+                  }}
+                >
                   {event.description}
                 </Text>
                 <Text
@@ -73,35 +90,60 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
       </Timeline>
       {displayModal && (
         <ModalInfo
-          {...{ ...eventDescription, displayModal, setDisplayModal, eventColors, currentTimezone }}
+          {...{
+            ...eventDescription,
+            displayModal,
+            setDisplayModal,
+            eventColors,
+            currentTimezone,
+            fontSize,
+            titleTextSize,
+          }}
         />
       )}
     </>
   );
 };
 
-const ListTypeSelect = ({ onChange, listView, left, right, alternate }) => (
-  <Radio.Group
-    onChange={onChange}
-    value={listView}
-    style={{
-      display: 'flex',
-      marginBottom: 10,
-      justifyContent: 'flex-end',
-    }}
-  >
-    <Radio value="left">{left}</Radio>
-    <Radio value="right">{right}</Radio>
-    <Radio value="alternate">{alternate}</Radio>
-  </Radio.Group>
-);
+const ListTypeSelect = ({ onChange, listView, radioItems, fontSize }) => {
+  const radioStyles = { fontSize, display: 'flex', alignItems: 'center' };
+  const radioItemsKeys = Object.entries(radioItems);
 
-const mapStateToProps = ({ events, selectedEvents, eventColors, listView, currentTimezone }) => ({
+  return (
+    <Radio.Group
+      onChange={onChange}
+      value={listView}
+      style={{
+        display: 'flex',
+        marginBottom: 10,
+        justifyContent: 'flex-end',
+      }}
+    >
+      {radioItemsKeys.length
+        ? radioItemsKeys.map((item) => (
+            <Radio value={item[0]} style={radioStyles} key={item[0]}>
+              {item[1]}
+            </Radio>
+          ))
+        : null}
+    </Radio.Group>
+  );
+};
+
+const mapStateToProps = ({
   events,
   selectedEvents,
   eventColors,
   listView,
   currentTimezone,
+  fontSize,
+}) => ({
+  events,
+  selectedEvents,
+  eventColors,
+  listView,
+  currentTimezone,
+  textSize: fontSize,
 });
 
 export default connect(mapStateToProps, { onChange: onSetListView })(List);

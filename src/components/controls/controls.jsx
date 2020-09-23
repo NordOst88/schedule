@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
 import { Menu, Button } from 'antd';
-import { PrinterOutlined, SettingOutlined } from '@ant-design/icons';
+import { PrinterOutlined, SettingOutlined, LineHeightOutlined } from '@ant-design/icons';
 
 import ModalSpinner from '../modal-spinner/modal-spinner';
 import OptionPicker from '../option-picker/option-picker';
@@ -16,10 +16,17 @@ import {
   SAVE_OPTIONS,
   MENTOR,
   TABLE,
+  VIEW_SPINNER_TIP,
 } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
-import { onViewModeChange, onTimezoneChange, onTaskChange } from '../../actions/actions';
+import {
+  onViewModeChange,
+  onTimezoneChange,
+  onTaskChange,
+  onFontSizeChange,
+} from '../../actions/actions';
 import print from '../../utils/print';
+import getFontSize from '../../utils/getFontSize';
 import exportToFile from '../../utils/exportToFile';
 
 import './controls.scss';
@@ -34,13 +41,19 @@ const Controls = ({
   onTimezoneSelect,
   selectedTask,
   tasksTypes,
+  onTextSizeChange,
+  fontSize,
   role,
 }) => {
-  const { printBtn } = CONTROLS_TEXT;
+  const { printBtn, textAdjust, colorSettings } = CONTROLS_TEXT;
   const [displaySpinner, setDisplaySpinner] = useState(false);
+  const [spinnerTip, setSpinnerTip] = useState(MODAL_SPINNER_TIP);
   const [displaySettingsModal, setDisplaySettingsModal] = useState(false);
 
   const onBtnExportClick = async (extension) => {
+    if (displaySpinner !== MODAL_SPINNER_TIP) {
+      setSpinnerTip(MODAL_SPINNER_TIP);
+    }
     setDisplaySpinner(true);
     await exportToFile(currentView, extension);
     setDisplaySpinner(false);
@@ -50,40 +63,100 @@ const Controls = ({
     setDisplaySettingsModal(true);
   };
 
+  const onViewAdjustment = () => {
+    if (displaySpinner !== VIEW_SPINNER_TIP) {
+      setSpinnerTip(VIEW_SPINNER_TIP);
+    }
+    setDisplaySpinner(true);
+    onTextSizeChange(fontSize);
+    setTimeout(() => {
+      setDisplaySpinner(false);
+    }, 700);
+  };
+
+  const textSize = `${getFontSize(fontSize, 1.7)}`;
+  const iconsStyles = { fontSize: '1.9rem', margin: '3px 0 0' };
+  const btnsStyles = {
+    fontSize: textSize,
+    padding: '4px 10px',
+    display: 'flex',
+    alignItems: 'center',
+  };
+  const getStyles = (width) => ({ width, fontSize: textSize });
+
   return (
     <>
-      <Menu mode="horizontal">
+      <Menu
+        mode="horizontal"
+        style={{
+          height: 50,
+          lineHeight: 1,
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
         <Menu.Item>
-          <Dropdown text={BTN_SAVE_TEXT} onBtnClick={onBtnExportClick} items={SAVE_OPTIONS} />
+          <Dropdown
+            text={BTN_SAVE_TEXT}
+            onBtnClick={onBtnExportClick}
+            items={SAVE_OPTIONS}
+            styles={getStyles(115)}
+          />
         </Menu.Item>
         <Menu.Item>
-          <OptionPicker onChange={onViewSelect} defaultValue={currentView} options={VIEW_MODES} />
+          <OptionPicker
+            onChange={onViewSelect}
+            defaultValue={currentView}
+            options={VIEW_MODES}
+            styles={getStyles(130)}
+          />
         </Menu.Item>
         <Menu.Item>
           <OptionPicker
             onChange={onTimezoneSelect}
             defaultValue={currentTimezone}
             options={TIMEZONE}
+            styles={getStyles(225)}
           />
         </Menu.Item>
         <Menu.Item>
-          <OptionPicker onChange={onTaskSelect} defaultValue={selectedTask} options={tasksTypes} />
+          <OptionPicker
+            onChange={onTaskSelect}
+            defaultValue={selectedTask}
+            options={tasksTypes}
+            styles={getStyles(175)}
+          />
         </Menu.Item>
         <Menu.Item>
-          <Button icon={<PrintLogo />} onClick={print}>
+          <Button icon={<PrinterOutlined style={iconsStyles} />} onClick={print} style={btnsStyles}>
             {printBtn}
+          </Button>
+        </Menu.Item>
+        <Menu.Item>
+          <Button
+            icon={<LineHeightOutlined style={iconsStyles} />}
+            onClick={onViewAdjustment}
+            style={btnsStyles}
+          >
+            {textAdjust}
           </Button>
         </Menu.Item>
         {role === MENTOR && currentView === TABLE && (
           <Menu.Item>
-            <TableControls />
+            <TableControls style={btnsStyles} />
           </Menu.Item>
         )}
         <Menu.Item>
-          <Button icon={<SettingsLogo />} onClick={onSettingsClick} />
+          <Button
+            icon={<SettingOutlined style={iconsStyles} />}
+            onClick={onSettingsClick}
+            style={btnsStyles}
+          >
+            {colorSettings}
+          </Button>
         </Menu.Item>
       </Menu>
-      {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: MODAL_SPINNER_TIP }} />}
+      {displaySpinner && <ModalSpinner {...{ displaySpinner, tip: spinnerTip }} />}
       {displaySettingsModal && (
         <SettingsModal {...{ setDisplaySettingsModal, displaySettingsModal }} />
       )}
@@ -91,24 +164,25 @@ const Controls = ({
   );
 };
 
-const PrintLogo = () => (
-  <PrinterOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
-);
-
-const SettingsLogo = () => (
-  <SettingOutlined style={{ fontSize: '1.8rem', verticalAlign: 'bottom', marginRight: 0 }} />
-);
-
-const mapStateToProps = ({ currentView, tasksTypes, currentTimezone, selectedTask, role }) => ({
+const mapStateToProps = ({
+  currentView,
+  tasksTypes,
+  currentTimezone,
+  selectedTask,
+  role,
+  fontSize,
+}) => ({
   currentView,
   currentTimezone,
   selectedTask,
   tasksTypes,
   role,
+  fontSize,
 });
 
 export default connect(mapStateToProps, {
   onViewSelect: onViewModeChange,
   onTimezoneSelect: onTimezoneChange,
   onTaskSelect: onTaskChange,
+  onTextSizeChange: onFontSizeChange,
 })(Controls);
