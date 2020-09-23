@@ -52,7 +52,7 @@ const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selec
         const badgeText = window.innerWidth <= LARGE_MOBILE_WIDTH ? '' : EllipsisText(name);
 
         return (
-          <li key={name} id={id}>
+          <li key={id}>
             <Badge
               onClick={() => onEventClick(item)}
               color={color}
@@ -72,7 +72,7 @@ const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selec
   );
 };
 
-const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => {
+const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents, role }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [eventDescription, setEventDescription] = useState(null);
   const [displayPopUp, setDisplayPopUp] = useState(false);
@@ -106,7 +106,14 @@ const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => 
       />
       {displayModal && (
         <ModalInfo
-          {...{ ...eventDescription, displayModal, setDisplayModal, eventColors, currentTimezone }}
+          {...{
+            ...eventDescription,
+            displayModal,
+            setDisplayModal,
+            eventColors,
+            currentTimezone,
+            role,
+          }}
         />
       )}
       {displayPopUp && (
@@ -122,10 +129,11 @@ const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => 
   );
 };
 
-const mapStateToProps = ({ eventColors, currentTimezone, selectedEvents }) => ({
+const mapStateToProps = ({ eventColors, currentTimezone, selectedEvents, role }) => ({
   eventColors,
   currentTimezone,
   selectedEvents,
+  role,
 });
 
 export default connect(mapStateToProps)(CalendarContainer);

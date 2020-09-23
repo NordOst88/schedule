@@ -13,7 +13,15 @@ import getFontSize from '../../utils/getFontSize';
 
 import './list.scss';
 
-const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone, textSize }) => {
+const List = ({
+  selectedEvents,
+  eventColors,
+  listView,
+  onChange,
+  currentTimezone,
+  textSize,
+  role,
+}) => {
   const { Text, Link } = Typography;
   const { moreDetails, deadline } = LIST_TEXT;
   const [displayModal, setDisplayModal] = useState(false);
@@ -98,6 +106,7 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
             currentTimezone,
             fontSize,
             titleTextSize,
+            role,
           }}
         />
       )}
@@ -137,6 +146,7 @@ const mapStateToProps = ({
   listView,
   currentTimezone,
   fontSize,
+  role,
 }) => ({
   events,
   selectedEvents,
@@ -144,6 +154,7 @@ const mapStateToProps = ({
   listView,
   currentTimezone,
   textSize: fontSize,
+  role,
 });
 
 export default connect(mapStateToProps, { onChange: onSetListView })(List);

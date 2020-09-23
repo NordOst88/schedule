@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { Modal, Space, Typography, Button } from 'antd';
-import { FormOutlined } from '@ant-design/icons';
+import { Modal, Space, Typography, Button, Switch } from 'antd';
+import { FormOutlined, ReadOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
 
@@ -12,7 +12,7 @@ import FeedbackContainer from '../feedback/feedback';
 import MapContainer from '../map/map';
 
 import getFormattedDate from '../../utils/getFormattedDate';
-import { MODAL_INFO_TEXT } from '../../constants/constants';
+import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
 import { ONLINE_TEXT } from '../../constants/mapConstants';
 
 import './modal-info.scss';
@@ -45,12 +45,14 @@ const ModalInfo = ({
   links = {},
   organizer = [],
   comment = noInfo,
+  allowFeedback,
   displayModal,
   setDisplayModal,
   eventColors,
   currentTimezone,
   fontSize,
   titleTextSize,
+  role,
 }) => {
   const { Link } = Typography;
   const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
@@ -65,6 +67,8 @@ const ModalInfo = ({
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
   const isOfflineEvent = place !== ONLINE_TEXT && place;
 
+  const isMentor = role === MENTOR;
+
   const [displayFeedbackModal, setDisplayFeedback] = useState(false);
 
   const onFeedbackBtnClick = () => {
@@ -78,6 +82,7 @@ const ModalInfo = ({
     const style = document.createElement('style');
     style.innerHTML = css;
     document.querySelector('.modal-info').appendChild(style);
+    console.log(role);
   }, []);
 
   return (
@@ -92,11 +97,28 @@ const ModalInfo = ({
           setDisplayModal(false);
         }}
       >
-        <Button
-          icon={<FeedbackIcon />}
-          style={{ position: 'absolute', top: 67, right: 20 }}
-          onClick={onFeedbackBtnClick}
-        />
+        {allowFeedback && !isMentor && (
+          <Button
+            icon={<FeedbackIcon />}
+            style={{ position: 'absolute', top: 67, right: 20 }}
+            onClick={onFeedbackBtnClick}
+          />
+        )}
+        {isMentor && (
+          <>
+            <Button
+              icon={<ReadOutlined />}
+              style={{ position: 'absolute', top: 67, right: 20 }}
+              onClick={onFeedbackBtnClick}
+            />
+            <Switch
+              checkedChildren="Feedback ON"
+              unCheckedChildren="Feedback OFF"
+              defaultChecked
+              style={{ position: 'absolute', top: 18, right: 50 }}
+            />
+          </>
+        )}
         <FeedbackContainer
           displayFeedbackModal={displayFeedbackModal}
           setDisplayFeedback={setDisplayFeedback}

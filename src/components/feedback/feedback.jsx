@@ -11,6 +11,7 @@ import { onFeedbackChange } from '../../actions/actions';
 const FeedbackContainer = ({
   displayFeedbackModal,
   setDisplayFeedback,
+  role,
   /* taskName,
   timeZone,
   feedbacks, */
@@ -74,8 +75,9 @@ const FeedbackContainer = ({
   );
 };
 
-const mapStateToProps = ({ feedbacks }) => ({
+const mapStateToProps = ({ feedbacks, role }) => ({
   feedbacks,
+  role,
 });
 
 export default connect(mapStateToProps, { onFeedbackAdd: onFeedbackChange })(FeedbackContainer);
