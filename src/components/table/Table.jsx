@@ -6,7 +6,14 @@ import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
 import createColumns from './createColumns';
-import { COLUMNS_LIST } from '../../constants/tableConstants';
+import TableEditor from '../table-editor';
+import popupMessage from '../popup-message';
+import {
+  COLUMNS_LIST,
+  SUCCESS_FETCH_MSG,
+  SUCCESS_UPDATE_EVENT,
+  ERROR_FETCH_MSG,
+} from '../../constants/tableConstants';
 import {
   filterColumns,
   addColumnKey,
@@ -17,7 +24,7 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 import ModalEvent from '../modal-event';
-import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
+import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE } from '../../constants/constants';
 import ModalSpinner from '../modal-spinner';
 
 const api = new SwaggerService();
@@ -29,6 +36,8 @@ const TableContainer = ({
   eventColors,
   tableEditMode,
   onFetch,
+  currentView,
+  role,
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
@@ -64,13 +73,26 @@ const TableContainer = ({
 
   const fetchUpdateEvent = (event) => {
     setLoading(true);
-    api.updateEventById(event.id, event).then(() => {
-      api.getAllEvents().then((evnts) => {
-        const formattedData = sortByDateTime(evnts);
-        onFetch(formattedData);
+    api
+      .updateEventById(event.id, event)
+      .then(() => {
+        api.getAllEvents().then((evnts) => {
+          const formattedData = sortByDateTime(evnts);
+          onFetch(formattedData);
+          setLoading(false);
+          popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_UPDATE_EVENT });
+        });
+      })
+      .catch((error) => {
         setLoading(false);
+        popupMessage({
+          ...ERROR_FETCH_MSG,
+          message: error.name,
+          description: error.message,
+          callbacksArg: event,
+          callback: fetchUpdateEvent,
+        });
       });
-    });
   };
 
   const updateEvent = (event) => {
@@ -107,6 +129,11 @@ const TableContainer = ({
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
+        {role === MENTOR && currentView === TABLE && (
+          <Form.Item style={{ cursor: 'pointer' }}>
+            <TableEditor />
+          </Form.Item>
+        )}
       </Form>
       <Table
         rowClassName={addClassByCurrentDate}
@@ -131,12 +158,16 @@ const mapStateToProps = ({
   eventColors,
   tableEditMode,
   onFetch,
+  role,
+  currentView,
 }) => ({
   eventColors,
   selectedEvents,
   currentTimezone,
   tableEditMode,
   onFetch,
+  role,
+  currentView,
 });
 
 export default connect(mapStateToProps, { onFetch: onSetEvents })(TableContainer);

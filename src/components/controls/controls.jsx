@@ -143,7 +143,7 @@ const Controls = ({
         </Menu.Item>
         {role === MENTOR && currentView === TABLE && (
           <Menu.Item>
-            <TableControls />
+            <TableControls style={btnsStyles} />
           </Menu.Item>
         )}
         <Menu.Item>
