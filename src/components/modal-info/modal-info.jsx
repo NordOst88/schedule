@@ -7,9 +7,11 @@ import getEventColor from '../../utils/getEventColor';
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer/organizer';
+import MapContainer from '../map/map';
 
 import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
+import { ONLINE_TEXT } from '../../constants/mapConstants';
 
 import './modal-info.scss';
 
@@ -59,6 +61,7 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
+  const isOfflineEvent = place !== ONLINE_TEXT && place;
 
   // todo: think about refactor
 
@@ -101,6 +104,7 @@ const ModalInfo = ({
             styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
           />
         </Space>
+        {isOfflineEvent && <MapContainer place={place} />}
       </Modal>
     </div>
   );
