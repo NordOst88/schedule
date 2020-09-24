@@ -69,7 +69,7 @@ const ModalInfo = ({
     organizer = [],
     comment = noInfo,
     allowFeedback,
-    // feedbacks = {},
+    feedbacks = {},
   } = eventDescription;
   const { Link } = Typography;
   const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
@@ -134,7 +134,6 @@ const ModalInfo = ({
   // todo: think about refactor
 
   useEffect(() => {
-    console.log('uploaded event', updatedEvent);
     const css = `.ant-modal-header { background-color: ${getEventColor(eventColors, type)}5e; }`;
     const style = document.createElement('style');
     style.innerHTML = css;
@@ -151,7 +150,6 @@ const ModalInfo = ({
         footer={null}
         onCancel={() => {
           if (isNeedToUpdate && isMentor) {
-            console.log('updated event', updatedEvent);
             fetchUpdateEvent(updatedEvent);
             setNeedToUpdate(false);
           }
@@ -193,6 +191,9 @@ const ModalInfo = ({
           displayFeedbackModal={displayFeedbackModal}
           setDisplayFeedback={setDisplayFeedback}
           onFeedbackAdd={onFeedbackAdd}
+          isMentor={isMentor}
+          feedbacks={feedbacks}
+          currentTimezone={currentTimezone}
         />
         <Space direction="vertical">
           <Line title={estimatedWeek} text={week} styles={{ fontSize }} />

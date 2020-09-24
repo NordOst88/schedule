@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 
 import { Modal, Input } from 'antd';
 
-// import getFormattedDate from '../../utils/getFormattedDate';
+import getFormattedDate from '../../utils/getFormattedDate';
 import getTimeStamp from '../../utils/getTimeStamp';
 
-const FeedbackContainer = ({ displayFeedbackModal, setDisplayFeedback, onFeedbackAdd }) => {
+const FeedbackContainer = ({
+  displayFeedbackModal,
+  setDisplayFeedback,
+  onFeedbackAdd,
+  isMentor,
+  feedbacks,
+  currentTimezone,
+}) => {
   const { TextArea } = Input;
   const [inputText, setInputText] = useState('');
 
@@ -13,19 +20,44 @@ const FeedbackContainer = ({ displayFeedbackModal, setDisplayFeedback, onFeedbac
     setInputText(e.target.value);
   };
 
+  const getFeedbackData = () => {
+    const entries = Object.entries(feedbacks);
+    return entries.map((feedback) => {
+      const dateTime = getFormattedDate(feedback[0], currentTimezone);
+      return `${dateTime}: ${feedback[1]}`;
+    });
+  };
+
   const handleOk = () => {
-    console.log(inputText);
-    onFeedbackAdd(getTimeStamp(new Date()), inputText);
-    setDisplayFeedback(false);
-    setInputText('');
+    if (isMentor) {
+      setDisplayFeedback(false);
+    } else {
+      onFeedbackAdd(getTimeStamp(new Date()), inputText);
+      setDisplayFeedback(false);
+      setInputText('');
+    }
   };
 
   const handleCancel = () => {
+    if (!isMentor) {
+      setInputText('');
+    }
     setDisplayFeedback(false);
-    setInputText('');
   };
 
-  return (
+  return isMentor ? (
+    <Modal
+      title="All feedbacks"
+      visible={displayFeedbackModal}
+      closable={false}
+      onOk={handleOk}
+      onCancel={handleCancel}
+    >
+      {getFeedbackData().map((feedback) => (
+        <p key={feedback}>{feedback}</p>
+      ))}
+    </Modal>
+  ) : (
     <Modal
       title="Feedback"
       visible={displayFeedbackModal}
