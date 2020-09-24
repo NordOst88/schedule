@@ -143,7 +143,9 @@ const TableContainer = ({
       <Table
         rowClassName={addClassByCurrentDate}
         dataSource={selectedEvents}
-        columns={tableEditMode ? [editColumn, ...visibleColumns] : visibleColumns}
+        columns={
+          tableEditMode && role === MENTOR ? [editColumn, ...visibleColumns] : visibleColumns
+        }
         rowKey="id"
         size={fontSize === 10 ? 'small' : 'middle'}
         pagination={false}
