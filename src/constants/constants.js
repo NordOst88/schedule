@@ -94,6 +94,9 @@ const ADJUST_FONT_SIZE = 13;
 
 const TABLE_EDITABLE = true;
 
+const HIDDEN_ITEMS_TEXT = 'Hidden Items: ';
+const SELECTED_ITEMS_TEXT = 'Selected Items: ';
+
 export {
   TABLE,
   LIST,
@@ -117,4 +120,6 @@ export {
   ADJUST_FONT_SIZE,
   RADIO_ITEMS,
   VIEW_SPINNER_TIP,
+  HIDDEN_ITEMS_TEXT,
+  SELECTED_ITEMS_TEXT,
 };

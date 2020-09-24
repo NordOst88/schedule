@@ -24,7 +24,13 @@ import {
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
 import ModalEvent from '../modal-event';
-import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE } from '../../constants/constants';
+import {
+  MODAL_ADD_EVENT_TEXT,
+  MENTOR,
+  TABLE,
+  HIDDEN_ITEMS_TEXT,
+  SELECTED_ITEMS_TEXT,
+} from '../../constants/constants';
 import ModalSpinner from '../modal-spinner';
 import { hideItems, viewItems } from '../../utils/hideSelectedItems';
 
@@ -52,7 +58,7 @@ const TableContainer = ({
   const [selectedItems, setItem] = useState(selectedRowKeys);
 
   const handleRowClick = (event) => {
-    if (event.shiftKey === true) {
+    if (event.shiftKey) {
       const target = event.target.closest('tr[data-row-key]');
       if (target) {
         const rowKey = target.getAttribute('data-row-key');
@@ -71,7 +77,7 @@ const TableContainer = ({
   };
 
   useEffect(() => {
-    if (isHiddenRowKeys === true) {
+    if (isHiddenRowKeys) {
       hideItems(selectedItems);
     }
   }, []);
@@ -84,6 +90,18 @@ const TableContainer = ({
   const rowSelection = {
     onChange: onSelectChange,
     selectedRowKeys: selectedItems,
+  };
+
+  const onHideButtonClick = () => {
+    if (selectedItems !== 0) {
+      setVisibility(true);
+    }
+    hideItems(selectedItems);
+  };
+
+  const onShowButtonClick = () => {
+    setVisibility(false);
+    viewItems(selectedItems);
   };
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
@@ -176,29 +194,17 @@ const TableContainer = ({
             <TableEditor />
           </Form.Item>
         )}
-        <Button
-          type="primary"
-          onClick={() => {
-            if (selectedItems !== 0) {
-              setVisibility(true);
-            }
-            hideItems(selectedItems);
-          }}
-        >
+        <Button type="primary" onClick={() => onHideButtonClick()}>
           Hide Selected items
         </Button>
-        <Button
-          type="primary"
-          className="marginLeft"
-          onClick={() => {
-            setVisibility(false);
-            viewItems(selectedItems);
-          }}
-        >
+        <Button type="primary" className="marginLeft" onClick={() => onShowButtonClick()}>
           Show Hidden Items
         </Button>
         <Text strong underline className="marginLeft typography">
-          {isHiddenRowKeys === true ? 'Hidden Items: ' : 'Selected Items: '} {selectedItems.length}
+          {isHiddenRowKeys === true && selectedItems.length
+            ? HIDDEN_ITEMS_TEXT
+            : SELECTED_ITEMS_TEXT}{' '}
+          {selectedItems.length}
         </Text>
       </Form>
       <Table
