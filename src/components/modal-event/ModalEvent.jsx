@@ -3,8 +3,8 @@ import { Modal, Form, Input, InputNumber, DatePicker } from 'antd';
 import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
-import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import Line from '../line';
+import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import { formatEventForModal } from '../../utils/tableHelpers';
 
 const {

@@ -1,8 +1,8 @@
 import moment from 'moment';
+import { TABLE, MODAL_INFO_TEXT } from '../constants/constants';
 import setLocaLStorageSettings from './setLocalStorageSettings';
 import getTimeStamp from './getTimeStamp';
 import convertArrayToObject from './convertArrayToObject';
-import { TABLE, MODAL_INFO_TEXT } from '../constants/constants';
 
 const { noInfo } = MODAL_INFO_TEXT;
 

@@ -4,16 +4,19 @@ import { Table, Form, Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
-import sortByDateTime from '../../utils/sortByDateTime';
 import createColumns from './createColumns';
 import TableEditor from '../table-editor';
 import popupMessage from '../popup-message';
+import ModalEvent from '../modal-event';
+import ColumnSelector from './ColumnSelector';
+import ModalSpinner from '../modal-spinner';
 import {
   COLUMNS_LIST,
   SUCCESS_FETCH_MSG,
   SUCCESS_UPDATE_EVENT,
   ERROR_FETCH_MSG,
 } from '../../constants/tableConstants';
+import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE } from '../../constants/constants';
 import {
   filterColumns,
   addColumnKey,
@@ -21,12 +24,9 @@ import {
   addClassByCurrentDate,
   formatEventForFetch,
 } from '../../utils/tableHelpers';
-import './Table.scss';
-import ColumnSelector from './ColumnSelector';
-import ModalEvent from '../modal-event';
-import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE } from '../../constants/constants';
-import ModalSpinner from '../modal-spinner';
 import getFontSize from '../../utils/getFontSize';
+import sortByDateTime from '../../utils/sortByDateTime';
+import './Table.scss';
 
 const api = new SwaggerService();
 const { editEvent } = MODAL_ADD_EVENT_TEXT;

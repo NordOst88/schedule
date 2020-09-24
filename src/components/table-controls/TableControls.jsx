@@ -4,7 +4,6 @@ import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
-import sortByDateTime from '../../utils/sortByDateTime';
 import ModalEvent from '../modal-event';
 import popupMessage from '../popup-message';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
@@ -14,6 +13,7 @@ import {
   ERROR_FETCH_MSG,
 } from '../../constants/tableConstants';
 import { formatEventForFetch } from '../../utils/tableHelpers';
+import sortByDateTime from '../../utils/sortByDateTime';
 
 const api = new SwaggerService();
 const { addEvent } = MODAL_ADD_EVENT_TEXT;
