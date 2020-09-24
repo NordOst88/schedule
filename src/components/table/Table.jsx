@@ -26,6 +26,7 @@ import ColumnSelector from './ColumnSelector';
 import ModalEvent from '../modal-event';
 import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE } from '../../constants/constants';
 import ModalSpinner from '../modal-spinner';
+import getFontSize from '../../utils/getFontSize';
 
 const api = new SwaggerService();
 const { editEvent } = MODAL_ADD_EVENT_TEXT;
@@ -38,11 +39,13 @@ const TableContainer = ({
   onFetch,
   currentView,
   role,
+  fontSize,
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});
   const [loading, setLoading] = useState(false);
   const columns = createColumns(currentTimezone, eventColors);
+  const textSize = getFontSize(fontSize, 1.7);
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
   const selectedColumns = storage.tableColumnsSelected
@@ -123,15 +126,17 @@ const TableContainer = ({
   };
 
   return (
-    <div style={{ overflowX: 'auto' }}>
+    <div className="table-wrap" style={{ overflowX: 'auto', height: '86vh' }}>
       {loading && <ModalSpinner displaySpinner={loading} tip="Updating Event" />}
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item style={{ cursor: 'pointer' }}>
-          <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
+          <ColumnSelector
+            {...{ visibleColumns, columnSelectHandler, columns, fontSize: textSize }}
+          />
         </Form.Item>
         {role === MENTOR && currentView === TABLE && (
           <Form.Item style={{ cursor: 'pointer' }}>
-            <TableEditor />
+            <TableEditor fontSize={textSize} />
           </Form.Item>
         )}
       </Form>
@@ -140,7 +145,7 @@ const TableContainer = ({
         dataSource={selectedEvents}
         columns={tableEditMode ? [editColumn, ...visibleColumns] : visibleColumns}
         rowKey="id"
-        size="small"
+        size={fontSize === 10 ? 'small' : 'middle'}
         pagination={false}
       />
       {displayModal && (
@@ -160,6 +165,7 @@ const mapStateToProps = ({
   onFetch,
   role,
   currentView,
+  fontSize,
 }) => ({
   eventColors,
   selectedEvents,
@@ -168,6 +174,7 @@ const mapStateToProps = ({
   onFetch,
   role,
   currentView,
+  fontSize,
 });
 
 export default connect(mapStateToProps, { onFetch: onSetEvents })(TableContainer);
