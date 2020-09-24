@@ -5,6 +5,8 @@ import { Modal, Space, Typography, Button, Switch } from 'antd';
 import { FormOutlined, ReadOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
+import sortByDateTime from '../../utils/sortByDateTime';
+import getFormattedDate from '../../utils/getFormattedDate';
 
 import { onSetEvents } from '../../actions/actions';
 
@@ -14,7 +16,6 @@ import Organizer from '../organizer/organizer';
 import FeedbackContainer from '../feedback/feedback';
 import MapContainer from '../map/map';
 
-import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
 import { ONLINE_TEXT } from '../../constants/mapConstants';
 
@@ -83,19 +84,25 @@ const ModalInfo = ({
 
   const [displayFeedbackModal, setDisplayFeedback] = useState(false);
   const [updatedEvent, setUpdateEvents] = useState(eventDescription);
+  const [isNeedToUpdate, setNeedToUpdate] = useState(false);
 
   const onFeedbackBtnClick = () => {
     setDisplayFeedback(true);
   };
 
   const toggleAllowFeedback = () => {
-    setUpdateEvents((prevState) => ({ ...prevState, allowFeedback: false }));
+    setUpdateEvents((prevState) => ({
+      ...prevState,
+      allowFeedback: !prevState.allowFeedback,
+      organizer: prevState.organizer.map((item) => item.id),
+    }));
+    setNeedToUpdate(true);
   };
 
   const fetchUpdateEvent = (event) => {
     api.updateEventById(event.id, event).then(() => {
-      api.getAllEvents().then((formattedEvents) => {
-        console.log('formatted', formattedEvents);
+      api.getAllEvents().then((events) => {
+        const formattedEvents = sortByDateTime(events);
         onFetch(formattedEvents);
       });
     });
@@ -104,6 +111,7 @@ const ModalInfo = ({
   // todo: think about refactor
 
   useEffect(() => {
+    console.log('uploaded event', updatedEvent);
     const css = `.ant-modal-header { background-color: ${getEventColor(eventColors, type)}5e; }`;
     const style = document.createElement('style');
     style.innerHTML = css;
@@ -119,8 +127,11 @@ const ModalInfo = ({
         centered
         footer={null}
         onCancel={() => {
-          console.log('updated event', updatedEvent);
-          fetchUpdateEvent(updatedEvent);
+          if (isNeedToUpdate && isMentor) {
+            console.log('updated event', updatedEvent);
+            fetchUpdateEvent(updatedEvent);
+            setNeedToUpdate(false);
+          }
           setDisplayModal(false);
         }}
       >
@@ -141,9 +152,9 @@ const ModalInfo = ({
             <Switch
               checkedChildren="Feedback ON"
               unCheckedChildren="Feedback OFF"
-              defaultChecked
+              defaultChecked={allowFeedback}
               style={{ position: 'absolute', top: 18, right: 50 }}
-              onClick={toggleAllowFeedback}
+              onChange={toggleAllowFeedback}
             />
           </>
         )}
@@ -202,6 +213,7 @@ const mapStateToProps = ({
   fontSize,
   titleTextSize,
   role,
+  feedbackMode,
   onFetch,
 }) => ({
   eventColors,
@@ -209,7 +221,10 @@ const mapStateToProps = ({
   fontSize,
   titleTextSize,
   role,
+  feedbackMode,
   onFetch,
 });
 
-export default connect(mapStateToProps, { onFetch: onSetEvents })(ModalInfo);
+export default connect(mapStateToProps, {
+  onFetch: onSetEvents,
+})(ModalInfo);
