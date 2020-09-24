@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Modal, Space, Typography, Button, Switch } from 'antd';
+import { Modal, Space, Typography, Button, Switch, Tooltip } from 'antd';
 import { FormOutlined, ReadOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
@@ -18,6 +18,10 @@ import MapContainer from '../map/map';
 
 import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
 import { ONLINE_TEXT } from '../../constants/mapConstants';
+import {
+  MENTOR_SHOW_FEEDBACKS_TEXT,
+  STUDENT_ADD_FEEDBACK_TEXT,
+} from '../../constants/modalInfoConstants';
 
 import SwaggerService from '../../services/swagger-service';
 
@@ -136,19 +140,23 @@ const ModalInfo = ({
         }}
       >
         {allowFeedback && !isMentor && (
-          <Button
-            icon={<FeedbackIcon />}
-            style={{ position: 'absolute', top: 67, right: 20 }}
-            onChange={onFeedbackBtnClick}
-          />
+          <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
+            <Button
+              icon={<FeedbackIcon />}
+              style={{ position: 'absolute', top: 67, right: 20 }}
+              onChange={onFeedbackBtnClick}
+            />
+          </Tooltip>
         )}
         {isMentor && (
           <>
-            <Button
-              icon={<ReadOutlined />}
-              style={{ position: 'absolute', top: 67, right: 20 }}
-              onClick={onFeedbackBtnClick}
-            />
+            <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
+              <Button
+                icon={<ReadOutlined />}
+                style={{ position: 'absolute', top: 67, right: 20 }}
+                onClick={onFeedbackBtnClick}
+              />
+            </Tooltip>
             <Switch
               checkedChildren="Feedback ON"
               unCheckedChildren="Feedback OFF"
