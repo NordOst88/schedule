@@ -15,7 +15,6 @@ import {
   BTN_SAVE_TEXT,
   SAVE_OPTIONS,
   MENTOR,
-  TABLE,
   VIEW_SPINNER_TIP,
 } from '../../constants/constants';
 import TIMEZONE from '../../constants/timezone';
@@ -141,7 +140,7 @@ const Controls = ({
             {textAdjust}
           </Button>
         </Menu.Item>
-        {role === MENTOR && currentView === TABLE && (
+        {role === MENTOR && (
           <Menu.Item>
             <TableControls style={btnsStyles} />
           </Menu.Item>

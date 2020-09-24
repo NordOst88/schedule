@@ -55,7 +55,6 @@ const TableControls = ({ onFetch, style }) => {
   return (
     <>
       <Button
-        type="dashed"
         disabled={loading}
         icon={<PlusOutlined spin={loading} />}
         onClick={() => setDisplayModal(true)}
