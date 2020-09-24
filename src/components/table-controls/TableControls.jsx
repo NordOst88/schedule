@@ -56,7 +56,7 @@ const TableControls = ({ onFetch, style }) => {
     <>
       <Button
         disabled={loading}
-        icon={<PlusOutlined spin={loading} />}
+        icon={<PlusOutlined spin={loading} style={{ margin: '3px 0px 0px' }} />}
         onClick={() => setDisplayModal(true)}
         style={style}
       >
