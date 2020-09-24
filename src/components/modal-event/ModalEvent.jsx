@@ -6,6 +6,7 @@ import LinksList from './LinksList';
 import Line from '../line';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import { formatEventForModal } from '../../utils/tableHelpers';
+import './ModalEvent.scss';
 
 const {
   week,
@@ -71,6 +72,7 @@ const ModalEvent = ({
       onCancel={() => setDisplayModal(false)}
       onOk={onOk}
       okText={createNewEvent ? 'OK' : 'SAVE'}
+      className="modal-event"
     >
       <Form
         layout={layout}

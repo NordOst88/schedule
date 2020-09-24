@@ -1,0 +1,17 @@
+.modal-event {
+  .ant-modal {
+    &-header {
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+    }
+    &-title {
+      color: #ffffff;
+      cursor: default;
+    }
+    &-close-x {
+      color: #ffffff;
+      &:hover {
+        color: #d6d6d6;
+      }
+    }
+  }
+}
