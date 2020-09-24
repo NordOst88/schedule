@@ -27,13 +27,12 @@ const TableContainer = ({
   isHiddenRowKeys,
   setVisibility,
 }) => {
-  // hideItem
   const [selectedItems, setItem] = useState(selectedRowKeys);
 
-  const handleRowClick = (e) => {
-    if (e.shiftKey === true) {
-      const target = e.target.closest('tr[data-row-key]');
-      if (e.target.closest('tr[data-row-key]')) {
+  const handleRowClick = (event) => {
+    if (event.shiftKey === true) {
+      const target = event.target.closest('tr[data-row-key]');
+      if (target) {
         const rowKey = target.getAttribute('data-row-key');
         const id = selectedItems.indexOf(`${rowKey}`);
         if (!selectedItems.includes(`${rowKey}`)) {
@@ -43,7 +42,7 @@ const TableContainer = ({
           const before = selectedItems.slice(0, id);
           const after = selectedItems.slice(id + 1);
           setItem([...before, ...after]);
-          onSelectItem([...selectedItems, `${rowKey}`]);
+          onSelectItem([...before, ...after]);
         }
       }
     }
@@ -122,13 +121,15 @@ const TableContainer = ({
           Show Hidden Items
         </Button>
         <Text strong underline className="marginLeft typography">
-          {isHiddenRowKeys === true ? 'Hidden items: ' : 'Selected Items: '} {selectedItems.length}
+          {isHiddenRowKeys === true ? 'Hidden Items: ' : 'Selected Items: '} {selectedItems.length}
         </Text>
       </Form>
       <Table
-        // hideItem
         onRow={() => ({
-          onClick: (e) => handleRowClick(e),
+          onClick: (event) => handleRowClick(event),
+          style: {
+            userSelect: 'none',
+          },
         })}
         rowSelection={rowSelection}
         rowClassName={addClassByCurrentDate}
