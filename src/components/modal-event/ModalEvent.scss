@@ -1,4 +1,5 @@
-.modal-event {
+.modal-event-sm,
+.modal-event-df {
   .ant-modal {
     &-header {
       background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
@@ -12,6 +13,48 @@
       &:hover {
         color: #d6d6d6;
       }
+    }
+  }
+}
+
+.modal-event-sm {
+  &.ant-modal {
+    top: 50px;
+  }
+}
+
+.modal-event-df {
+  &.ant-modal {
+    top: 8px;
+  }
+  .ant-modal {
+    &-title {
+      font-size: 18px;
+    }
+  }
+  .ant-btn {
+    font-size: 18px;
+    line-height: 0;
+  }
+  span.ant-typography {
+    font-size: 16px;
+  }
+  .ant-input-number {
+    font-size: 16px;
+  }
+  .ant-picker-input {
+    font-size: 16px;
+    #dateTime,
+    #deadline {
+      font-size: 16px;
+    }
+  }
+  .ant-col.ant-form-item-control {
+    font-size: 16px;
+    line-height: 0;
+    & input,
+    textarea {
+      font-size: 16px;
     }
   }
 }
