@@ -1,78 +1,72 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
 import sortByDateTime from '../../utils/sortByDateTime';
-import ModalAddEvent from './ModalAddEvent';
-import getTimeStamp from '../../utils/getTimeStamp';
-import convertArrayToObject from '../../utils/convertArrayToObject';
-import { MODAL_INFO_TEXT } from '../../constants/constants';
+import ModalEvent from '../modal-event';
+import popupMessage from '../popup-message';
+import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
+import {
+  SUCCESS_FETCH_MSG,
+  SUCCESS_ADD_EVENT,
+  ERROR_FETCH_MSG,
+} from '../../constants/tableConstants';
+import { formatEventForFetch } from '../../utils/tableHelpers';
 
 const api = new SwaggerService();
-const { noInfo } = MODAL_INFO_TEXT;
+const { addEvent } = MODAL_ADD_EVENT_TEXT;
 
-const TableControls = ({ onFetch }) => {
+const TableControls = ({ onFetch, style }) => {
   const [loading, setLoading] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
 
-  const addEventToBackend = (event) => {
+  const fetchAddEvent = (event) => {
     setLoading(true);
-    api.addEvent(event).then(() => {
-      api.getAllEvents().then((events) => {
-        const formattedData = sortByDateTime(events);
-        onFetch(formattedData);
+    api
+      .addEvent(event)
+      .then(() => {
+        api.getAllEvents().then((events) => {
+          const formattedData = sortByDateTime(events);
+          onFetch(formattedData);
+          setLoading(false);
+          popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_ADD_EVENT });
+        });
+      })
+      .catch((error) => {
         setLoading(false);
+        popupMessage({
+          ...ERROR_FETCH_MSG,
+          message: error.name,
+          description: error.message,
+          callbacksArg: event,
+          callback: fetchAddEvent,
+        });
       });
-    });
   };
 
-  const createNewEvent = ({
-    week,
-    dateTime,
-    deadline,
-    type,
-    place = noInfo,
-    estimatedTime = noInfo,
-    name = noInfo,
-    descriptionUrl = noInfo,
-    description = noInfo,
-    links,
-    selectedOrganizers,
-    comment = noInfo,
-  }) => {
-    const newEvent = {
-      week: `${week}`,
-      dateTime: `${getTimeStamp(dateTime)}`,
-      deadline: `${getTimeStamp(deadline)}`,
-      type: type ? type.tags : [noInfo],
-      place,
-      estimatedTime,
-      timeZone: '',
-      name,
-      descriptionUrl,
-      description,
-      links: convertArrayToObject(links),
-      organizer: selectedOrganizers ? selectedOrganizers.organizers : [noInfo],
-      comment,
-    };
-    addEventToBackend(newEvent);
+  const createNewEvent = (event) => {
+    const newEvent = formatEventForFetch(event);
+    fetchAddEvent(newEvent);
     setDisplayModal(false);
   };
 
   return (
-    <Space>
+    <>
       <Button
         type="dashed"
         disabled={loading}
         icon={<PlusOutlined spin={loading} />}
         onClick={() => setDisplayModal(true)}
+        style={style}
       >
-        Add Event
+        Add event
       </Button>
-      <ModalAddEvent {...{ setDisplayModal, displayModal, createNewEvent, api }} />
-    </Space>
+      {displayModal && (
+        <ModalEvent {...{ setDisplayModal, displayModal, createNewEvent, api, title: addEvent }} />
+      )}
+    </>
   );
 };
 

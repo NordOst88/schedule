@@ -8,6 +8,7 @@ const getInitialState = () => {
     listView,
     timezone,
     selectedTask,
+    fontSize,
     selectedRowKeys,
     isHiddenRowKeys,
   } = localStorage.settings ? JSON.parse(localStorage.settings) : {};
@@ -22,6 +23,8 @@ const getInitialState = () => {
     currentTimezone: timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
     selectedTask: selectedTask || ALL_TASKS,
     tasksTypes: [],
+    tableEditMode: false,
+    fontSize: fontSize || 10,
     selectedRowKeys: selectedRowKeys || [],
     isHiddenRowKeys: isHiddenRowKeys || false,
   };

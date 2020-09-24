@@ -1,6 +1,18 @@
 import React from 'react';
+
+import { connect } from 'react-redux';
+
+import getFontSize from '../../utils/getFontSize';
 import './heading.scss';
 
-const Heading = ({ children }) => <h1 className="title">{children}</h1>;
+const Heading = ({ fontSize, children }) => (
+  <h1 className="title" style={{ fontSize: `${getFontSize(fontSize, 2)}` }}>
+    {children}
+  </h1>
+);
 
-export default Heading;
+const mapStateToProps = ({ fontSize }) => ({
+  fontSize,
+});
+
+export default connect(mapStateToProps)(Heading);

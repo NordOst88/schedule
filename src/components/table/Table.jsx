@@ -1,32 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table, Form, Button, Typography } from 'antd';
+import { EditTwoTone } from '@ant-design/icons';
+import SwaggerService from '../../services/swagger-service';
+import { onSetEvents, onSetSelectedItems, onSetVisibility } from '../../actions/actions';
+import sortByDateTime from '../../utils/sortByDateTime';
 import createColumns from './createColumns';
-import { COLUMNS_LIST } from '../../constants/tableConstants';
+import TableEditor from '../table-editor';
+import popupMessage from '../popup-message';
+import {
+  COLUMNS_LIST,
+  SUCCESS_FETCH_MSG,
+  SUCCESS_UPDATE_EVENT,
+  ERROR_FETCH_MSG,
+} from '../../constants/tableConstants';
 import {
   filterColumns,
   addColumnKey,
   removeColumnKey,
   addClassByCurrentDate,
+  formatEventForFetch,
 } from '../../utils/tableHelpers';
 import './Table.scss';
 import ColumnSelector from './ColumnSelector';
-
-import { onSetSelectedItems, onSetVisibility } from '../../actions/actions';
-
+import ModalEvent from '../modal-event';
+import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE } from '../../constants/constants';
+import ModalSpinner from '../modal-spinner';
 import { hideItems, viewItems } from '../../utils/hideSelectedItems';
 
+const api = new SwaggerService();
+const { editEvent } = MODAL_ADD_EVENT_TEXT;
 const { Text } = Typography;
 
 const TableContainer = ({
-  events,
+  selectedEvents,
   currentTimezone,
   eventColors,
+  tableEditMode,
+  onFetch,
+  currentView,
+  role,
   onSelectItem,
   selectedRowKeys,
   isHiddenRowKeys,
   setVisibility,
 }) => {
+  const [displayModal, setDisplayModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState({});
+  const [loading, setLoading] = useState(false);
+  const columns = createColumns(currentTimezone, eventColors);
   const [selectedItems, setItem] = useState(selectedRowKeys);
 
   const handleRowClick = (event) => {
@@ -64,8 +86,6 @@ const TableContainer = ({
     selectedRowKeys: selectedItems,
   };
 
-  const columns = createColumns(currentTimezone, eventColors);
-
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
   const selectedColumns = storage.tableColumnsSelected
     ? JSON.parse(storage.tableColumnsSelected)
@@ -93,12 +113,69 @@ const TableContainer = ({
     }
   };
 
+  const fetchUpdateEvent = (event) => {
+    setLoading(true);
+    api
+      .updateEventById(event.id, event)
+      .then(() => {
+        api.getAllEvents().then((evnts) => {
+          const formattedData = sortByDateTime(evnts);
+          onFetch(formattedData);
+          setLoading(false);
+          popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_UPDATE_EVENT });
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        popupMessage({
+          ...ERROR_FETCH_MSG,
+          message: error.name,
+          description: error.message,
+          callbacksArg: event,
+          callback: fetchUpdateEvent,
+        });
+      });
+  };
+
+  const updateEvent = (event) => {
+    const updatableEvent = formatEventForFetch(event);
+    fetchUpdateEvent(updatableEvent);
+    setDisplayModal(false);
+  };
+
+  const openModal = (record) => {
+    setDisplayModal(true);
+    setSelectedEvent(record);
+  };
+
+  const editColumn = {
+    title: () => <EditTwoTone />,
+    dataIndex: 'id',
+    key: 'id',
+    render: (id, record) => (
+      <Button
+        type="dashed"
+        size="small"
+        icon={<EditTwoTone />}
+        key={id}
+        onClick={() => openModal(record)}
+      />
+    ),
+    align: 'center',
+  };
+
   return (
     <>
+      {loading && <ModalSpinner displaySpinner={loading} tip="Updating Event" />}
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item style={{ cursor: 'pointer' }}>
           <ColumnSelector {...{ visibleColumns, columnSelectHandler, columns }} />
         </Form.Item>
+        {role === MENTOR && currentView === TABLE && (
+          <Form.Item style={{ cursor: 'pointer' }}>
+            <TableEditor />
+          </Form.Item>
+        )}
         <Button
           type="primary"
           onClick={() => {
@@ -133,31 +210,45 @@ const TableContainer = ({
         })}
         rowSelection={rowSelection}
         rowClassName={addClassByCurrentDate}
-        dataSource={events}
-        columns={visibleColumns}
+        dataSource={selectedEvents}
+        columns={tableEditMode ? [editColumn, ...visibleColumns] : visibleColumns}
         rowKey="id"
         size="small"
         pagination={false}
       />
+      {displayModal && (
+        <ModalEvent
+          {...{ setDisplayModal, displayModal, selectedEvent, updateEvent, api, title: editEvent }}
+        />
+      )}
     </>
   );
 };
 
 const mapStateToProps = ({
-  events,
+  selectedEvents,
   currentTimezone,
   eventColors,
+  tableEditMode,
+  onFetch,
+  role,
+  currentView,
   selectedRowKeys,
   isHiddenRowKeys,
 }) => ({
   eventColors,
-  events,
+  selectedEvents,
   currentTimezone,
+  tableEditMode,
+  onFetch,
+  role,
+  currentView,
   selectedRowKeys,
   isHiddenRowKeys,
 });
 
 export default connect(mapStateToProps, {
+  onFetch: onSetEvents,
   onSelectItem: onSetSelectedItems,
   setVisibility: onSetVisibility,
 })(TableContainer);

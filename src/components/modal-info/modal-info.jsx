@@ -7,9 +7,11 @@ import getEventColor from '../../utils/getEventColor';
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer/organizer';
+import MapContainer from '../map/map';
 
 import getFormattedDate from '../../utils/getFormattedDate';
 import { MODAL_INFO_TEXT } from '../../constants/constants';
+import { ONLINE_TEXT } from '../../constants/mapConstants';
 
 import './modal-info.scss';
 
@@ -45,9 +47,11 @@ const ModalInfo = ({
   setDisplayModal,
   eventColors,
   currentTimezone,
+  fontSize,
+  titleTextSize,
 }) => {
   const { Link } = Typography;
-  const getTypeTaskTags = () => <Type {...{ type, eventColors }} />;
+  const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
   const getLinks = () => <Links {...{ links }} />;
   const getOrganizer = () => <Organizer {...{ organizer }} />;
   const getTopic = () => (
@@ -57,6 +61,7 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
+  const isOfflineEvent = place !== ONLINE_TEXT && place;
 
   // todo: think about refactor
 
@@ -72,7 +77,7 @@ const ModalInfo = ({
       <Modal
         width={650}
         visible={displayModal}
-        title={<Line title={taskName} text={getTopic()} />}
+        title={<Line title={taskName} text={getTopic()} styles={{ fontSize: titleTextSize }} />}
         centered
         footer={null}
         onCancel={() => {
@@ -80,17 +85,26 @@ const ModalInfo = ({
         }}
       >
         <Space direction="vertical">
-          <Line title={estimatedWeek} text={week} />
-          <Line title={taskType} text={getTypeTaskTags()} />
-          <Line title={taskStart} text={startDate} styles="success" />
-          <Line title={taskDeadline} text={deadlineDate} styles="danger" />
-          <Line title={estimatedStudyTime} text={estimatedTime} />
-          <Line title={taskPlace} text={place} />
-          <Line title={taskDescription} text={description} />
-          <Line title={taskLinks} text={getLinks()} />
-          <Line title={taskOrganizer} text={getOrganizer()} />
-          <Line title={taskComment} text={comment} />
+          <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
+          <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
+          <Line title={taskStart} text={startDate} type="success" styles={{ fontSize }} />
+          <Line title={taskDeadline} text={deadlineDate} type="danger" styles={{ fontSize }} />
+          <Line title={estimatedStudyTime} text={estimatedTime} styles={{ fontSize }} />
+          <Line title={taskPlace} text={place} styles={{ fontSize }} />
+          <Line
+            title={taskDescription}
+            text={description}
+            styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
+          />
+          <Line title={taskLinks} text={getLinks()} styles={{ fontSize }} />
+          <Line title={taskOrganizer} text={getOrganizer()} styles={{ fontSize }} />
+          <Line
+            title={taskComment}
+            text={comment}
+            styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
+          />
         </Space>
+        {isOfflineEvent && <MapContainer place={place} />}
       </Modal>
     </div>
   );
@@ -98,13 +112,15 @@ const ModalInfo = ({
 
 export default ModalInfo;
 
-const Line = ({ title, text, styles }) => {
+const Line = ({ title, text, type, styles }) => {
   const { Text } = Typography;
-  const mode = styles && text !== noInfo;
+  const mode = type && text !== noInfo;
   return (
     <>
-      <Text strong>{title}</Text>
-      <Text type={mode && styles} strong={mode}>
+      <Text strong style={styles}>
+        {title}
+      </Text>
+      <Text type={mode && type} strong={mode} style={styles}>
         {text}
       </Text>
     </>

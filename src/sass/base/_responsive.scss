@@ -1,26 +1,10 @@
-@media (max-width: 767px){
-    .ant-layout .header-container{
-        padding: 0 15px 15px;
-    }
-    .title {
-        margin-left: 50px
-    }
-    .header-container .ant-select {
-        padding-left: 50px;
-    }
-    .logo__img{
-        padding: 10px;
-    }
-}
-@media (max-width: 425px) {
-    .ant-layout .header-container {
-        padding: 0 15px 0 15px;
-        height: 60px;
-    }
-    .title {
-        margin-left: 0;
-    }
-    .logo {
-        display: none;
-    }
+@media (max-width: 475px) {
+  .ant-layout .header-container {
+    height: 45px;
+    padding: 0 15px;
+  }
+
+  .logo {
+    display: none;
+  }
 }
