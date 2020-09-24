@@ -51,6 +51,8 @@ const formatEventForModal = ({
   description,
   descriptionUrl,
   links,
+  feedbacks,
+  allowFeedback,
   organizer,
   comment,
 }) => ({
@@ -68,6 +70,8 @@ const formatEventForModal = ({
     title: item[0],
     url: item[1],
   })),
+  feedbacks,
+  allowFeedback,
   selectedOrganizers: organizer,
   comment,
 });
@@ -84,6 +88,8 @@ const formatEventForFetch = ({
   descriptionUrl = noInfo,
   description = noInfo,
   links,
+  feedbacks,
+  allowFeedback,
   selectedOrganizers = [noInfo],
   comment = noInfo,
 }) => ({
@@ -99,6 +105,8 @@ const formatEventForFetch = ({
   descriptionUrl,
   description,
   links: convertArrayToObject(links),
+  feedbacks,
+  allowFeedback,
   organizer: selectedOrganizers.map((item) => item.id),
   comment,
 });

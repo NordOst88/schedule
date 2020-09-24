@@ -70,7 +70,7 @@ const ModalEvent = ({
         layout={layout}
         onFinish={createNewEvent || updateEvent}
         form={form}
-        initialValues={{ week: 0 }}
+        initialValues={{ week: 0, feedbacks: {}, allowFeedback: true }}
         size="small"
       >
         <Form.Item
@@ -126,6 +126,12 @@ const ModalEvent = ({
           <LinksList />
         </Form.Item>
         <Form.Item name="id" noStyle>
+          <Input type="hidden" />
+        </Form.Item>
+        <Form.Item name="feedbacks" noStyle>
+          <Input type="hidden" />
+        </Form.Item>
+        <Form.Item name="allowFeedback" noStyle>
           <Input type="hidden" />
         </Form.Item>
       </Form>
