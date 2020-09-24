@@ -17,4 +17,19 @@
       font-size: 18px;
     }
   }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    &-track {
+      background: #f1f1f1;
+      border-radius: 5px;
+    }
+    &-thumb {
+      background: #888;
+      border-radius: 5px;
+      &:hover {
+        background: #555;
+      }
+    }
+  }
 }
