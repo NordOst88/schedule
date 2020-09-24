@@ -98,7 +98,26 @@ const ModalInfo = ({
     setUpdateEvents((prevState) => ({
       ...prevState,
       allowFeedback: !prevState.allowFeedback,
-      organizer: prevState.organizer.map((item) => item.id),
+      organizer: prevState.organizer.map((item) => {
+        if (typeof item === 'string') {
+          return item;
+        }
+        return item.id;
+      }),
+    }));
+    setNeedToUpdate(true);
+  };
+
+  const onFeedbackAdd = (timeStamp, feedbackText) => {
+    setUpdateEvents((prevState) => ({
+      ...prevState,
+      feedbacks: { ...prevState.feedbacks, [timeStamp]: feedbackText },
+      organizer: prevState.organizer.map((item) => {
+        if (typeof item === 'string') {
+          return item;
+        }
+        return item.id;
+      }),
     }));
     setNeedToUpdate(true);
   };
@@ -136,6 +155,10 @@ const ModalInfo = ({
             fetchUpdateEvent(updatedEvent);
             setNeedToUpdate(false);
           }
+          if (isNeedToUpdate && !isMentor) {
+            fetchUpdateEvent(updatedEvent);
+            setNeedToUpdate(false);
+          }
           setDisplayModal(false);
         }}
       >
@@ -144,7 +167,7 @@ const ModalInfo = ({
             <Button
               icon={<FeedbackIcon />}
               style={{ position: 'absolute', top: 67, right: 20 }}
-              onChange={onFeedbackBtnClick}
+              onClick={onFeedbackBtnClick}
             />
           </Tooltip>
         )}
@@ -169,8 +192,7 @@ const ModalInfo = ({
         <FeedbackContainer
           displayFeedbackModal={displayFeedbackModal}
           setDisplayFeedback={setDisplayFeedback}
-          taskName={name}
-          timeZone={currentTimezone}
+          onFeedbackAdd={onFeedbackAdd}
         />
         <Space direction="vertical">
           <Line title={estimatedWeek} text={week} styles={{ fontSize }} />

@@ -27,9 +27,6 @@ const onFontSizeChange = (fontSize) => {
   return { type: SET_FONT_SIZE, fontSize: DEFAULT_FONT_SIZE };
 };
 
-// feedback
-const onFeedbackChange = (feedbacks) => ({ type: 'SET_FEEDBACK', feedbacks });
-
 export {
   onViewModeChange,
   onSetUser,
@@ -39,6 +36,5 @@ export {
   onTaskChange,
   onEventColorChange,
   onSetTableEditMode,
-  onFeedbackChange,
   onFontSizeChange,
 };

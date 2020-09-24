@@ -1,14 +1,11 @@
-import React, { useState /*  useEffect */ } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 
 import { Modal, Input } from 'antd';
 
-import { onFeedbackChange } from '../../actions/actions';
-
 // import getFormattedDate from '../../utils/getFormattedDate';
-// import getTimeStamp from '../../utils/getTimeStamp';
+import getTimeStamp from '../../utils/getTimeStamp';
 
-const FeedbackContainer = ({ displayFeedbackModal, setDisplayFeedback }) => {
+const FeedbackContainer = ({ displayFeedbackModal, setDisplayFeedback, onFeedbackAdd }) => {
   const { TextArea } = Input;
   const [inputText, setInputText] = useState('');
 
@@ -17,6 +14,8 @@ const FeedbackContainer = ({ displayFeedbackModal, setDisplayFeedback }) => {
   };
 
   const handleOk = () => {
+    console.log(inputText);
+    onFeedbackAdd(getTimeStamp(new Date()), inputText);
     setDisplayFeedback(false);
     setInputText('');
   };
@@ -45,8 +44,4 @@ const FeedbackContainer = ({ displayFeedbackModal, setDisplayFeedback }) => {
   );
 };
 
-const mapStateToProps = ({ feedbacks }) => ({
-  feedbacks,
-});
-
-export default connect(mapStateToProps, { onFeedbackAdd: onFeedbackChange })(FeedbackContainer);
+export default FeedbackContainer;
