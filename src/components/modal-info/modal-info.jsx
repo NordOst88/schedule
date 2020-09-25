@@ -1,19 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
-import { Modal, Space, Typography } from 'antd';
+import { Modal, Space, Typography, Button, Switch, Tooltip } from 'antd';
+import { FormOutlined, ReadOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
+import sortByDateTime from '../../utils/sortByDateTime';
+import getFormattedDate from '../../utils/getFormattedDate';
+import { feedbackButtonStyles, getOrganizerID } from '../../utils/modalInfoHelpers';
+
+import { onSetEvents } from '../../actions/actions';
 
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer/organizer';
+import FeedbackContainer from '../feedback/feedback';
 import MapContainer from '../map/map';
 
-import getFormattedDate from '../../utils/getFormattedDate';
-import { MODAL_INFO_TEXT } from '../../constants/constants';
+import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
 import { ONLINE_TEXT } from '../../constants/mapConstants';
+import {
+  MENTOR_SHOW_FEEDBACKS_TEXT,
+  STUDENT_ADD_FEEDBACK_TEXT,
+} from '../../constants/modalInfoConstants';
+
+import SwaggerService from '../../services/swagger-service';
 
 import './modal-info.scss';
+
+const api = new SwaggerService();
 
 const {
   noInfo,
@@ -31,25 +46,32 @@ const {
 } = MODAL_INFO_TEXT;
 
 const ModalInfo = ({
-  name = noInfo,
-  week = noInfo,
-  type = [],
-  dateTime,
-  deadline,
-  estimatedTime = noInfo,
-  place = noInfo,
-  description = noInfo,
-  descriptionUrl = null,
-  links = {},
-  organizer = [],
-  comment = noInfo,
+  eventDescription,
   displayModal,
   setDisplayModal,
   eventColors,
   currentTimezone,
   fontSize,
   titleTextSize,
+  role,
+  onFetch,
 }) => {
+  const {
+    name = noInfo,
+    week = noInfo,
+    type = [],
+    dateTime,
+    deadline,
+    estimatedTime = noInfo,
+    place = noInfo,
+    description = noInfo,
+    descriptionUrl = null,
+    links = {},
+    organizer = [],
+    comment = noInfo,
+    allowFeedback = true,
+    feedbacks = {},
+  } = eventDescription;
   const { Link } = Typography;
   const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
   const getLinks = () => <Links {...{ links }} />;
@@ -62,6 +84,57 @@ const ModalInfo = ({
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
   const isOfflineEvent = place !== ONLINE_TEXT && place;
+
+  const isMentor = role === MENTOR;
+
+  const [displayFeedbackModal, setDisplayFeedback] = useState(false);
+  const [updatedEvent, setUpdateEvents] = useState(eventDescription);
+  const [isNeedToUpdate, setNeedToUpdate] = useState(false);
+  const [allFeedbacks, setAllFeedbacks] = useState(feedbacks);
+
+  const onFeedbackBtnClick = () => {
+    setDisplayFeedback(true);
+  };
+
+  const toggleAllowFeedback = () => {
+    setUpdateEvents((prevState) => ({
+      ...prevState,
+      allowFeedback: !prevState.allowFeedback,
+      organizer: getOrganizerID(prevState),
+    }));
+    setNeedToUpdate(true);
+  };
+
+  const onFeedbackAdd = (timeStamp, feedbackText) => {
+    setUpdateEvents((prevState) => ({
+      ...prevState,
+      feedbacks: { ...prevState.feedbacks, [timeStamp]: feedbackText },
+      organizer: getOrganizerID(prevState),
+    }));
+    setNeedToUpdate(true);
+  };
+
+  const fetchUpdateEvent = async (event) => {
+    await api.updateEventById(event.id, event);
+    const events = await api.getAllEvents();
+    const formattedEvents = sortByDateTime(events);
+    onFetch(formattedEvents);
+  };
+
+  const deleteFeedback = (feedback, timeStamp) => {
+    delete feedback[timeStamp];
+    setAllFeedbacks({ ...feedback });
+    return { ...feedback };
+  };
+
+  const getDeletedFeedback = (timeStamp) => {
+    setUpdateEvents((prevState) => ({
+      ...prevState,
+      feedbacks: deleteFeedback(prevState.feedbacks, timeStamp),
+      organizer: getOrganizerID(prevState),
+    }));
+    setNeedToUpdate(true);
+  };
 
   // todo: think about refactor
 
@@ -81,9 +154,55 @@ const ModalInfo = ({
         centered
         footer={null}
         onCancel={() => {
+          if (isNeedToUpdate && isMentor) {
+            fetchUpdateEvent(updatedEvent);
+            setNeedToUpdate(false);
+          }
+          if (isNeedToUpdate) {
+            fetchUpdateEvent(updatedEvent);
+            setNeedToUpdate(false);
+          }
           setDisplayModal(false);
         }}
       >
+        {allowFeedback && !isMentor && (
+          <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
+            <Button
+              icon={<FormOutlined />}
+              style={feedbackButtonStyles(67, 20)}
+              onClick={onFeedbackBtnClick}
+            />
+          </Tooltip>
+        )}
+        {isMentor && (
+          <>
+            <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
+              <Button
+                icon={<ReadOutlined />}
+                style={feedbackButtonStyles(67, 20)}
+                onClick={onFeedbackBtnClick}
+              />
+            </Tooltip>
+            <Switch
+              checkedChildren="Feedback ON"
+              unCheckedChildren="Feedback OFF"
+              defaultChecked={allowFeedback}
+              style={feedbackButtonStyles(18, 50)}
+              onChange={toggleAllowFeedback}
+            />
+          </>
+        )}
+        <FeedbackContainer
+          {...{
+            displayFeedbackModal,
+            setDisplayFeedback,
+            onFeedbackAdd,
+            isMentor,
+            allFeedbacks,
+            currentTimezone,
+            getDeletedFeedback,
+          }}
+        />
         <Space direction="vertical">
           <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
           <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
@@ -110,8 +229,6 @@ const ModalInfo = ({
   );
 };
 
-export default ModalInfo;
-
 const Line = ({ title, text, type, styles }) => {
   const { Text } = Typography;
   const mode = type && text !== noInfo;
@@ -126,3 +243,23 @@ const Line = ({ title, text, type, styles }) => {
     </>
   );
 };
+const mapStateToProps = ({
+  eventColors,
+  currentTimezone,
+  fontSize,
+  titleTextSize,
+  role,
+  feedbackMode,
+  onFetch,
+}) => ({
+  eventColors,
+  currentTimezone,
+  fontSize,
+  titleTextSize,
+  role,
+  feedbackMode,
+  onFetch,
+});
+export default connect(mapStateToProps, {
+  onFetch: onSetEvents,
+})(ModalInfo);

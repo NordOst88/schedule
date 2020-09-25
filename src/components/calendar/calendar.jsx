@@ -126,7 +126,11 @@ const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents, textS
       />
       {displayModal && (
         <ModalInfo
-          {...{ ...eventDescription, displayModal, setDisplayModal, eventColors, currentTimezone }}
+          {...{
+            eventDescription,
+            displayModal,
+            setDisplayModal,
+          }}
         />
       )}
       {displayPopUp && (
