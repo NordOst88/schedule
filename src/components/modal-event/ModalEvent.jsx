@@ -84,7 +84,7 @@ const ModalEvent = ({
       onCancel={() => setDisplayModal(false)}
       className={fontSize === DEFAULT_FONT_SIZE ? 'modal-event-sm' : 'modal-event-df'}
       footer={[
-        <Space key="space" style={{ width: 'calc(100% - 145px)' }}>
+        <Space key="space" className="delete-btn-wrap">
           {createNewEvent ? null : (
             <Button
               key={btnDelete}
