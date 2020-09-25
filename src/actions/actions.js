@@ -7,7 +7,7 @@ import {
   SET_TASK,
   SET_COLOR,
   SET_SELECTED_ITEMS,
-  SET_VISIBILITY,
+  SET_SELECTED_ITEMS_VISIBILITY,
   SET_TABLE_EDIT_MODE,
   SET_FONT_SIZE,
 } from './actions-types';
@@ -31,7 +31,10 @@ const onFontSizeChange = (fontSize) => {
 
 // item-selection
 const onSetSelectedItems = (selectedRowKeys) => ({ type: SET_SELECTED_ITEMS, selectedRowKeys });
-const onSetVisibility = (isHiddenRowKeys) => ({ type: SET_VISIBILITY, isHiddenRowKeys });
+const onSetSelectedItemsVisibility = (isHiddenRowKeys) => ({
+  type: SET_SELECTED_ITEMS_VISIBILITY,
+  isHiddenRowKeys,
+});
 
 export {
   onViewModeChange,
@@ -42,7 +45,7 @@ export {
   onTaskChange,
   onEventColorChange,
   onSetSelectedItems,
-  onSetVisibility,
+  onSetSelectedItemsVisibility,
   onSetTableEditMode,
   onFontSizeChange,
 };

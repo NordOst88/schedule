@@ -7,7 +7,7 @@ import {
   SET_TASK,
   SET_COLOR,
   SET_SELECTED_ITEMS,
-  SET_VISIBILITY,
+  SET_SELECTED_ITEMS_VISIBILITY,
   SET_TABLE_EDIT_MODE,
   SET_FONT_SIZE,
 } from '../actions/actions-types';
@@ -55,10 +55,11 @@ const reducer = (state = getInitialState(), action) => {
       return { ...state, eventColors: action.colorPreset };
     }
     case SET_SELECTED_ITEMS: {
+      const { selectedRowKeys } = action;
       setLocaLStorageSettings(Object.entries(action));
-      return { ...state, selectedRowKeys: action.selectedRowKeys };
+      return { ...state, selectedRowKeys };
     }
-    case SET_VISIBILITY: {
+    case SET_SELECTED_ITEMS_VISIBILITY: {
       setLocaLStorageSettings(Object.entries(action));
       return { ...state, isHiddenRowKeys: action.isHiddenRowKeys };
     }

@@ -1,15 +1,15 @@
-const hideItems = (items) => {
-  if (items && items.length) {
+const hideSelectedItems = (items = []) => {
+  if (items.length) {
     items.map((item) =>
       document.querySelector(`[data-row-key= "${item}"]`).classList.add('hidden'),
     );
   }
 };
-const viewItems = (items) => {
-  if (items && items.length) {
+const showSelectedItems = (items = []) => {
+  if (items.length) {
     items.map((item) =>
       document.querySelector(`[data-row-key= "${item}"]`).classList.remove('hidden'),
     );
   }
 };
-export { hideItems, viewItems };
+export { hideSelectedItems, showSelectedItems };

@@ -94,8 +94,11 @@ const ADJUST_FONT_SIZE = 13;
 
 const TABLE_EDITABLE = true;
 
-const HIDDEN_ITEMS_TEXT = 'Hidden Items: ';
-const SELECTED_ITEMS_TEXT = 'Selected Items: ';
+const HIDE_SELECTED_ITEMS_BUTTON_TEXT = 'Hide Selected Events';
+const SHOW_SELECTED_ITEMS_BUTTON_TEXT = 'Show Hidden Event';
+
+const HIDDEN_EVENTS_TEXT = 'Hidden Events: ';
+const SELECTED_EVENTS_TEXT = 'Selected Events: ';
 
 export {
   TABLE,
@@ -120,6 +123,8 @@ export {
   ADJUST_FONT_SIZE,
   RADIO_ITEMS,
   VIEW_SPINNER_TIP,
-  HIDDEN_ITEMS_TEXT,
-  SELECTED_ITEMS_TEXT,
+  HIDDEN_EVENTS_TEXT,
+  SELECTED_EVENTS_TEXT,
+  HIDE_SELECTED_ITEMS_BUTTON_TEXT,
+  SHOW_SELECTED_ITEMS_BUTTON_TEXT,
 };

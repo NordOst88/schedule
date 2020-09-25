@@ -4,10 +4,10 @@
 @import "abstract/constants";
 @import "abstract/placeholders";
 @import "abstract/mixins";
-@import "abstract/selection";
 
 //  Base
 @import "base/base";
 @import "antd/dist/antd";
 @import "base/responsive"; 
+@import "base/selection";
 
