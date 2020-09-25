@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 import { Modal, Form, Input, InputNumber, DatePicker } from 'antd';
 import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
-import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import Line from '../line';
+import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
 import { formatEventForModal } from '../../utils/tableHelpers';
+import './ModalEvent.scss';
 
 const {
   week,
@@ -47,6 +49,7 @@ const ModalEvent = ({
   updateEvent,
   api,
   title,
+  fontSize,
 }) => {
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
@@ -65,13 +68,20 @@ const ModalEvent = ({
   };
 
   return (
-    <Modal title={title} visible={displayModal} onCancel={() => setDisplayModal(false)} onOk={onOk}>
+    <Modal
+      title={title}
+      visible={displayModal}
+      onCancel={() => setDisplayModal(false)}
+      onOk={onOk}
+      okText={createNewEvent ? 'OK' : 'SAVE'}
+      className={fontSize === 10 ? 'modal-event-sm' : 'modal-event-df'}
+    >
       <Form
         layout={layout}
         onFinish={createNewEvent || updateEvent}
         form={form}
-        initialValues={{ week: 0 }}
-        size="small"
+        initialValues={{ week: 0, feedbacks: {}, allowFeedback: true }}
+        size={fontSize === 10 ? 'small' : 'default'}
       >
         <Form.Item
           label={<Line title={week} />}
@@ -120,7 +130,7 @@ const ModalEvent = ({
           <OrganizersPicker {...{ api }} />
         </Form.Item>
         <Form.Item name="comment" label={<Line title={comment} />}>
-          <Input />
+          <Input.TextArea rows={4} />
         </Form.Item>
         <Form.Item name="links" label={<Line title={links} />}>
           <LinksList />
@@ -128,9 +138,17 @@ const ModalEvent = ({
         <Form.Item name="id" noStyle>
           <Input type="hidden" />
         </Form.Item>
+        <Form.Item name="feedbacks" noStyle>
+          <Input type="hidden" />
+        </Form.Item>
+        <Form.Item name="allowFeedback" noStyle>
+          <Input type="hidden" />
+        </Form.Item>
       </Form>
     </Modal>
   );
 };
 
-export default ModalEvent;
+const mapStateToProps = ({ fontSize }) => ({ fontSize });
+
+export default connect(mapStateToProps)(ModalEvent);
