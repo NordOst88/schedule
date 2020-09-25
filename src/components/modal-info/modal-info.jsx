@@ -7,7 +7,11 @@ import { FormOutlined, ReadOutlined } from '@ant-design/icons';
 import getEventColor from '../../utils/getEventColor';
 import sortByDateTime from '../../utils/sortByDateTime';
 import getFormattedDate from '../../utils/getFormattedDate';
-import { feedbackButtonStyles, getOrganizerID } from '../../utils/modalInfoHelpers';
+import {
+  feedbackButtonStyles,
+  getOrganizerID,
+  feedbackSwitchStyles,
+} from '../../utils/modalInfoHelpers';
 
 import { onSetEvents } from '../../actions/actions';
 
@@ -144,14 +148,46 @@ const ModalInfo = ({
     style.innerHTML = css;
     document.querySelector('.modal-info').appendChild(style);
   }, []);
+  const makeFeedback = allowFeedback && !isMentor && (
+    <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
+      <Button icon={<FormOutlined />} style={feedbackButtonStyles()} onClick={onFeedbackBtnClick} />
+    </Tooltip>
+  );
+  const titleWidth = isMentor ? 250 : null;
+  const feedBackButton = isMentor && (
+    <Tooltip title={MENTOR_SHOW_FEEDBACKS_TEXT}>
+      <Button icon={<ReadOutlined />} style={feedbackButtonStyles()} onClick={onFeedbackBtnClick} />
+    </Tooltip>
+  );
+
+  const feedBackSwitch = isMentor && (
+    <Switch
+      className="c"
+      checkedChildren="ON Feedback "
+      unCheckedChildren="OFF Feedback "
+      defaultChecked={allowFeedback}
+      style={feedbackSwitchStyles()}
+      onChange={toggleAllowFeedback}
+    />
+  );
 
   return (
     <div className="modal-info">
       <Modal
         width={650}
+        style={{
+          paddingLeft: 5,
+          paddingRight: 5,
+        }}
         visible={displayModal}
-        title={<Line title={taskName} text={getTopic()} styles={{ fontSize: titleTextSize }} />}
-        centered
+        title={
+          <div className="modal__title__container">
+            <div style={{ width: titleWidth }}>
+              <Line title={taskName} text={getTopic()} styles={{ fontSize: titleTextSize }} />
+            </div>
+            {feedBackSwitch}
+          </div>
+        }
         footer={null}
         onCancel={() => {
           if (isNeedToUpdate && isMentor) {
@@ -165,33 +201,6 @@ const ModalInfo = ({
           setDisplayModal(false);
         }}
       >
-        {allowFeedback && !isMentor && (
-          <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
-            <Button
-              icon={<FormOutlined />}
-              style={feedbackButtonStyles(67, 20)}
-              onClick={onFeedbackBtnClick}
-            />
-          </Tooltip>
-        )}
-        {isMentor && (
-          <>
-            <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
-              <Button
-                icon={<ReadOutlined />}
-                style={feedbackButtonStyles(67, 20)}
-                onClick={onFeedbackBtnClick}
-              />
-            </Tooltip>
-            <Switch
-              checkedChildren="Feedback ON"
-              unCheckedChildren="Feedback OFF"
-              defaultChecked={allowFeedback}
-              style={feedbackButtonStyles(18, 50)}
-              onChange={toggleAllowFeedback}
-            />
-          </>
-        )}
         <FeedbackContainer
           {...{
             displayFeedbackModal,
@@ -222,6 +231,8 @@ const ModalInfo = ({
             text={comment}
             styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
           />
+          {feedBackButton}
+          {makeFeedback}
         </Space>
         {isOfflineEvent && <MapContainer place={place} />}
       </Modal>
