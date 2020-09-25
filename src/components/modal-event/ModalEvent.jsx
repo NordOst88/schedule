@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Form, Input, InputNumber, DatePicker } from 'antd';
+import { Modal, Form, Input, InputNumber, DatePicker, Button, Space } from 'antd';
 import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
 import Line from '../line';
-import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
+import { MODAL_ADD_EVENT_TEXT, EDIT_EVENT_TEXT } from '../../constants/constants';
 import { formatEventForModal } from '../../utils/tableHelpers';
 import './ModalEvent.scss';
 
@@ -47,6 +47,7 @@ const ModalEvent = ({
   createNewEvent,
   selectedEvent,
   updateEvent,
+  fetchDeleteEvent,
   api,
   title,
   fontSize,
@@ -67,14 +68,34 @@ const ModalEvent = ({
     wrapperCol: { span: 16 },
   };
 
+  const { btnOk, btnSave, btnCancel, btnDelete } = EDIT_EVENT_TEXT;
+  const btnOkMode = createNewEvent ? btnOk : btnSave;
+  const onDelete = (id) => {
+    fetchDeleteEvent(id);
+  };
+
   return (
     <Modal
       title={title}
       visible={displayModal}
       onCancel={() => setDisplayModal(false)}
       onOk={onOk}
-      okText={createNewEvent ? 'OK' : 'SAVE'}
       className={fontSize === 10 ? 'modal-event-sm' : 'modal-event-df'}
+      footer={[
+        <Space>
+          {createNewEvent ? null : (
+            <Button key={btnDelete} onClick={() => onDelete(selectedEvent.id)}>
+              {btnDelete}
+            </Button>
+          )}
+        </Space>,
+        <Button key={btnCancel} onClick={() => setDisplayModal(false)}>
+          {btnCancel}
+        </Button>,
+        <Button key={btnOkMode} type="primary" onClick={onOk}>
+          {btnOkMode}
+        </Button>,
+      ]}
     >
       <Form
         layout={layout}

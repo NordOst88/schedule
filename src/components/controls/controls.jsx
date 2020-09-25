@@ -70,7 +70,7 @@ const Controls = ({
     onTextSizeChange(fontSize);
     setTimeout(() => {
       setDisplaySpinner(false);
-    }, 700);
+    }, 1000);
   };
 
   const textSize = `${getFontSize(fontSize, 1.7)}`;
