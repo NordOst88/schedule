@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Table, Form, Button } from 'antd';
+import { Table, Form, Button, Typography } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
-import { onSetEvents } from '../../actions/actions';
+import {
+  onSetEvents,
+  onSetSelectedItems,
+  onSetSelectedItemsVisibility,
+} from '../../actions/actions';
+
 import createColumns from './createColumns';
 import TableEditor from '../table-editor';
 import popupMessage from '../popup-message';
@@ -17,7 +22,18 @@ import {
   SUCCESS_DELETE_EVENT,
   ERROR_FETCH_MSG,
 } from '../../constants/tableConstants';
-import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE, TIPS_TEXT } from '../../constants/constants';
+
+import {
+  MODAL_ADD_EVENT_TEXT,
+  MENTOR,
+  TABLE,
+  HIDDEN_EVENTS_TEXT,
+  SELECTED_EVENTS_TEXT,
+  HIDE_SELECTED_ITEMS_BUTTON_TEXT,
+  SHOW_SELECTED_ITEMS_BUTTON_TEXT,
+  TIPS_TEXT,
+} from '../../constants/constants';
+
 import {
   filterColumns,
   addColumnKey,
@@ -28,8 +44,11 @@ import {
 import getFontSize from '../../utils/getFontSize';
 import './Table.scss';
 
+import { hideSelectedItems, showSelectedItems } from '../../utils/hideSelectedItems';
+
 const api = new SwaggerService();
 const { editEvent } = MODAL_ADD_EVENT_TEXT;
+const { Text } = Typography;
 
 const TableContainer = ({
   selectedEvents,
@@ -40,6 +59,10 @@ const TableContainer = ({
   currentView,
   role,
   fontSize,
+  onSelectItem,
+  selectedRowKeys,
+  isHiddenRowKeys,
+  setSelectItemVisibility,
 }) => {
   const { onUpdateEvent, onDeleteEvent } = TIPS_TEXT;
   const [displayModal, setDisplayModal] = useState(false);
@@ -47,6 +70,56 @@ const TableContainer = ({
   const [loading, setLoading] = useState(false);
   const [spinnerTip, setSpinnerTip] = useState(onUpdateEvent);
   const columns = createColumns(currentTimezone, eventColors);
+  const [selectedItems, setItem] = useState(selectedRowKeys);
+
+  const handleRowClick = (event) => {
+    if (event.shiftKey) {
+      if (event.target.closest('tr[data-row-key]')) {
+        const target = event.target.closest('tr[data-row-key]');
+        const rowKey = target.getAttribute('data-row-key');
+        const id = selectedItems.indexOf(`${rowKey}`);
+        if (!selectedItems.includes(`${rowKey}`)) {
+          const newSelectedItems = [...selectedItems, `${rowKey}`];
+          setItem(newSelectedItems);
+          onSelectItem(newSelectedItems);
+        } else {
+          const before = selectedItems.slice(0, id);
+          const after = selectedItems.slice(id + 1);
+          const newSelectedItems = [...before, ...after];
+          setItem(newSelectedItems);
+          onSelectItem(newSelectedItems);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isHiddenRowKeys) {
+      hideSelectedItems(selectedItems);
+    }
+  }, []);
+
+  const onSelectChange = (selectedRow) => {
+    setItem(selectedRow);
+    onSelectItem(selectedRow);
+  };
+
+  const rowSelection = {
+    onChange: onSelectChange,
+    selectedRowKeys: selectedItems,
+  };
+
+  const onHideButtonClick = () => {
+    if (selectedItems.length) {
+      setSelectItemVisibility(true);
+    }
+    hideSelectedItems(selectedItems);
+  };
+
+  const onShowButtonClick = () => {
+    setSelectItemVisibility(false);
+    showSelectedItems(selectedItems);
+  };
   const textSize = getFontSize(fontSize, 1.7);
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
@@ -164,8 +237,25 @@ const TableContainer = ({
             <TableEditor fontSize={textSize} />
           </Form.Item>
         )}
+        <Button type="primary" onClick={onHideButtonClick}>
+          {HIDE_SELECTED_ITEMS_BUTTON_TEXT}
+        </Button>
+        <Button type="primary" className="marginLeft" onClick={onShowButtonClick}>
+          {SHOW_SELECTED_ITEMS_BUTTON_TEXT}
+        </Button>
+        <Text strong underline className="marginLeft typography">
+          {isHiddenRowKeys && selectedItems.length ? HIDDEN_EVENTS_TEXT : SELECTED_EVENTS_TEXT}{' '}
+          {selectedItems.length}
+        </Text>
       </Form>
       <Table
+        onRow={() => ({
+          onClick: (event) => handleRowClick(event),
+          style: {
+            userSelect: 'none',
+          },
+        })}
+        rowSelection={rowSelection}
         rowClassName={addClassByCurrentDate}
         dataSource={selectedEvents}
         columns={
@@ -202,6 +292,8 @@ const mapStateToProps = ({
   role,
   currentView,
   fontSize,
+  selectedRowKeys,
+  isHiddenRowKeys,
 }) => ({
   eventColors,
   selectedEvents,
@@ -211,6 +303,12 @@ const mapStateToProps = ({
   role,
   currentView,
   fontSize,
+  selectedRowKeys,
+  isHiddenRowKeys,
 });
 
-export default connect(mapStateToProps, { onFetch: onSetEvents })(TableContainer);
+export default connect(mapStateToProps, {
+  onFetch: onSetEvents,
+  onSelectItem: onSetSelectedItems,
+  setSelectItemVisibility: onSetSelectedItemsVisibility,
+})(TableContainer);

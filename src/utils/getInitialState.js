@@ -9,6 +9,8 @@ const getInitialState = () => {
     timezone,
     selectedTask,
     fontSize,
+    selectedRowKeys,
+    isHiddenRowKeys,
   } = localStorage.settings ? JSON.parse(localStorage.settings) : {};
 
   return {
@@ -23,6 +25,8 @@ const getInitialState = () => {
     tasksTypes: [],
     tableEditMode: false,
     fontSize: fontSize || 10,
+    selectedRowKeys: selectedRowKeys || [],
+    isHiddenRowKeys: isHiddenRowKeys || false,
   };
 };
 
