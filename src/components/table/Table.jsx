@@ -122,9 +122,11 @@ const TableContainer = ({
     setLoading(true);
     try {
       await api.deleteEventById(id);
-      const events = await api.getAllEvents();
-      onFetch(events);
-      popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_DELETE_EVENT });
+      setTimeout(async () => {
+        const events = await api.getAllEvents();
+        onFetch(events);
+        popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_DELETE_EVENT });
+      }, 1000);
     } catch (e) {
       popupMessage({
         ...ERROR_FETCH_MSG,
