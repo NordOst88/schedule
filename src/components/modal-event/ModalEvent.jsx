@@ -69,7 +69,6 @@ const ModalEvent = ({
   };
 
   const { btnOk, btnSave, btnCancel, btnDelete } = EDIT_EVENT_TEXT;
-  const btnOkMode = createNewEvent ? btnOk : btnSave;
   const onDelete = (id) => {
     fetchDeleteEvent(id);
   };
@@ -79,12 +78,16 @@ const ModalEvent = ({
       title={title}
       visible={displayModal}
       onCancel={() => setDisplayModal(false)}
-      onOk={onOk}
       className={fontSize === 10 ? 'modal-event-sm' : 'modal-event-df'}
       footer={[
-        <Space>
+        <Space key="space" style={{ width: 'calc(100% - 145px)' }}>
           {createNewEvent ? null : (
-            <Button key={btnDelete} onClick={() => onDelete(selectedEvent.id)}>
+            <Button
+              key={btnDelete}
+              onClick={() => onDelete(selectedEvent.id)}
+              type="primary"
+              danger
+            >
               {btnDelete}
             </Button>
           )}
@@ -92,8 +95,8 @@ const ModalEvent = ({
         <Button key={btnCancel} onClick={() => setDisplayModal(false)}>
           {btnCancel}
         </Button>,
-        <Button key={btnOkMode} type="primary" onClick={onOk}>
-          {btnOkMode}
+        <Button key={btnOk} type="primary" onClick={onOk}>
+          {createNewEvent ? btnOk : btnSave}
         </Button>,
       ]}
     >
