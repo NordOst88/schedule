@@ -100,6 +100,11 @@ const ADJUST_FONT_SIZE = 13;
 
 const TABLE_EDITABLE = true;
 
+const HIDE_SELECTED_ITEMS_BUTTON_TEXT = 'Hide Selected Events';
+const SHOW_SELECTED_ITEMS_BUTTON_TEXT = 'Show Hidden Event';
+
+const HIDDEN_EVENTS_TEXT = 'Hidden Events: ';
+const SELECTED_EVENTS_TEXT = 'Selected Events: ';
 const EDIT_EVENT_TEXT = {
   btnOk: 'OK',
   btnSave: 'Save',
@@ -130,6 +135,10 @@ export {
   ADJUST_FONT_SIZE,
   RADIO_ITEMS,
   VIEW_SPINNER_TIP,
+  HIDDEN_EVENTS_TEXT,
+  SELECTED_EVENTS_TEXT,
+  HIDE_SELECTED_ITEMS_BUTTON_TEXT,
+  SHOW_SELECTED_ITEMS_BUTTON_TEXT,
   EDIT_EVENT_TEXT,
   TIPS_TEXT,
 };

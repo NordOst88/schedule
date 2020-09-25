@@ -4,6 +4,17 @@
 .expired-date {
   opacity: 0.5;
 }
+
+// hideItem 
+.marginLeft{
+  margin-left: 20px;
+}
+.typography{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
 .table-wrap {
   .ant-table.ant-table-small {
     font-size: 14px;
