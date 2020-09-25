@@ -157,7 +157,7 @@ const TableContainer = ({
   };
 
   return (
-    <div className="table-wrap" style={{ overflowX: 'auto', height: '86vh' }}>
+    <div className="table-wrap" style={{ overflowX: 'auto', height: '85vh' }}>
       {loading && <ModalSpinner displaySpinner={loading} tip={spinnerTip} />}
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item style={{ cursor: 'pointer' }}>

@@ -3,7 +3,7 @@
 .modal-event-df {
   .ant-modal {
     &-header {
-      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background: linear-gradient(45deg, #1890ff, #40a9ff);
     }
     &-title {
       color: $modal-event-header-color;
