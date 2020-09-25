@@ -3,8 +3,8 @@ import { Tooltip, Typography } from 'antd';
 import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer';
-import getFormattedDate from '../../utils/getFormattedDate';
 import { TAGS_NAME } from '../../constants/tableConstants';
+import getFormattedDate from '../../utils/getFormattedDate';
 
 const { Link } = Typography;
 

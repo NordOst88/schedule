@@ -1,6 +1,24 @@
 import React from 'react';
 
-import { Modal, Space, Badge } from 'antd';
+import { Modal, Space, Badge, Tooltip } from 'antd';
+
+import { ELLIPSIS_TEXT_WIDTH } from '../../constants/calendarConstants';
+
+const EllipsisText = (text, textSize) => (
+  <Tooltip placement="topLeft" title={text}>
+    <div
+      style={{
+        width: ELLIPSIS_TEXT_WIDTH,
+        textOverflow: 'ellipsis',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        fontSize: textSize,
+      }}
+    >
+      {text}
+    </div>
+  </Tooltip>
+);
 
 const EventPopUp = ({
   currentDateEvents = [],
@@ -8,6 +26,7 @@ const EventPopUp = ({
   onEventClick,
   setDisplayPopUp,
   displayModal,
+  textSize,
 }) => {
   const isDisplay = !displayModal && displayPopUp && currentDateEvents.length;
 
@@ -26,7 +45,14 @@ const EventPopUp = ({
           const { name, color } = item;
 
           return (
-            <Line text={name} color={color} item={item} onEventClick={onEventClick} key={name} />
+            <Line
+              text={name}
+              color={color}
+              item={item}
+              onEventClick={onEventClick}
+              key={name}
+              textSize={textSize}
+            />
           );
         })}
       </Space>
@@ -34,15 +60,20 @@ const EventPopUp = ({
   );
 };
 
-const Line = ({ text, color, item, onEventClick }) => (
+const Line = ({ text, color, item, onEventClick, textSize }) => (
   <>
     <Badge
       onClick={() => {
         onEventClick(item);
       }}
-      style={{ cursor: 'pointer' }}
+      text={EllipsisText(text, textSize)}
+      style={{
+        cursor: 'pointer',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+      }}
       color={color}
-      text={text}
     />
   </>
 );

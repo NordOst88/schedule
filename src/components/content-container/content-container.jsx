@@ -10,8 +10,6 @@ import { LIST, TABLE, CALENDAR } from '../../constants/constants';
 import List from '../list/list';
 import Table from '../table';
 
-import sortByDateTime from '../../utils/sortByDateTime';
-
 import './content-container.scss';
 
 import CalendarContainer from '../calendar/calendar';
@@ -26,8 +24,7 @@ class ContentContainer extends PureComponent {
   componentDidMount() {
     const { onFetch } = this.props;
     this.api.getAllEvents().then((events) => {
-      const formattedData = sortByDateTime(events);
-      onFetch(formattedData);
+      onFetch(events);
       this.setState({ loading: false });
     });
   }

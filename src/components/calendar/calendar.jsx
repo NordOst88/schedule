@@ -6,18 +6,19 @@ import { Badge, Calendar, Tooltip } from 'antd';
 import ModalInfo from '../modal-info/modal-info';
 import { filterDataByDay, getListData } from '../../utils/calendarHelpers';
 import getFormattedDate from '../../utils/getFormattedDate';
+import getFontSize from '../../utils/getFontSize';
+
 import EventPopUp from './eventPopUp';
 import {
   INACTIVE_EVENT_TYPE,
   INACTIVE_EVENT_COLOR,
   LARGE_MOBILE_WIDTH,
   DESKTOP_WIDTH,
-  CALENDAR_FONT_SIZE,
   BADGE_HEIGHT,
 } from '../../constants/calendarConstants';
 import './calendar.scss';
 
-const EllipsisText = (text) => (
+const EllipsisText = (text, fontSize) => (
   <Tooltip placement="topLeft" title={text}>
     <div
       style={{
@@ -25,7 +26,7 @@ const EllipsisText = (text) => (
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
-        fontSize: CALENDAR_FONT_SIZE,
+        fontSize,
       }}
     >
       {text}
@@ -33,7 +34,14 @@ const EllipsisText = (text) => (
   </Tooltip>
 );
 
-const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selectedEvents) => {
+const dateCellRender = (
+  value,
+  eventColors,
+  onEventClick,
+  currentTimezone,
+  selectedEvents,
+  fontSize,
+) => {
   const listData = getListData(value, selectedEvents, eventColors, currentTimezone);
 
   return (
@@ -49,10 +57,11 @@ const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selec
         const { dateTime, name, color, id } = item;
         const activeEvent = Date.now() > new Date(getFormattedDate(dateTime, currentTimezone));
         const textType = activeEvent ? INACTIVE_EVENT_TYPE : null;
-        const badgeText = window.innerWidth <= LARGE_MOBILE_WIDTH ? '' : EllipsisText(name);
+        const badgeText =
+          window.innerWidth <= LARGE_MOBILE_WIDTH ? '' : EllipsisText(name, fontSize);
 
         return (
-          <li key={name} id={id}>
+          <li key={id}>
             <Badge
               onClick={() => onEventClick(item)}
               color={color}
@@ -63,6 +72,7 @@ const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selec
                 justifyContent: 'flex-start',
                 alignItems: 'center',
                 height: BADGE_HEIGHT,
+                fontSize,
               }}
             />
           </li>
@@ -72,11 +82,13 @@ const dateCellRender = (value, eventColors, onEventClick, currentTimezone, selec
   );
 };
 
-const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => {
+const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents, textSize }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [eventDescription, setEventDescription] = useState(null);
   const [displayPopUp, setDisplayPopUp] = useState(false);
   const [currentDateEvents, setCurrentDateEvents] = useState(null);
+  const fontSize = getFontSize(textSize, 1.6);
+  const titleTextSize = getFontSize(textSize, 1.9);
 
   const onEventClick = (eventName) => {
     setEventDescription(eventName);
@@ -94,7 +106,15 @@ const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => 
       <Calendar
         className="schedule__calendar"
         dateCellRender={(value) =>
-          dateCellRender(value, eventColors, onEventClick, currentTimezone, selectedEvents)
+          dateCellRender(
+            value,
+            eventColors,
+            onEventClick,
+            currentTimezone,
+            selectedEvents,
+            fontSize,
+            titleTextSize,
+          )
         }
         onSelect={(value) => {
           if (window.innerWidth <= LARGE_MOBILE_WIDTH) {
@@ -116,16 +136,18 @@ const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents }) => 
           onEventClick={onEventClick}
           setDisplayPopUp={setDisplayPopUp}
           displayModal={displayModal}
+          textSize={titleTextSize}
         />
       )}
     </>
   );
 };
 
-const mapStateToProps = ({ eventColors, currentTimezone, selectedEvents }) => ({
+const mapStateToProps = ({ eventColors, currentTimezone, selectedEvents, fontSize }) => ({
   eventColors,
   currentTimezone,
   selectedEvents,
+  textSize: fontSize,
 });
 
 export default connect(mapStateToProps)(CalendarContainer);

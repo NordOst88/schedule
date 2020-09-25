@@ -85,6 +85,12 @@ const COLOR_PRESET = {
 const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
 const VIEW_SPINNER_TIP = 'Please, wait. We are preparing view for you ...';
 
+const TIPS_TEXT = {
+  onAddEvent: 'Please, wait. We are adding event ...',
+  onUpdateEvent: 'Please, wait. We are updating event ...',
+  onDeleteEvent: 'Please, wait. We are deleting event ...',
+};
+
 const SAVE_OPTIONS = ['PDF', 'JPG'];
 const BTN_SAVE_TEXT = 'Save as';
 
@@ -99,6 +105,12 @@ const SHOW_SELECTED_ITEMS_BUTTON_TEXT = 'Show Hidden Event';
 
 const HIDDEN_EVENTS_TEXT = 'Hidden Events: ';
 const SELECTED_EVENTS_TEXT = 'Selected Events: ';
+const EDIT_EVENT_TEXT = {
+  btnOk: 'OK',
+  btnSave: 'Save',
+  btnCancel: 'Cancel',
+  btnDelete: 'Delete',
+};
 
 export {
   TABLE,
@@ -127,4 +139,6 @@ export {
   SELECTED_EVENTS_TEXT,
   HIDE_SELECTED_ITEMS_BUTTON_TEXT,
   SHOW_SELECTED_ITEMS_BUTTON_TEXT,
+  EDIT_EVENT_TEXT,
+  TIPS_TEXT,
 };

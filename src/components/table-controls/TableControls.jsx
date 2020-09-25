@@ -4,7 +4,6 @@ import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import { onSetEvents } from '../../actions/actions';
-import sortByDateTime from '../../utils/sortByDateTime';
 import ModalEvent from '../modal-event';
 import popupMessage from '../popup-message';
 import { MODAL_ADD_EVENT_TEXT } from '../../constants/constants';
@@ -28,8 +27,7 @@ const TableControls = ({ onFetch, style }) => {
       .addEvent(event)
       .then(() => {
         api.getAllEvents().then((events) => {
-          const formattedData = sortByDateTime(events);
-          onFetch(formattedData);
+          onFetch(events);
           setLoading(false);
           popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_ADD_EVENT });
         });
@@ -55,9 +53,8 @@ const TableControls = ({ onFetch, style }) => {
   return (
     <>
       <Button
-        type="dashed"
         disabled={loading}
-        icon={<PlusOutlined spin={loading} />}
+        icon={<PlusOutlined spin={loading} style={{ margin: '3px 0px 0px' }} />}
         onClick={() => setDisplayModal(true)}
         style={style}
       >
