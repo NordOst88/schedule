@@ -90,6 +90,7 @@ const ModalInfo = ({
   const [displayFeedbackModal, setDisplayFeedback] = useState(false);
   const [updatedEvent, setUpdateEvents] = useState(eventDescription);
   const [isNeedToUpdate, setNeedToUpdate] = useState(false);
+  const [allFeedbacks, setAllFeedbacks] = useState(feedbacks);
 
   const onFeedbackBtnClick = () => {
     setDisplayFeedback(true);
@@ -118,6 +119,21 @@ const ModalInfo = ({
     const events = await api.getAllEvents();
     const formattedEvents = sortByDateTime(events);
     onFetch(formattedEvents);
+  };
+
+  const deleteFeedback = (feedback, timeStamp) => {
+    delete feedback[timeStamp];
+    setAllFeedbacks({ ...feedback });
+    return { ...feedback };
+  };
+
+  const getDeletedFeedback = (timeStamp) => {
+    setUpdateEvents((prevState) => ({
+      ...prevState,
+      feedbacks: deleteFeedback(prevState.feedbacks, timeStamp),
+      organizer: getOrganizerID(prevState),
+    }));
+    setNeedToUpdate(true);
   };
 
   // todo: think about refactor
@@ -182,8 +198,9 @@ const ModalInfo = ({
             setDisplayFeedback,
             onFeedbackAdd,
             isMentor,
-            feedbacks,
+            allFeedbacks,
             currentTimezone,
+            getDeletedFeedback,
           }}
         />
         <Space direction="vertical">
@@ -226,7 +243,6 @@ const Line = ({ title, text, type, styles }) => {
     </>
   );
 };
-
 const mapStateToProps = ({
   eventColors,
   currentTimezone,
@@ -244,7 +260,6 @@ const mapStateToProps = ({
   feedbackMode,
   onFetch,
 });
-
 export default connect(mapStateToProps, {
   onFetch: onSetEvents,
 })(ModalInfo);

@@ -6,6 +6,12 @@ import { DeleteOutlined } from '@ant-design/icons';
 import getFormattedDate from '../../utils/getFormattedDate';
 import getTimeStamp from '../../utils/getTimeStamp';
 
+import {
+  INPUT_PLACEHOLDER,
+  MENTOR_MODAL_TITLE,
+  STUDENT_MODAL_TITLE,
+} from '../../constants/modalInfoConstants';
+
 import './feedback.scss';
 
 const FeedbackContainer = ({
@@ -13,8 +19,9 @@ const FeedbackContainer = ({
   setDisplayFeedback,
   onFeedbackAdd,
   isMentor,
-  feedbacks,
+  allFeedbacks,
   currentTimezone,
+  getDeletedFeedback,
 }) => {
   const { TextArea } = Input;
   const { Text } = Typography;
@@ -25,10 +32,10 @@ const FeedbackContainer = ({
   };
 
   const getFeedbackData = () => {
-    const entries = Object.entries(feedbacks);
+    const entries = Object.entries(allFeedbacks);
     return entries.map((feedback) => {
       const dateTime = getFormattedDate(feedback[0], currentTimezone);
-      return `${dateTime}: ${feedback[1]}`;
+      return { text: `${dateTime}: ${feedback[1]}`, timeStamp: feedback[0] };
     });
   };
 
@@ -51,7 +58,7 @@ const FeedbackContainer = ({
 
   return isMentor ? (
     <Modal
-      title="All feedbacks"
+      title={MENTOR_MODAL_TITLE}
       visible={displayFeedbackModal}
       closable
       onOk={handleOk}
@@ -61,17 +68,20 @@ const FeedbackContainer = ({
       footer={null}
     >
       {getFeedbackData().map((feedback) => (
-        <>
-          <Text>{feedback}</Text>
+        <div key={feedback.timeStamp}>
+          <Text>{feedback.text}</Text>
           <Divider type="vertical" />
-          <Button icon={<DeleteOutlined />} onClick={() => console.log(feedback)} />
+          <Button
+            icon={<DeleteOutlined />}
+            onClick={() => getDeletedFeedback(feedback.timeStamp)}
+          />
           <Divider style={{ margin: '10px 0' }} />
-        </>
+        </div>
       ))}
     </Modal>
   ) : (
     <Modal
-      title="Feedback"
+      title={STUDENT_MODAL_TITLE}
       visible={displayFeedbackModal}
       closable={false}
       onOk={handleOk}
@@ -79,7 +89,7 @@ const FeedbackContainer = ({
     >
       <TextArea
         rows={4}
-        placeholder="Write your feedback of the task"
+        placeholder={INPUT_PLACEHOLDER}
         allowClear
         onChange={handleOnChange}
         value={inputText}
