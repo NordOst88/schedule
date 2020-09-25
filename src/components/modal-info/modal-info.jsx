@@ -7,6 +7,7 @@ import { FormOutlined, ReadOutlined } from '@ant-design/icons';
 import getEventColor from '../../utils/getEventColor';
 import sortByDateTime from '../../utils/sortByDateTime';
 import getFormattedDate from '../../utils/getFormattedDate';
+import { feedbackButtonStyles, getOrganizerID } from '../../utils/modalInfoHelpers';
 
 import { onSetEvents } from '../../actions/actions';
 
@@ -68,7 +69,7 @@ const ModalInfo = ({
     links = {},
     organizer = [],
     comment = noInfo,
-    allowFeedback,
+    allowFeedback = true,
     feedbacks = {},
   } = eventDescription;
   const { Link } = Typography;
@@ -98,12 +99,7 @@ const ModalInfo = ({
     setUpdateEvents((prevState) => ({
       ...prevState,
       allowFeedback: !prevState.allowFeedback,
-      organizer: prevState.organizer.map((item) => {
-        if (typeof item === 'string') {
-          return item;
-        }
-        return item.id;
-      }),
+      organizer: getOrganizerID(prevState),
     }));
     setNeedToUpdate(true);
   };
@@ -112,23 +108,16 @@ const ModalInfo = ({
     setUpdateEvents((prevState) => ({
       ...prevState,
       feedbacks: { ...prevState.feedbacks, [timeStamp]: feedbackText },
-      organizer: prevState.organizer.map((item) => {
-        if (typeof item === 'string') {
-          return item;
-        }
-        return item.id;
-      }),
+      organizer: getOrganizerID(prevState),
     }));
     setNeedToUpdate(true);
   };
 
-  const fetchUpdateEvent = (event) => {
-    api.updateEventById(event.id, event).then(() => {
-      api.getAllEvents().then((events) => {
-        const formattedEvents = sortByDateTime(events);
-        onFetch(formattedEvents);
-      });
-    });
+  const fetchUpdateEvent = async (event) => {
+    await api.updateEventById(event.id, event);
+    const events = await api.getAllEvents();
+    const formattedEvents = sortByDateTime(events);
+    onFetch(formattedEvents);
   };
 
   // todo: think about refactor
@@ -153,7 +142,7 @@ const ModalInfo = ({
             fetchUpdateEvent(updatedEvent);
             setNeedToUpdate(false);
           }
-          if (isNeedToUpdate && !isMentor) {
+          if (isNeedToUpdate) {
             fetchUpdateEvent(updatedEvent);
             setNeedToUpdate(false);
           }
@@ -163,8 +152,8 @@ const ModalInfo = ({
         {allowFeedback && !isMentor && (
           <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
             <Button
-              icon={<FeedbackIcon />}
-              style={{ position: 'absolute', top: 67, right: 20 }}
+              icon={<FormOutlined />}
+              style={feedbackButtonStyles(67, 20)}
               onClick={onFeedbackBtnClick}
             />
           </Tooltip>
@@ -174,7 +163,7 @@ const ModalInfo = ({
             <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
               <Button
                 icon={<ReadOutlined />}
-                style={{ position: 'absolute', top: 67, right: 20 }}
+                style={feedbackButtonStyles(67, 20)}
                 onClick={onFeedbackBtnClick}
               />
             </Tooltip>
@@ -182,18 +171,20 @@ const ModalInfo = ({
               checkedChildren="Feedback ON"
               unCheckedChildren="Feedback OFF"
               defaultChecked={allowFeedback}
-              style={{ position: 'absolute', top: 18, right: 50 }}
+              style={feedbackButtonStyles(18, 50)}
               onChange={toggleAllowFeedback}
             />
           </>
         )}
         <FeedbackContainer
-          displayFeedbackModal={displayFeedbackModal}
-          setDisplayFeedback={setDisplayFeedback}
-          onFeedbackAdd={onFeedbackAdd}
-          isMentor={isMentor}
-          feedbacks={feedbacks}
-          currentTimezone={currentTimezone}
+          {...{
+            displayFeedbackModal,
+            setDisplayFeedback,
+            onFeedbackAdd,
+            isMentor,
+            feedbacks,
+            currentTimezone,
+          }}
         />
         <Space direction="vertical">
           <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
@@ -235,8 +226,6 @@ const Line = ({ title, text, type, styles }) => {
     </>
   );
 };
-
-const FeedbackIcon = () => <FormOutlined style={{ fontSize: '1.8rem', marginRight: 0 }} />;
 
 const mapStateToProps = ({
   eventColors,

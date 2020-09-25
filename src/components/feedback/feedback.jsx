@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
-import { Modal, Input } from 'antd';
+import { Modal, Input, Typography, Divider, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import getFormattedDate from '../../utils/getFormattedDate';
 import getTimeStamp from '../../utils/getTimeStamp';
+
+import './feedback.scss';
 
 const FeedbackContainer = ({
   displayFeedbackModal,
@@ -14,6 +17,7 @@ const FeedbackContainer = ({
   currentTimezone,
 }) => {
   const { TextArea } = Input;
+  const { Text } = Typography;
   const [inputText, setInputText] = useState('');
 
   const handleOnChange = (e) => {
@@ -49,12 +53,20 @@ const FeedbackContainer = ({
     <Modal
       title="All feedbacks"
       visible={displayFeedbackModal}
-      closable={false}
+      closable
       onOk={handleOk}
       onCancel={handleCancel}
+      style={{ maxHeight: 400 }}
+      className="feedback__modal"
+      footer={null}
     >
       {getFeedbackData().map((feedback) => (
-        <p key={feedback}>{feedback}</p>
+        <>
+          <Text>{feedback}</Text>
+          <Divider type="vertical" />
+          <Button icon={<DeleteOutlined />} onClick={() => console.log(feedback)} />
+          <Divider style={{ margin: '10px 0' }} />
+        </>
       ))}
     </Modal>
   ) : (
