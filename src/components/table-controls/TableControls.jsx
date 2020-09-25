@@ -13,7 +13,6 @@ import {
   ERROR_FETCH_MSG,
 } from '../../constants/tableConstants';
 import { formatEventForFetch } from '../../utils/tableHelpers';
-import sortByDateTime from '../../utils/sortByDateTime';
 
 const api = new SwaggerService();
 const { addEvent } = MODAL_ADD_EVENT_TEXT;
@@ -28,8 +27,7 @@ const TableControls = ({ onFetch, style }) => {
       .addEvent(event)
       .then(() => {
         api.getAllEvents().then((events) => {
-          const formattedData = sortByDateTime(events);
-          onFetch(formattedData);
+          onFetch(events);
           setLoading(false);
           popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_ADD_EVENT });
         });

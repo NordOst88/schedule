@@ -1,4 +1,5 @@
 import DATA from '../constants/data';
+import sortByDateTime from '../utils/sortByDateTime';
 
 export default class SwaggerService {
   _apiKey = '8xZBYLh04KItILB5uYVO';
@@ -88,7 +89,7 @@ export default class SwaggerService {
       return event;
     });
 
-    return formattedEvents;
+    return sortByDateTime(formattedEvents);
   };
 
   // todo: !!!don't use these methods!!!
