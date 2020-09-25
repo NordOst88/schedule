@@ -16,6 +16,7 @@ import {
 
 import getTasksTypes from '../../utils/getTasksTypes';
 import rgbToHex from '../../utils/colorPickerHelpers';
+import getFontSize from '../../utils/getFontSize';
 
 import './color-picker.scss';
 
@@ -25,6 +26,7 @@ const SettingsModal = ({
   events,
   eventColors,
   onColorSelect,
+  textSize,
 }) => {
   const [isDisplayColorPicker, setDisplayColorPicker] = useState(false);
   const [targetColor, setTargetColor] = useState(null);
@@ -32,6 +34,8 @@ const SettingsModal = ({
   const [eventTarget, setEventTarget] = useState(null);
   const [formattedColor, setFormattedColor] = useState(null);
   const [newColorPreset, setColorPreset] = useState(eventColors);
+  const fontSize = getFontSize(textSize, 1.6);
+  const titleTextSize = getFontSize(textSize, 1.9);
 
   useEffect(() => {
     if (formattedColor) {
@@ -51,7 +55,7 @@ const SettingsModal = ({
 
   const getTypeTaskTags = () => {
     const type = tasksTypes;
-    return <Type {...{ type, eventColors, tagsName, displayColorPicker }} />;
+    return <Type {...{ type, eventColors, tagsName, displayColorPicker, fontSize }} />;
   };
 
   const handleOk = () => {
@@ -68,7 +72,7 @@ const SettingsModal = ({
       <Modal
         width={MODAL_WIDTH}
         visible={displaySettingsModal}
-        title={<Line text={MODAL_TEXT} />}
+        title={<Line text={MODAL_TEXT} fontSize={titleTextSize} />}
         closable={false}
         onCancel={handleCancel}
         onOk={handleOk}
@@ -78,6 +82,7 @@ const SettingsModal = ({
             text={getTypeTaskTags()}
             setDisplayColorPicker={setDisplayColorPicker}
             setTargetColor={setTargetColor}
+            fontSize={fontSize}
           />
         </Space>
         {isDisplayColorPicker && (
@@ -92,14 +97,15 @@ const SettingsModal = ({
   );
 };
 
-const Line = ({ text }) => {
+const Line = ({ text, fontSize }) => {
   const { Text } = Typography;
-  return <Text style={{ lineHeight: '30px' }}>{text}</Text>;
+  return <Text style={{ lineHeight: '30px', fontSize }}>{text}</Text>;
 };
 
-const mapStateToProps = ({ events, eventColors }) => ({
+const mapStateToProps = ({ events, eventColors, fontSize }) => ({
   events,
   eventColors,
+  textSize: fontSize,
 });
 
 export default connect(mapStateToProps, { onColorSelect: onEventColorChange })(SettingsModal);

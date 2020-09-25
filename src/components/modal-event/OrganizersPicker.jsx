@@ -17,6 +17,15 @@ const OrganizersPicker = ({ value, onChange, api }) => {
     getOrganizers();
   }, []);
 
+  const customStyles = {
+    multiValueRemove: (styles) => ({
+      ...styles,
+      ':hover': {
+        cursor: 'pointer',
+      },
+    }),
+  };
+
   const triggerChange = (changedValue) => {
     if (onChange) {
       onChange(changedValue);
@@ -35,7 +44,7 @@ const OrganizersPicker = ({ value, onChange, api }) => {
       closeMenuOnSelect={false}
       isMulti
       options={organizers}
-      styles={SELECT_STYLES}
+      styles={{ ...SELECT_STYLES, ...customStyles }}
       className="multi-select"
       classNamePrefix="react-select"
       menuPlacement="auto"

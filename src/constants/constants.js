@@ -85,6 +85,12 @@ const COLOR_PRESET = {
 const MODAL_SPINNER_TIP = 'Please, wait. We are preparing files for you ...';
 const VIEW_SPINNER_TIP = 'Please, wait. We are preparing view for you ...';
 
+const TIPS_TEXT = {
+  onAddEvent: 'Please, wait. We are adding event ...',
+  onUpdateEvent: 'Please, wait. We are updating event ...',
+  onDeleteEvent: 'Please, wait. We are deleting event ...',
+};
+
 const SAVE_OPTIONS = ['PDF', 'JPG'];
 const BTN_SAVE_TEXT = 'Save as';
 
@@ -93,6 +99,13 @@ const DEFAULT_FONT_SIZE = 10;
 const ADJUST_FONT_SIZE = 13;
 
 const TABLE_EDITABLE = true;
+
+const EDIT_EVENT_TEXT = {
+  btnOk: 'OK',
+  btnSave: 'Save',
+  btnCancel: 'Cancel',
+  btnDelete: 'Delete',
+};
 
 export {
   TABLE,
@@ -117,4 +130,6 @@ export {
   ADJUST_FONT_SIZE,
   RADIO_ITEMS,
   VIEW_SPINNER_TIP,
+  EDIT_EVENT_TEXT,
+  TIPS_TEXT,
 };
