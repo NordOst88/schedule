@@ -91,13 +91,9 @@ const List = ({ selectedEvents, eventColors, listView, onChange, currentTimezone
       {displayModal && (
         <ModalInfo
           {...{
-            ...eventDescription,
+            eventDescription,
             displayModal,
             setDisplayModal,
-            eventColors,
-            currentTimezone,
-            fontSize,
-            titleTextSize,
           }}
         />
       )}
@@ -137,6 +133,7 @@ const mapStateToProps = ({
   listView,
   currentTimezone,
   fontSize,
+  role,
 }) => ({
   events,
   selectedEvents,
@@ -144,6 +141,7 @@ const mapStateToProps = ({
   listView,
   currentTimezone,
   textSize: fontSize,
+  role,
 });
 
 export default connect(mapStateToProps, { onChange: onSetListView })(List);
