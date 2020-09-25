@@ -17,7 +17,13 @@ import {
   SUCCESS_DELETE_EVENT,
   ERROR_FETCH_MSG,
 } from '../../constants/tableConstants';
-import { MODAL_ADD_EVENT_TEXT, MENTOR, TABLE, TIPS_TEXT } from '../../constants/constants';
+import {
+  MODAL_ADD_EVENT_TEXT,
+  MENTOR,
+  TABLE,
+  TIPS_TEXT,
+  DEFAULT_FONT_SIZE,
+} from '../../constants/constants';
 import {
   filterColumns,
   addColumnKey,
@@ -172,7 +178,7 @@ const TableContainer = ({
           tableEditMode && role === MENTOR ? [editColumn, ...visibleColumns] : visibleColumns
         }
         rowKey="id"
-        size={fontSize === 10 ? 'small' : 'middle'}
+        size={fontSize === DEFAULT_FONT_SIZE ? 'small' : 'middle'}
         pagination={false}
       />
       {displayModal && (

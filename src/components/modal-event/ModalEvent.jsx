@@ -5,7 +5,11 @@ import TagPicker from './TagsPicker';
 import OrganizersPicker from './OrganizersPicker';
 import LinksList from './LinksList';
 import Line from '../line';
-import { MODAL_ADD_EVENT_TEXT, EDIT_EVENT_TEXT } from '../../constants/constants';
+import {
+  MODAL_ADD_EVENT_TEXT,
+  EDIT_EVENT_TEXT,
+  DEFAULT_FONT_SIZE,
+} from '../../constants/constants';
 import { formatEventForModal } from '../../utils/tableHelpers';
 import './ModalEvent.scss';
 
@@ -78,7 +82,7 @@ const ModalEvent = ({
       title={title}
       visible={displayModal}
       onCancel={() => setDisplayModal(false)}
-      className={fontSize === 10 ? 'modal-event-sm' : 'modal-event-df'}
+      className={fontSize === DEFAULT_FONT_SIZE ? 'modal-event-sm' : 'modal-event-df'}
       footer={[
         <Space key="space" style={{ width: 'calc(100% - 145px)' }}>
           {createNewEvent ? null : (
@@ -105,7 +109,7 @@ const ModalEvent = ({
         onFinish={createNewEvent || updateEvent}
         form={form}
         initialValues={{ week: 0, feedbacks: {}, allowFeedback: true }}
-        size={fontSize === 10 ? 'small' : 'default'}
+        size={fontSize === DEFAULT_FONT_SIZE ? 'small' : 'default'}
       >
         <Form.Item
           label={<Line title={week} />}
