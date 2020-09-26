@@ -1,17 +1,18 @@
+@import '../../sass/abstract/constants';
 .modal-event-sm,
 .modal-event-df {
   .ant-modal {
     &-header {
-      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+      background: linear-gradient(45deg, #1890ff, #40a9ff);
     }
     &-title {
-      color: #ffffff;
+      color: $modal-event-header-color;
       cursor: default;
     }
     &-close-x {
-      color: #ffffff;
+      color: $modal-event-header-color;
       &:hover {
-        color: #d6d6d6;
+        color: $modal-event-header-color-hover;
       }
     }
   }
@@ -20,6 +21,9 @@
 .modal-event-sm {
   &.ant-modal {
     top: 50px;
+  }
+  .delete-btn-wrap {
+    width: calc(100% - 145px);
   }
 }
 
@@ -50,11 +54,14 @@
     }
   }
   .ant-col.ant-form-item-control {
-    font-size: 16px;
-    line-height: 0;
+    font-size: 18px;
+    line-height: 1.5;
     & input,
     textarea {
       font-size: 16px;
     }
+  }
+  .delete-btn-wrap {
+    width: calc(100% - 175px);
   }
 }
