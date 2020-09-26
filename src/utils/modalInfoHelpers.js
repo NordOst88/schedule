@@ -1,7 +1,5 @@
-const feedbackButtonStyles = (top, right) => ({
-  position: 'absolute',
-  top,
-  right,
+const feedbackButtonStyles = () => ({
+  marginTop: 14,
 });
 const feedbackSwitchStyles = () => ({
   marginRight: 25,

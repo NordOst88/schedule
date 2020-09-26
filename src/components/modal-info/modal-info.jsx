@@ -202,7 +202,7 @@ const ModalInfo = ({
     style.innerHTML = css;
     document.querySelector('.modal-info').appendChild(style);
   }, []);
-  const titleWidth = isMentor ? 250 : null;
+  const titleWidth = isMentor ? 340 : null;
 
   const feedBackSwitch = isMentor && (
     <Switch
@@ -245,31 +245,6 @@ const ModalInfo = ({
           setDisplayModal(false);
         }}
       >
-        {allowFeedback && !isMentor && (
-          <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
-            <Button
-              icon={<FormOutlined />}
-              style={feedbackButtonStyles(75, 20)}
-              onClick={onFeedbackBtnClick}
-            />
-          </Tooltip>
-        )}
-        {isMentor && (
-          <>
-            <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
-              <Button
-                icon={<ReadOutlined />}
-                style={feedbackButtonStyles(85, 20)}
-                onClick={onFeedbackBtnClick}
-              />
-            </Tooltip>
-            <Button
-              icon={<EditOutlined />}
-              style={feedbackButtonStyles(125, 20)}
-              onClick={onEditBtnClick}
-            />
-          </>
-        )}
         <FeedbackContainer
           {...{
             displayFeedbackModal,
@@ -293,26 +268,47 @@ const ModalInfo = ({
             }}
           />
         )}
-        <Space direction="vertical">
-          <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
-          <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
-          <Line title={taskStart} text={startDate} type="success" styles={{ fontSize }} />
-          <Line title={taskDeadline} text={deadlineDate} type="danger" styles={{ fontSize }} />
-          <Line title={estimatedStudyTime} text={estimatedTime} styles={{ fontSize }} />
-          <Line title={taskPlace} text={place} styles={{ fontSize }} />
-          <Line
-            title={taskDescription}
-            text={description}
-            styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
-          />
-          <Line title={taskLinks} text={getLinks()} styles={{ fontSize }} />
-          <Line title={taskOrganizer} text={getOrganizer()} styles={{ fontSize }} />
-          <Line
-            title={taskComment}
-            text={comment}
-            styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
-          />
-        </Space>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Space direction="vertical">
+            <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
+            <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
+            <Line title={taskStart} text={startDate} type="success" styles={{ fontSize }} />
+            <Line title={taskDeadline} text={deadlineDate} type="danger" styles={{ fontSize }} />
+            <Line title={estimatedStudyTime} text={estimatedTime} styles={{ fontSize }} />
+            <Line title={taskPlace} text={place} styles={{ fontSize }} />
+            <Line
+              title={taskDescription}
+              text={description}
+              styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
+            />
+            <Line title={taskLinks} text={getLinks()} styles={{ fontSize }} />
+            <Line title={taskOrganizer} text={getOrganizer()} styles={{ fontSize }} />
+            <Line
+              title={taskComment}
+              text={comment}
+              styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
+            />
+          </Space>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {allowFeedback && !isMentor && (
+              <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
+                <Button icon={<FormOutlined />} onClick={onFeedbackBtnClick} />
+              </Tooltip>
+            )}
+            {isMentor && (
+              <>
+                <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
+                  <Button icon={<ReadOutlined />} onClick={onFeedbackBtnClick} />
+                </Tooltip>
+                <Button
+                  icon={<EditOutlined />}
+                  style={feedbackButtonStyles()}
+                  onClick={onEditBtnClick}
+                />
+              </>
+            )}
+          </div>
+        </div>
         {isOfflineEvent && <MapContainer place={place} />}
       </Modal>
     </div>
