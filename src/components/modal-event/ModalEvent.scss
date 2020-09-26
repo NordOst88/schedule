@@ -12,7 +12,7 @@
     &-close-x {
       color: $modal-event-header-color;
       &:hover {
-        color: #d6d6d6;
+        color: $modal-event-header-color-hover;
       }
     }
   }
