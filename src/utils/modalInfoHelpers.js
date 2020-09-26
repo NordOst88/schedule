@@ -1,7 +1,9 @@
-const feedbackButtonStyles = (top, right) => ({
-  position: 'absolute',
-  top,
-  right,
+const feedbackButtonStyles = () => ({
+  marginTop: 14,
+});
+const feedbackSwitchStyles = () => ({
+  marginRight: 25,
+  overflow: 'hidden',
 });
 
 const getOrganizerID = (prevState) =>
@@ -12,4 +14,4 @@ const getOrganizerID = (prevState) =>
     return item.id;
   });
 
-export { feedbackButtonStyles, getOrganizerID };
+export { feedbackButtonStyles, getOrganizerID, feedbackSwitchStyles };
