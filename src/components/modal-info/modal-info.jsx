@@ -22,7 +22,7 @@ import popupMessage from '../popup-message';
 import MapContainer from '../map/map';
 
 import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
-import { ONLINE_TEXT } from '../../constants/mapConstants';
+import { ONLINE_TEXT, NO_PLACE } from '../../constants/mapConstants';
 import {
   MENTOR_SHOW_FEEDBACKS_TEXT,
   STUDENT_ADD_FEEDBACK_TEXT,
@@ -94,7 +94,7 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
-  const isOfflineEvent = place !== ONLINE_TEXT && place;
+  const isOfflineEvent = place !== ONLINE_TEXT && place !== NO_PLACE && place;
 
   const isMentor = role === MENTOR;
 

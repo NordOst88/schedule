@@ -22,7 +22,7 @@ const EllipsisText = (text, fontSize) => (
   <Tooltip placement="topLeft" title={text}>
     <div
       style={{
-        width: `${window.innerWidth <= DESKTOP_WIDTH ? '30px' : '80px'}`,
+        width: `${window.innerWidth <= DESKTOP_WIDTH ? '30px' : '70%'}`,
         textOverflow: 'ellipsis',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
