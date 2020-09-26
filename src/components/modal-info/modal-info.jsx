@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { Modal, Space, Typography, Button, Switch, Tooltip } from 'antd';
-import { FormOutlined, ReadOutlined } from '@ant-design/icons';
+import { FormOutlined, ReadOutlined, EditOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
 import sortByDateTime from '../../utils/sortByDateTime';
 import getFormattedDate from '../../utils/getFormattedDate';
 import { feedbackButtonStyles, getOrganizerID } from '../../utils/modalInfoHelpers';
+import { formatEventForFetch } from '../../utils/tableHelpers';
 
 import { onSetEvents } from '../../actions/actions';
 
@@ -15,6 +16,8 @@ import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer/organizer';
 import FeedbackContainer from '../feedback/feedback';
+import ModalEvent from '../modal-event';
+import popupMessage from '../popup-message';
 import MapContainer from '../map/map';
 
 import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
@@ -23,6 +26,12 @@ import {
   MENTOR_SHOW_FEEDBACKS_TEXT,
   STUDENT_ADD_FEEDBACK_TEXT,
 } from '../../constants/modalInfoConstants';
+import {
+  SUCCESS_FETCH_MSG,
+  SUCCESS_UPDATE_EVENT,
+  SUCCESS_DELETE_EVENT,
+  ERROR_FETCH_MSG,
+} from '../../constants/tableConstants';
 
 import SwaggerService from '../../services/swagger-service';
 
@@ -88,12 +97,57 @@ const ModalInfo = ({
   const isMentor = role === MENTOR;
 
   const [displayFeedbackModal, setDisplayFeedback] = useState(false);
+  const [displayEditor, setDisplayEditor] = useState(false);
   const [updatedEvent, setUpdateEvents] = useState(eventDescription);
   const [isNeedToUpdate, setNeedToUpdate] = useState(false);
   const [allFeedbacks, setAllFeedbacks] = useState(feedbacks);
 
   const onFeedbackBtnClick = () => {
     setDisplayFeedback(true);
+  };
+
+  const onEditBtnClick = () => {
+    setDisplayEditor(true);
+  };
+
+  const updateEvent = (event) => {
+    const updatableEvent = formatEventForFetch(event);
+    api
+      .updateEventById(updatableEvent.id, updatableEvent)
+      .then(() => {
+        api.getAllEvents().then((events) => {
+          onFetch(events);
+          popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_UPDATE_EVENT });
+        });
+      })
+      .catch((error) => {
+        popupMessage({
+          ...ERROR_FETCH_MSG,
+          message: error.name,
+          description: error.message,
+          callbacksArg: event,
+          callback: updateEvent,
+        });
+      });
+    setDisplayModal(false);
+  };
+
+  const fetchDeleteEvent = async (id) => {
+    try {
+      await api.deleteEventById(id);
+      setTimeout(async () => {
+        const events = await api.getAllEvents();
+        onFetch(events);
+        popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_DELETE_EVENT });
+      }, 1000);
+    } catch (e) {
+      popupMessage({
+        ...ERROR_FETCH_MSG,
+        message: e.name,
+        description: e.message,
+      });
+    }
+    setDisplayModal(false);
   };
 
   const toggleAllowFeedback = () => {
@@ -183,6 +237,11 @@ const ModalInfo = ({
                 onClick={onFeedbackBtnClick}
               />
             </Tooltip>
+            <Button
+              icon={<EditOutlined />}
+              style={feedbackButtonStyles(107, 20)}
+              onClick={onEditBtnClick}
+            />
             <Switch
               checkedChildren="Feedback ON"
               unCheckedChildren="Feedback OFF"
@@ -203,6 +262,18 @@ const ModalInfo = ({
             getDeletedFeedback,
           }}
         />
+        {isMentor && (
+          <ModalEvent
+            {...{
+              displayModal: displayEditor,
+              setDisplayModal: setDisplayEditor,
+              selectedEvent: eventDescription,
+              api,
+              updateEvent,
+              fetchDeleteEvent,
+            }}
+          />
+        )}
         <Space direction="vertical">
           <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
           <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
