@@ -27,10 +27,21 @@ const FeedbackContainer = ({
   const { Text } = Typography;
   const [inputText, setInputText] = useState('');
 
+  /**
+   * Function handles onChange logic of the feedback modal
+   * it set state for the input text
+   *
+   * @param {Object} event current event
+   */
+
   const handleOnChange = (e) => {
     setInputText(e.target.value);
   };
 
+  /**
+   * Function get all feedback data, look through the data and return object with data needed for displaying in the feedback modal
+   * @returns {Object} object of text, which is string, and timestamp
+   */
   const getFeedbackData = () => {
     const entries = Object.entries(allFeedbacks);
     return entries.map((feedback) => {
@@ -39,6 +50,13 @@ const FeedbackContainer = ({
     });
   };
 
+  /**
+   * Function handles onOk logic of the feedback modal
+   * If current mode is mentor, it sets the state to close feedback modal
+   *
+   * if current mode is student, it sets the state to close model and add feedback to global state and backend, as well as clears input area
+   *
+   */
   const handleOk = () => {
     if (isMentor) {
       setDisplayFeedback(false);
@@ -49,6 +67,11 @@ const FeedbackContainer = ({
     }
   };
 
+  /**
+   * Function handles onCancel logic of the feedback modal
+   * If current mode is student, it sets the state to clears input area and to close modal
+   *
+   */
   const handleCancel = () => {
     if (!isMentor) {
       setInputText('');

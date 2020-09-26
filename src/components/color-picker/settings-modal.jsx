@@ -46,6 +46,15 @@ const SettingsModal = ({
   const tasksTypes = getTasksTypes(events);
   const tagsName = TAGS_NAME;
 
+  /**
+   * Function set state of:
+   * -current target
+   * -selected tag
+   * -target color
+   * -displays color picker modal
+   *
+   * @param {Object} event current event and its target
+   */
   const displayColorPicker = ({ target }) => {
     setEventTarget(target);
     setSelectedTag(target.textContent);
@@ -53,16 +62,32 @@ const SettingsModal = ({
     setDisplayColorPicker(true);
   };
 
+  /**
+   * function generates all tags using tasks types
+   *
+   * @returns (
+   * <Type {...{ type, eventColors, tagsName, displayColorPicker, fontSize }} />
+   * )
+   */
   const getTypeTaskTags = () => {
     const type = tasksTypes;
     return <Type {...{ type, eventColors, tagsName, displayColorPicker, fontSize }} />;
   };
 
+  /**
+   * Function handle onOk logic in the modal
+   * It set state of new color present for the tags
+   * it set state for not displaying color picker modal
+   */
   const handleOk = () => {
     onColorSelect(newColorPreset);
     setDisplaySettingsModal(false);
   };
 
+  /**
+   * Function handles onCancel logic in the modal
+   * it set state for not displaying color picker modal
+   */
   const handleCancel = () => {
     setDisplaySettingsModal(false);
   };

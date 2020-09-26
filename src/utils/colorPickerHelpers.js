@@ -1,3 +1,10 @@
+/**
+ * Function gets rgb color in text format and transforms it into '#' digital format
+ *
+ * @param {string} rgbText rgb text format
+ * @returns {string} "#" + digital format
+ */
+
 const rgbToHex = (rgbText) =>
   rgbText.replace(
     /rgb\((.+?)\)/gi,

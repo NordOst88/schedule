@@ -90,6 +90,14 @@ const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents, textS
   const fontSize = getFontSize(textSize, 1.6);
   const titleTextSize = getFontSize(textSize, 1.9);
 
+  /**
+   * Function displays actions on exact event click.
+   * It sets event description state
+   * sets if to display small modal on mobile devices
+   *
+   * @param {sting} eventName
+   */
+
   const onEventClick = (eventName) => {
     setEventDescription(eventName);
     if (window.innerWidth <= LARGE_MOBILE_WIDTH) {

@@ -9,6 +9,12 @@ const ColorPicker = ({ defaultColor, setFormattedColor, eventTarget }) => {
     setColor(defaultColor);
   }, [defaultColor]);
 
+  /**
+   * Function sets color state using hex format
+   * changes background of the target element using hex format
+   *
+   * @param {Object} colorObject color object with hex
+   */
   const updateColor = ({ hex }) => {
     setColor(hex);
     eventTarget.style.backgroundColor = hex;
