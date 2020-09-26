@@ -7,6 +7,7 @@ import { FormOutlined, ReadOutlined, EditOutlined } from '@ant-design/icons';
 import getEventColor from '../../utils/getEventColor';
 import sortByDateTime from '../../utils/sortByDateTime';
 import getFormattedDate from '../../utils/getFormattedDate';
+import getFontSize from '../../utils/getFontSize';
 import { feedbackButtonStyles, getOrganizerID } from '../../utils/modalInfoHelpers';
 import { formatEventForFetch } from '../../utils/tableHelpers';
 
@@ -60,7 +61,7 @@ const ModalInfo = ({
   setDisplayModal,
   eventColors,
   currentTimezone,
-  fontSize,
+  textSize,
   titleTextSize,
   role,
   onFetch,
@@ -82,6 +83,7 @@ const ModalInfo = ({
     feedbacks = {},
   } = eventDescription;
   const { Link } = Typography;
+  const fontSize = getFontSize(textSize, 1.6);
   const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
   const getLinks = () => <Links {...{ links }} />;
   const getOrganizer = () => <Organizer {...{ organizer }} />;
@@ -325,7 +327,7 @@ const mapStateToProps = ({
 }) => ({
   eventColors,
   currentTimezone,
-  fontSize,
+  textSize: fontSize,
   titleTextSize,
   role,
   feedbackMode,
