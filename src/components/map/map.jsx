@@ -10,6 +10,17 @@ import './map.scss';
 
 mapboxgl.accessToken = MAP_BOX_TOKEN;
 
+/**
+ * Creates a map box and map marker using event place if existed
+ * @component
+ * @example
+ * const place = 'Minsk, Голубка 12'
+ *
+ * return (
+ *    <MapContainer place={place} />
+ * )
+ */
+
 const MapContainer = ({ place }) => {
   const mapContainerRef = useRef(null);
   const [lat, setLatitude] = useState(GLOBAL_COORDS);

@@ -3,6 +3,20 @@ import { HuePicker } from 'react-color';
 
 import { HUE_PICKER_WIDTH } from '../../constants/colorPickerConstants';
 
+/**
+ * Component creates Hue color picker and setChosen color to the state
+ *
+ * @component
+ * @example
+ * const defaultColor = '#00000';
+ * const eventTarget = e.target;
+ * const setFormattedColor = () => console.log('sets state');
+ *
+ * return (
+ *  <ColorPicker {...{ defaultColor, setFormattedColor, eventTarget }} />
+ * )
+ */
+
 const ColorPicker = ({ defaultColor, setFormattedColor, eventTarget }) => {
   const [color, setColor] = useState(defaultColor);
   useEffect(() => {

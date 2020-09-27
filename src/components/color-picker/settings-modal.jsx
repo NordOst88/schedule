@@ -20,6 +20,23 @@ import getFontSize from '../../utils/getFontSize';
 
 import './color-picker.scss';
 
+/**
+ * Component which combines modal component and ColorPicker
+ *
+ * @component
+ * @example
+ * const displaySettingsModal = true/false;
+ * const events = [{week: 0, name: 'JS basics', description: 'interesting course'....}];
+ * const eventColors = {'js task': '#44444'}
+ * const setDisplaySettingsModal = () => console.log('sets state for displaying modal or not');
+ * const onColorSelect = () => console.log('handles onSelect logic');
+ * const textSize = 14
+ *
+ * return (
+ *  <SettingsModal {...{ setDisplaySettingsModal, displaySettingsModal, events, eventColors, onColorSelect, textSize }} />
+ * )
+ */
+
 const SettingsModal = ({
   setDisplaySettingsModal,
   displaySettingsModal,
@@ -121,6 +138,19 @@ const SettingsModal = ({
     </>
   );
 };
+
+/**
+ * Component creates Line with the text
+ *
+ * @component
+ * @example
+ * const text = ''Js course materials';
+ * const fontSize = 14;
+ *
+ * return (
+ *  <Line {...{ text, color, item, onEventClick, textSize }} />
+ * )
+ */
 
 const Line = ({ text, fontSize }) => {
   const { Text } = Typography;

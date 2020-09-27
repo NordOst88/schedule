@@ -15,6 +15,24 @@ import {
 
 import './feedback.scss';
 
+/**
+ * Creates feedback container which consists of a modal with dividers, buttons Ok, Cancel, and text area
+ * @component
+ * @example
+ * const displayFeedbackModal = true/false
+ * const currentTimezone = Europe/Minsk
+ * const setDisplayFeedback = () => console.log('sets state fro displaying feedback container or not');
+ * const onFeedbackAdd = () => console.log('function which produces a new feedback logic')
+ * const isMentor = true/false
+ * allFeedbacks = {'timestamp': 'text'}
+ * const currentTimezone = Europe/Minsk
+ * const getDeletedFeedback = () => console.log('function which handles delete feedback logic')
+ *
+ * return (
+ *    <FeedbackContainer {...{displayFeedbackModal, setDisplayFeedback, onFeedbackAdd, isMentor, allFeedbacks, currentTimezone, getDeletedFeedback }} />
+ * )
+ */
+
 const FeedbackContainer = ({
   displayFeedbackModal,
   setDisplayFeedback,
