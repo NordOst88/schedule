@@ -1,0 +1,46 @@
+.table-tags:not(:last-child) {
+  margin-bottom: 5px;
+}
+.expired-date {
+  opacity: 0.5;
+}
+
+// hideItem 
+.marginLeft{
+  margin-left: 20px;
+}
+.typography{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+.table-wrap {
+  .ant-table.ant-table-small {
+    font-size: 14px;
+    .table-tags {
+      font-size: 14px;
+    }
+  }
+  .ant-table.ant-table-middle {
+    font-size: 18px;
+    .table-tags {
+      font-size: 18px;
+    }
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    &-track {
+      background: #f1f1f1;
+      border-radius: 5px;
+    }
+    &-thumb {
+      background: #888;
+      border-radius: 5px;
+      &:hover {
+        background: #555;
+      }
+    }
+  }
+}

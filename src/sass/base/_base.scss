@@ -1,0 +1,12 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  display: -webkit-flex;
+  display:         flex;
+  flex-direction: column;
+
+  @extend %font-prim;
+  @include font($size: 1.6rem, $height: 1.65rem, $weight: normal);
+}

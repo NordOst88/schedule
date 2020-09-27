@@ -1,0 +1,67 @@
+@import '../../sass/abstract/constants';
+.modal-event-sm,
+.modal-event-df {
+  .ant-modal {
+    &-header {
+      background: linear-gradient(45deg, #1890ff, #40a9ff);
+    }
+    &-title {
+      color: $modal-event-header-color;
+      cursor: default;
+    }
+    &-close-x {
+      color: $modal-event-header-color;
+      &:hover {
+        color: $modal-event-header-color-hover;
+      }
+    }
+  }
+}
+
+.modal-event-sm {
+  &.ant-modal {
+    top: 50px;
+  }
+  .delete-btn-wrap {
+    width: calc(100% - 145px);
+  }
+}
+
+.modal-event-df {
+  &.ant-modal {
+    top: 8px;
+  }
+  .ant-modal {
+    &-title {
+      font-size: 18px;
+    }
+  }
+  .ant-btn {
+    font-size: 18px;
+    line-height: 0;
+  }
+  span.ant-typography {
+    font-size: 16px;
+  }
+  .ant-input-number {
+    font-size: 16px;
+  }
+  .ant-picker-input {
+    font-size: 16px;
+    #dateTime,
+    #deadline {
+      font-size: 16px;
+    }
+  }
+  .ant-col.ant-form-item-control {
+    font-size: 18px;
+    line-height: 1.5;
+    & input,
+    textarea {
+      font-size: 16px;
+    }
+  }
+  .delete-btn-wrap {
+    width: calc(100% - 175px);
+  }
+}
