@@ -99,7 +99,7 @@ const SettingsModal = ({
 
 const Line = ({ text, fontSize }) => {
   const { Text } = Typography;
-  return <Text style={{ lineHeight: '30px', fontSize }}>{text}</Text>;
+  return <Text style={{ fontSize }}>{text}</Text>;
 };
 
 const mapStateToProps = ({ events, eventColors, fontSize }) => ({

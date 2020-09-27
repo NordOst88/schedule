@@ -22,7 +22,6 @@ import {
   SUCCESS_DELETE_EVENT,
   ERROR_FETCH_MSG,
 } from '../../constants/tableConstants';
-
 import {
   MODAL_ADD_EVENT_TEXT,
   MENTOR,
@@ -32,6 +31,7 @@ import {
   HIDE_SELECTED_ITEMS_BUTTON_TEXT,
   SHOW_SELECTED_ITEMS_BUTTON_TEXT,
   TIPS_TEXT,
+  DEFAULT_FONT_SIZE,
 } from '../../constants/constants';
 
 import {
@@ -189,9 +189,11 @@ const TableContainer = ({
     setLoading(true);
     try {
       await api.deleteEventById(id);
-      const events = await api.getAllEvents();
-      onFetch(events);
-      popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_DELETE_EVENT });
+      setTimeout(async () => {
+        const events = await api.getAllEvents();
+        onFetch(events);
+        popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_DELETE_EVENT });
+      }, 1000);
     } catch (e) {
       popupMessage({
         ...ERROR_FETCH_MSG,
@@ -224,7 +226,7 @@ const TableContainer = ({
   };
 
   return (
-    <div className="table-wrap" style={{ overflowX: 'auto', height: '86vh' }}>
+    <div className="table-wrap" style={{ overflowX: 'auto', height: '85vh' }}>
       {loading && <ModalSpinner displaySpinner={loading} tip={spinnerTip} />}
       <Form layout="inline" style={{ marginBottom: 16, marginTop: 16 }}>
         <Form.Item style={{ cursor: 'pointer' }}>
@@ -262,7 +264,7 @@ const TableContainer = ({
           tableEditMode && role === MENTOR ? [editColumn, ...visibleColumns] : visibleColumns
         }
         rowKey="id"
-        size={fontSize === 10 ? 'small' : 'middle'}
+        size={fontSize === DEFAULT_FONT_SIZE ? 'small' : 'middle'}
         pagination={false}
       />
       {displayModal && (

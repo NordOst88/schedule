@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { Modal, Space, Typography, Button, Switch, Tooltip } from 'antd';
-import { FormOutlined, ReadOutlined } from '@ant-design/icons';
+import { FormOutlined, ReadOutlined, EditOutlined } from '@ant-design/icons';
 
 import getEventColor from '../../utils/getEventColor';
 import sortByDateTime from '../../utils/sortByDateTime';
 import getFormattedDate from '../../utils/getFormattedDate';
-import { feedbackButtonStyles, getOrganizerID } from '../../utils/modalInfoHelpers';
+import getFontSize from '../../utils/getFontSize';
+import {
+  feedbackButtonStyles,
+  getOrganizerID,
+  feedbackSwitchStyles,
+} from '../../utils/modalInfoHelpers';
+import { formatEventForFetch } from '../../utils/tableHelpers';
 
 import { onSetEvents } from '../../actions/actions';
 
@@ -15,14 +21,22 @@ import Type from '../task-type';
 import Links from '../links';
 import Organizer from '../organizer/organizer';
 import FeedbackContainer from '../feedback/feedback';
+import ModalEvent from '../modal-event';
+import popupMessage from '../popup-message';
 import MapContainer from '../map/map';
 
 import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
-import { ONLINE_TEXT } from '../../constants/mapConstants';
+import { ONLINE_TEXT, NO_PLACE } from '../../constants/mapConstants';
 import {
   MENTOR_SHOW_FEEDBACKS_TEXT,
   STUDENT_ADD_FEEDBACK_TEXT,
 } from '../../constants/modalInfoConstants';
+import {
+  SUCCESS_FETCH_MSG,
+  SUCCESS_UPDATE_EVENT,
+  SUCCESS_DELETE_EVENT,
+  ERROR_FETCH_MSG,
+} from '../../constants/tableConstants';
 
 import SwaggerService from '../../services/swagger-service';
 
@@ -51,7 +65,7 @@ const ModalInfo = ({
   setDisplayModal,
   eventColors,
   currentTimezone,
-  fontSize,
+  textSize,
   titleTextSize,
   role,
   onFetch,
@@ -73,6 +87,7 @@ const ModalInfo = ({
     feedbacks = {},
   } = eventDescription;
   const { Link } = Typography;
+  const fontSize = getFontSize(textSize, 1.6);
   const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
   const getLinks = () => <Links {...{ links }} />;
   const getOrganizer = () => <Organizer {...{ organizer }} />;
@@ -83,17 +98,62 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
-  const isOfflineEvent = place !== ONLINE_TEXT && place;
+  const isOfflineEvent = place !== ONLINE_TEXT && place !== NO_PLACE && place;
 
   const isMentor = role === MENTOR;
 
   const [displayFeedbackModal, setDisplayFeedback] = useState(false);
+  const [displayEditor, setDisplayEditor] = useState(false);
   const [updatedEvent, setUpdateEvents] = useState(eventDescription);
   const [isNeedToUpdate, setNeedToUpdate] = useState(false);
   const [allFeedbacks, setAllFeedbacks] = useState(feedbacks);
 
   const onFeedbackBtnClick = () => {
     setDisplayFeedback(true);
+  };
+
+  const onEditBtnClick = () => {
+    setDisplayEditor(true);
+  };
+
+  const updateEvent = (event) => {
+    const updatableEvent = formatEventForFetch(event);
+    api
+      .updateEventById(updatableEvent.id, updatableEvent)
+      .then(() => {
+        api.getAllEvents().then((events) => {
+          onFetch(events);
+          popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_UPDATE_EVENT });
+        });
+      })
+      .catch((error) => {
+        popupMessage({
+          ...ERROR_FETCH_MSG,
+          message: error.name,
+          description: error.message,
+          callbacksArg: event,
+          callback: updateEvent,
+        });
+      });
+    setDisplayModal(false);
+  };
+
+  const fetchDeleteEvent = async (id) => {
+    try {
+      await api.deleteEventById(id);
+      setTimeout(async () => {
+        const events = await api.getAllEvents();
+        onFetch(events);
+        popupMessage({ ...SUCCESS_FETCH_MSG, ...SUCCESS_DELETE_EVENT });
+      }, 1000);
+    } catch (e) {
+      popupMessage({
+        ...ERROR_FETCH_MSG,
+        message: e.name,
+        description: e.message,
+      });
+    }
+    setDisplayModal(false);
   };
 
   const toggleAllowFeedback = () => {
@@ -144,14 +204,37 @@ const ModalInfo = ({
     style.innerHTML = css;
     document.querySelector('.modal-info').appendChild(style);
   }, []);
+  const titleWidth = isMentor ? 340 : null;
+
+  const feedBackSwitch = isMentor && (
+    <Switch
+      className="c"
+      checkedChildren="ON Feedback "
+      unCheckedChildren="OFF Feedback "
+      defaultChecked={allowFeedback}
+      style={feedbackSwitchStyles()}
+      onChange={toggleAllowFeedback}
+    />
+  );
 
   return (
     <div className="modal-info">
       <Modal
         width={650}
+        style={{
+          paddingLeft: 5,
+          paddingRight: 5,
+        }}
+        bodyStyle={{ padding: 24, paddingTop: 10 }}
         visible={displayModal}
-        title={<Line title={taskName} text={getTopic()} styles={{ fontSize: titleTextSize }} />}
-        centered
+        title={
+          <div className="modal__title__container">
+            <div style={{ width: titleWidth }}>
+              <Line title={taskName} text={getTopic()} styles={{ fontSize: titleTextSize }} />
+            </div>
+            {feedBackSwitch}
+          </div>
+        }
         footer={null}
         onCancel={() => {
           if (isNeedToUpdate && isMentor) {
@@ -165,33 +248,6 @@ const ModalInfo = ({
           setDisplayModal(false);
         }}
       >
-        {allowFeedback && !isMentor && (
-          <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
-            <Button
-              icon={<FormOutlined />}
-              style={feedbackButtonStyles(67, 20)}
-              onClick={onFeedbackBtnClick}
-            />
-          </Tooltip>
-        )}
-        {isMentor && (
-          <>
-            <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
-              <Button
-                icon={<ReadOutlined />}
-                style={feedbackButtonStyles(67, 20)}
-                onClick={onFeedbackBtnClick}
-              />
-            </Tooltip>
-            <Switch
-              checkedChildren="Feedback ON"
-              unCheckedChildren="Feedback OFF"
-              defaultChecked={allowFeedback}
-              style={feedbackButtonStyles(18, 50)}
-              onChange={toggleAllowFeedback}
-            />
-          </>
-        )}
         <FeedbackContainer
           {...{
             displayFeedbackModal,
@@ -203,6 +259,37 @@ const ModalInfo = ({
             getDeletedFeedback,
           }}
         />
+        {isMentor && (
+          <ModalEvent
+            {...{
+              displayModal: displayEditor,
+              setDisplayModal: setDisplayEditor,
+              selectedEvent: eventDescription,
+              api,
+              updateEvent,
+              fetchDeleteEvent,
+            }}
+          />
+        )}
+        <div style={{ display: 'flex', float: 'right' }}>
+          {allowFeedback && !isMentor && (
+            <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
+              <Button icon={<FormOutlined />} onClick={onFeedbackBtnClick} />
+            </Tooltip>
+          )}
+          {isMentor && (
+            <>
+              <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
+                <Button icon={<ReadOutlined />} onClick={onFeedbackBtnClick} />
+              </Tooltip>
+              <Button
+                icon={<EditOutlined />}
+                style={feedbackButtonStyles()}
+                onClick={onEditBtnClick}
+              />
+            </>
+          )}
+        </div>
         <Space direction="vertical">
           <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
           <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
@@ -254,7 +341,7 @@ const mapStateToProps = ({
 }) => ({
   eventColors,
   currentTimezone,
-  fontSize,
+  textSize: fontSize,
   titleTextSize,
   role,
   feedbackMode,
