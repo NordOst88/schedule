@@ -7,6 +7,7 @@ import { FormOutlined, ReadOutlined, EditOutlined } from '@ant-design/icons';
 import getEventColor from '../../utils/getEventColor';
 import sortByDateTime from '../../utils/sortByDateTime';
 import getFormattedDate from '../../utils/getFormattedDate';
+import getFontSize from '../../utils/getFontSize';
 import {
   feedbackButtonStyles,
   getOrganizerID,
@@ -25,7 +26,7 @@ import popupMessage from '../popup-message';
 import MapContainer from '../map/map';
 
 import { MODAL_INFO_TEXT, MENTOR } from '../../constants/constants';
-import { ONLINE_TEXT } from '../../constants/mapConstants';
+import { ONLINE_TEXT, NO_PLACE } from '../../constants/mapConstants';
 import {
   MENTOR_SHOW_FEEDBACKS_TEXT,
   STUDENT_ADD_FEEDBACK_TEXT,
@@ -64,7 +65,7 @@ const ModalInfo = ({
   setDisplayModal,
   eventColors,
   currentTimezone,
-  fontSize,
+  textSize,
   titleTextSize,
   role,
   onFetch,
@@ -86,6 +87,7 @@ const ModalInfo = ({
     feedbacks = {},
   } = eventDescription;
   const { Link } = Typography;
+  const fontSize = getFontSize(textSize, 1.6);
   const getTypeTaskTags = () => <Type {...{ type, eventColors, fontSize }} />;
   const getLinks = () => <Links {...{ links }} />;
   const getOrganizer = () => <Organizer {...{ organizer }} />;
@@ -96,7 +98,7 @@ const ModalInfo = ({
   );
   const startDate = getFormattedDate(dateTime, currentTimezone) || noInfo;
   const deadlineDate = getFormattedDate(deadline, currentTimezone) || noInfo;
-  const isOfflineEvent = place !== ONLINE_TEXT && place;
+  const isOfflineEvent = place !== ONLINE_TEXT && place !== NO_PLACE && place;
 
   const isMentor = role === MENTOR;
 
@@ -223,6 +225,7 @@ const ModalInfo = ({
           paddingLeft: 5,
           paddingRight: 5,
         }}
+        bodyStyle={{ padding: 24, paddingTop: 10 }}
         visible={displayModal}
         title={
           <div className="modal__title__container">
@@ -268,47 +271,45 @@ const ModalInfo = ({
             }}
           />
         )}
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Space direction="vertical">
-            <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
-            <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
-            <Line title={taskStart} text={startDate} type="success" styles={{ fontSize }} />
-            <Line title={taskDeadline} text={deadlineDate} type="danger" styles={{ fontSize }} />
-            <Line title={estimatedStudyTime} text={estimatedTime} styles={{ fontSize }} />
-            <Line title={taskPlace} text={place} styles={{ fontSize }} />
-            <Line
-              title={taskDescription}
-              text={description}
-              styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
-            />
-            <Line title={taskLinks} text={getLinks()} styles={{ fontSize }} />
-            <Line title={taskOrganizer} text={getOrganizer()} styles={{ fontSize }} />
-            <Line
-              title={taskComment}
-              text={comment}
-              styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
-            />
-          </Space>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {allowFeedback && !isMentor && (
-              <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
-                <Button icon={<FormOutlined />} onClick={onFeedbackBtnClick} />
+        <div style={{ display: 'flex', float: 'right' }}>
+          {allowFeedback && !isMentor && (
+            <Tooltip placement="left" title={STUDENT_ADD_FEEDBACK_TEXT}>
+              <Button icon={<FormOutlined />} onClick={onFeedbackBtnClick} />
+            </Tooltip>
+          )}
+          {isMentor && (
+            <>
+              <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
+                <Button icon={<ReadOutlined />} onClick={onFeedbackBtnClick} />
               </Tooltip>
-            )}
-            {isMentor && (
-              <>
-                <Tooltip placement="left" title={MENTOR_SHOW_FEEDBACKS_TEXT}>
-                  <Button icon={<ReadOutlined />} onClick={onFeedbackBtnClick} />
-                </Tooltip>
-                <Button
-                  icon={<EditOutlined />}
-                  style={feedbackButtonStyles()}
-                  onClick={onEditBtnClick}
-                />
-              </>
-            )}
-          </div>
+              <Button
+                icon={<EditOutlined />}
+                style={feedbackButtonStyles()}
+                onClick={onEditBtnClick}
+              />
+            </>
+          )}
         </div>
+        <Space direction="vertical">
+          <Line title={estimatedWeek} text={week} styles={{ fontSize }} />
+          <Line title={taskType} text={getTypeTaskTags()} styles={{ fontSize }} />
+          <Line title={taskStart} text={startDate} type="success" styles={{ fontSize }} />
+          <Line title={taskDeadline} text={deadlineDate} type="danger" styles={{ fontSize }} />
+          <Line title={estimatedStudyTime} text={estimatedTime} styles={{ fontSize }} />
+          <Line title={taskPlace} text={place} styles={{ fontSize }} />
+          <Line
+            title={taskDescription}
+            text={description}
+            styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
+          />
+          <Line title={taskLinks} text={getLinks()} styles={{ fontSize }} />
+          <Line title={taskOrganizer} text={getOrganizer()} styles={{ fontSize }} />
+          <Line
+            title={taskComment}
+            text={comment}
+            styles={{ fontSize, display: 'flex', textAlign: 'justify' }}
+          />
+        </Space>
         {isOfflineEvent && <MapContainer place={place} />}
       </Modal>
     </div>
@@ -340,7 +341,7 @@ const mapStateToProps = ({
 }) => ({
   eventColors,
   currentTimezone,
-  fontSize,
+  textSize: fontSize,
   titleTextSize,
   role,
   feedbackMode,
