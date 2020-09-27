@@ -68,6 +68,7 @@ const TableContainer = ({
   const [spinnerTip, setSpinnerTip] = useState(onUpdateEvent);
   const columns = createColumns(currentTimezone, eventColors);
   const [selectedItems, setItem] = useState(selectedRowKeys);
+  const [newCount, setNewCount] = useState(0);
 
   /**
    * Selecting event by clicking with shift on table row
@@ -107,6 +108,7 @@ const TableContainer = ({
   const onSelectChange = (selectedRow) => {
     setItem(selectedRow);
     onSelectItem(selectedRow);
+    setNewCount(newCount + 1);
   };
 
   const rowSelection = {
@@ -118,6 +120,7 @@ const TableContainer = ({
    * Make Selected Event invisible by clicking on Hide Events button
    */
   const onHideButtonClick = () => {
+    setNewCount(0);
     if (selectedItems.length) {
       setSelectItemVisibility(true);
     }
@@ -258,7 +261,7 @@ const TableContainer = ({
         )}
         <Button type="dashed" style={btnsStyles} onClick={onHideButtonClick}>
           {HIDE_SELECTED_ITEMS_BUTTON_TEXT}
-          {isHiddenRowKeys ? null : `: ${selectedItems.length}`}
+          {isHiddenRowKeys ? `: ${newCount}` : `: ${selectedItems.length}`}
         </Button>
         <Button type="dashed" style={btnsStyles} className="marginLeft" onClick={onShowButtonClick}>
           {SHOW_SELECTED_ITEMS_BUTTON_TEXT}
