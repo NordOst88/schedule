@@ -2,6 +2,11 @@ import React from 'react';
 import { Form, Input, Space, Button } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
+/**
+ * Uncontrolled component for showing links titles and URL's in the inputs
+ * of ModalEvent's form.
+ * @component
+ */
 const LinksList = () => (
   <Form.List name="links">
     {(fields, { add, remove }) => (

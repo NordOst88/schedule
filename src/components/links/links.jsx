@@ -3,11 +3,16 @@ import { Typography, Divider } from 'antd';
 
 import { MODAL_INFO_TEXT } from '../../constants/constants';
 
+/**
+ * Component for showing links to materials of event with divider between them.
+ * @component
+ * @param {Object} wrapper - Arguments wrapper.
+ * @param {Object} wrapper.links - Object with links.
+ */
 const Links = ({ links }) => {
   const { Text, Link } = Typography;
   const { noInfo } = MODAL_INFO_TEXT;
   const linksArray = Object.entries(links);
-
   return (
     <>
       {linksArray.length ? (

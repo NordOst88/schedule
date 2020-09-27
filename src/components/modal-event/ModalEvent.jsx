@@ -45,6 +45,45 @@ const useResetFormOnCloseModal = ({ form, displayModal, selectedEvent }) => {
   }, [displayModal]);
 };
 
+/**
+ * Change state of parent component.
+ * @callback setDisplayModalCallback
+ * @param {boolean} - Show or hide modal window.
+ */
+
+/**
+ * Fetch new event to backend.
+ * @callback createNewEventCallback
+ * @param {Object} - Event object.
+ */
+
+/**
+ * Fetch updated event to backend.
+ * @callback updateEventCallback
+ * @param {Object} - Event object.
+ */
+
+/**
+ * Delete event from backend.
+ * @callback fetchDeleteEventCallback
+ * @param {Object} - Event object.
+ */
+
+/**
+ * Modal with the form for create, update or delete event.
+ * @component
+ * @param {Object} wrapper - Arguments wrapper.
+ * @param {setDisplayModalCallback} wrapper.setDisplayModal - Change state of parent component.
+ * @param {boolean} wrapper.displayModal - Flag that triggers showing or hiding modal window.
+ * @param {createNewEventCallback} wrapper.createNewEvent - Fetch new event to backend.
+ * @param {Object} wrapper.selectedEvent - Current event selected to showing in modal.
+ * @param {createNewEventCallback} wrapper.createNewEvent - Fetch new event to backend.
+ * @param {updateEventCallback} wrapper.updateEvent - Fetch updated event to backend.
+ * @param {fetchDeleteEventCallback} wrapper.fetchDeleteEvent - Delete event from backend.
+ * @param {InstanceType} wrapper.api - Instanse of swagger-service class.
+ * @param {string} wrapper.title - Title of modal.
+ * @param {number} wrapper.fontSize - Selected font size from redux store.
+ */
 const ModalEvent = ({
   setDisplayModal,
   displayModal,
