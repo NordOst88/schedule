@@ -17,10 +17,28 @@ import { formatEventForFetch } from '../../utils/tableHelpers';
 const api = new SwaggerService();
 const { addEvent } = MODAL_ADD_EVENT_TEXT;
 
+/**
+ * Function that calls onSetEvents action.
+ * @callback onFetchCallback
+ * @param {Array} events - An array with events.
+ */
+
+/**
+ * Component that showing 'Add event' button and ModalEvent if on button click.
+ * @component
+ * @param {Object} wrapper - Arguments wrapper.
+ * @param {onFetchCallback} wrapper.onFetch - Calls onSetEvents action.
+ * @param {Object} wrapper.style - CSSProperties.
+ */
 const TableControls = ({ onFetch, style }) => {
   const [loading, setLoading] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
 
+  /**
+   * Function that calls api methods for manipulating event on backend.
+   * Aslo its set loader, catch errors and show notification with fetch results.
+   * @param {Object} event - Current event.
+   */
   const fetchAddEvent = (event) => {
     setLoading(true);
     api
@@ -44,6 +62,10 @@ const TableControls = ({ onFetch, style }) => {
       });
   };
 
+  /**
+   * Function that format event, calls fetchAddEvent and hide modal.
+   * @param {Object} event - Current event.
+   */
   const createNewEvent = (event) => {
     const newEvent = formatEventForFetch(event);
     fetchAddEvent(newEvent);
