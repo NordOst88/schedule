@@ -112,7 +112,6 @@ const TableContainer = ({
   const rowSelection = {
     onChange: onSelectChange,
     selectedRowKeys: selectedItems,
-    onSelectAll: (selected) => (selected ? null : setSelectItemVisibility(false)),
   };
 
   /**
