@@ -6,6 +6,12 @@ import { MODAL_INFO_TEXT } from '../../constants/constants';
 
 import './organizer.scss';
 
+/**
+ * Component for showing organizers of event.
+ * @component
+ * @param {Object} wrapper - Arguments wrapper.
+ * @param {Array} wrapper.organizer - Object with links.
+ */
 const Organizer = ({ organizer }) => {
   const { Text, Link } = Typography;
   const { noInfo } = MODAL_INFO_TEXT;

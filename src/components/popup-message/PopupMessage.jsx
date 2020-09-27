@@ -1,6 +1,23 @@
 import React from 'react';
 import { Button, notification } from 'antd';
 
+/**
+ * Function which executes if on button click
+ * @callback Callback
+ * @param {any} callbacksArg - Any argument.
+ */
+
+/**
+ * Function that call notification with specified parameters.
+ * @param {Object} wrapper - Arguments wrapper.
+ * @param {string} wrapper.message - Message of notification.
+ * @param {string} wrapper.description - Description of notification.
+ * @param {string} wrapper.type - Type of notification. Сould be 'error', 'warning', 'info' or 'success'.
+ * @param {number} wrapper.duration - Duration of showing notification.
+ * @param {any} wrapper.callbacksArg - An argument for callback.
+ * @param {Callback} wrapper.callback - If callback and callbacksArg are defined then shows button 'try again'
+ * with onClick calls callback.
+ */
 const popupMessage = ({ message, description, type, duration, callbacksArg, callback }) => {
   let key = null;
   let btn = null;
