@@ -160,7 +160,7 @@ const ModalEvent = ({
         <Form.Item name="comment" label={<Line title={comment} />}>
           <Input.TextArea rows={4} />
         </Form.Item>
-        <Form.Item name="links" label={<Line title={links} />}>
+        <Form.Item name="links" label={<Line title={links} />} style={{ marginBottom: 0 }}>
           <LinksList />
         </Form.Item>
         <Form.Item name="id" noStyle>

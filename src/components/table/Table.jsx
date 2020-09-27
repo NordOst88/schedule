@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Table, Form, Button, Typography } from 'antd';
+import { Table, Form, Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 import SwaggerService from '../../services/swagger-service';
 import {
@@ -26,8 +26,6 @@ import {
   MODAL_ADD_EVENT_TEXT,
   MENTOR,
   TABLE,
-  HIDDEN_EVENTS_TEXT,
-  SELECTED_EVENTS_TEXT,
   HIDE_SELECTED_ITEMS_BUTTON_TEXT,
   SHOW_SELECTED_ITEMS_BUTTON_TEXT,
   TIPS_TEXT,
@@ -48,7 +46,6 @@ import { hideSelectedItems, showSelectedItems } from '../../utils/hideSelectedIt
 
 const api = new SwaggerService();
 const { editEvent } = MODAL_ADD_EVENT_TEXT;
-const { Text } = Typography;
 
 const TableContainer = ({
   selectedEvents,
@@ -134,7 +131,13 @@ const TableContainer = ({
     setSelectItemVisibility(false);
     showSelectedItems(selectedItems);
   };
-  const textSize = getFontSize(fontSize, 1.7);
+  const textSize = `${getFontSize(fontSize, 1.7)}`;
+  const btnsStyles = {
+    fontSize: textSize,
+    padding: '4px 10px',
+    display: 'flex',
+    alignItems: 'center',
+  };
 
   const storage = localStorage.settings ? JSON.parse(localStorage.settings) : '';
   const selectedColumns = storage.tableColumnsSelected
@@ -250,19 +253,15 @@ const TableContainer = ({
         </Form.Item>
         {role === MENTOR && currentView === TABLE && (
           <Form.Item style={{ cursor: 'pointer' }}>
-            <TableEditor fontSize={textSize} />
+            <TableEditor style={btnsStyles} />
           </Form.Item>
         )}
-        <Button type="primary" onClick={onHideButtonClick}>
+        <Button type="dashed" style={btnsStyles} onClick={onHideButtonClick}>
           {HIDE_SELECTED_ITEMS_BUTTON_TEXT}
         </Button>
-        <Button type="primary" className="marginLeft" onClick={onShowButtonClick}>
+        <Button type="dashed" style={btnsStyles} className="marginLeft" onClick={onShowButtonClick}>
           {SHOW_SELECTED_ITEMS_BUTTON_TEXT}
         </Button>
-        <Text strong underline className="marginLeft typography">
-          {isHiddenRowKeys && selectedItems.length ? HIDDEN_EVENTS_TEXT : SELECTED_EVENTS_TEXT}{' '}
-          {selectedItems.length}
-        </Text>
       </Form>
       <Table
         onRow={() => ({
