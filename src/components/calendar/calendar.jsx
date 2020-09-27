@@ -18,6 +18,19 @@ import {
 } from '../../constants/calendarConstants';
 import './calendar.scss';
 
+/**
+ * Creates tooltip component
+ *
+ * @param {string} text test which will be displayed
+ * @param {number} fontSize current fontsize
+ * @example
+ * const text = 'Add feedback';
+ * const fontSize = 14;
+ *
+ * return (
+ * <EllipsisText text={text} fontSize={fontSize} />)
+ */
+
 const EllipsisText = (text, fontSize) => (
   <Tooltip placement="topLeft" title={text}>
     <div
@@ -33,6 +46,18 @@ const EllipsisText = (text, fontSize) => (
     </div>
   </Tooltip>
 );
+
+/**
+ * Function which draws unordered list for every day in calendar depending on event on this day
+ *
+ * @param {Object} value current date
+ * @param {Object} eventColors events colors object
+ * @param {function} onEventClick on event click function
+ * @param {string} currentTimezone current Country/City format
+ * @param {Object} selectedEvents events which has been selected
+ * @param {number} fontSize current fontsize
+ *
+ */
 
 const dateCellRender = (
   value,
@@ -81,6 +106,20 @@ const dateCellRender = (
     </ul>
   );
 };
+
+/**
+ * Creates calendar component based on selectedEvents, colors, timezone and textSize
+ * @component
+ * @example
+ * const eventColors = {'js task': '#44444'}
+ * const currentTimezone = Europe/Minsk
+ * const selectedEvents = [{week: 0, name: 'JS basics', description: 'interesting course'....}]
+ * const textSize = 16
+ *
+ * return (
+ *    <CalendarContainer {...{eventColors, currentTimezone, selectedEvents, textSize}} />
+ * )
+ */
 
 const CalendarContainer = ({ eventColors, currentTimezone, selectedEvents, textSize }) => {
   const [displayModal, setDisplayModal] = useState(false);
