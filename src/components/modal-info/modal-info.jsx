@@ -108,6 +108,9 @@ const ModalInfo = ({
   const [isNeedToUpdate, setNeedToUpdate] = useState(false);
   const [allFeedbacks, setAllFeedbacks] = useState(feedbacks);
 
+  /**
+   * Function sets state to display feedback modal on feedback button click
+   */
   const onFeedbackBtnClick = () => {
     setDisplayFeedback(true);
   };
@@ -156,6 +159,12 @@ const ModalInfo = ({
     setDisplayModal(false);
   };
 
+  /**
+   * Function toggle the state of enable and disable the feedback in mentor mode
+   * it updates events
+   * sets state to show that changes have been made to the on/off state
+   */
+
   const toggleAllowFeedback = () => {
     setUpdateEvents((prevState) => ({
       ...prevState,
@@ -165,6 +174,11 @@ const ModalInfo = ({
     setNeedToUpdate(true);
   };
 
+  /**
+   * Function add new feedback to backend as well as sets state to show that changes have been made to the on/off state
+   * @param {string} timeStamp current date in timestamp format
+   * @param {string} feedbackText feedback text from the input
+   */
   const onFeedbackAdd = (timeStamp, feedbackText) => {
     setUpdateEvents((prevState) => ({
       ...prevState,
@@ -174,6 +188,12 @@ const ModalInfo = ({
     setNeedToUpdate(true);
   };
 
+  /**
+   * Function updates backend with new events data and gets updated events back to the local state, while sorting event by Date and Time
+   *
+   * @param {Object} event all events which have to be sent to backend and back
+   */
+
   const fetchUpdateEvent = async (event) => {
     await api.updateEventById(event.id, event);
     const events = await api.getAllEvents();
@@ -181,12 +201,23 @@ const ModalInfo = ({
     onFetch(formattedEvents);
   };
 
+  /**
+   * Function delete chosen feedback and set new feedback object
+   * @param {Object} feedback object with all feedbacks
+   * @param {string} timeStamp event date and time in timestamp format, which is due to be deleted
+   */
+
   const deleteFeedback = (feedback, timeStamp) => {
     delete feedback[timeStamp];
     setAllFeedbacks({ ...feedback });
     return { ...feedback };
   };
 
+  /**
+   * Function get new object without deleted feedbacks and set new state of events with updated feedbacks property
+   * it sets state to show that changes have been made to the modal
+   * @param {string} timeStamp
+   */
   const getDeletedFeedback = (timeStamp) => {
     setUpdateEvents((prevState) => ({
       ...prevState,
