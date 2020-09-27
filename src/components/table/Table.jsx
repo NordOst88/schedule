@@ -265,6 +265,7 @@ const TableContainer = ({
         </Button>
         <Button type="dashed" style={btnsStyles} className="marginLeft" onClick={onShowButtonClick}>
           {SHOW_SELECTED_ITEMS_BUTTON_TEXT}
+          {isHiddenRowKeys ? `: ${selectedItems.length - newCount}` : `: 0`}
         </Button>
       </Form>
       <Table
