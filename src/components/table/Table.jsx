@@ -258,6 +258,7 @@ const TableContainer = ({
         )}
         <Button type="dashed" style={btnsStyles} onClick={onHideButtonClick}>
           {HIDE_SELECTED_ITEMS_BUTTON_TEXT}
+          {isHiddenRowKeys ? null : `: ${selectedItems.length}`}
         </Button>
         <Button type="dashed" style={btnsStyles} className="marginLeft" onClick={onShowButtonClick}>
           {SHOW_SELECTED_ITEMS_BUTTON_TEXT}
