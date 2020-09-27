@@ -5,7 +5,7 @@
  */
 
 const feedbackButtonStyles = () => ({
-  marginTop: 14,
+  marginLeft: 14,
 });
 
 /**

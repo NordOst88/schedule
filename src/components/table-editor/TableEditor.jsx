@@ -4,12 +4,12 @@ import { Button } from 'antd';
 import { EditTwoTone } from '@ant-design/icons';
 import { onSetTableEditMode } from '../../actions/actions';
 
-const TableEditor = ({ tableEditMode, onChange, fontSize }) => (
+const TableEditor = ({ tableEditMode, onChange, style }) => (
   <Button
     type="dashed"
     onClick={() => onChange(!tableEditMode)}
     icon={tableEditMode && <EditTwoTone />}
-    style={{ fontSize, padding: '4px 10px', display: 'flex', alignItems: 'center' }}
+    style={style}
   >
     Edit table
   </Button>

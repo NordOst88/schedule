@@ -10,6 +10,7 @@ import {
   INPUT_PLACEHOLDER,
   MENTOR_MODAL_TITLE,
   STUDENT_MODAL_TITLE,
+  NO_FEEDBACK_TEXT,
 } from '../../constants/modalInfoConstants';
 
 import './feedback.scss';
@@ -101,6 +102,7 @@ const FeedbackContainer = ({
           <Divider style={{ margin: '10px 0' }} />
         </div>
       ))}
+      {getFeedbackData().length ? null : <Text>{NO_FEEDBACK_TEXT}</Text>}
     </Modal>
   ) : (
     <Modal
