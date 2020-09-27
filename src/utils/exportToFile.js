@@ -3,6 +3,13 @@ import { SAVE_OPTIONS, TABLE, CALENDAR } from '../constants/constants';
 
 const [pdf, jpg] = SAVE_OPTIONS;
 
+/**
+ * Exports current view to file
+ *
+ * @param {string} view - current events display mode
+ * @param {string} extension - file export extension
+ */
+
 const exportToFile = async (view, extension = pdf) => {
   let [className, orientation, margin] = ['.ant-timeline', 'p', [7, 10, 9, 10]];
 
