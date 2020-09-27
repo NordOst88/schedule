@@ -69,6 +69,10 @@ const TableContainer = ({
   const columns = createColumns(currentTimezone, eventColors);
   const [selectedItems, setItem] = useState(selectedRowKeys);
 
+  /**
+   * Selecting event by clicking with shift on table row
+   * @param {object} event event of click
+   */
   const handleRowClick = (event) => {
     if (event.shiftKey) {
       if (event.target.closest('tr[data-row-key]')) {
@@ -96,6 +100,10 @@ const TableContainer = ({
     }
   }, []);
 
+  /**
+   * Selecting Events by clicking on checkbox
+   * @param {object} selectedRow object of Selected Row keys of table
+   */
   const onSelectChange = (selectedRow) => {
     setItem(selectedRow);
     onSelectItem(selectedRow);
@@ -106,6 +114,9 @@ const TableContainer = ({
     selectedRowKeys: selectedItems,
   };
 
+  /**
+   * Make Selected Event invisible by clicking on Hide Events button
+   */
   const onHideButtonClick = () => {
     if (selectedItems.length) {
       setSelectItemVisibility(true);
@@ -113,6 +124,9 @@ const TableContainer = ({
     hideSelectedItems(selectedItems);
   };
 
+  /**
+   * Make Selected Event visible by clicking on Show Hidden Events button
+   */
   const onShowButtonClick = () => {
     setSelectItemVisibility(false);
     showSelectedItems(selectedItems);
