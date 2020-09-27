@@ -20,6 +20,23 @@ import getFontSize from '../../utils/getFontSize';
 
 import './color-picker.scss';
 
+/**
+ * Component which combines modal component and ColorPicker
+ *
+ * @component
+ * @example
+ * const displaySettingsModal = true/false;
+ * const events = [{week: 0, name: 'JS basics', description: 'interesting course'....}];
+ * const eventColors = {'js task': '#44444'}
+ * const setDisplaySettingsModal = () => console.log('sets state for displaying modal or not');
+ * const onColorSelect = () => console.log('handles onSelect logic');
+ * const textSize = 14
+ *
+ * return (
+ *  <SettingsModal {...{ setDisplaySettingsModal, displaySettingsModal, events, eventColors, onColorSelect, textSize }} />
+ * )
+ */
+
 const SettingsModal = ({
   setDisplaySettingsModal,
   displaySettingsModal,
@@ -46,6 +63,15 @@ const SettingsModal = ({
   const tasksTypes = getTasksTypes(events);
   const tagsName = TAGS_NAME;
 
+  /**
+   * Function set state of:
+   * -current target
+   * -selected tag
+   * -target color
+   * -displays color picker modal
+   *
+   * @param {Object} event current event and its target
+   */
   const displayColorPicker = ({ target }) => {
     setEventTarget(target);
     setSelectedTag(target.textContent);
@@ -53,16 +79,32 @@ const SettingsModal = ({
     setDisplayColorPicker(true);
   };
 
+  /**
+   * function generates all tags using tasks types
+   *
+   * @returns (
+   * <Type {...{ type, eventColors, tagsName, displayColorPicker, fontSize }} />
+   * )
+   */
   const getTypeTaskTags = () => {
     const type = tasksTypes;
     return <Type {...{ type, eventColors, tagsName, displayColorPicker, fontSize }} />;
   };
 
+  /**
+   * Function handle onOk logic in the modal
+   * It set state of new color present for the tags
+   * it set state for not displaying color picker modal
+   */
   const handleOk = () => {
     onColorSelect(newColorPreset);
     setDisplaySettingsModal(false);
   };
 
+  /**
+   * Function handles onCancel logic in the modal
+   * it set state for not displaying color picker modal
+   */
   const handleCancel = () => {
     setDisplaySettingsModal(false);
   };
@@ -96,6 +138,19 @@ const SettingsModal = ({
     </>
   );
 };
+
+/**
+ * Component creates Line with the text
+ *
+ * @component
+ * @example
+ * const text = ''Js course materials';
+ * const fontSize = 14;
+ *
+ * return (
+ *  <Line {...{ text, color, item, onEventClick, textSize }} />
+ * )
+ */
 
 const Line = ({ text, fontSize }) => {
   const { Text } = Typography;

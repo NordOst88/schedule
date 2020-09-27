@@ -4,6 +4,19 @@ import { Modal, Space, Badge, Tooltip } from 'antd';
 
 import { ELLIPSIS_TEXT_WIDTH } from '../../constants/calendarConstants';
 
+/**
+ * Creates tooltip component
+ *
+ * @param {string} text test which will be displayed
+ * @param {number} fontSize current fontsize
+ * @example
+ * const text = 'Add feedback';
+ * const fontSize = 14;
+ *
+ * return (
+ * <EllipsisText text={text} fontSize={fontSize} />)
+ */
+
 const EllipsisText = (text, textSize) => (
   <Tooltip placement="topLeft" title={text}>
     <div
@@ -19,6 +32,23 @@ const EllipsisText = (text, textSize) => (
     </div>
   </Tooltip>
 );
+
+/**
+ * Creates a small popup modal on mobile devices for better displaying event on the particular date
+ *
+ * @component
+ * @example
+ * const currentDateEvents = [{name: 'JS basics course, color: '#1111'}]
+ * const displayPopUp = true;
+ * const onEventClick = () => console.log('handle event click');
+ * const setDisplayPopUp = () => console.log('set state for displaying popup to false');
+ * const displayModal = true/false;
+ * const textSize = 14;
+ *
+ * return (
+ *  <EventPopUp {...{currentDateEvents, displayPopUp, onEventClick, setDisplayPopUp, displayModal, textSize }} />
+ * )
+ */
 
 const EventPopUp = ({
   currentDateEvents = [],
@@ -59,6 +89,22 @@ const EventPopUp = ({
     </Modal>
   );
 };
+
+/**
+ * Component creates Line including badge and event description
+ *
+ * @component
+ * @example
+ * const text = ''Js course materials';
+ * const color = '#0000';
+ * const item = e.target;
+ * const onEventClick = () => console.log('handle onClick function');
+ * const textSize = 14;
+ *
+ * return (
+ *  <Line {...{ text, color, item, onEventClick, textSize }} />
+ * )
+ */
 
 const Line = ({ text, color, item, onEventClick, textSize }) => (
   <>
