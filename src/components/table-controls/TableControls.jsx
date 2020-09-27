@@ -34,6 +34,11 @@ const TableControls = ({ onFetch, style }) => {
   const [loading, setLoading] = useState(false);
   const [displayModal, setDisplayModal] = useState(false);
 
+  /**
+   * Function that calls api methods for manipulating event on backend.
+   * Aslo its set loader, catch errors and show notification with fetch results.
+   * @param {Object} event - Current event.
+   */
   const fetchAddEvent = (event) => {
     setLoading(true);
     api
@@ -57,6 +62,10 @@ const TableControls = ({ onFetch, style }) => {
       });
   };
 
+  /**
+   * Function that format event, calls fetchAddEvent and hide modal.
+   * @param {Object} event - Current event.
+   */
   const createNewEvent = (event) => {
     const newEvent = formatEventForFetch(event);
     fetchAddEvent(newEvent);

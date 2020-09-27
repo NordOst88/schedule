@@ -47,6 +47,41 @@ import { hideSelectedItems, showSelectedItems } from '../../utils/hideSelectedIt
 const api = new SwaggerService();
 const { editEvent } = MODAL_ADD_EVENT_TEXT;
 
+/**
+ * Function that calls onSetEvents action.
+ * @callback onFetchCallback
+ * @param {Array} events - Current events.
+ */
+
+/**
+ * Function that calls onSetSelectedItems action.
+ * @callback onSelectItemCallback
+ * @param {Object} selectedRow - Current events.
+ */
+
+/**
+ * Function that calls onSetSelectedItemsVisibility action.
+ * @callback setSelectItemVisibility
+ * @param {boolean} - set visibility state to selected rows.
+ */
+
+/**
+ * Component that showing the table with events.
+ * @component
+ * @param {Object} wrapper - Arguments wrapper.
+ * @param {Array} wrapper.selectedEvents - List of selected events.
+ * @param {string} wrapper.currentTimezone - Current timezone.
+ * @param {Object} wrapper.eventColors - List of task type names and its colors.
+ * @param {boolean} wrapper.tableEditMode - Edit table mode (true|false).
+ * @param {onFetchCallback} wrapper.onFetch - Calls onSetEvents action.
+ * @param {string} wrapper.currentView - Current app view. Сould be 'Table', 'List' or 'Calendar'.
+ * @param {string} wrapper.role - Current user's role. Сould be 'Mentor' or 'Student'.
+ * @param {number} wrapper.fontSize - Selected font size from redux store.
+ * @param {onSelectItemCallback} wrapper.onSelectItem - Calls onSetSelectedItems action.
+ * @param {Array} wrapper.selectedRowKeys - Keys list of selected rows.
+ * @param {boolean} wrapper.isHiddenRowKeys - Is hidden rows (true|false).
+ * @param {setSelectItemVisibility} wrapper.setSelectItemVisibility - Set visibility state to selected rows.
+ */
 const TableContainer = ({
   selectedEvents,
   currentTimezone,
@@ -152,6 +187,11 @@ const TableContainer = ({
     }
   };
 
+  /**
+   * Function that calls api methods for manipulating event on backend.
+   * Aslo its set loader, catch errors and show notification with fetch results.
+   * @param {Object} event - Current event.
+   */
   const fetchUpdateEvent = (event) => {
     setLoading(true);
     if (spinnerTip !== onUpdateEvent) {
@@ -178,12 +218,21 @@ const TableContainer = ({
       });
   };
 
+  /**
+   * Function that format event, calls fetchUpdateEvent and hide modal.
+   * @param {Object} event - Current event.
+   */
   const updateEvent = (event) => {
     const updatableEvent = formatEventForFetch(event);
     fetchUpdateEvent(updatableEvent);
     setDisplayModal(false);
   };
 
+  /**
+   * Function that calls api methods for manipulating event on backend.
+   * Aslo its set loader, catch errors and show notification with fetch results.
+   * @param {Object} event - Current event.
+   */
   const fetchDeleteEvent = async (id) => {
     setDisplayModal(false);
     if (spinnerTip !== onDeleteEvent) {
@@ -206,6 +255,11 @@ const TableContainer = ({
     }
     setLoading(false);
   };
+
+  /**
+   * Function that open modal.
+   * @param {Object} record - Current event.
+   */
 
   const openModal = (record) => {
     setDisplayModal(true);

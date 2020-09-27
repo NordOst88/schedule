@@ -8,6 +8,11 @@ import getFormattedDate from '../../utils/getFormattedDate';
 
 const { Link } = Typography;
 
+/**
+ * Component that showing ellipsed text with tooltips.
+ * @component
+ * @param {string} text - Some text.
+ */
 const EllipsedText = (text) => (
   <Tooltip placement="topLeft" title={text}>
     <div
@@ -23,6 +28,12 @@ const EllipsedText = (text) => (
   </Tooltip>
 );
 
+/**
+ * Function that returns columns config for table.
+ * @param {string} currentTimezone - Current timezone.
+ * @param {Object} eventColors - List of task type names and its colors.
+ * @returns {Array} Table's columns config.
+ */
 const createColumns = (currentTimezone, eventColors) => [
   {
     title: `Date`,
